@@ -5,9 +5,9 @@ using System.Web;
 
 namespace BorjesLIA.Models
 {
-    public class StartModel
+    public class UrlModel
     {
-
-
+        public int ID { get; set; }
+        public string urlString { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace BorjesLIA.Models.Diesel
         public decimal dtmPrice { get; set; }
         [DataType(DataType.DateTime)]
         [Display(Name = "Nytt Datum")]
-        public DateTime dateNewDieselPrice { get; set; }
+        public DateTime dateNewDtmPrice { get; set; }
     }
 }

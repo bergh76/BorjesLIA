@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BorjesLIA.Models.Euro
 {
-    public class GetEuroExchangeModel
+    public class EuroExchangeModel
     {
         [Key]
         public int ID { get; set; }

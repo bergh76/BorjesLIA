@@ -178,6 +178,7 @@
       <DependentUpon>201605021516332_BorjesData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\DBContext\ApplicationDBContext.cs" />
     <Compile Include="Models\Diesel\DieselPriceModel.cs" />

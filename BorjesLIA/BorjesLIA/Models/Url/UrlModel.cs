@@ -9,5 +9,6 @@ namespace BorjesLIA.Models
     {
         public int ID { get; set; }
         public string urlString { get; set; }
+        public DateTime dateUrl { get; set; }
     }
 }

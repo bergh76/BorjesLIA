@@ -14,7 +14,7 @@ namespace BorjesLIA.Models
         public string Name { get; set; }
         public DieselPriceModel DieselSlide { get; set; }
         public DtmModel DmtSlide { get; set; }
-        public GetEuroExchangeModel EuroSlide { get; set; }
+        public EuroExchangeModel EuroSlide { get; set; }
         public UrlModel UrlSlide { get; set; }
         public VideoModel VideoSlide { get; set; }
     }

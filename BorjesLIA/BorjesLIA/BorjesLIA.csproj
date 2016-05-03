@@ -182,7 +182,7 @@
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\DBContext\ApplicationDBContext.cs" />
     <Compile Include="Models\Diesel\DieselPriceModel.cs" />
-    <Compile Include="Models\Euro\GetEuroExchangeModel.cs" />
+    <Compile Include="Models\Euro\EuroExchangeModel.cs" />
     <Compile Include="Models\UserAccount\IdentityModels.cs" />
     <Compile Include="Models\UserAccount\ManageViewModels.cs" />
     <Compile Include="Models\StartModel.cs" />

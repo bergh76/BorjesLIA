@@ -1583,7 +1583,6 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -1597,7 +1596,7 @@ pre code {
     bottom:0;
     left:0;
 }
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
   .container {
     width: 750px;
   }
@@ -1606,7 +1605,7 @@ pre code {
   .container {
     width: 970px;
   }
-}*/
+}
 @media (min-width: 1200px) {
   .container {
     width: 1170px;

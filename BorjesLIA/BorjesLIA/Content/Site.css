@@ -3,22 +3,44 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
+/* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+.tablewidth-100{
+    width: 100px; white-space: normal;
+}
+.tablewidth-150{
+    width: 150px;white-space: normal;
+}
+.tablewidth-200{
+    width: 200px;white-space: normal;
+}
+.tablewidth-350{
+    width: 350px;white-space: normal;
+}
+/* Carousel */
+.carousel-caption {
+    z-index: 10 !important;
+}
+
+    .carousel-caption p {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+
+@media (min-width: 768px) {
+    .carousel-caption {
+        z-index: 10 !important;
+    }
 }

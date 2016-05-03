@@ -43,10 +43,17 @@ jQuery(function($) {'use strict';
 		}(jQuery));
 
 
-	$('.main-menu ul li a,.smooth-scroll').scrollingTo();
+		$('.main-menu ul li a,.smooth-scroll').scrollingTo();
 
 
+    // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
+		$('.navbar').delay(5000).fadeOut('slow');
+		$("html").mousemove(function( event ) {
+		    $('.navbar').delay(250).fadeIn('fast');
+		});
+	
 
+	
 	//Slider
 	$(document).ready(function() {
 		var time = 14; // time in seconds
@@ -175,6 +182,6 @@ jQuery(function($) {'use strict';
 	$("a[rel^='prettyPhoto']").prettyPhoto({
 		social_tools: false
 	});
-
+	
 
 });

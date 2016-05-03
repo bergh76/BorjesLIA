@@ -13,7 +13,7 @@
     <link href="~/Content/main.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,29 +28,30 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Admin", "Index", "Home")</li>*@
+                    <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                
             </div>
         </div>
     </div>
-    <div class="container-max body-content">
+    <div class="container body-content">
         @RenderBody()
         @*<hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>*@
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
     </div>
-    <script src="~/Scripts/jquery-2.2.3.js"></script>
-    <script src="~/Scripts/jquery.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="~/Scripts/mousescroll.js"></script>
-    <script src="~/Scripts/jquery.prettyPhoto.js"></script>
-    <script src="~/Scripts/jquery.isotope.min.js"></script>
-    <script src="~/Scripts/jquery.inview.min.js"></script>
-    <script src="~/Scripts/wow.min.js"></script>
-    <script src="~/Scripts/main.js"></script>
-    @RenderSection("scripts", required: false)
+        <script src="~/Scripts/jquery-2.2.3.js"></script>
+        <script src="~/Scripts/jquery.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/owl.carousel.min.js"></script>
+        <script src="~/Scripts/mousescroll.js"></script>
+        <script src="~/Scripts/jquery.prettyPhoto.js"></script>
+        <script src="~/Scripts/jquery.isotope.min.js"></script>
+        <script src="~/Scripts/jquery.inview.min.js"></script>
+        <script src="~/Scripts/wow.min.js"></script>
+        <script src="~/Scripts/main.js"></script>
+        @RenderSection("scripts", required: false)
 </body>
 </html>

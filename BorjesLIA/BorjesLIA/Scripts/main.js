@@ -1,4 +1,18 @@
-jQuery(function($) {'use strict';
+﻿jQuery(function($) {'use strict';
+
+    //$(document).ready(function(){ 
+    // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
+
+        var c, p = $('.navbar');
+        $(document).on('mousemove',function() {        
+            p.fadeIn('fast');
+            clearTimeout(c);
+            c= setTimeout(function(){
+                p.fadeOut('fast');
+            }, 5000);
+        });
+
+    //});​
 
 	// Navigation Scroll
 		(function($){
@@ -45,15 +59,8 @@ jQuery(function($) {'use strict';
 
 		$('.main-menu ul li a,.smooth-scroll').scrollingTo();
 
-
-    // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
-		$('.navbar').delay(5000).fadeOut('slow');
-		$("html").mousemove(function( event ) {
-		    $('.navbar').delay(250).fadeIn('fast');
-		});
 	
-
-	
+		
 	//Slider
 	$(document).ready(function() {
 		var time = 14; // time in seconds

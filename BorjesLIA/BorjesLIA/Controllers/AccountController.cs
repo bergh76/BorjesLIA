@@ -55,6 +55,7 @@ namespace BorjesLIA.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        //[Route("Admin")]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -449,7 +450,8 @@ namespace BorjesLIA.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Hub");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

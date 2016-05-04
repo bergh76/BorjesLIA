@@ -1,6 +1,7 @@
 ﻿using BorjesLIA.Models.Diesel;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.Models.Video;
+using BorjesLIA.Models.URL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BorjesLIA.Models
         public DieselPriceModel DieselSlide { get; set; }
         public DtmModel DmtSlide { get; set; }
         public EuroExchangeModel EuroSlide { get; set; }
-        public UrlModel UrlSlide { get; set; }
+        public URLModel UrlSlide { get; set; }
         public VideoModel VideoSlide { get; set; }
     }
 }

@@ -3,10 +3,53 @@ namespace BorjesLIA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class BorjesData : DbMigration
+    public partial class localDB : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.DieselPriceModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        dieselPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        dateNewDieselPrice = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.DtmModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        dtmPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        dateNewDtmPrice = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.EuroExchangeModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        euroValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Date = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Imgs",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Url = c.String(),
+                        Name = c.String(),
+                        Date = c.DateTime(nullable: false),
+                        PlacingOrder = c.Int(nullable: false),
+                        Active = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -29,6 +72,25 @@ namespace BorjesLIA.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.testModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        test = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.URLModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        urlString = c.String(),
+                        dateUrl = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -75,6 +137,16 @@ namespace BorjesLIA.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.VideoModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Url = c.String(),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
         }
         
         public override void Down()
@@ -89,11 +161,18 @@ namespace BorjesLIA.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.VideoModels");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.URLModels");
+            DropTable("dbo.testModels");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Imgs");
+            DropTable("dbo.EuroExchangeModels");
+            DropTable("dbo.DtmModels");
+            DropTable("dbo.DieselPriceModels");
         }
     }
 }

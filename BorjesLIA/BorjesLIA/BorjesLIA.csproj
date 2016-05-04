@@ -163,6 +163,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControllers\DieselPriceModelsController.cs" />
+    <Compile Include="AdminControllers\DtmModelsController.cs" />
+    <Compile Include="AdminControllers\EuroExchangeModelsController.cs" />
+    <Compile Include="AdminControllers\HubController.cs" />
+    <Compile Include="AdminControllers\ImgsController.cs" />
+    <Compile Include="AdminControllers\URLModelsController.cs" />
+    <Compile Include="AdminControllers\VideoModelsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -174,12 +181,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605021516332_BorjesData.cs" />
-    <Compile Include="Migrations\201605021516332_BorjesData.Designer.cs">
-      <DependentUpon>201605021516332_BorjesData.cs</DependentUpon>
+    <Compile Include="Migrations\201605041003328_localDB.cs" />
+    <Compile Include="Migrations\201605041003328_localDB.Designer.cs">
+      <DependentUpon>201605041003328_localDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
+    <Compile Include="Models\Img\Img.cs" />
+    <Compile Include="Models\testModel.cs" />
+    <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\DBContext\ApplicationDBContext.cs" />
     <Compile Include="Models\Diesel\DieselPriceModel.cs" />
@@ -187,7 +197,6 @@
     <Compile Include="Models\UserAccount\IdentityModels.cs" />
     <Compile Include="Models\UserAccount\ManageViewModels.cs" />
     <Compile Include="Models\StartModel.cs" />
-    <Compile Include="Models\Url\UrlModel.cs" />
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -316,6 +325,37 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Hub\Index.cshtml" />
+    <Content Include="Views\Imgs\Create.cshtml" />
+    <Content Include="Views\Imgs\Delete.cshtml" />
+    <Content Include="Views\Imgs\Details.cshtml" />
+    <Content Include="Views\Imgs\Edit.cshtml" />
+    <Content Include="Views\Imgs\Index.cshtml" />
+    <Content Include="Views\DieselPriceModels\Create.cshtml" />
+    <Content Include="Views\DieselPriceModels\Delete.cshtml" />
+    <Content Include="Views\DieselPriceModels\Details.cshtml" />
+    <Content Include="Views\DieselPriceModels\Edit.cshtml" />
+    <Content Include="Views\DieselPriceModels\Index.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Create.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Delete.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Details.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Edit.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Index.cshtml" />
+    <Content Include="Views\VideoModels\Create.cshtml" />
+    <Content Include="Views\VideoModels\Delete.cshtml" />
+    <Content Include="Views\VideoModels\Details.cshtml" />
+    <Content Include="Views\VideoModels\Edit.cshtml" />
+    <Content Include="Views\VideoModels\Index.cshtml" />
+    <Content Include="Views\URLModels\Create.cshtml" />
+    <Content Include="Views\URLModels\Delete.cshtml" />
+    <Content Include="Views\URLModels\Details.cshtml" />
+    <Content Include="Views\URLModels\Edit.cshtml" />
+    <Content Include="Views\URLModels\Index.cshtml" />
+    <Content Include="Views\DtmModels\Index.cshtml" />
+    <Content Include="Views\DtmModels\Create.cshtml" />
+    <Content Include="Views\DtmModels\Delete.cshtml" />
+    <Content Include="Views\DtmModels\Details.cshtml" />
+    <Content Include="Views\DtmModels\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,8 +366,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605021516332_BorjesData.resx">
-      <DependentUpon>201605021516332_BorjesData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605041003328_localDB.resx">
+      <DependentUpon>201605041003328_localDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

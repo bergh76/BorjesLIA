@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <h1></h1>
+    <h2>Börjes admin hub </h2>
+    <h2>| URL | BILDER | CHARTS | VIDEOS | VALUTA, dtm, disel, euro | </h2>
+</div>
+<div>
+    <ul >
+        <li>@Html.ActionLink("Url", "Index", "URLModels")</li>
+        <li>@Html.ActionLink("img", "Index", "Imgs")</li>
+        <li>@Html.ActionLink("euro", "Index", "EuroExchangeModels")</li>
+        <li>@Html.ActionLink("dtm", "Index", "DtmModels")</li>
+        <li>@Html.ActionLink("Disel", "Index", "DieselPriceModels")</li>
+        <li>@Html.ActionLink("Video", "Index", "VideoModels")</li>
+    </ul>
+</div>

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BorjesLIA.Models
+namespace BorjesLIA.Models.URL
 {
-    public class UrlModel
+    public class URLModel
     {
         [Key]
         public int ID { get; set; }

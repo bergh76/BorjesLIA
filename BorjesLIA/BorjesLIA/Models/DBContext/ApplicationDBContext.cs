@@ -18,5 +18,19 @@ namespace BorjesLIA.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.URL.URLModel> UrlModels { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Img.Img> Imgs { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselPriceModel> DieselPriceModels { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DtmModel> DtmModels { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Euro.EuroExchangeModel> EuroExchangeModels { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Video.VideoModel> VideoModels { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.testModel> testModels { get; set; }
     }
 }

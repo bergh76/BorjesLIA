@@ -11,6 +11,7 @@ using BorjesLIA.Models.Video;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class VideoModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

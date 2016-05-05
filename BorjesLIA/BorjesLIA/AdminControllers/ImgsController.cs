@@ -11,6 +11,7 @@ using BorjesLIA.Models.Img;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class ImgsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

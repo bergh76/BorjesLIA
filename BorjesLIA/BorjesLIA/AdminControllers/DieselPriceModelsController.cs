@@ -11,6 +11,7 @@ using BorjesLIA.Models.Diesel;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class DieselPriceModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

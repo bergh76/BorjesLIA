@@ -11,6 +11,7 @@ using BorjesLIA.Models.Diesel;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class DtmModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

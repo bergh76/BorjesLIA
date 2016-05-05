@@ -181,14 +181,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605041003328_localDB.cs" />
-    <Compile Include="Migrations\201605041003328_localDB.Designer.cs">
-      <DependentUpon>201605041003328_localDB.cs</DependentUpon>
+    <Compile Include="Migrations\201605051222418_BorjesData.cs" />
+    <Compile Include="Migrations\201605051222418_BorjesData.Designer.cs">
+      <DependentUpon>201605051222418_BorjesData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
-    <Compile Include="Models\testModel.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\DBContext\ApplicationDBContext.cs" />
@@ -253,6 +252,7 @@
     <Content Include="Content\images\prettyPhoto\light_square\sprite.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
+    <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\owl.transitions.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\responsive.css" />
@@ -290,6 +290,7 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\mousescroll.js" />
+    <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -360,6 +361,7 @@
     <Content Include="Views\DtmModels\Delete.cshtml" />
     <Content Include="Views\DtmModels\Details.cshtml" />
     <Content Include="Views\DtmModels\Edit.cshtml" />
+    <Content Include="Views\Shared\_AdminPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,8 +371,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605041003328_localDB.resx">
-      <DependentUpon>201605041003328_localDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605051222418_BorjesData.resx">
+      <DependentUpon>201605051222418_BorjesData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

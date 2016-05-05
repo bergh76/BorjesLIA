@@ -1,66 +1,20 @@
 ﻿jQuery(function($) {'use strict';
 
-    //$(document).ready(function(){ 
     // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
 
-        var c, p = $('.navbar');
-        $(document).on('mousemove',function() {        
-            p.fadeIn('fast');
-            clearTimeout(c);
-            c= setTimeout(function(){
-                p.fadeOut('fast');
-            }, 5000);
-        });
+        //var c, p = $('.navbar');
+        //$(document).on('mousemove',function() {        
+        //    p.fadeIn('fast');
+        //    clearTimeout(c);
+        //    c= setTimeout(function(){
+        //        p.fadeOut('fast');
+        //    }, 5000);
+        //});
 
     //});​
-
-	// Navigation Scroll
-		(function($){
-		    $.fn.scrollingTo = function( opts ) {
-		        var defaults = {
-		            animationTime : 1000,
-		            easing : '',
-		            callbackBeforeTransition : function(){},
-		            callbackAfterTransition : function(){}
-		        };
-
-		        var config = $.extend( {}, defaults, opts );
-
-		        $(this).click(function(e){
-		            var eventVal = e;
-		            e.preventDefault();
-
-		            var $section = $(document).find( $(this).data('section') );
-		            if ( $section.length < 1 ) {
-		                return false;
-		            };
-
-		            if ( $('html, body').is(':animated') ) {
-		                $('html, body').stop( true, true );
-		            };
-
-		            var scrollPos = $section.offset().top;
-
-		            if ( $(window).scrollTop() == scrollPos ) {
-		                return false;
-		            };
-
-		            config.callbackBeforeTransition(eventVal, $section);
-
-		            $('html, body').animate({
-		                'scrollTop' : (scrollPos+'px' )
-		            }, config.animationTime, config.easing, function(){
-		                config.callbackAfterTransition(eventVal, $section);
-		            });
-		        });
-		    };
-		}(jQuery));
-
-
-		$('.main-menu ul li a,.smooth-scroll').scrollingTo();
+       
 
 	
-		
 	//Slider
 	$(document).ready(function() {
 		var time = 14; // time in seconds
@@ -144,51 +98,4 @@
 	      start();
 	    }
 	});
-
-	//Initiat WOW JS
-	new WOW().init();
-	//smoothScroll
-	smoothScroll.init();
-
-	// portfolio filter
-	$(window).load(function(){'use strict';
-		var $portfolio_selectors = $('.portfolio-filter >li>a');
-		var $portfolio = $('.portfolio-items');
-		$portfolio.isotope({
-			itemSelector : '.portfolio-item',
-			layoutMode : 'fitRows'
-		});
-		
-		$portfolio_selectors.on('click', function(){
-			$portfolio_selectors.removeClass('active');
-			$(this).addClass('active');
-			var selector = $(this).attr('data-filter');
-			$portfolio.isotope({ filter: selector });
-			return false;
-		});
-	});
-
-
-
-	// Contact form
-	var form = $('#main-contact-form');
-	form.submit(function(event){
-		event.preventDefault();
-		var form_status = $('<div class="form_status"></div>');
-		$.ajax({
-			url: $(this).attr('action'),
-			beforeSend: function(){
-				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
-			}
-		}).done(function(data){
-			form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
-		});
-	});
-
-	//Pretty Photo
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		social_tools: false
-	});
-	
-
 });

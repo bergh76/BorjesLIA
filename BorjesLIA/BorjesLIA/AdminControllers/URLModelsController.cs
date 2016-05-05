@@ -11,6 +11,7 @@ using BorjesLIA.Models.URL;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class URLModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

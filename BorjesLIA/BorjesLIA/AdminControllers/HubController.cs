@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BorjesLIA.AdminControllers
 {
+    [Authorize]
     public class HubController : Controller
     {
         // GET: Hub

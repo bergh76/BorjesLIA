@@ -3,7 +3,7 @@ namespace BorjesLIA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class localDB : DbMigration
+    public partial class BorjesData : DbMigration
     {
         public override void Up()
         {
@@ -72,15 +72,6 @@ namespace BorjesLIA.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.testModels",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        test = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.URLModels",
@@ -166,7 +157,6 @@ namespace BorjesLIA.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.URLModels");
-            DropTable("dbo.testModels");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Imgs");

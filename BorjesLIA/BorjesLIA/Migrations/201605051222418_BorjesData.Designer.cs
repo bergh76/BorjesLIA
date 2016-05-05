@@ -7,13 +7,13 @@ namespace BorjesLIA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class localDB : IMigrationMetadata
+    public sealed partial class BorjesData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(localDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BorjesData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605041003328_localDB"; }
+            get { return "201605051222418_BorjesData"; }
         }
         
         string IMigrationMetadata.Source

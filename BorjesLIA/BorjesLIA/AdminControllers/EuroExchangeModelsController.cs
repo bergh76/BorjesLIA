@@ -11,6 +11,7 @@ using BorjesLIA.Models.Euro;
 
 namespace BorjesLIA.AdminControllers
 {
+     [Authorize]
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

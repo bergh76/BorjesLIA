@@ -3,7 +3,7 @@
     padding-bottom: 20px;
 }
 
-/* Wrapping element */
+/* Wrapping element 
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 0px;
@@ -11,7 +11,7 @@
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
@@ -27,9 +27,9 @@ textarea {
 }
 .tablewidth-350{
     width: 350px;white-space: normal;
-}
+}*/
 /* Carousel */
-.carousel-caption {
+/*.carousel-caption {
     z-index: 10 !important;
 }
 
@@ -43,4 +43,4 @@ textarea {
     .carousel-caption {
         z-index: 10 !important;
     }
-}
+}*/

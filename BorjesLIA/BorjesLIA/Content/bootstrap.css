@@ -4,6 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -1082,8 +1083,8 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Corbel, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: 'Raleway', Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
@@ -1587,6 +1588,11 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.container-nav {
+  padding-right: 25px;
+  padding-left: 25px;
+
 }
 .container-max{
     position:fixed !important;
@@ -4176,7 +4182,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 60px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }

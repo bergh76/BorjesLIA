@@ -2,16 +2,14 @@
 
     @if (Request.IsAuthenticated)
     {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-left" }))
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
-            <ul class="nav navbar-nav navbar-left">
-                
+            <ul class="nav navbar-nav">
                 <li>
-                    @Html.ActionLink("Inloggad som: " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Inloggad som: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li>@Html.ActionLink("Inställningar", "Index", "Hub")</li>
-                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
@@ -20,10 +18,17 @@
     }
     else
     {
+        @*<ul class="nav navbar-nav navbar-right">
+            <li>
+                <input type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                    @Html.ActionLink("Inlogging", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </li>
+        </ul>*@
+
         <ul class="nav navbar-nav navbar-right">
 
-            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-           
+            <li>@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink,modal,#myModal" })</li>
 
         </ul>
-    } 
+    }
+

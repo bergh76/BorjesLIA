@@ -208,6 +208,7 @@
     <Content Include="Content\Chartcss\chart.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\borjes-logga-jpg.jpg" />
     <Content Include="Content\images\borjes_logistik_adr.jpg" />
     <Content Include="Content\images\borjes_logistik_adr_2.png" />
     <Content Include="Content\images\borjes_logistik_farja_sjofrakt.jpg" />

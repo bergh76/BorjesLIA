@@ -16,7 +16,6 @@
   font-style: normal;
 }
 .fa {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -29,6 +28,9 @@
   font-size: 1.33333333em;
   line-height: 0.75em;
   vertical-align: -15%;
+}
+.fa-1x {
+    font-size: 1.4em;
 }
 .fa-2x {
   font-size: 2em;

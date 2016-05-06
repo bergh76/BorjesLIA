@@ -1,4 +1,7 @@
-﻿body {
+﻿@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -9,9 +12,12 @@
     padding-left: 0px;
     padding-right: 0px;
 }
-
+.logo {
+    background-image: url("~/Content/images/borjes-logga-jpg.jpg");
+    
+}
 /* Set widths on the form inputs since otherwise they're 100% wide */
-/*input,
+input,
 select,
 textarea {
     max-width: 280px;
@@ -27,9 +33,9 @@ textarea {
 }
 .tablewidth-350{
     width: 350px;white-space: normal;
-}*/
-/* Carousel */
-/*.carousel-caption {
+}
+ Carousel 
+.carousel-caption {
     z-index: 10 !important;
 }
 
@@ -39,8 +45,8 @@ textarea {
     }
 
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
     .carousel-caption {
         z-index: 10 !important;
-    }
-}*/
+    }*/
+}

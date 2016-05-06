@@ -4,7 +4,7 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Börjes Transport</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="~/Content/animate.min.css" rel="stylesheet">
@@ -19,21 +19,25 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>                
-                @Html.ActionLink("~/Content/images/borjes-logga-jpg.jpg" , "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
+                </button>  
+                <div class="navbar-brand logo" ></div>             
+                @*@Html.ActionLink("Start" , "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@ 
             </div>
                 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav text-right">
+                    <li class="navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="right" title="Helskärm"></li>
+                    @*<li class="btn owl-buttons fa fa-tv"><input type="button" value="Fullskräm" onclick="toggleFullScreen(document.body)"></li>*@
                     @*<li>@Html.ActionLink("Admin", "Login", "Account")</li>*@
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <button type="submit" class="btn btn-default fa fa-tv">Helskärm</button>
-                </form>
+               
+                @*<form class="navbar-form navbar-left" onclick="toggleFullScreen(document.body)" role="search">
+                    <button value="click to toggle fullscreen"  type="submit" class="btn btn-default fa fa-tv">Helskärm</button>
+                </form>*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

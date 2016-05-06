@@ -252,7 +252,7 @@
     <Content Include="Content\images\prettyPhoto\light_square\loader.gif" />
     <Content Include="Content\images\prettyPhoto\light_square\sprite.png" />
     <Content Include="Content\main.css" />
-    <Content Include="Content\owl.carousel.css" />
+    <Content Include="Content\old.owl.carousel.css" />
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\owl.transitions.css" />
     <Content Include="Content\prettyPhoto.css" />

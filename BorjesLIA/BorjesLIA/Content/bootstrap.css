@@ -4621,11 +4621,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: #FFF;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #fff;
+  color: #c9302c;
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,
@@ -5071,6 +5071,13 @@ a.thumbnail.active {
   top: -2px;
   right: -21px;
   color: inherit;
+}
+.alert-settings {
+  color: #fff;
+  background-color: #325689;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-color: #d6e9c6;
 }
 .alert-success {
   color: #3c763d;

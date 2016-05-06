@@ -27,22 +27,24 @@
 	      percentTime;
 	 
 	    //Init the carousel
-	    $("#main-slider").find('.owl-carousel').owlCarousel({
-	      slideSpeed : 500,
-	      paginationSpeed : 500,
-	      singleItem : true,
-	      navigation : true,
-			navigationText: [
+	 	$("#main-slider").find('.owl-carousel').owlCarousel({
+	 	    slideSpeed : 500,
+	 	    paginationSpeed : 500,
+	 	    singleItem : true,
+	 	    navigation: true,
+	      
+	 	    navigationText: [
 			"<i class='fa fa-angle-left'></i>",
 			"<i class='fa fa-angle-right'></i>"
-			],
+	 	    ],
+	 	    responsiveClass: true,
 	      afterInit : progressBar,
 	      afterMove : moved,
 	      startDragging : pauseOnDragging,
-	      //autoHeight : true,
+	      autoHeight : true,
 	      transitionStyle : "fadeUp"
 	    });
-	 
+	    
 	    //Init progressBar where elem is $("#owl-demo")
 	    function progressBar(elem){
 	      $elem = elem;
@@ -100,7 +102,7 @@
 	});
 });
 function toggleFullScreen(elem) {
-   
+
     // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
     if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
         if (elem.requestFullScreen) {
@@ -112,6 +114,7 @@ function toggleFullScreen(elem) {
         } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
         }
+
         //var c, p = $('.navbar');
         //$(document).on('mousemove', function () {
         //    p.fadeIn('fast');
@@ -130,5 +133,6 @@ function toggleFullScreen(elem) {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
+
     }
 }

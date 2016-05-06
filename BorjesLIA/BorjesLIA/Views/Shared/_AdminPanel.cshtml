@@ -1,8 +1,9 @@
-﻿ <div class="navigation">
-    <nav>
-        <div class="container">
+﻿
+<nav class="navigation navbar-static-top">
+        <div class="container ">
             <div class="navigation navbar-brand ">
                 <ul>
+                    <li><i class="fa fa-cogs fa-2x"></i></li>
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="text-uppercase">URL</span>
@@ -77,8 +78,132 @@
                         </ul>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-</div>
+
+
+@*<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        @*<a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!-- menu prile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="http://placehold.it/100x100" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <h2>Välkommen!</h2>
+                            <h2>@Html.LabelForModel(User.Identity.GetUserName())</h2>
+                        </div>
+                    </div>
+                    <!-- /menu prile quick info -->
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                        <div class="menu_section">
+                            <div class="clearfix"></div>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu" style="display: none">
+                                            <li><a href="index.html">Dashboard</a></li>
+                                            <li>
+                                                <a href="index2.html">Dashboard2</a>
+                                            </li>
+                                            <li>
+                                                <a href="index3.html">Dashboard3</a>
+                                            </li>
+                                        </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-eur"></i> Euro <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till Euro", "Index", "EuroExchangeModels")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-internet-explorer"></i> Websidor <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till Url", "Index", "URLModels")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-table"></i> Dieselpriser <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till Diesel", "Index", "DieselPriceModels")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-table"></i> DTM <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till DTM", "Index", "DtmModels")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-picture-o"></i> Bilder <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till Bild", "Index", "Imgs")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-file-video-o"></i> Video <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>@Html.ActionLink("Lägg till Video", "Index", "VideoModels")</li>
+                                        <li><a href="/">Länk2</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                        <li><a href="/">Länk3</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <ul class="nav child_menu" style="display: none"></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>*@

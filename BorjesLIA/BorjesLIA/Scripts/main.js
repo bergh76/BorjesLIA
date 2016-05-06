@@ -13,8 +13,6 @@
 
     //});​
        
-
-	
 	//Slider
 	$(document).ready(function() {
 		var time = 14; // time in seconds
@@ -31,8 +29,7 @@
 	 	    slideSpeed : 500,
 	 	    paginationSpeed : 500,
 	 	    singleItem : true,
-	 	    navigation: true,
-	      
+	 	    navigation: true,	      
 	 	    navigationText: [
 			"<i class='fa fa-angle-left'></i>",
 			"<i class='fa fa-angle-right'></i>"
@@ -115,7 +112,7 @@ function toggleFullScreen(elem) {
             elem.msRequestFullscreen();
         }
 
-        //var c, p = $('.navbar');
+        //var c, p = $('.navbar, .navigation');
         //$(document).on('mousemove', function () {
         //    p.fadeIn('fast');
         //    clearTimeout(c);

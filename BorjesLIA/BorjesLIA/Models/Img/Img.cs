@@ -11,7 +11,7 @@ namespace BorjesLIA.Models.Img
         [Key]
         public int ID { get; set; }
 
-        [Display(Name = "Adress till sidan")]
+        [Display(Name = "Unc")]
         public string Url { get; set; }
 
         [Display(Name = "Namn på bilden")]
@@ -21,8 +21,10 @@ namespace BorjesLIA.Models.Img
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }
 
+        [Display(Name = "OrderIndex")]
         public int PlacingOrder { get; set; }
 
+        [Display(Name = "Aktiv")]
         public bool Active { get; set; }
     }
 }

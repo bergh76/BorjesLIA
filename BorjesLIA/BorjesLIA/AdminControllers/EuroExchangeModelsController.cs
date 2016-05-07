@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 
+using PagedList;
+
 namespace BorjesLIA.AdminControllers
 {
      [Authorize]

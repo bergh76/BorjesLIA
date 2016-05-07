@@ -17,5 +17,6 @@ namespace BorjesLIA.Models.Euro
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }
 
+
     }
 }

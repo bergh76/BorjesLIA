@@ -3,37 +3,50 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.Partial("_AdminPanel")
-<h2>Index</h2>
+<body class="nav-md">
+    <div class="container-dashboard body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    @Html.Partial("_AdminPanel")
+                </div>
+            </div>
+            <div class="right_col" role="main">
+                <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.urlString)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateUrl)
-        </th>
-        <th></th>
-    </tr>
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.urlString)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dateUrl)
+                        </th>
+                        <th></th>
+                    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.urlString)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateUrl)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.urlString)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dateUrl)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
 
-</table>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

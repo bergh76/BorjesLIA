@@ -11,10 +11,10 @@ namespace BorjesLIA.Models.Euro
         [Key]
         public int ID { get; set; }
         [DataType(DataType.Currency)]
-        [Display(Name = "Nytt Europris")]
+        [Display(Name = "Europris")]
         public decimal euroValue { get; set; }
         [DataType(DataType.DateTime)]
-        [Display(Name = "Nytt Datum")]
+        [Display(Name = "Datum")]
         public DateTime Date { get; set; }
 
     }

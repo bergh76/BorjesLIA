@@ -1,5 +1,12 @@
-.nav-sm .container.body .left_col {
+/*.left_col{
+    border-right: 4px solid green;
+}
+.right_col{
+      border-left: 4px solid red;
+}*/
+.nav-sm .container-dashboard.body .left_col {
   width: 70px;
+  height: 100%;
   padding: 0;
   z-index: 9999;
   position: absolute;
@@ -7,7 +14,9 @@
 .nav-sm .hidden-small {
   visibility: hidden;
 }
-.nav-sm .container.body .right_col {
+
+.nav-sm .container-dashboard.body .right_col {
+  border-left: 4px solid red;
   padding: 10px 20px;
   margin-left: 70px;
   z-index: 2;
@@ -176,16 +185,16 @@
     position: static;
   }
 }
-.nav-md .container.body .col-md-3.left_col {
+.nav-md .container-dashboard.body .col-md-3.left_col {
   width: 230px;
   padding: 0;
   position: absolute;
   display: flex;
 }
-body .container.body .right_col {
+body .container-dashboard.body .right_col {
   background: #F7F7F7;
 }
-.nav-md .container.body .right_col {
+.nav-md .container-dashboard.body .right_col {
   padding: 10px 20px 0;
   margin-left: 230px;
 }
@@ -197,14 +206,14 @@ body .container.body .right_col {
   height: 57px;
 }
 @media (max-width: 991px) {
-  .nav-md .container.body .right_col, .nav-md .container.body .top_nav {
+  .nav-md .container-dashboard.body .right_col, .nav-md .container-dashboard.body .top_nav {
     width: 100%;
     margin: 0;
   }
-  .nav-md .container.body .col-md-3.left_col {
+  .nav-md .container-dashboard.body .col-md-3.left_col {
     display: none;
   }
-  .nav-md .container.body .right_col {
+  .nav-md .container-dashboard.body .right_col {
     width: 100%;
     padding-right: 0
   }
@@ -301,8 +310,9 @@ body .container.body .right_col {
   border: 1px solid #50C1CF !important;
   color: #fff;
 }
-.container {
-  width: 100%;
+
+.container-dashboard {
+width: 100%;
   padding: 0
 }
 .navbar-nav>li>a, .navbar-brand, .navbar-nav>li>a {
@@ -313,10 +323,12 @@ body .container.body .right_col {
 }
 
 body {
-  color: #73879C;
+  color: #73879c;
   background: #2A3F54;
+  /* background: #2A3F54;
   /*#ECF0F1; #FCFCFC*/
   font-family: Roboto, Arial, "Droid Sans", sans-serif;
+
   font-size: 1.5em;
   font-weight: 400;
   line-height: 1.471;

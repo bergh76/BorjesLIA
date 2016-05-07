@@ -13,10 +13,7 @@ body {
     padding-right: 0px;
     background-color: #fff;
 }
-.logo {
-    background-image: url("~/Content/images/borjes-logga-jpg.jpg");
-    
-}
+
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,

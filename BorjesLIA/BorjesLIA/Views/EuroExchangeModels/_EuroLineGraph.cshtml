@@ -6,13 +6,15 @@
 <script src="~/Scripts/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
     google.load("visualization", "1", { packages: ["corechart"] });
-    //google.setOnLoadCallback(drawchart);
-</script>
-<!--GOOGLECHART START-->
-<script type="text/javascript">
-    $(function () {
+    //google.charts.load('current');
+    google.setOnLoadCallback(drawchart);
+@*</script>*@
+//<!--GOOGLECHART START-->
+@*<script type="text/javascript">*@
+    //$(
+    function drawchart() {
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
             // Calls an Action from Controller ie. HomeController/GetData
@@ -26,8 +28,7 @@
                     var data = new google.visualization.DataTable();
                     data.addColumn('string', 'Datum');
                     data.addColumn('number', 'Pris');
-                    var dateFormater = new google.visualization.DateFormat({ pattern: "dd-MMM-yyyy" });
-                    dateFormater.format(dataValues, 0);
+
                     // Settings for visualization of the graph
                     var options = {
                         title: 'Eurokurs',
@@ -35,14 +36,13 @@
                         dataOpacity: 0.4,
                         lineWidth: 4,
                         hAxis: {
-                            //format: 'dd-MMM-yyyy',
                             title: 'Datum', titleTextStyle: { color: '#333' },
                         }
                     }
                     // Loops through the DataTable with data from database
                     for (var i = 0; i < dataValues.length; i++) {
-                        data.addRow([dataValues[i].Date, dataValues[i].euroValue])
-                        
+                        data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+
                         // Drews the graph into a specified div
                         new google.visualization.LineChart(document.getElementById('myChartDiv')).
                             draw(data, options);
@@ -53,7 +53,8 @@
                 alert("Ett fel uppstod när datat försökte hämtas!");
             }
         });
-    })
+    }
+    //})
 
     //Chart.defaults.global.legend = {
     //    enabled: false

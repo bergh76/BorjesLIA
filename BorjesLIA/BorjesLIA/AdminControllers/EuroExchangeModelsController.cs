@@ -20,11 +20,19 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: EuroExchangeModels
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
             return View(db.EuroExchangeModels.ToList());
         }
 
+        public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
+        {
+            var euroList = db.EuroExchangeModels.ToList();
+            PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
+            return View(model);
+        }
+        //Populates a list with data from database tabel EuroExchangeModel
         public JsonResult GetData()
         {
             ListEuroViewModel eurox = new ListEuroViewModel();

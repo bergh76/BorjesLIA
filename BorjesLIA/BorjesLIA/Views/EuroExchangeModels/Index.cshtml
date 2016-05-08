@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BorjesLIA.Models.Euro.EuroExchangeModel>
 @*@model BorjesLIA.Models.Euro.EuroExchangeModel*@
-@{
-    ViewBag.Title = "Eurokurs";
+    @{
+    ViewData["Title"] = "Eurokurs";
 }
 <link href="~/Scripts/DataTables-1.10.11/media/css/jquery.dataTables.min.css" rel="stylesheet" />
 <body class="nav-md">
@@ -529,7 +529,7 @@
             });
             $('#datatable-responsive').DataTable();
             $('#datatable-scroller').DataTable({
-                ajax: "js/datatables/json/scroller-demo.json",
+                ajax: "",
                 deferRender: true,
                 scrollY: 380,
                 scrollCollapse: true,

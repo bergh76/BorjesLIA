@@ -8,14 +8,12 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="~/Content/animate.min.css" rel="stylesheet">
-    <link href="~/Content/owl.carousel.css" rel="stylesheet">
     <link href="~/Content/owl.transitions.css" rel="stylesheet">
     <link href="~/Content/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/main.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
     <link href="~/Content/production/css/custom.css" rel="stylesheet" />
-
-    @*<link href="~/Content/production/css/custom.css" rel="stylesheet" />*@
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -50,7 +48,7 @@
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
             </footer>*@
     </div>
-
+    <script src="~/Scripts/jquery.js"></script>
         <script src="~/Scripts/jquery-2.2.3.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/owl.carousel.min.js"></script>
@@ -62,8 +60,8 @@
         <script src="~/Scripts/main.js"></script>
     
     <script src="~/Content/production/js/custom.js"></script>
-    <script src="~/Content/documentation/js/shCore.js"></script>
-    <script src="~/Content/documentation/js/shBrushXml.js"></script>
+    @*<script src="~/Content/documentation/js/shCore.js"></script>
+    <script src="~/Content/documentation/js/shBrushXml.js"></script>*@
 
         @RenderSection("scripts", required: false)
 </body>

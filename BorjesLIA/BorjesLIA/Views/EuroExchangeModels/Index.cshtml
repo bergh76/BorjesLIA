@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<BorjesLIA.Models.Euro.EuroExchangeModel>
 @{
     ViewBag.Title = "Eurokurs";
-
 }
-
 <link href="~/Scripts/DataTables-1.10.11/media/css/jquery.dataTables.min.css" rel="stylesheet" />
 <body class="nav-md">
     <div class="container-dashboard body">
@@ -14,123 +12,21 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <!-- Tabel for Euroexchangecourse starts here -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Eurokurs</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li>
-                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ><i class="fa fa-wrench" data-toggle="tooltip" data-placement="bottom" title="Lägg till ny Erurokurs"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            @Html.ActionLink("Create New", "Create")
-                                        </li>
-                                        <li>
-                                            <a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <p class="text-muted font-13 m-b-30">
-                                Lägg till nytt Euroindex genom att klicka på skiftnyckeln uppe i det högra hörnet.
-                            </p>
-                            <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                                <div class="dt-buttons btn-group">
-                                    <a class="btn btn-default buttons-copy buttons-html5 btn-sm"  data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
-                                        <span>Copy</span>
-                                    </a>
-                                    <a class="btn btn-default buttons-csv buttons-html5 btn-sm"  data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
-                                        <span>CSV</span>
-                                    </a>
-                                    <a class="btn btn-default buttons-excel buttons-html5 btn-sm"  data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
-                                        <span>Excel</span>
-                                    </a>
-                                    <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
-                                        <span>PDF</span>
-                                    </a>
-                                    <a class="btn btn-default buttons-print btn-sm"  data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
-                                        <span>Print</span>
-                                    </a>
-                                </div>
-                                <div id="datatable-buttons_filter" class="dataTables_filter">
-                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label>
-                                </div>
-                                <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.euroValue)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Date)
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.euroValue)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Date)
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 51 to 57 of 57 entries</div>
-                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button previous" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li>
-                                    <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0">1</a></li>
-                                    <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0">2</a></li>
-                                    <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0">3</a></li>
-                                    <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0">4</a></li>
-                                    <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0">5</a></li>
-                                    <li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li>
-                                    <li class="paginate_button next disabled" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- Tabel for Euroexchangecourse ENDS here -->
-
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                </div>
-                <!-- LineGraph for Euroexchangecourse starts here -->
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!-- Tabel for Euroexchangecourse starts here -->
+                    <div class="col-md-6 col-sm-6 col-xs-12 pull-left">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Line Graph <small>Sessions</small></h2>
+                                <h2>Eurokurs</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
                                         <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="bottom" title="Lägg till ny Erurokurs"></i></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="#">Settings 1</a>
+                                                @Html.ActionLink("Create New", "Create")
                                             </li>
                                             <li>
                                                 <a href="#">Settings 2</a>
@@ -143,145 +39,91 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
-                                <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="lineChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                @Html.Partial("_Admin_NewEuroIndex")
                             </div>
+                            <div class="x_content">
+                                <p class="text-muted font-13 m-b-30">
+                                    Lägg till nytt Euroindex genom att klicka på skiftnyckeln uppe i det högra hörnet.
+                                </p>
+                                <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                    <div class="dt-buttons btn-group">
+                                        <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
+                                            <span>Copy</span>
+                                        </a>
+                                        <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
+                                            <span>CSV</span>
+                                        </a>
+                                        <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
+                                            <span>Excel</span>
+                                        </a>
+                                        <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
+                                            <span>PDF</span>
+                                        </a>
+                                        <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
+                                            <span>Print</span>
+                                        </a>
+                                    </div>
+                                    <div id="datatable-buttons_filter" class="dataTables_filter">
+                                        <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label>
+                                    </div>
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.euroValue)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Date)
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.euroValue)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Date)
+                                                    </td>
+                                                    <td>
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>                                
+                                <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 51 to 57 of 57 entries</div>
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button previous" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0">1</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0">2</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0">3</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0">4</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0">5</a></li>
+                                        <li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li>
+                                        <li class="paginate_button next disabled" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
                         </div>
-                    </div>
+                    </div><!-- Tabel for Euroexchangecourse ENDS here -->
 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Bar Graph <small>Sessions</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">Settings 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="mybarChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Donut Chart Graph <small>Sessions</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">Settings 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="canvasDoughnut" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Radar Chart <small>Sessions</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">Settings 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="canvasRadar" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Pie Area Chart <small>Sessions</small></h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">Settings 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                <canvas id="polarArea" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                   
+                    <!-- LineGraph for Euroexchangecourse starts here -->
                     <div class="row">
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Pie Chart Graph <small>Sessions</small></h2>
+                                    <h2>Line Graph <small>Sessions</small></h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
                                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -305,13 +147,173 @@
                                 </div>
                                 <div class="x_content">
                                     <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                                    <canvas id="pieChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                    <canvas id="lineChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Bar Graph <small>Sessions</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                    <canvas id="mybarChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Donut Chart Graph <small>Sessions</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                    <canvas id="canvasDoughnut" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Radar Chart <small>Sessions</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                    <canvas id="canvasRadar" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Pie Area Chart <small>Sessions</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                    <canvas id="polarArea" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Pie Chart Graph <small>Sessions</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#">Settings 1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Settings 2</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                                        <canvas id="pieChart" width="225" height="112" style="width: 225px; height: 112px;"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -515,10 +517,10 @@
                 }
             }
         });
-</script>
-        <!-- CHARTJS END-->
-<script>
-        $(document).ready(function () {
+    </script>
+    <!-- CHARTJS END-->
+    <script>
+        $(document).ready(function (Model) {
             $('#datatable').dataTable();
             $('#datatable-keytable').DataTable({
                 keys: true

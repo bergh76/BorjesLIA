@@ -10,6 +10,7 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 
 using PagedList;
+using BorjesLIA.ViewModel;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -24,6 +25,12 @@ namespace BorjesLIA.AdminControllers
             return View(db.EuroExchangeModels.ToList());
         }
 
+        public JsonResult GetData()
+        {
+            ListEuroViewModel eurox = new ListEuroViewModel();
+            var data = eurox.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
         {

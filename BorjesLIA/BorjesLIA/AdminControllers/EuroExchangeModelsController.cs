@@ -102,7 +102,7 @@ namespace BorjesLIA.AdminControllers
             {
                 db.EuroExchangeModels.Add(euroExchangeModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(euroExchangeModel);

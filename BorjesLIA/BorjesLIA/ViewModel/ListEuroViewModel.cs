@@ -3,6 +3,8 @@ using BorjesLIA.Models.Euro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,7 +39,7 @@ namespace BorjesLIA.ViewModel
                     }).ToArray();
             }
         }
-        public List<EuroExchangeModel> GetData()
+        public Task<List<EuroExchangeModel>>  GetData()
         {
             using (var db = new ApplicationDbContext())
             {
@@ -48,7 +50,7 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     var lDiesel = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
-                    return lDiesel;
+                    return Task.Run(() =>lDiesel);
                 }
             }
 

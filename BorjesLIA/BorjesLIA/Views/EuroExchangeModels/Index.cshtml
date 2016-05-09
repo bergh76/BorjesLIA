@@ -19,9 +19,6 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Eurokurs</h2>
-                                <p class="text-muted font-13 m-b-30">
-                                    Lägg till nytt Euroindex genom att klicka på skiftnyckeln uppe i det högra hörnet.
-                                </p>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
                                         <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -43,9 +40,14 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                @Html.Partial("_Admin_NewEuroIndex")
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.Partial("_Admin_NewEuroIndex") <!--Partial view for form adding new Euroindex-->
                             </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.Partial("_Admin_NewEuroIndex") <!--Partial view for form adding new Euroindex-->
+                            </div>
+
+                            <!-- Datatable starts here -->
                             <div class="x_content">
                                 <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                                     <div class="dt-buttons btn-group">
@@ -114,7 +116,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div><!-- Tabel for Euroexchangecourse ENDS here -->
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -182,6 +183,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -316,9 +318,7 @@
     </div>
     <!--ADD SCRIPTS HERE -->
     <!-- CHARTJS-->
-    @*<script src="~/Scripts/Chart.js/src/chart.js"></script>*@
     <script src="~/Scripts/Chart.js/dist/Chart.bundle.min.js"></script>
-    @*<script src="~/Scripts/Chart.js/dist/Chart.min.js"></script>*@
     <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
     <script>
          Chart.defaults.global.legend = {

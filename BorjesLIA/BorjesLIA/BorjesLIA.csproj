@@ -189,9 +189,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605051222418_BorjesData.cs" />
-    <Compile Include="Migrations\201605051222418_BorjesData.Designer.cs">
-      <DependentUpon>201605051222418_BorjesData.cs</DependentUpon>
+    <Compile Include="Migrations\201605090754321_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605090754321_BorjesLIA.Designer.cs">
+      <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
@@ -199,7 +199,7 @@
     <Compile Include="Models\Img\Img.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
-    <Compile Include="Models\DBContext\ApplicationDBContext.cs" />
+    <Compile Include="Models\ApplicationDBContext.cs" />
     <Compile Include="Models\Diesel\DieselPriceModel.cs" />
     <Compile Include="Models\Euro\EuroExchangeModel.cs" />
     <Compile Include="Models\UserAccount\IdentityModels.cs" />
@@ -517,14 +517,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605051222418_BorjesData.resx">
-      <DependentUpon>201605051222418_BorjesData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605090754321_BorjesLIA.resx">
+      <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

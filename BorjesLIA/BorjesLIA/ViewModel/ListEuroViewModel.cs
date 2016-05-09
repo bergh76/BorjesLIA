@@ -10,6 +10,8 @@ namespace BorjesLIA.ViewModel
 {
     public class ListEuroViewModel
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public class EuroGrafModel
         {
             private ApplicationDbContext _db;

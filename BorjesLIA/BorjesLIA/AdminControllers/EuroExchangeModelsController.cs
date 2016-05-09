@@ -11,6 +11,7 @@ using BorjesLIA.Models.Euro;
 
 using PagedList;
 using BorjesLIA.ViewModel;
+using System.Threading.Tasks;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -19,10 +20,18 @@ namespace BorjesLIA.AdminControllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        IEnumerable<EuroExchangeModel> dList;
+        public EuroExchangeModelsController()
+        {
+            dList = db.EuroExchangeModels.ToList();
+        }
+
+
+
         // GET: EuroExchangeModels
         [HttpGet]
-        public ActionResult Index(int pageNumber = 1, int pageSize = 10)
-        {
+        public ActionResult Index()
+        {            
             return View(db.EuroExchangeModels.ToList());
         }
 
@@ -32,13 +41,19 @@ namespace BorjesLIA.AdminControllers
             PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
             return View(model);
         }
+
+
+
         //Populates a list with data from database tabel EuroExchangeModel
-        public JsonResult GetData()
+        public async Task<JsonResult> GetData(ListEuroViewModel eurox)
         {
-            ListEuroViewModel eurox = new ListEuroViewModel();
-            var data = eurox.GetData();
+            //ListEuroViewModel eurox = new ListEuroViewModel();
+            var data = await eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+
+
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
         {
@@ -60,6 +75,22 @@ namespace BorjesLIA.AdminControllers
             return View();
         }
 
+        public ActionResult NewEuro(EuroExchangeModel newEuro)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.EuroExchangeModels.Add(newEuro);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return View(newEuro);
+            }
+        }
         // POST: EuroExchangeModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

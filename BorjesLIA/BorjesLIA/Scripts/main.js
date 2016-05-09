@@ -112,7 +112,7 @@ function toggleFullScreen(elem) {
             elem.msRequestFullscreen();
         }
 
-        //var c, p = $('.navbar, .navigation');
+        //var c, p = $('.navbar');
         //$(document).on('mousemove', function () {
         //    p.fadeIn('fast');
         //    clearTimeout(c);
@@ -130,6 +130,5 @@ function toggleFullScreen(elem) {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-
     }
 }

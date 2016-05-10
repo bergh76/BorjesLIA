@@ -13,7 +13,24 @@ namespace BorjesLIA.ViewModel
     public class ListEuroViewModel
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public EuroExchangeModel AddEuro { get; set; }
+        public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
+        public Task<List<EuroExchangeModel>> GetData()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (db.EuroExchangeModels == null)
+                {
+                    return GetData();
+                }
+                else
+                {
+                    var lDiesel = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
+                    return Task.Run(() => lDiesel);
+                }
+            }
 
+        }
         public class EuroGrafModel
         {
             private ApplicationDbContext _db;
@@ -27,6 +44,8 @@ namespace BorjesLIA.ViewModel
                 public int yPrice { get; set; }
                 public string xDate { get; set; }
             }
+
+
             public void PopulateRidesPerDayArray()
             {
                 List<EuroExchangeModel> ds = new List<EuroExchangeModel>();
@@ -38,22 +57,6 @@ namespace BorjesLIA.ViewModel
                         xDate = groupObject.Key.ToString(),
                     }).ToArray();
             }
-        }
-        public Task<List<EuroExchangeModel>>  GetData()
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                if (db.EuroExchangeModels == null)
-                {
-                    return GetData();
-                }
-                else
-                {
-                    var lDiesel = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
-                    return Task.Run(() =>lDiesel);
-                }
-            }
-
         }
     }
 }

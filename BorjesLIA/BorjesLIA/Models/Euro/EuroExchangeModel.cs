@@ -10,6 +10,7 @@ namespace BorjesLIA.Models.Euro
     {
         [Key]
         public int ID { get; set; }
+
         [DataType(DataType.Currency)]
         [Display(Name = "Europris")]
         public decimal euroValue { get; set; }

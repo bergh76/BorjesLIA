@@ -14,7 +14,7 @@ using BorjesLIA.ViewModel;
 
 namespace BorjesLIA.AdminControllers
 {
-     [Authorize]
+    [Authorize]
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -39,6 +39,14 @@ namespace BorjesLIA.AdminControllers
             var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        //return partial view
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult returnPartialView()
+        {
+            return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+        }
+
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
         {

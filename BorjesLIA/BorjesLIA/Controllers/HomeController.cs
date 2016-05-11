@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BorjesLIA.ViewModel;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,19 +12,12 @@ namespace BorjesLIA.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            //ContentSliderViewModel model = new ContentSliderViewModel()
+            //{
+            //    ImagesList = new System.IO.DirectoryInfo(Server.MapPath("~/Images/contentslider/")).GetFiles()
+            //};
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            //return View(model);
 
             return View();
         }

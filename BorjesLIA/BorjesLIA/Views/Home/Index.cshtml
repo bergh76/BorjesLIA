@@ -1,53 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div>
-    <section id="main-slider">
-        <div class="owl-carousel">
-            <div class="item" style="background-image: url(http://placehold.it/1900x1040/565621/ffffff);">
-                <div class="slider-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="carousel-content text-right">
-                                    <h2>Create your <span>PERFECT</span> winter escape!</h2>
-                                    <p>Tell us our preferences and we'll be intouch with the details. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/.item-->
-            <div class="item" style="background-image: url(http://placehold.it/1900x1040/325689/ffffff);">
-                <div class="slider-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="carousel-content text-right">
-                                    <h2>Accessible design is good design. Only with <span>Color</span>.</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/.item-->
-            <div class="item" style="background-image: url(http://placehold.it/1900x1040/881252/ffffff);">
-                <div class="slider-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="carousel-content text-right">
-                                    <h2>Accessible design is good design. Only with <span>Color</span>.</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/.item-->
-        </div><!--/.owl-carousel-->
-    </section>
+
+<!--bxSlider-->
+<script src="~/Scripts/jquery.bxslider.min.js"></script>
+<script src="~/Scripts/daJavaScript.js"></script>
+
+<div id="slider-wrapper">
+    @*<ul class="bxslider">
+        <li><iframe src="@Url.Action("returnPartialView", "EuroExchangeModels")" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+
+        <li><iframe src="http://player.vimeo.com/video/17914974" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+
+        <li><img src="~/Content/images/bilder/landscape-615429_960_720.jpg" /></li>
+
+        <li><iframe src="http://www.borjes.com/se" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+    </ul>*@   
+    <ul class="bxslider"> 
+        <li><iframe  src='@Url.Action("returnPartialView", "EuroExchangeModels")' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+
+        <li><iframe  src='http://player.vimeo.com/video/17914974' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+
+        <li><img src='~/Content/images/bilder/landscape-615429_960_720.jpg' width=768 height="1040" /></li>
+
+        <li><iframe  src='http://www.borjes.com/se' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+    </ul> 
 </div>
-@*<section id="main-slider">*@
+
+
 

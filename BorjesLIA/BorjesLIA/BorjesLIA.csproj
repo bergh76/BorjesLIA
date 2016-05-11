@@ -210,14 +210,17 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Models\ViewModel\ListEuroViewModel.cs" />
     <Compile Include="Models\ViewModel\DieselViewModel.cs" />
+    <Compile Include="ViewModels\ContentSliderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chartcss\chart.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\bilder\home-1353389_960_720.jpg" />
+    <Content Include="Content\images\bilder\landscape-615429_960_720.jpg" />
+    <Content Include="Content\images\bilder\sunset-1331088_960_720.jpg" />
     <Content Include="Content\images\borjes-logga-jpg.jpg" />
     <Content Include="Content\images\borjes_logistik_adr.jpg" />
     <Content Include="Content\images\borjes_logistik_adr_2.png" />
@@ -262,11 +265,10 @@
     <Content Include="Content\images\prettyPhoto\light_square\loader.gif" />
     <Content Include="Content\images\prettyPhoto\light_square\sprite.png" />
     <Content Include="Content\images\test_user.jpg" />
+    <Content Include="Content\jquery.bxslider.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\old.owl.carousel.css" />
-    <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.carousel.min.css" />
-    <Content Include="Content\owl.transitions.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\production\css\custom.css" />
     <Content Include="Content\production\css\maps\jquery-jvectormap-2.0.3.css" />
@@ -335,6 +337,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
+    <Content Include="Images\bx_loader.gif" />
+    <Content Include="Images\controls.png" />
     <Content Include="Scripts\Chart.js\src\chart.js" />
     <Content Include="Scripts\Chart.js\src\charts\Chart.Bar.js" />
     <Content Include="Scripts\Chart.js\src\charts\Chart.Bubble.js" />
@@ -371,6 +375,7 @@
     <Content Include="Scripts\Chart.js\src\scales\scale.logarithmic.js" />
     <Content Include="Scripts\Chart.js\src\scales\scale.radialLinear.js" />
     <Content Include="Scripts\Chart.js\src\scales\scale.time.js" />
+    <Content Include="Scripts\daJavaScript.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\images\Sorting icons.psd" />
     <Content Include="Scripts\DataTables-1.10.11\media\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -423,6 +428,7 @@
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
     <Content Include="Scripts\jquery.inview.min.js" />
     <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.js" />

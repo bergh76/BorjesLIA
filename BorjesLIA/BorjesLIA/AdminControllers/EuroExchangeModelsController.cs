@@ -23,7 +23,7 @@ namespace BorjesLIA.AdminControllers
         // GET: EuroExchangeModels
         [HttpGet]
         public ActionResult Index()
-        {            
+        {
             return View(db.EuroExchangeModels.ToList());
         }
 
@@ -75,7 +75,7 @@ namespace BorjesLIA.AdminControllers
                 {
                     db.EuroExchangeModels.Add(newEuro);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return PartialView("Index", db.EuroExchangeModels);
                 }
             }
             else

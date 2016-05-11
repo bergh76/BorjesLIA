@@ -1,8 +1,60 @@
-﻿@*@model IEnumerable<BorjesLIA.Models.Euro.EuroExchangeModel>*@
-@model BorjesLIA.ViewModel.ListEuroViewModel
+﻿@model BorjesLIA.ViewModel.ListEuroViewModel
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": '@Url.Action("GetData")',
+                "type": "GET"
+            },
+            "columns": [
+                { "data": "euroValue" },
+                { "data": "Date" }
+            ]
+        });
+    });
+    
+</script>*@
 <div class="x_panel">
     <div class="x_title">
+        <ul class="nav navbar-left panel_toolbox">
+
+            <li>
+                <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
+                    <span>Copy</span>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
+                    <span>CSV</span>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
+                    <span>Excel</span>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
+                    <span>PDF</span>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
+                    <span>Print</span>
+                </a>
+            </li>
+            </ul>
         <ul class="nav navbar-right panel_toolbox">
+            @*<li class="dataTables_filter">
+                <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label>
+            </li>*@
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -13,42 +65,20 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        <p class="text-muted font-13 m-b-30">
-            <h2>PartialView</h2> Renderad ifrån _EuroList.cshtml
-        </p>
-        <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <div class="dt-buttons btn-group">
-                <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Copy</span>
-                </a>
-                <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
-                    <span>CSV</span>
-                </a>
-                <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Excel</span>
-                </a>
-                <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
-                    <span>PDF</span>
-                </a>
-                <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Print</span>
-                </a>
-            </div>
-            @*<div id="datatable-buttons_filter" class="dataTables_filter">
-                <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label>
-            </div>*@
+        <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">            
             <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                <tr>
-                    <th>
-                        Euro
-                    </th>
-                    <th>
-                        Datum
-                    </th>
-                    <th>Edit</th>
-                </tr>
-
-                @foreach (var item in Model.newEuroList)
+            @*<table id="example" class="display" cellspacing="0">*@
+                <thead>
+                    <tr>
+                        <th>
+                            Euro
+                        </th>
+                        <th>
+                            Datum
+                        </th>
+                    </tr>
+                </thead>
+                    @foreach (var item in Model.newEuroList)
                     {
                         <tr>
                             <td>
@@ -58,16 +88,16 @@
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
                         </tr>
                     }
 
             </table>
         </div>
-        <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 51 to 57 of 57 entries</div>
+        @*<div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 51 to 57 of 57 entries</div>
         <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
             <ul class="pagination">
                 <li class="paginate_button previous" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li>
@@ -79,7 +109,6 @@
                 <li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li>
                 <li class="paginate_button next disabled" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li>
             </ul>
-        </div>
+        </div>*@
     </div>
 </div>
-

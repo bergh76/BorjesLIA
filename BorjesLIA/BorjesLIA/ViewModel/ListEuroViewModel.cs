@@ -35,10 +35,6 @@ namespace BorjesLIA.ViewModel
         }
 
 
-
-
-
-
         public class EuroGrafModel
         {
             private ApplicationDbContext _db;

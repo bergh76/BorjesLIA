@@ -22,36 +22,53 @@ namespace BorjesLIA.AdminControllers
 
         // GET: EuroExchangeModels
         [HttpGet]
+
         public ActionResult Index()
         {
             ListEuroViewModel euroV = new ListEuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
-                newEuroList = db.EuroExchangeModels.ToList()
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
 
             };
             return View(euroV);
         }
 
-        public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
-        {
-            var euroList = db.EuroExchangeModels.ToList();
-            PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
-            return View(model);
-        }
-
-
+        //public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
+        //{
+        //    var euroList = db.EuroExchangeModels.ToList();
+        //    PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
+        //    return View(model);
+        //}
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(ListEuroViewModel eurox)
         {
-            //ListEuroViewModel eurox = new ListEuroViewModel();
             var data = await eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
+        //[HttpPost]
+        public ActionResult _AddNewEuro(ListEuroViewModel newEuro)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.EuroExchangeModels.Add(newEuro.AddEuro);
+                    db.SaveChanges();
+                    newEuro.newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date);
+                    //var getNewChart = newEuro.GetData();
+                    return PartialView("_EuroList", newEuro);
+                }
+            }
+            else
+            {
+                return View(newEuro);
+            }
+        }
 
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
@@ -67,50 +84,28 @@ namespace BorjesLIA.AdminControllers
             }
             return View(euroExchangeModel);
         }
-
-        // GET: EuroExchangeModels/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-        public ActionResult _AddNewEuro(ListEuroViewModel newEuro)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                using (var db = new ApplicationDbContext())
-                {
-                    db.EuroExchangeModels.Add(newEuro.AddEuro);
-                    db.SaveChanges();
-                    newEuro.newEuroList = db.EuroExchangeModels.ToList();
-                    return PartialView("_EuroList", newEuro);
-                }
-            }
-            else
-            {
-                return View(newEuro);
-            }
-        }
-
-
+        //// GET: EuroExchangeModels/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: EuroExchangeModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.EuroExchangeModels.Add(euroExchangeModel);
-                db.SaveChanges();
-                //return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.EuroExchangeModels.Add(euroExchangeModel);
+        //        db.SaveChanges();
+        //        //return RedirectToAction("Index");
+        //    }
 
-            return View(euroExchangeModel);
-        }
+        //    return View(euroExchangeModel);
+        //}
 
         // GET: EuroExchangeModels/Edit/5
         public ActionResult Edit(int? id)

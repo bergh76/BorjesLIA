@@ -264,11 +264,9 @@
     <Content Include="Content\images\prettyPhoto\light_square\sprite.png" />
     <Content Include="Content\images\test_user.jpg" />
     <Content Include="Content\main.css" />
-    <Content Include="Content\old.owl.carousel.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\owl.transitions.css" />
-    <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\production\css\custom.css" />
     <Content Include="Content\production\css\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="Content\production\images\1.png" />
@@ -323,7 +321,6 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff" />

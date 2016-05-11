@@ -24,7 +24,13 @@ namespace BorjesLIA.AdminControllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.EuroExchangeModels.ToList());
+            ListEuroViewModel euroV = new ListEuroViewModel
+            {
+                AddEuro = new EuroExchangeModel(),
+                newEuroList = db.EuroExchangeModels.ToList()
+
+            };
+            return View(euroV);
         }
 
         public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
@@ -36,6 +42,7 @@ namespace BorjesLIA.AdminControllers
 
 
 
+        [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(ListEuroViewModel eurox)
         {
@@ -67,15 +74,17 @@ namespace BorjesLIA.AdminControllers
             return View();
         }
 
-        public ActionResult NewEuro(EuroExchangeModel newEuro)
+
+        public ActionResult _AddNewEuro(ListEuroViewModel newEuro)
         {
-            if (ModelState.IsValid)
+            if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
-                    db.EuroExchangeModels.Add(newEuro);
+                    db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
-                    return PartialView("Index", db.EuroExchangeModels);
+                    newEuro.newEuroList = db.EuroExchangeModels.ToList();
+                    return PartialView("_EuroList", newEuro);
                 }
             }
             else
@@ -83,6 +92,9 @@ namespace BorjesLIA.AdminControllers
                 return View(newEuro);
             }
         }
+
+
+
         // POST: EuroExchangeModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

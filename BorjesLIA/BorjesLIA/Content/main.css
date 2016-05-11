@@ -17,21 +17,7 @@ body {
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
-textarea {
-    max-width: 280px;
-}
-.tablewidth-100{
-    width: 100px; white-space: normal;
-}
-.tablewidth-150{
-    width: 150px;white-space: normal;
-}
-.tablewidth-200{
-    width: 200px;white-space: normal;
-}
-.tablewidth-350{
-    width: 350px;white-space: normal;
-}
+
 
 .carousel-caption {
     z-index: 10 !important;
@@ -122,36 +108,7 @@ textarea {
   width: 100%;
   background: rgba(0, 0, 0, 0.1);
 }
-#cta {
-  padding: 50px 0;
-  background-color: #eeeeee;
-}
-#cta h2 {
-  margin-top: 0;
-}
-#cta .btn {
-  margin-top: 40px;
-}
-#cta2 {
-  background: #242a33;
-  background-size: cover;
-  color: #fff;
-  padding: 70px 0;
-}
-#cta2 .btn {
-  margin-top: 10px;
-}
-#cta2 h2 {
-  color: #fff;
-  font-size: 44px;
-  line-height: 1;
-}
-#cta2 h2 > span {
-  color: #72C05B;
-}
-#cta2 p {
-    color: #fff;
-}
+
 
 .container-push-top{
     padding-top:50px;
@@ -159,128 +116,4 @@ textarea {
 .login{
     color: #ca1a1a;
 }
-/*
-=============================================
-NAVIGATION START
-=============================================
-*/
-
-nav {
-    width: 100%;
-    /*z-index: 9999;
-    position: fixed;
-    top: 0;*/
-    transition: top 0.3s ease-in-out;
-}
-
-.navigation {
-    font-size: 14px;
-    color: #fff;
-    background-color: #666666;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-right: auto;
-    margin-left: auto;
-}
-    /*top right bottom left 
-}*/
-
-.navigation ul {
-    /* TA BORT PRICKEN: */
-    list-style: none;
-    /* TA BORT DEFULT VÄRDEN OCH ÄRVDA MARGINALER OCH PADDINGS: */
-    margin: 0;
-    padding: 0;
-}
-
-.navigation > ul > li {
-    position: relative;
-    float: left;
-    margin-right: 1px;
-    width: auto;
-}
-
-.navigation > ul > li > a {
-    display: block;
-    background: rgba(44, 44, 44, 0.0);
-    padding: 8px 14px;
-    text-decoration: none;
-    color: #fff;
-}
-
-.navigation > ul > li > a.active {
-    color: #FFF;
-}
-
-/*.navigation > ul > li > a:hover {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background: rgba(234, 234, 234, 0.8);
-    color: #ca1a1a;
-}*/
-
-.navigation ul ul {
-    width: 170%;
-    position: absolute;
-    z-index: 100;
-    height: 0;
-    overflow: hidden;
-    box-shadow: 0px 1px 4px #666666;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    -webkit-transition: height 0.3s ease-in;
-    -moz-transition: height 0.3s ease-in;
-    -o-transition: height 0.3s ease-in;
-    -ms-transition: height 0.3s ease-in;
-    transition: height 0.3s ease-in;
-}
-
-.navigation > ul > li:hover ul,
-.navigation > ul > li > a:hover ul,
-.navigation ul ul li:hover > ul,
-.navigation ul ul li a:hover > ul {
-    height: auto;
-}
-
-.navigation ul ul li {
-    background: rgba(234, 234, 234, 0.9);
-    width: auto;
-    -webkit-transition: background-color 0.3s ease;
-    -moz-transition: background-color 0.3s ease;
-    -o-transition: background-color 0.3s ease;
-    -ms-transition: background-color 0.3s ease;
-    transition: background-color 0.3s ease;
-}
-
-.navigation ul ul li:hover {
-    background-color: #999;
-}
-
-.navigation ul ul li a {
-    display: block;
-    text-decoration: none;
-    margin: 0 12px;
-    padding: 0;
-    color: #ca1a1a;
-
-}
-
-.navigation ul ul li a:hover,
-.navigation ul ul li:hover > a {
-    color: #ffffff;
-}
-
-.navigation ul ul li + li a {
-    border-top: 1px dotted #999;
-}
-
-.navigation ul ul li:hover + li a {
-    border-top: 1px solid #eaeaea;
-}
-
-.navigation-up {
-    z-index: 99;
-    top: -50px;
-}
-
 

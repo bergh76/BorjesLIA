@@ -12,9 +12,11 @@ namespace BorjesLIA.ViewModel
 {
     public class ListEuroViewModel
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+
         public EuroExchangeModel AddEuro { get; set; }
         public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
+
+
         public Task<List<EuroExchangeModel>> GetData()
         {
             using (var db = new ApplicationDbContext())
@@ -31,6 +33,12 @@ namespace BorjesLIA.ViewModel
             }
 
         }
+
+
+
+
+
+
         public class EuroGrafModel
         {
             private ApplicationDbContext _db;
@@ -46,7 +54,7 @@ namespace BorjesLIA.ViewModel
             }
 
 
-            public void PopulateRidesPerDayArray()
+            public void PopulateEuroLineChart()
             {
                 List<EuroExchangeModel> ds = new List<EuroExchangeModel>();
                 euroLineChartArray = ds.GroupBy(x => x.Date.Day)

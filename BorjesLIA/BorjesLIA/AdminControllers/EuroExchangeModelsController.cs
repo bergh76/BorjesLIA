@@ -33,6 +33,7 @@ namespace BorjesLIA.AdminControllers
             return View(model);
         }
         //Populates a list with data from database tabel EuroExchangeModel
+        [AllowAnonymous]
         public JsonResult GetData()
         {
             ListEuroViewModel eurox = new ListEuroViewModel();

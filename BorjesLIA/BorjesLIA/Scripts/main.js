@@ -2,14 +2,14 @@
 
     // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
 
-        //var c, p = $('.navbar');
-        //$(document).on('mousemove',function() {        
-        //    p.fadeIn('fast');
-        //    clearTimeout(c);
-        //    c= setTimeout(function(){
-        //        p.fadeOut('fast');
-        //    }, 5000);
-        //});
+    //    var c, p = $('.navbar');
+    //    $(document).on('mousemove',function() {        
+    //        p.fadeIn('fast');
+    //        clearTimeout(c);
+    //        c= setTimeout(function(){
+    //            p.fadeOut('fast');
+    //        }, 5000);
+    //    });
 
     //});​
        
@@ -133,3 +133,4 @@ function toggleFullScreen(elem) {
 
     }
 }
+

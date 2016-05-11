@@ -6,26 +6,31 @@
 <script src="~/Scripts/jquery.bxslider.min.js"></script>
 <script src="~/Scripts/daJavaScript.js"></script>
 
-<div id="slider-wrapper">
+<div id="bx-wrapper">
     @*<ul class="bxslider">
-        <li><iframe src="@Url.Action("returnPartialView", "EuroExchangeModels")" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+            <li><iframe src="@Url.Action("returnPartialView", "EuroExchangeModels")" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
 
-        <li><iframe src="http://player.vimeo.com/video/17914974" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+            <li><iframe src="http://player.vimeo.com/video/17914974" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
 
-        <li><img src="~/Content/images/bilder/landscape-615429_960_720.jpg" /></li>
+            <li><img src="~/Content/images/bilder/landscape-615429_960_720.jpg" /></li>
 
-        <li><iframe src="http://www.borjes.com/se" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-    </ul>*@   
-    <ul class="bxslider"> 
-        <li><iframe  src='@Url.Action("returnPartialView", "EuroExchangeModels")' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+            <li><iframe src="http://www.borjes.com/se" width=1080 height="800" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+        </ul>*@
+    <ul class="bxslider">
+        <li><iframe src='@Url.Action("returnPartialView", "EuroExchangeModels")' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
 
-        <li><iframe  src='http://player.vimeo.com/video/17914974' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+        <li><iframe src='http://player.vimeo.com/video/17914974' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
 
-        <li><img src='~/Content/images/bilder/landscape-615429_960_720.jpg' width=768 height="1040" /></li>
+        <li><img src='~/Content/images/bilder/landscape-615429_960_720.jpg' width=1040 height="768" /></li>
 
-        <li><iframe  src='http://www.borjes.com/se' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-    </ul> 
+        <li><iframe src='http://www.borjes.com/se' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+
+        <!-- <li> Lokal videofil </li>-->
+
+    </ul>
 </div>
 
-
-
+<!--Statiska knappar helskärm-->
+@*<div><input id="ButtonOne" type="button" value="fullScreen" onclick="launchIntoFullscreen(document.documentElement)" /></div>
+    <p></p>
+    <div><input id="ButtonTwo" type="button" value="exitFullScreen" onclick="exitFullscreen()" /></div>*@

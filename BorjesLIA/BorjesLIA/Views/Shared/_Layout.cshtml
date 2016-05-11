@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
     <link href="~/Content/prettyPhoto.css" rel="stylesheet"> <!--donow-->
     <link href="~/Content/responsive.css" rel="stylesheet"> <!--donow-->
     <link href="~/Content/production/css/custom.css" rel="stylesheet" /> <!--färg n suff-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> <!--bxslider-->
     <link href="~/Content/jquery.bxslider.css" rel="stylesheet" /> <!--bxSlider-->
    <!-- <link href="~/Content/main.css" rel="stylesheet"> bxsliderns play,stop knapp borta-->
 
@@ -34,18 +35,20 @@
                     <a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>
                 </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav text-right">
-                    @*<li ><span class="navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="right" title="Helskärm"></span></li>*@
-                    @*<li>@Html.ActionLink("Admin", "Login", "Account")</li>*@
-                </ul>
-                @Html.Partial("_LoginPartial")
-                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
-            </div>
+                <div class="navbar-collapse collapse">
+                    <!--TODO: hide-->
+                    <ul class="nav navbar-nav text-right">
+                        @*<li ><span class="navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="right" title="Helskärm"></span></li>*@
+                        @*<li>@Html.ActionLink("Admin", "Login", "Account")</li>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial") 
+                    <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="launchIntoFullscreen(document.documentElement)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
+                    @*<span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
+                </div>
         </div>
     </div>
 
-    <div>
+    <div class="container-max">
         @RenderBody()
         @*<hr />
             <footer>
@@ -55,7 +58,7 @@
     <!-- <script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/jquery-2.2.3.js"></script>  ofunkis med bxSlider-->
     <!--<script src="~/Scripts/owl.carousel.min.js"></script> -->
-
+   
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/mousescroll.js"></script>
     <script src="~/Scripts/jquery.prettyPhoto.js"></script>
@@ -64,7 +67,8 @@
     <script src="~/Scripts/wow.min.js"></script>
     <script src="~/Scripts/main.js"></script> 
     <script src="~/Content/production/js/custom.js"></script>
-
+   
+    
     <!--off-->
     @*<script src="~/Content/documentation/js/shCore.js"></script>
         <script src="~/Content/documentation/js/shBrushXml.js"></script>*@

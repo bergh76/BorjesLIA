@@ -30,59 +30,67 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <!--Partial view for form adding new Euroindex-->
+                                @using (Ajax.BeginForm("_AddNewEuro", new AjaxOptions { UpdateTargetId = "euroList" }))
+                                {
 
-                            <!--Partial view for form adding new Euroindex-->
-                            @using (Ajax.BeginForm("_AddNewEuro", new AjaxOptions { UpdateTargetId = "euroList" }))
-                            {
-                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="x_content">
-                                        <div class="form-horizontal">                                            
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.AddEuro.euroValue, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+                                        <div class="x_panel">
+                                            <div class="x_title">
+                                                <ul class="nav navbar-right panel_toolbox">
+                                                    <li>
+                                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div class="form-horizontal">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddEuro.euroValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.TextBoxFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddEuro.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.TextBoxFor(model => model.AddEuro.Date, DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"), new { htmlAttributes = new { @class = "form-control text-box" } })
+                                                            @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                            <input type="submit" value="Create" class="btn btn-default" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.AddEuro.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.TextBoxFor(model => model.AddEuro.Date, DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"), new { htmlAttributes = new { @class = "form-control text-box" } })
-                                                    @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-offset-2 col-md-10">
-                                                    <input type="submit" value="Create" class="btn btn-default" />
-                                                </div>
-                                            </div>
                                         </div>
+                                        <!-- Datatable starts here -->
                                     </div>
-                                    
-                                </div>
-                                <!-- Datatable starts here -->
-                               
-                            }
-                            <div class="x_content">
-                                <div id="euroList">
-                                    @Html.Partial("_EuroList", Model)
-                                </div>
-                            </div><!-- Datatable ENDS here -->
-                        </div>
+                                }
+                                <div class="x_content">
+                                    <div id="euroList">
+                                        @Html.Partial("_EuroList", Model)
+                                    </div>
+                                </div><!-- Datatable ENDS here -->
+                            </div>
+                        </div><!-- Euroexchangecourse ENDS here -->                        
+                    </div>
 
-
-
-                    </div><!-- Euroexchangecourse ENDS here -->
-                    
-                    
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         @Html.Partial("_EuroLineGraph")
                     </div>
-
-
 
                     <!-- LineGraph for Euroexchangecourse starts here -->
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -285,9 +293,9 @@
     <script src="~/Scripts/Chart.js/dist/Chart.bundle.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
     <script>
-         Chart.defaults.global.legend = {
-             enabled: false
-         };
+        Chart.defaults.global.legend = {
+            enabled: false
+        };
         // Draws the graph into a specified div
         var ctx = document.getElementById("lineChart");
         var lineChart = new Chart(ctx, {
@@ -486,25 +494,25 @@
     </script>
     <!-- CHARTJS END-->
     @*<script>
-        $(document).ready(function (Model) {
-            $('#datatable').dataTable();
-            $('#datatable-keytable').DataTable({
-                keys: true
+            $(document).ready(function (Model) {
+                $('#datatable').dataTable();
+                $('#datatable-keytable').DataTable({
+                    keys: true
+                });
+                $('#datatable-responsive').DataTable();
+                $('#datatable-scroller').DataTable({
+                    ajax: "",
+                    deferRender: true,
+                    scrollY: 380,
+                    scrollCollapse: true,
+                    scroller: true
+                });
+                var table = $('#datatable-fixed-header').DataTable({
+                    fixedHeader: true
+                });
             });
-            $('#datatable-responsive').DataTable();
-            $('#datatable-scroller').DataTable({
-                ajax: "",
-                deferRender: true,
-                scrollY: 380,
-                scrollCollapse: true,
-                scroller: true
-            });
-            var table = $('#datatable-fixed-header').DataTable({
-                fixedHeader: true
-            });
-        });
-        TableManageButtons.init();
-    </script>*@
+            TableManageButtons.init();
+        </script>*@
 </body>
 
 

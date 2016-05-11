@@ -20,14 +20,6 @@ namespace BorjesLIA.AdminControllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        IEnumerable<EuroExchangeModel> dList;
-        public EuroExchangeModelsController()
-        {
-            dList = db.EuroExchangeModels.ToList();
-        }
-
-
-
         // GET: EuroExchangeModels
         [HttpGet]
         public ActionResult Index()

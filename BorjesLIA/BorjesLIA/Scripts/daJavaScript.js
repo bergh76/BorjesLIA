@@ -57,3 +57,11 @@ function myStopFunction() {
     }
 }
 
+//video test
+$("#videoOne").on("pause", function (e) {
+    slider.startShow();
+});
+
+$("#videoOne").on("play", function (e) {
+    slider.stopShow();
+});

@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AddToSlider.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.Designer.cs">
       <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
@@ -218,9 +219,11 @@
     <Content Include="Content\Chartcss\chart.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\images\bilder\home-1353389_960_720.jpg" />
     <Content Include="Content\images\bilder\landscape-615429_960_720.jpg" />
-    <Content Include="Content\images\bilder\sunset-1331088_960_720.jpg" />
+    <Content Include="Content\video\SampleVideo_1280x720_1mb.mp4" />
+    <Content Include="Images\contentslider\home-1353389_960_720.jpg" />
+    <Content Include="Images\contentslider\landscape-615429_960_720.jpg" />
+    <Content Include="Images\contentslider\sunset-1331088_960_720.jpg" />
     <Content Include="Content\images\borjes-logga-jpg.jpg" />
     <Content Include="Content\images\borjes_logistik_adr.jpg" />
     <Content Include="Content\images\borjes_logistik_adr_2.png" />
@@ -524,6 +527,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DBContext\" />
+    <Folder Include="Models\localVideo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

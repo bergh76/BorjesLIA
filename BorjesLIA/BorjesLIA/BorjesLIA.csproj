@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Chart.Mvc, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chart.Mvc.1.0.0.2\lib\net45\Chart.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -432,42 +436,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
-    <Content Include="Scripts\Chart.js\src\chart.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Bar.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Bubble.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Doughnut.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Line.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.PolarArea.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Radar.js" />
-    <Content Include="Scripts\Chart.js\src\charts\Chart.Scatter.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.bar.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.bubble.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.doughnut.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.line.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.polarArea.js" />
-    <Content Include="Scripts\Chart.js\src\controllers\controller.radar.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.animation.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.controller.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.datasetController.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.element.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.helpers.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.layoutService.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.legend.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.plugin.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.scale.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.scaleService.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.title.js" />
-    <Content Include="Scripts\Chart.js\src\core\core.tooltip.js" />
-    <Content Include="Scripts\Chart.js\src\elements\element.arc.js" />
-    <Content Include="Scripts\Chart.js\src\elements\element.line.js" />
-    <Content Include="Scripts\Chart.js\src\elements\element.point.js" />
-    <Content Include="Scripts\Chart.js\src\elements\element.rectangle.js" />
-    <Content Include="Scripts\Chart.js\src\scales\scale.category.js" />
-    <Content Include="Scripts\Chart.js\src\scales\scale.linear.js" />
-    <Content Include="Scripts\Chart.js\src\scales\scale.logarithmic.js" />
-    <Content Include="Scripts\Chart.js\src\scales\scale.radialLinear.js" />
-    <Content Include="Scripts\Chart.js\src\scales\scale.time.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\cropper\dist\cropper.css" />
     <Content Include="Scripts\cropper\dist\cropper.js" />
     <Content Include="Scripts\cropper\dist\cropper.min.css" />
@@ -1025,6 +994,7 @@
     <Content Include="Views\Shared\_Admin_NewEuroIndex.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
+    <Content Include="Views\EuroExchangeModels\_EuroBarChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,17 +1,11 @@
 ﻿jQuery(function($) {'use strict';
 
-    // Hides navbar on mouseinactivity. Needs a controll if navbar hides and show.
-
-        //var c, p = $('.navbar');
-        //$(document).on('mousemove',function() {        
-        //    p.fadeIn('fast');
-        //    clearTimeout(c);
-        //    c= setTimeout(function(){
-        //        p.fadeOut('fast');
-        //    }, 5000);
-        //});
-
-    //});​
+    // ADD PAGINATIONS TO TABLES
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "processing": true,
+        });
+    });
        
 	//Slider
 	$(document).ready(function() {
@@ -132,3 +126,4 @@ function toggleFullScreen(elem) {
         }
     }
 }
+

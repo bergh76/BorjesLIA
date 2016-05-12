@@ -7,5 +7,6 @@ namespace BorjesLIA.Models.Graphs
 {
     public class EuroLineGraphModel
     {
+
     }
 }

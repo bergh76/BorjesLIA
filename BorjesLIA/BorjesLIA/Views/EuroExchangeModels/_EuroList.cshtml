@@ -1,12 +1,14 @@
 ﻿@model BorjesLIA.ViewModel.ListEuroViewModel
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myTable').DataTable({
-
+            "processing": true,
         });
     });
 
 </script>
+
 <div class="x_panel">
     <div class="x_title">
         <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
@@ -49,9 +51,7 @@
     </ul>
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <table id="myTable" class="table table-striped table-responsive dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-
-            @*<table id="example"  class="dataTable " cellspacing="0">*@
+            <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                 <thead>
                     <tr>
                         <th>

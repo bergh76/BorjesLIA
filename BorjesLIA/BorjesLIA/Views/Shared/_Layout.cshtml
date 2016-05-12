@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Börjes Transport</title>
 
+    <!-- DataTabel CSS-->
+    <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
-    <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
-    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
+    <!-- DataTabel CSS-->
 
 
 
@@ -34,8 +34,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    @*@Html.ActionLink("Start", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                    @*<a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>*@
+                    @Html.ActionLink("Start", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>
                 </div>
             </div>
             <div class="navbar-collapse collapse">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="container-max">
         @RenderBody()
         @*<hr />
             <footer>
@@ -53,21 +53,16 @@
             </footer>*@
     </div>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+    </script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/owl.carousel.min.js"></script>
-    @*<script src="~/Scripts/mousescroll.js"></script>
-    <script src="~/Scripts/jquery.prettyPhoto.js"></script>
-    <script src="~/Scripts/jquery.isotope.min.js"></script>
-    <script src="~/Scripts/jquery.inview.min.js"></script>*@
     <script src="~/Scripts/wow.min.js"></script>
     <script src="~/Scripts/main.js"></script>
-
-
     <script src="~/Content/production/js/custom.js"></script>
-    @*<script src="~/Content/documentation/js/shCore.js"></script>
-        <script src="~/Content/documentation/js/shBrushXml.js"></script>*@
-
 
 
     @RenderSection("scripts", required: false)

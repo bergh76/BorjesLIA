@@ -22,9 +22,9 @@ namespace BorjesLIA.AdminControllers
 
         // GET: EuroExchangeModels
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(ListEuroViewModel euroV)
         {
-            ListEuroViewModel euroV = new ListEuroViewModel
+            euroV = new ListEuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
@@ -50,6 +50,7 @@ namespace BorjesLIA.AdminControllers
 
 
         //[HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(ListEuroViewModel newEuro)
         {
             if (Request.IsAjaxRequest())

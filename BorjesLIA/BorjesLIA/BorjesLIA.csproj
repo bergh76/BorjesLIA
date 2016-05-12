@@ -176,6 +176,7 @@
     <Compile Include="AdminControllers\EuroExchangeModelsController.cs" />
     <Compile Include="AdminControllers\HubController.cs" />
     <Compile Include="AdminControllers\ImgsController.cs" />
+    <Compile Include="AdminControllers\StartModelsController.cs" />
     <Compile Include="AdminControllers\URLModelsController.cs" />
     <Compile Include="AdminControllers\VideoModelsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -189,7 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\AddToSlider.cs" />
+    <Compile Include="Helper\SliderHelper.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.Designer.cs">
       <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
@@ -523,6 +524,11 @@
     <Content Include="Views\Shared\_Admin_NewEuroIndex.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
+    <Content Include="Views\StartModels\Create.cshtml" />
+    <Content Include="Views\StartModels\Delete.cshtml" />
+    <Content Include="Views\StartModels\Details.cshtml" />
+    <Content Include="Views\StartModels\Edit.cshtml" />
+    <Content Include="Views\StartModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

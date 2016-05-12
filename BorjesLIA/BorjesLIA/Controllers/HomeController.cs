@@ -12,35 +12,62 @@ namespace BorjesLIA.Controllers
 {
     public class HomeController : Controller
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {
-            //StartModel asdf = new StartModel()
-            //{
-            //    UrlSlide = db.UrlModels.ToList()
-            //}
-
-            AddToSlider ATS = new AddToSlider();
             ContentSliderViewModel model = new ContentSliderViewModel()
             {
-                SliderList = ATS.AddToListHelper()
-                //SliderList = new List<Models.StartModel>()
-            };   
+                SliderList = db.StartModels.ToList()
+            };
             return View(model);
+
+            //AddToSlider ATS = new AddToSlider();
+            //ContentSliderViewModel model = new ContentSliderViewModel()
+            //{
+            //    SliderList = ATS.AddToListHelper()
+            //    //SliderList = new List<Models.StartModel>()
+            //};   
+            //return View(model);
 
             //ContentSliderViewModel model = new ContentSliderViewModel()
             //{
-            //    ImagesList = new System.IO.DirectoryInfo(Server.MapPath("~/Images/contentslider/")).GetFiles()
+            //    SliderList = new System.IO.DirectoryInfo(Server.MapPath("~/Images/contentslider/")).GetFiles()
             //};
             //return View(model);
 
             //return View();
         }
 
-        public ActionResult returnPartialView()
+        public JsonResult GetData()
         {
-            return View();
+            ListEuroViewModel eurox = new ListEuroViewModel();
+            var data = eurox.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult returnPartialView(dynamic element)
+        {
+            // TODO: hitta nåt sätt att sortera och veta vad som ska visas
+            return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+         
         }
     }
 }
+
+/*
+ [AllowAnonymous]
+        public JsonResult GetData()
+        {
+            ListEuroViewModel eurox = new ListEuroViewModel();
+            var data = eurox.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        //return partial view
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult returnPartialView()
+        {
+            return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+        }
+*/

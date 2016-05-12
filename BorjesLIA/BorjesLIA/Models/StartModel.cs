@@ -12,6 +12,7 @@ namespace BorjesLIA.Models
 {
     public class StartModel
     {
+
         public int ID { get; set; }
         public string Name { get; set; }
         public DieselPriceModel DieselSlide { get; set; }
@@ -20,5 +21,6 @@ namespace BorjesLIA.Models
         public URLModel UrlSlide { get; set; }
         public VideoModel VideoSlide { get; set; }
         public BorjesLIA.Models.Img.Img ImageSlide { get; set; }
+
     }
 }

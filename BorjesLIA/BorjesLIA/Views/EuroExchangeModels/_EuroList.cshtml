@@ -1,60 +1,16 @@
 ﻿@model BorjesLIA.ViewModel.ListEuroViewModel
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myTable').DataTable({
 
-
-@*<script type="text/javascript">
-    $(document).ready(function () {
-        $('#example').DataTable({
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": '@Url.Action("GetData")',
-                "type": "GET"
-            },
-            "columns": [
-                { "data": "euroValue" },
-                { "data": "Date" }
-            ]
         });
     });
-    
-</script>*@
+
+</script>
 <div class="x_panel">
     <div class="x_title">
-        <ul class="nav navbar-left panel_toolbox">
-
-            <li>
-                <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Copy</span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
-                    <span>CSV</span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Excel</span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
-                    <span>PDF</span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
-                    <span>Print</span>
-                </a>
-            </li>
-            </ul>
+        <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
         <ul class="nav navbar-right panel_toolbox">
-            @*<li class="dataTables_filter">
-                <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label>
-            </li>*@
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -64,10 +20,38 @@
         </ul>
         <div class="clearfix"></div>
     </div>
+    <ul class="nav navbar-left panel_toolbox">
+        <li>
+            <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
+                <span>Copy</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
+                <span>CSV</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
+                <span>Excel</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
+                <span>PDF</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
+                <span>Print</span>
+            </a>
+        </li>
+    </ul>
     <div class="x_content">
-        <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">            
-            <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-            @*<table id="example" class="display" cellspacing="0">*@
+        <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <table id="myTable" class="table table-striped table-responsive dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+
+            @*<table id="example"  class="dataTable " cellspacing="0">*@
                 <thead>
                     <tr>
                         <th>
@@ -76,39 +60,31 @@
                         <th>
                             Datum
                         </th>
+                        <th>
+                            Edit
+                        </th>
                     </tr>
                 </thead>
-                    @foreach (var item in Model.newEuroList)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.euroValue)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date)
-                            </td>
-                            <td>
+                @foreach (var item in Model.newEuroList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.euroValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                         </td>
-                        </tr>
-                    }
+                    </tr>
+                }
 
             </table>
         </div>
-        @*<div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 51 to 57 of 57 entries</div>
-        <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
-            <ul class="pagination">
-                <li class="paginate_button previous" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li>
-                <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0">1</a></li>
-                <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0">2</a></li>
-                <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0">3</a></li>
-                <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0">4</a></li>
-                <li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0">5</a></li>
-                <li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li>
-                <li class="paginate_button next disabled" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li>
-            </ul>
-        </div>*@
     </div>
 </div>
+
+

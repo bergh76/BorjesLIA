@@ -926,6 +926,8 @@
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.jqueryui.min.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.material.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.responsive.min.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.semanticui.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.semanticui.min.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\dataTables.uikit.js" />

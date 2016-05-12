@@ -22,7 +22,6 @@ namespace BorjesLIA.AdminControllers
 
         // GET: EuroExchangeModels
         [HttpGet]
-
         public ActionResult Index()
         {
             ListEuroViewModel euroV = new ListEuroViewModel

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
+using BorjesLIA.ViewModel;
+using System.Threading.Tasks;
 using BorjesLIA.Models.Diesel;
 
 namespace BorjesLIA.AdminControllers
@@ -17,10 +16,47 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DieselPriceModels
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(DieselViewModel dieselV)
         {
-            return View(db.DieselPriceModels.ToList());
+            dieselV = new DieselViewModel
+            {
+                AddDiesel = new DieselPriceModel(),
+                newDieselList = db.DieselPriceModels.ToList()
+            };
+            return View(dieselV);
         }
+
+        [AllowAnonymous]
+        //Populates a list with data from database tabel EuroExchangeModel
+        public async Task<JsonResult> GetData(DieselViewModel dieselChartData)
+        {
+            var data = await dieselChartData.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddDiesel(DieselViewModel newDiesel)
+        {
+
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.DieselPriceModels.Add(newDiesel.AddDiesel);
+                    db.SaveChanges();
+                    newDiesel.newDieselList = db.DieselPriceModels.ToList().OrderByDescending(x => x.Date);
+                    //var getNewChart = newEuro.GetData();
+                    return PartialView("_DieselList", newDiesel);
+                }
+            }
+            else
+            {
+                return View(newDiesel);
+            }
+        }
+
 
         // GET: DieselPriceModels/Details/5
         public ActionResult Details(int? id)
@@ -37,28 +73,28 @@ namespace BorjesLIA.AdminControllers
             return View(dieselPriceModel);
         }
 
-        // GET: DieselPriceModels/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: DieselPriceModels/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: DieselPriceModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DieselPriceModels.Add(dieselPriceModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: DieselPriceModels/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.DieselPriceModels.Add(dieselPriceModel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(dieselPriceModel);
-        }
+        //    return View(dieselPriceModel);
+        //}
 
         // GET: DieselPriceModels/Edit/5
         public ActionResult Edit(int? id)

@@ -13,9 +13,12 @@ namespace BorjesLIA.Models.Diesel
 
         [DataType(DataType.Currency)]
         [Display(Name = "Dieselpris")]
-        public decimal dieselPrice { get; set; }
+        public decimal dieselValue { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
-        public DateTime dateNewDieselPrice { get; set; }
+        public DateTime Date {
+            get; set;
+        }
     }
 }

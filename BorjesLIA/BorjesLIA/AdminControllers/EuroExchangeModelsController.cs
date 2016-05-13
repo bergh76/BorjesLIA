@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
-
-using PagedList;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
 
 namespace BorjesLIA.AdminControllers
 {
-     [Authorize]
+    [Authorize]
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: EuroExchangeModels
         [HttpGet]
-        public ActionResult Index(ListEuroViewModel euroV)
+        public ActionResult Index(EuroViewModel euroV)
         {
-            euroV = new ListEuroViewModel
+            euroV = new EuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
@@ -42,7 +37,7 @@ namespace BorjesLIA.AdminControllers
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(ListEuroViewModel eurox)
+        public async Task<JsonResult> GetData(EuroViewModel eurox)
         {
             var data = await eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -51,7 +46,7 @@ namespace BorjesLIA.AdminControllers
 
         //[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _AddNewEuro(ListEuroViewModel newEuro)
+        public ActionResult _AddNewEuro(EuroViewModel newEuro)
         {
             if (Request.IsAjaxRequest())
             {
@@ -172,5 +167,6 @@ namespace BorjesLIA.AdminControllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

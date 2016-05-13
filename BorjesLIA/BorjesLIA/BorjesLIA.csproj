@@ -193,9 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605090754321_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605090754321_BorjesLIA.Designer.cs">
-      <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201605131037155_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605131037155_BorjesLIA.Designer.cs">
+      <DependentUpon>201605131037155_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
@@ -437,6 +437,7 @@
     <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\cropper\dist\cropper.css" />
     <Content Include="Scripts\cropper\dist\cropper.js" />
     <Content Include="Scripts\cropper\dist\cropper.min.css" />
@@ -995,6 +996,7 @@
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroBarChart.cshtml" />
+    <Content Include="Views\DieselPriceModels\_DieselList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1006,8 +1008,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605090754321_BorjesLIA.resx">
-      <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605131037155_BorjesLIA.resx">
+      <DependentUpon>201605131037155_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

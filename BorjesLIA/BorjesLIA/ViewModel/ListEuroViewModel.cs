@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using Chart.Mvc.ComplexChart;
 namespace BorjesLIA.ViewModel
 {
-    public class ListEuroViewModel
+    public class EuroViewModel
     {
 
         public EuroExchangeModel AddEuro { get; set; }

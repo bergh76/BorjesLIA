@@ -12,8 +12,8 @@ namespace BorjesLIA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        dieselPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        dateNewDieselPrice = c.DateTime(nullable: false),
+                        dieselValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Date = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

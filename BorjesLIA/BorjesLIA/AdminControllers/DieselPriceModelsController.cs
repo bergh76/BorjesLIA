@@ -22,7 +22,7 @@ namespace BorjesLIA.AdminControllers
             dieselV = new DieselViewModel
             {
                 AddDiesel = new DieselPriceModel(),
-                newDieselList = db.DieselPriceModels.ToList()
+                newDieselList = db.DieselPriceModels.ToList().OrderByDescending(x => x.Date)
             };
             return View(dieselV);
         }
@@ -39,7 +39,6 @@ namespace BorjesLIA.AdminControllers
         [ValidateAntiForgeryToken]
         public ActionResult _AddDiesel(DieselViewModel newDiesel)
         {
-
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
@@ -73,28 +72,28 @@ namespace BorjesLIA.AdminControllers
             return View(dieselPriceModel);
         }
 
-        //// GET: DieselPriceModels/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // GET: DieselPriceModels/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-        //// POST: DieselPriceModels/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.DieselPriceModels.Add(dieselPriceModel);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: DieselPriceModels/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(DieselPriceModel dieselPriceModel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.DieselPriceModels.Add(dieselPriceModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-        //    return View(dieselPriceModel);
-        //}
+            return View(dieselPriceModel);
+        }
 
         // GET: DieselPriceModels/Edit/5
         public ActionResult Edit(int? id)
@@ -116,7 +115,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
+        public ActionResult Edit(DieselPriceModel dieselPriceModel)
         {
             if (ModelState.IsValid)
             {

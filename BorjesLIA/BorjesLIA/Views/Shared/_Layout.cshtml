@@ -11,10 +11,8 @@
     <link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
     <!-- DataTabel CSS-->
-
-
-
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="~/Content/animate.min.css" rel="stylesheet">
     <link href="~/Content/owl.transitions.css" rel="stylesheet">
@@ -34,7 +32,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    @*@Html.ActionLink("Start", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                     <a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>
                 </div>
             </div>
@@ -47,17 +44,14 @@
 
     <div class="container-max">
         @RenderBody()
-        @*<hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
     </div>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.sv.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/owl.carousel.min.js"></script>
     <script src="~/Scripts/wow.min.js"></script>

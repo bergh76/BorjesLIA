@@ -1,5 +1,4 @@
-﻿
-@model BorjesLIA.ViewModel.EuroViewModel
+﻿@model BorjesLIA.ViewModel.EuroViewModel
 @{
     ViewData["Title"] = "Eurokurs";
 }
@@ -61,7 +60,7 @@
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.AddEuro.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                                                             <div class="col-md-10">
-                                                                @Html.EditorFor(model => model.AddEuro.Date, DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"), new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.EditorFor(model => model.AddEuro.Date, new { htmlAttributes = new { @class = "form-control" } })
                                                                 @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
                                                             </div>
                                                         </div>
@@ -82,16 +81,11 @@
                                 <div id="euroList">
                                     @Html.Partial("_EuroList", Model)
                                 </div>
-
                                 <!-- Datatable ENDS here -->
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            @*@using (Ajax.BeginForm("GetData", new AjaxOptions { UpdateTargetId = "euroLineChart" }))
-                                {*@
                             @Html.Partial("_EuroLineGraph")
-
-                            @*}*@
                         </div>
                     </div>
                 </div>

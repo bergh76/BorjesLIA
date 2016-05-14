@@ -3,44 +3,32 @@
 @{
     ViewBag.Title = "Details";
 }
-<body class="nav-md">
-    <div class="container-dashboard body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    @Html.Partial("_AdminPanel")
-                </div>
-            </div>
-            <div class="right_col" role="main">
-                <h2>Details</h2>
 
-                <div>
-                    <h4>DieselPriceModel</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.dieselPrice)
-                        </dt>
+<h2>Details</h2>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.dieselPrice)
-                        </dd>
+<div>
+    <h4>DieselPriceModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dieselValue)
+        </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.dateNewDieselPrice)
-                        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dieselValue)
+        </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.dateNewDieselPrice)
-                        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
 
-                    </dl>
-                </div>
-                <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
-            </div>
-        </div>
-    </div>
-</body>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

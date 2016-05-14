@@ -1,10 +1,8 @@
-﻿
-@model BorjesLIA.ViewModel.DieselViewModel
+﻿@model BorjesLIA.ViewModel.DieselViewModel
 @{
-    ViewData["Title"] = "Dieselpris";
+    ViewData["Title"] = "Dieselpriser";
 }
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
+>
 <body class="nav-md">
     <div class="container-dashboard body">
         <div class="main_container">
@@ -19,7 +17,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Dieselpriser</h2>
+                                <h2>Dieselpris</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
                                         <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -32,10 +30,11 @@
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <!--Partial view for form adding new Euroindex-->
-                            @using(Ajax.BeginForm("_AddDiesel", new AjaxOptions { UpdateTargetId = "dieselList" }))
+
+                                @using (Ajax.BeginForm("_AddDiesel", new AjaxOptions { UpdateTargetId = "dieselList" }))
                                 {
-                                @Html.AntiForgeryToken()
-                                                <div class="x_content">
+                                    @Html.AntiForgeryToken()
+                                    <div class="x_content">
                                         <div class="x_panel">
                                             <div class="x_title">
                                                 <h2>Lägg till nytt Dieselpris</h2>
@@ -52,31 +51,38 @@
                                             <div class="x_content">
                                                 <div class="form-horizontal">
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                                                     <div class="form-group">
                                                         @Html.LabelFor(model => model.AddDiesel.dieselValue, htmlAttributes: new { @class = "control-label col-md-2" })
                                                         <div class="col-md-10">
-                                                            @Html.EditorFor(model => model.AddDiesel.dieselValue, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                            @Html.EditorFor(model => model.AddDiesel.dieselValue, new { htmlAttributes = new { @class = "form-control has-feedback-left active "} })
                                                             @Html.ValidationMessageFor(model => model.AddDiesel.dieselValue, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                         @Html.LabelFor(model => model.AddDiesel.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                                                         <div class="col-md-10">
-                                                            @Html.EditorFor(model => model.AddDiesel.Date, DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"), new { htmlAttributes = new { @class = "form-control" } })
+                                                            @*@Html.EditorFor(model => model.AddDiesel.Date, new { htmlAttributes = new { @class = "form-control has-feedback-left active" } })*@
+
+                                                            @Html.EditorFor(model => model.AddDiesel.Date, DateTime.UtcNow.ToString(), new {@class = "form-control"})
                                                             @Html.ValidationMessageFor(model => model.AddDiesel.Date, "", new { @class = "text-danger" })
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-md-offset-2 col-md-10">
-                                                            <input type="submit"  value="Lägg till" class="btn btn-default" />
+                                                            <input type="submit" value="Lägg till" class="btn btn-default" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
-
                                 }
+
                             </div><!-- Euroexchangecourse ENDS here -->
                             <div class="col-md-8 col-sm-12 col-xs-12">
                                 <!-- Datatable starts here -->
@@ -87,19 +93,18 @@
                                 <!-- Datatable ENDS here -->
                             </div>
                         </div>
-                        @*<div class="col-md-12 col-sm-12 col-xs-12">
-                            @using (Ajax.BeginForm("GetData", new AjaxOptions { UpdateTargetId = "euroLineChart" }))
-                                {*@
-                            @*@Html.Partial("_EuroLineGraph")*@
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @*@using (Ajax.BeginForm("GetData", new AjaxOptions { UpdateTargetId = "euroLineChart" }))
+                                    {
+                                @Html.Partial("_EuroLineGraph")
 
-                            @*}
-                        </div>*@
+                                @*}*@
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
-
-
 

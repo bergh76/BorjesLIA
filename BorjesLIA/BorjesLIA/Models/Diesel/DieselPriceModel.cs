@@ -15,7 +15,8 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Dieselpris")]
         public decimal dieselValue { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd mm:HH:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum")]
         public DateTime Date {
             get; set;

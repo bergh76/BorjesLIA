@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -72,28 +75,28 @@ namespace BorjesLIA.AdminControllers
             return View(dieselPriceModel);
         }
 
-        // GET: DieselPriceModels/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: DieselPriceModels/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: DieselPriceModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(DieselPriceModel dieselPriceModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DieselPriceModels.Add(dieselPriceModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: DieselPriceModels/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(DieselPriceModel dieselPriceModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.DieselPriceModels.Add(dieselPriceModel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(dieselPriceModel);
-        }
+        //    return View(dieselPriceModel);
+        //}
 
         // GET: DieselPriceModels/Edit/5
         public ActionResult Edit(int? id)

@@ -15,7 +15,7 @@ namespace BorjesLIA.Models.Euro
         [Display(Name = "Europris")]
         public decimal euroValue { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }
       

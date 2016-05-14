@@ -6,7 +6,7 @@
             "processing": true,
         });
     });
-       
+
 	//Slider
 	$(document).ready(function() {
 		var time = 14; // time in seconds

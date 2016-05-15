@@ -8,22 +8,42 @@ namespace BorjesLIA.ViewModel
 {
     public class DieselViewModel
     {
-        public DieselPriceModel AddDiesel { get; set; }
-        public IEnumerable<DieselPriceModel> newDieselList { get; set; }
+        public DieselWeekModel AddWeekDiesel { get; set; }
+        public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
 
-
-        public Task<List<DieselPriceModel>> GetData()
+        public Task<List<DieselWeekModel>> GetWeekData()
         {
             using (var db = new ApplicationDbContext())
             {
-                if (db.DieselPriceModels == null)
+                if (db.DieselPriceWeek == null)
                 {
-                    return GetData();
+                    return GetWeekData();
                 }
                 else
                 {
-                    var lDiesel = db.DieselPriceModels.OrderBy(x => x.Date).ToList();
-                    return Task.Run(() => lDiesel);
+                    var lwDiesel = db.DieselPriceWeek.OrderBy(x => x.Week).ToList();
+                    return Task.Run(() => lwDiesel);
+                }
+            }
+        }
+
+
+
+        public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
+        public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
+
+        public Task<List<DieselQuarterPriceModel>> GetQuaerterData()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (db.DieselPriceWeek == null)
+                {
+                    return GetQuaerterData();
+                }
+                else
+                {
+                    var lqDiesel = db.DieselPriceQuarter.OrderBy(x => x.Quarter).ToList();
+                    return Task.Run(() => lqDiesel);
                 }
             }
         }

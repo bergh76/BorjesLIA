@@ -1,6 +1,6 @@
 ﻿@model BorjesLIA.ViewModel.DieselViewModel
 @{
-    ViewData["Title"] = "Dieselpriser";
+    ViewData["Title"] = "Veckopris Diesel";
 }
 >
 <body class="nav-md">
@@ -31,7 +31,7 @@
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <!--Partial view for form adding new Euroindex-->
 
-                                @using (Ajax.BeginForm("_AddDiesel", new AjaxOptions { UpdateTargetId = "dieselList" }))
+                                @using (Ajax.BeginForm("_AddWeekDiesel", new AjaxOptions { UpdateTargetId = "dieselWeekList" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="x_content">
@@ -53,21 +53,29 @@
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                                     <div class="form-group">
-                                                        @Html.LabelFor(model => model.AddDiesel.dieselValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.LabelFor(model => model.AddWeekDiesel.Year, htmlAttributes: new { @class = "control-label col-md-2" })
                                                         <div class="col-md-10">
 
-                                                            @Html.EditorFor(model => model.AddDiesel.dieselValue, new { htmlAttributes = new { @class = "form-control has-feedback-left active "} })
-                                                            @Html.ValidationMessageFor(model => model.AddDiesel.dieselValue, "", new { @class = "text-danger" })
+                                                            @Html.EditorFor(model => model.AddWeekDiesel.Year, new { htmlAttributes = new { @class = "form-control"} })
+                                                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        @Html.LabelFor(model => model.AddDiesel.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.LabelFor(model => model.AddWeekDiesel.Week, htmlAttributes: new { @class = "control-label col-md-2" })
                                                         <div class="col-md-10">
-                                                            @*@Html.EditorFor(model => model.AddDiesel.Date, new { htmlAttributes = new { @class = "form-control has-feedback-left active" } })*@
 
-                                                            @Html.EditorFor(model => model.AddDiesel.Date, DateTime.UtcNow.ToString(), new {@class = "form-control"})
-                                                            @Html.ValidationMessageFor(model => model.AddDiesel.Date, "", new { @class = "text-danger" })
+                                                            @Html.EditorFor(model => model.AddWeekDiesel.Week, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.Week, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddWeekDiesel.DieselWeekValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+
+                                                            @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
 
                                                         </div>
                                                     </div>
@@ -86,8 +94,8 @@
                             </div><!-- Euroexchangecourse ENDS here -->
                             <div class="col-md-8 col-sm-12 col-xs-12">
                                 <!-- Datatable starts here -->
-                                <div id="dieselList">
-                                    @Html.Partial("_DieselList", Model)
+                                <div id="dieselWeekList">
+                                    @Html.Partial("_WeekPriceDiesel", Model)
                                 </div>
 
                                 <!-- Datatable ENDS here -->
@@ -107,4 +115,3 @@
     </div>
 
 </body>
-

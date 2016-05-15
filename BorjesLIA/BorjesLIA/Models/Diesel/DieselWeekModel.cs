@@ -6,23 +6,23 @@ using System.Web;
 
 namespace BorjesLIA.Models.Diesel
 {
-    public class DtmModel
+    public class DieselWeekModel
     {
         [Key]
         public int ID { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.Text)]
         [Display(Name = "År")]
-        public DateTime Year { get; set; }
+        public int Year { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Månad")]
-        public string Month { get; set; }
+        [Display(Name = "Vecka")]
+        public string Week { get; set; }
 
         [DataType(DataType.Currency)]
         [Display(Name = "Pris")]
-        public decimal DieselDTMValue { get; set; }
+        public decimal DieselWeekValue { get; set; }
 
-        public DateTime LoggDate { get; set; }
+        public DateTime loggDate { get; set; }
     }
 }

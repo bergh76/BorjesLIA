@@ -2,7 +2,7 @@
 
     // ADD PAGINATIONS TO TABLES
     $(document).ready(function () {
-        $('#myTable').DataTable({
+        $('.myTable').DataTable({
             "processing": true,
         });
     });

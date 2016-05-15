@@ -188,7 +188,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminControllers\DieselPriceModelsController.cs" />
+    <Compile Include="AdminControllers\DieselQuarterPriceModelsController.cs" />
+    <Compile Include="AdminControllers\DieselWeekModelsController.cs" />
     <Compile Include="AdminControllers\DtmModelsController.cs" />
     <Compile Include="AdminControllers\EuroExchangeModelsController.cs" />
     <Compile Include="AdminControllers\HubController.cs" />
@@ -207,11 +208,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605131037155_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605131037155_BorjesLIA.Designer.cs">
-      <DependentUpon>201605131037155_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201605151902441_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605151902441_BorjesLIA.Designer.cs">
+      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Graphs\EuroLineGraphModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
+    <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.min.css" />
@@ -1089,12 +1092,18 @@
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroBarChart.cshtml" />
-    <Content Include="Views\DieselPriceModels\Create.cshtml" />
-    <Content Include="Views\DieselPriceModels\Delete.cshtml" />
-    <Content Include="Views\DieselPriceModels\Details.cshtml" />
-    <Content Include="Views\DieselPriceModels\Edit.cshtml" />
-    <Content Include="Views\DieselPriceModels\Index.cshtml" />
-    <Content Include="Views\DieselPriceModels\_DieselList.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Edit.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Index.cshtml" />
+    <Content Include="Views\DieselWeekModels\Create.cshtml" />
+    <Content Include="Views\DieselWeekModels\Delete.cshtml" />
+    <Content Include="Views\DieselWeekModels\Details.cshtml" />
+    <Content Include="Views\DieselWeekModels\Edit.cshtml" />
+    <Content Include="Views\DieselWeekModels\Index.cshtml" />
+    <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\_QuarterPriceDiesel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1106,8 +1115,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605131037155_BorjesLIA.resx">
-      <DependentUpon>201605131037155_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605151902441_BorjesLIA.resx">
+      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

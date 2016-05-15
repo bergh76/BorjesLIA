@@ -1,5 +1,4 @@
-﻿@model BorjesLIA.ViewModel.EuroViewModel
-
+﻿@model BorjesLIA.ViewModel.DieselViewModel
 <script type="text/javascript">
     $(document).ready(function(){
         $('.myTable').DataTable({
@@ -8,10 +7,9 @@
     });
 
 </script>
-
 <div class="x_panel">
     <div class="x_title">
-        <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
+        <h2>Dieselpriser <small>bacon ipsum</small></h2>
         <ul class="nav navbar-right panel_toolbox">
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -55,24 +53,28 @@
                 <thead>
                     <tr>
                         <th>
-                            Euro
+                            År
                         </th>
                         <th>
-                            Datum
+                            Vecka
                         </th>
                         <th>
-                            Edit
+                            Pris
                         </th>
                     </tr>
                 </thead>
-                @foreach (var item in Model.newEuroList)
+
+                @foreach (var item in Model.newWeekDieselList)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.euroValue)
+                            @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Date)
+                            @Html.DisplayFor(modelItem => item.Week)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DieselWeekValue)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -86,5 +88,4 @@
         </div>
     </div>
 </div>
-
 

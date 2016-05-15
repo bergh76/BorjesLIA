@@ -8,12 +8,26 @@ namespace BorjesLIA.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.DieselPriceModels",
+                "dbo.DieselQuarterPriceModels",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        dieselValue = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Date = c.DateTime(nullable: false),
+                        Year = c.Int(nullable: false),
+                        Quarter = c.String(),
+                        DieselQuarterValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        LoggDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.DieselWeekModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Year = c.Int(nullable: false),
+                        Week = c.String(),
+                        DieselWeekValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        loggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -22,8 +36,10 @@ namespace BorjesLIA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        dtmPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        dateNewDtmPrice = c.DateTime(nullable: false),
+                        Year = c.DateTime(nullable: false),
+                        Month = c.String(),
+                        DieselDTMValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        LoggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -162,7 +178,8 @@ namespace BorjesLIA.Migrations
             DropTable("dbo.Imgs");
             DropTable("dbo.EuroExchangeModels");
             DropTable("dbo.DtmModels");
-            DropTable("dbo.DieselPriceModels");
+            DropTable("dbo.DieselWeekModels");
+            DropTable("dbo.DieselQuarterPriceModels");
         }
     }
 }

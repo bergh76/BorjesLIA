@@ -1,17 +1,15 @@
 ﻿@model BorjesLIA.ViewModel.DieselViewModel
-
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#myTable').DataTable({
+        $('.myTable').DataTable({
             "processing": true,
         });
     });
 
 </script>
-
 <div class="x_panel">
     <div class="x_title">
-        <h2>Dieselpriser <small>bacon ipsum</small></h2>
+        <h2>Dieselpriser Kvartal <small>bacon ipsum</small></h2>
         <ul class="nav navbar-right panel_toolbox">
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -51,28 +49,32 @@
     </ul>
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+            <table class="myTable table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                 <thead>
                     <tr>
                         <th>
-                            Diesel
+                            År
                         </th>
                         <th>
-                            Datum
+                            Kvartal
                         </th>
                         <th>
-                            Edit
+                            Pris
                         </th>
                     </tr>
                 </thead>
-                @foreach (var item in Model.newDieselList)
+
+                @foreach (var item in Model.newQuarterDieselList)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.dieselValue)
+                            @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Date)
+                            @Html.DisplayFor(modelItem => item.Quarter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DieselQuarterValue)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -86,9 +88,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-

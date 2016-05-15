@@ -11,9 +11,13 @@ namespace BorjesLIA.ViewModel
     public class ResultTilesPanelViewModels
     {
 
-        public string actualDiesel { get; set; }
-        public string lastDiesel { get; set; }
-        public string diffDiesel { get; set; }
+        public string actDieselWeek { get; set; }
+        public string lastDieselWeek { get; set; }
+        public string diffDieselWeek { get; set; }
+
+        public string actDieselQuarter { get; set; }
+        public string lastDieselQuarter { get; set; }
+        public string diffDieselQuarter { get; set; }
 
         public string actualDTM { get; set; }
         public string lastDTM { get; set; }
@@ -34,20 +38,42 @@ namespace BorjesLIA.ViewModel
                 {
                     var getDiesel = iDPM.Select(s => s.DieselWeekValue)
                                         .FirstOrDefault();
-                    actualDiesel = getDiesel.ToString();
+                    actDieselWeek = getDiesel.ToString();
                     var getLastDiesel = iDPM.OrderByDescending(x => x.Week).Select(x => x.DieselWeekValue).ElementAt(1);
-                    lastDiesel = getLastDiesel.ToString();
+                    lastDieselWeek = getLastDiesel.ToString();
 
-                    var dieselTemp = Math.Round(Convert.ToDecimal(actualDiesel) - Convert.ToDecimal(lastDiesel), 2);
-                    diffDiesel = dieselTemp.ToString();
+                    var dWTemp = Math.Round(Convert.ToDecimal(actDieselWeek) - Convert.ToDecimal(lastDieselWeek), 2);
+                    diffDieselWeek = dWTemp.ToString();
                 }
 
                 else
                 {
-                    actualDiesel = error;
-                    lastDiesel = error;
-                    diffDiesel = error;
+                    actDieselWeek = error;
+                    lastDieselWeek = error;
+                    diffDieselWeek = error;
                 }
+
+                List<DieselQuarterPriceModel> iDPQ = new List<DieselQuarterPriceModel>();
+                iDPQ = _db.DieselPriceQuarter.ToList();
+                if (iDPQ == null || iDPQ.GetEnumerator().MoveNext())
+                {
+                    var getDieselQ = iDPQ.Select(s => s.DieselQuarterValue)
+                                        .FirstOrDefault();
+                    actDieselQuarter = getDieselQ.ToString();
+                    var getLastQDiesel = iDPQ.OrderByDescending(x => x.DieselQuarterValue).Select(x => x.DieselQuarterValue).ElementAt(1);
+                    lastDieselQuarter = getLastQDiesel.ToString();
+
+                    var dQTemp = Math.Round(Convert.ToDecimal(actDieselQuarter) - Convert.ToDecimal(lastDieselQuarter), 3);
+                    diffDieselWeek = dQTemp.ToString();
+                }
+
+                else
+                {
+                    actDieselQuarter = error;
+                    lastDieselQuarter = error;
+                    diffDieselWeek = error;
+                }
+
                 List<EuroExchangeModel> iEPM = new List<EuroExchangeModel>();
                 iEPM = _db.EuroExchangeModels.ToList();
                 if (iEPM == null || iEPM.GetEnumerator().MoveNext())

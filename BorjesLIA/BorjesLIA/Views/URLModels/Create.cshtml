@@ -14,14 +14,16 @@
             <div class="right_col" role="main">
                 <h2>Create</h2>
 
-                @using (Html.BeginForm())
-                {
+             @using (Html.BeginForm("Create", "URLModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+             {
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
                         <h4>URLModel</h4>
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.urlString, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -30,6 +32,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.dateUrl, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -37,6 +41,9 @@
                                 @Html.ValidationMessageFor(model => model.dateUrl, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+
+
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">

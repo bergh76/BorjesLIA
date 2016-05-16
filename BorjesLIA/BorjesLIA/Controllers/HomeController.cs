@@ -14,14 +14,50 @@ namespace BorjesLIA.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
+        SliderHelper SH = new SliderHelper();
 
         public ActionResult Index()
         {
-            ContentSliderViewModel model = new ContentSliderViewModel()
+
+            var images = db.Imgs.OrderByDescending(x=>x.PlacingOrder).ToList();
+            var exPageUrl = db.UrlModels.ToList();
+            var euros = db.EuroExchangeModels.ToList();
+            var model = new StartModelViewModel();
+            model.listVM = new List<listViewModel>();
+            foreach (var item in images)
             {
-                SliderList = db.StartModels.ToList()
-            };
+                var listvm = new listViewModel();
+                listvm.name = item.Name;
+                listvm.url = "/Images/contentslider/" + item.Url;
+                listvm.orderby = item.PlacingOrder;
+
+                model.listVM.Add(listvm);
+            
+            }
+            foreach (var item in exPageUrl)
+            {
+                var listvm = new listViewModel();
+                listvm.url = item.urlString;
+               
+                //listvm.url = "/Images/contentslider/" + item.Url;
+                //listvm.orderby = item.PlacingOrder;
+
+                model.listVM.Add(listvm);
+            }
+            if(euros != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
+                model.listVM.Add(listvm);
+            }
+
             return View(model);
+
+            //ContentSliderViewModel model = new ContentSliderViewModel()
+            //{
+            //    SliderList = db.StartModels.ToList()
+            //};
+            //return View(model);
 
             //AddToSlider ATS = new AddToSlider();
             //ContentSliderViewModel model = new ContentSliderViewModel()
@@ -48,9 +84,10 @@ namespace BorjesLIA.Controllers
         }
         public ActionResult returnPartialView(dynamic element)
         {
-            // TODO: hitta nåt sätt att sortera och veta vad som ska visas
-            return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
-         
+            var something = SH.returnPartialViewUrl(element);
+
+            //return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+            return PartialView(something);
         }
     }
 }

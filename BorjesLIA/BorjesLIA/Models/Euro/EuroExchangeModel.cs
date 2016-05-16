@@ -13,6 +13,11 @@ namespace BorjesLIA.Models.Euro
         [DataType(DataType.Currency)]
         [Display(Name = "Europris")]
         public decimal euroValue { get; set; }
+
+        [DataType(DataType.Url)]
+        [Display(Name = "Ny Url")]
+        public string urlString { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }

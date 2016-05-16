@@ -9,8 +9,6 @@ namespace BorjesLIA.ViewModels
 {
     public class ContentSliderViewModel
     {
-        //public FileInfo[] SliderList { get; set; }
-
         public List<StartModel> SliderList { get; set; }
     }
 }

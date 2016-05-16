@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Img;
+using System.IO;
 
 namespace BorjesLIA.AdminControllers
 {
-    [Authorize]
+    //[Authorize]
     public class ImgsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -48,12 +49,27 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Url,Name,Date,PlacingOrder,Active")] Img img)
+        public ActionResult Create(Img img, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Imgs.Add(img);
-                db.SaveChanges();
+         
+                if (file != null)
+                {
+                    var fileName = Path.GetFileName(file.FileName);                
+                    var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
+               
+                    var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
+                    file.SaveAs(path);
+
+                    img.Url = fileName;
+                    img.Date = DateTime.Now;
+                    img.Active = true;
+                    
+                    db.Imgs.Add(img);
+                    db.SaveChanges();
+                }
+                
                 return RedirectToAction("Index");
             }
 

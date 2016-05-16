@@ -213,6 +213,7 @@
     <Compile Include="Models\ViewModel\ListEuroViewModel.cs" />
     <Compile Include="Models\ViewModel\DieselViewModel.cs" />
     <Compile Include="ViewModels\ContentSliderViewModel.cs" />
+    <Compile Include="ViewModels\StartModelViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

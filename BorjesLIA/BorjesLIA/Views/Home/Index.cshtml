@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BorjesLIA.ViewModels.StartModelViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -9,13 +10,12 @@
 <div id="bx-wrapper">
     <ul class="bxslider">
        
-        @foreach (var element in Model.SliderList)
+        @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
-                @*<li><img src="@Url.Content("~/Images/contentslider/" + element)" title="@element" /></li>*@
-            //.load('@Url.Action("TabMethod", "MyController", new { @id = applicationID })')
-            //.load('@Url.Action("Prueba2", new { str = str})');
-                <li><iframe src='@Url.Action("returnPartialView", "Home", new { element = element})' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-                @*<li><iframe src='@Url.Action("returnPartialView", "EuroExchangeModels")' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>*@
+                @*<li><img src="@Url.Content("~/Images/contentslider/" + element)" /></li>*@
+                @*<li><iframe src='@Url.Action("returnPartialView", "Home", new { element = element})' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>*@
+                @*<li><img src="@element.url"/></li>*@
+                <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
         }
     </ul>
     @*<ul class="bxslider">
@@ -27,7 +27,4 @@
         </ul>*@
 </div>
 
-<!--Statiska knappar helskärm-->
-@*<div><input id="ButtonOne" type="button" value="fullScreen" onclick="launchIntoFullscreen(document.documentElement)" /></div>
-    <p></p>
-    <div><input id="ButtonTwo" type="button" value="exitFullScreen" onclick="exitFullscreen()" /></div>*@
+

@@ -19,6 +19,11 @@ ul, li {
     padding: 0;
 }
 
+iframe{
+    width: 1500px;
+    height: 800px;
+}
+
 .bx-wrapper {
     position: relative;
     /*margin: 0 auto 60px;*/

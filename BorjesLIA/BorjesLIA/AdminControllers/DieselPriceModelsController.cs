@@ -22,6 +22,18 @@ namespace BorjesLIA.AdminControllers
             return View(db.DieselPriceModels.ToList());
         }
 
+        [AllowAnonymous]
+        public JsonResult GetData()
+        {
+            var data = db.DieselPriceModels.ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        //ge en view
+        public ActionResult DieselPriceGraph()
+        {
+            return View();
+        }
+
         // GET: DieselPriceModels/Details/5
         public ActionResult Details(int? id)
         {

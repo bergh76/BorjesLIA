@@ -22,6 +22,18 @@ namespace BorjesLIA.AdminControllers
             return View(db.DtmModels.ToList());
         }
 
+        [AllowAnonymous]
+        public JsonResult GetData()
+        {
+            var data = db.DtmModels.ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        //ge en view
+        public ActionResult DtmLineGraph()
+        {
+            return View();
+        }
+
         // GET: DtmModels/Details/5
         public ActionResult Details(int? id)
         {

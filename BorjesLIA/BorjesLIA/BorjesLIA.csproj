@@ -190,7 +190,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\SliderHelper.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.cs" />
     <Compile Include="Migrations\201605090754321_BorjesLIA.Designer.cs">
       <DependentUpon>201605090754321_BorjesLIA.cs</DependentUpon>
@@ -530,11 +529,12 @@
     <Content Include="Views\StartModels\Details.cshtml" />
     <Content Include="Views\StartModels\Edit.cshtml" />
     <Content Include="Views\StartModels\Index.cshtml" />
+    <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
+    <Content Include="Views\DieselPriceModels\DieselPriceGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DBContext\" />
-    <Folder Include="Models\localVideo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

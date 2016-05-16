@@ -81,9 +81,18 @@ namespace BorjesLIA.ViewModel
                     var getEuro = iEPM.Select(s => s.euroValue)
                                         .FirstOrDefault();
                     actualEuro = getEuro.ToString();
-                    var getLastEuro = iEPM.OrderByDescending(x => x.Date).Select(x => x.euroValue).ElementAt(1);
-                    lastEuro = getLastEuro.ToString();
+                    var getLastEuro = iEPM.OrderByDescending(x => x.Date)
+                        .Select(x => x.euroValue)
+                        .ElementAt(1);
 
+                    if (getLastEuro <= 0)
+                    {
+                        lastEuro = "0";
+                    }
+                    
+                    else { 
+                    lastEuro = getLastEuro.ToString();
+                    }
                     var EuroTemp = Math.Round(Convert.ToDecimal(actualEuro) - Convert.ToDecimal(lastEuro), 2);
                     diffEuro = EuroTemp.ToString();
                 }

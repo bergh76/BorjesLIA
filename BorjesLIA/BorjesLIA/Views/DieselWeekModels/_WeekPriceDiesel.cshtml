@@ -1,7 +1,7 @@
 ﻿@model BorjesLIA.ViewModel.DieselViewModel
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.myTable').DataTable({
+        $('#myDWeekTable').DataTable({
             "processing": true,
         });
     });
@@ -49,7 +49,7 @@
     </ul>
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <table class="myTable table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+            <table id="myDWeekTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                 <thead>
                     <tr>
                         <th>

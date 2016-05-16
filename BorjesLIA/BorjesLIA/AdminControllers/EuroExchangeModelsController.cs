@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BorjesLIA.AdminControllers
 {
-    [Authorize]
+    
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -28,23 +28,17 @@ namespace BorjesLIA.AdminControllers
             return View(euroV);
         }
 
-        //public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
-        //{
-        //    var euroList = db.EuroExchangeModels.ToList();
-        //    PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
-        //    return View(model);
-        //}
-
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(EuroViewModel eurox)
+        public JsonResult GetData(EuroViewModel eurox)
         {
-            var data = await eurox.GetData();
+            var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
         //[HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
         {
@@ -65,6 +59,13 @@ namespace BorjesLIA.AdminControllers
             }
         }
 
+
+        public ActionResult _EuroLineGraph()
+        {
+            return View();
+        }
+
+
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
         {
@@ -79,28 +80,7 @@ namespace BorjesLIA.AdminControllers
             }
             return View(euroExchangeModel);
         }
-        //// GET: EuroExchangeModels/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        // POST: EuroExchangeModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.EuroExchangeModels.Add(euroExchangeModel);
-        //        db.SaveChanges();
-        //        //return RedirectToAction("Index");
-        //    }
-
-        //    return View(euroExchangeModel);
-        //}
+       
 
         // GET: EuroExchangeModels/Edit/5
         public ActionResult Edit(int? id)

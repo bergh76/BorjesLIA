@@ -13,7 +13,7 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
 
 
-        public Task<List<EuroExchangeModel>> GetData()
+        public List<EuroExchangeModel> GetData()
         {
             using (var db = new ApplicationDbContext())
             {
@@ -24,10 +24,9 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     var lEuro = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
-                    return Task.Run(() => lEuro);
+                    return lEuro;
                 }
             }
         }      
-      
     }
 }

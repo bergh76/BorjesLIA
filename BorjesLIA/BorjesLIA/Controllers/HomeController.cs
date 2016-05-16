@@ -18,22 +18,15 @@ namespace BorjesLIA.Controllers
 
         public ActionResult Index()
         {
+            if(db.UrlModels !=null || db.EuroExchangeModels !=null || db.Imgs != null)
+            { 
+            var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
 
-            var images = db.Imgs.OrderByDescending(x=>x.PlacingOrder).ToList();
             var exPageUrl = db.UrlModels.ToList();
             var euros = db.EuroExchangeModels.ToList();
             var model = new StartModelViewModel();
             model.listVM = new List<listViewModel>();
-            foreach (var item in images)
-            {
-                var listvm = new listViewModel();
-                listvm.name = item.Name;
-                listvm.url = "/Images/contentslider/" + item.Url;
-                listvm.orderby = item.PlacingOrder;
-
-                model.listVM.Add(listvm);
             
-            }
             foreach (var item in exPageUrl)
             {
                 var listvm = new listViewModel();
@@ -44,7 +37,7 @@ namespace BorjesLIA.Controllers
 
                 model.listVM.Add(listvm);
             }
-            if(euros != null)
+            if (euros != null)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
@@ -52,6 +45,9 @@ namespace BorjesLIA.Controllers
             }
 
             return View(model);
+            }
+            return View();
+
 
             //ContentSliderViewModel model = new ContentSliderViewModel()
             //{
@@ -78,10 +74,11 @@ namespace BorjesLIA.Controllers
 
         public JsonResult GetData()
         {
-            ListEuroViewModel eurox = new ListEuroViewModel();
+            EuroViewModel eurox = new EuroViewModel();
             var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult returnPartialView(dynamic element)
         {
             var something = SH.returnPartialViewUrl(element);

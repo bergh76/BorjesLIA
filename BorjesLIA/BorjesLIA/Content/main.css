@@ -1,7 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
 
 body {
-    background-color: #fff;
     padding-top: 50px;
 
 }
@@ -11,11 +10,14 @@ body {
 .body-content {
     padding-left: 0px;
     padding-right: 0px;
-    background-color: #fff;
+
+}
+.container-push-top{
+    padding-top:50px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
+/*/* Set widths on the form inputs since otherwise they're 100% wide */
+/*input,
 select,
 
 
@@ -26,7 +28,7 @@ select,
     .carousel-caption p {
         font-size: 20px;
         line-height: 1.4;
-    }
+    }*/
 
 
 /*@media (min-width: 768px) {
@@ -35,7 +37,7 @@ select,
     }*/
 }
 
-#main-slider {
+/*#main-slider {
   overflow: hidden;
 }
 #main-slider .item {
@@ -101,7 +103,7 @@ select,
   background: rgba(27, 66, 116, 0.57); /*steelgray*/
  /*background: rgba(254, 100, 46, 0.57); /*semired*/
 }
-#progressBar {
+/*#progressBar {
   margin-top: -4px;
   position: relative;
   z-index: 999;
@@ -110,10 +112,8 @@ select,
 }
 
 
-.container-push-top{
-    padding-top:50px;
-}
+
 .login{
-    color: #ca1a1a;
-}
+    color: #ca1a1a;*/
+}*/*/
 

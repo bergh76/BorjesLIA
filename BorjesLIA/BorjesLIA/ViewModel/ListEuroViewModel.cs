@@ -24,9 +24,10 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     var lEuro = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
-                    return lEuro;
+                   return lEuro;
                 }
             }
+            
         }      
     }
 }

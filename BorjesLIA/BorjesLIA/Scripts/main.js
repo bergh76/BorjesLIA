@@ -1,13 +1,13 @@
 ﻿jQuery(function ($) {
     'use strict';
 
-    // ADD PAGINATIONS TO TABLES
-    $(document).ready(function () {
-        $('#myTable').DataTable({
-            "processing": true,
-        });
-    });
-});
+    //// ADD PAGINATIONS TO TABLES
+    //$(document).ready(function () {
+    //    $('#myTable').DataTable({
+    //        "processing": true,
+    //    });
+    //});
+
     //	//Slider
     //	$(document).ready(function() {
     //		var time = 14; // time in seconds
@@ -93,38 +93,38 @@
     //	    }
     //	});
     //});
-//    function toggleFullScreen(elem) {
+    //function toggleFullScreen(elem) {
 
-//        // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-//        if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
-//            if (elem.requestFullScreen) {
-//                elem.requestFullScreen();
-//            } else if (elem.mozRequestFullScreen) {
-//                elem.mozRequestFullScreen();
-//            } else if (elem.webkitRequestFullScreen) {
-//                elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-//            } else if (elem.msRequestFullscreen) {
-//                elem.msRequestFullscreen();
-//            }
+    //    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    //    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+    //        if (elem.requestFullScreen) {
+    //            elem.requestFullScreen();
+    //        } else if (elem.mozRequestFullScreen) {
+    //            elem.mozRequestFullScreen();
+    //        } else if (elem.webkitRequestFullScreen) {
+    //            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    //        } else if (elem.msRequestFullscreen) {
+    //            elem.msRequestFullscreen();
+    //        }
 
-//            var c, p = $('.navbar');
-//            $(document).on('mousemove', function () {
-//                p.fadeIn('fast');
-//                clearTimeout(c);
-//                c = setTimeout(function () {
-//                    p.fadeOut('fast');
-//                }, 5000);
-//            });
-//        } else {
-//            if (document.cancelFullScreen) {
-//                document.cancelFullScreen();
-//            } else if (document.mozCancelFullScreen) {
-//                document.mozCancelFullScreen();
-//            } else if (document.webkitCancelFullScreen) {
-//                document.webkitCancelFullScreen();
-//            } else if (document.msExitFullscreen) {
-//                document.msExitFullscreen();
-//            }
-//        }
-//    }
-//});
+    //        var c, p = $('#navbar-start');
+    //        $(document).on('mousemove', function () {
+    //            p.fadeIn('fast');
+    //            clearTimeout(c);
+    //            c = setTimeout(function () {
+    //                p.fadeOut('fast');
+    //            }, 5000);
+    //        });
+    //    } else {
+    //        if (document.cancelFullScreen) {
+    //            document.cancelFullScreen();
+    //        } else if (document.mozCancelFullScreen) {
+    //            document.mozCancelFullScreen();
+    //        } else if (document.webkitCancelFullScreen) {
+    //            document.webkitCancelFullScreen();
+    //        } else if (document.msExitFullscreen) {
+    //            document.msExitFullscreen();
+    //        }
+    //    }
+    //}
+});

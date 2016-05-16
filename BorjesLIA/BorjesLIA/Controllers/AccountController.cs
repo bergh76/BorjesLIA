@@ -451,7 +451,7 @@ namespace BorjesLIA.Controllers
                 return Redirect(returnUrl);
             }
             //return RedirectToAction("Index", "Home");
-            return RedirectToAction("Index", "Hub");
+            return RedirectToAction("Index", "Admin");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

@@ -7,6 +7,7 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -60,10 +61,11 @@ namespace BorjesLIA.AdminControllers
         }
 
 
-        public ActionResult _EuroLineGraph()
-        {
-            return View();
-        }
+        //public ActionResult _EuroLineGraph (EuroViewModel evm)
+        //{         
+        //    var data = evm.GetData();
+        //    return View(data);
+        //}
 
 
         // GET: EuroExchangeModels/Details/5

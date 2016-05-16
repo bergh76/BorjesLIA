@@ -184,6 +184,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControllers\AdminController.cs" />
     <Compile Include="AdminControllers\DieselQuarterPriceModelsController.cs" />
     <Compile Include="AdminControllers\DieselWeekModelsController.cs" />
     <Compile Include="AdminControllers\DtmModelsController.cs" />
@@ -210,6 +211,7 @@
       <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Charts\ChartModel.cs" />
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Graphs\GraphModel.cs" />
@@ -983,7 +985,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Hub\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Imgs\Create.cshtml" />
     <Content Include="Views\Imgs\Delete.cshtml" />
     <Content Include="Views\Imgs\Details.cshtml" />

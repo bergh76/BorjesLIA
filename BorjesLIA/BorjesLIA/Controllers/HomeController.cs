@@ -18,6 +18,7 @@ namespace BorjesLIA.Controllers
 
         public ActionResult Index()
         {
+
             if(db.UrlModels !=null || db.EuroExchangeModels !=null || db.Imgs != null)
             { 
             var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();

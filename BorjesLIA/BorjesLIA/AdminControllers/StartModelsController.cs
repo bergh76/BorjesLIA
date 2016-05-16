@@ -6,129 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
 using BorjesLIA.Models;
-using BorjesLIA.Models.Img;
-using System.IO;
 
 namespace BorjesLIA.AdminControllers
 {
-    //[Authorize]
-    public class ImgsController : Controller
+    public class StartModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Imgs
+        // GET: StartModels
         public ActionResult Index()
         {
-            return View(db.Imgs.ToList());
+            return View(db.StartModels.ToList());
         }
 
-        // GET: Imgs/Details/5
+        // GET: StartModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Img img = db.Imgs.Find(id);
-            if (img == null)
+            StartModel startModel = db.StartModels.Find(id);
+            if (startModel == null)
             {
                 return HttpNotFound();
             }
-            return View(img);
+            return View(startModel);
         }
 
-        // GET: Imgs/Create
+        // GET: StartModels/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Imgs/Create
+        // POST: StartModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Img img, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ID,Name")] StartModel startModel)
         {
             if (ModelState.IsValid)
             {
-         
-                if (file != null)
-                {
-                    var fileName = Path.GetFileName(file.FileName);                
-                    var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
-               
-                    var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
-                    file.SaveAs(path);
-
-                    img.Url = fileName;
-                    img.Date = DateTime.Now;
-                    img.Active = true;
-                    
-                    db.Imgs.Add(img);
-                    db.SaveChanges();
-                }
-                
+                db.StartModels.Add(startModel);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(img);
+            return View(startModel);
         }
 
-        // GET: Imgs/Edit/5
+        // GET: StartModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Img img = db.Imgs.Find(id);
-            if (img == null)
+            StartModel startModel = db.StartModels.Find(id);
+            if (startModel == null)
             {
                 return HttpNotFound();
             }
-            return View(img);
+            return View(startModel);
         }
 
-        // POST: Imgs/Edit/5
+        // POST: StartModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Url,Name,Date,PlacingOrder,Active")] Img img)
+        public ActionResult Edit([Bind(Include = "ID,Name")] StartModel startModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(img).State = EntityState.Modified;
+                db.Entry(startModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(img);
+            return View(startModel);
         }
 
-        // GET: Imgs/Delete/5
+        // GET: StartModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Img img = db.Imgs.Find(id);
-            if (img == null)
+            StartModel startModel = db.StartModels.Find(id);
+            if (startModel == null)
             {
                 return HttpNotFound();
             }
-            return View(img);
+            return View(startModel);
         }
 
-        // POST: Imgs/Delete/5
+        // POST: StartModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Img img = db.Imgs.Find(id);
-            db.Imgs.Remove(img);
+            StartModel startModel = db.StartModels.Find(id);
+            db.StartModels.Remove(startModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

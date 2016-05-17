@@ -13,17 +13,17 @@ namespace BorjesLIA.ViewModel
 
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }
-        public Task<List<DtmModel>> GetDtmData()
+        public Task<List<DtmModel>> GetData()
         {
             using (var db = new ApplicationDbContext())
             {
                 if (db.DtmModels == null)
                 {
-                    return GetDtmData();
+                    return GetData();
                 }
                 else
                 {
-                    var lDtm = db.DtmModels.OrderBy(x => x.Month).ToList();
+                    var lDtm = db.DtmModels.OrderBy(x => x.Date).ToList();
                     return Task.Run(() => lDtm);
                 }
             }

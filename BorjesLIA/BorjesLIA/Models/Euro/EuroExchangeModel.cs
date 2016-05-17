@@ -16,15 +16,12 @@ namespace BorjesLIA.Models.Euro
         [Display(Name = "Europris")]
         public decimal euroValue { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }
 
         //public int ChartType { get; set; }
         public int EuroChartID { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Skapat")]
-        public DateTime LoggDate { get; set; }
     }
 }

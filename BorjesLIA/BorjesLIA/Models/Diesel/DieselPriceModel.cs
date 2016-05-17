@@ -23,7 +23,10 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Pris")]
         public decimal DieselQuarterValue { get; set; }
 
-        public DateTime LoggDate { get; set; }
-        
+
+        [Display(Name = "ChartID")]
+        public int DieselQuarterChartID { get; set; }
+
+
     }
 }

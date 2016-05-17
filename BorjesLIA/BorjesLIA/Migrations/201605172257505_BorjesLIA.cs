@@ -8,6 +8,16 @@ namespace BorjesLIA.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.ChartModels",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ChartName = c.String(),
+                        ChartID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.DieselQuarterPriceModels",
                 c => new
                     {
@@ -15,6 +25,7 @@ namespace BorjesLIA.Migrations
                         Year = c.Int(nullable: false),
                         Quarter = c.String(),
                         DieselQuarterValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselQuarterChartID = c.Int(nullable: false),
                         LoggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -27,6 +38,7 @@ namespace BorjesLIA.Migrations
                         Year = c.Int(nullable: false),
                         Week = c.String(),
                         DieselWeekValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselWeekChartID = c.Int(nullable: false),
                         loggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -36,9 +48,9 @@ namespace BorjesLIA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Year = c.DateTime(nullable: false),
-                        Month = c.String(),
+                        Date = c.DateTime(nullable: false),
                         DieselDTMValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselDTMChartID = c.Int(nullable: false),
                         LoggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -51,6 +63,7 @@ namespace BorjesLIA.Migrations
                         euroValue = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Date = c.DateTime(nullable: false),
                         EuroChartID = c.Int(nullable: false),
+                        LoggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -181,6 +194,7 @@ namespace BorjesLIA.Migrations
             DropTable("dbo.DtmModels");
             DropTable("dbo.DieselWeekModels");
             DropTable("dbo.DieselQuarterPriceModels");
+            DropTable("dbo.ChartModels");
         }
     }
 }

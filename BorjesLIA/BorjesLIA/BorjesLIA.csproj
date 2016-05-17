@@ -205,9 +205,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605151902441_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605151902441_BorjesLIA.Designer.cs">
-      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201605172257505_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605172257505_BorjesLIA.Designer.cs">
+      <DependentUpon>201605172257505_BorjesLIA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605172300468_BorjesLIA1.cs" />
+    <Compile Include="Migrations\201605172300468_BorjesLIA1.Designer.cs">
+      <DependentUpon>201605172300468_BorjesLIA1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
@@ -1009,7 +1013,7 @@
     <Content Include="Views\StartModels\Details.cshtml" />
     <Content Include="Views\StartModels\Edit.cshtml" />
     <Content Include="Views\StartModels\Index.cshtml" />
-    <Content Include="Views\DtmModels\_DtmLineGraph.cshtml" />
+    <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
     <Content Include="Views\DieselPriceModels\DieselPriceGraph.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
@@ -1024,6 +1028,7 @@
     <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\QuarterPriceDiesel.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\DtmModels\_DTMList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1035,8 +1040,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605151902441_BorjesLIA.resx">
-      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605172257505_BorjesLIA.resx">
+      <DependentUpon>201605172257505_BorjesLIA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605172300468_BorjesLIA1.resx">
+      <DependentUpon>201605172300468_BorjesLIA1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

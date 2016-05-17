@@ -23,6 +23,9 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Pris")]
         public decimal DieselWeekValue { get; set; }
 
-        public DateTime loggDate { get; set; }
+        [Display(Name = "ChartID")]
+        public int DieselWeekChartID { get; set; }
+
+
     }
 }

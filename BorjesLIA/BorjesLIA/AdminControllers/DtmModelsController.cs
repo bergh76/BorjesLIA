@@ -23,7 +23,7 @@ namespace BorjesLIA.AdminControllers
             {
                 AddDtm = new DtmModel(),
                 newDTMList = db.DtmModels.ToList()
-                .OrderByDescending(x => x.Month)
+                .OrderByDescending(x => x.Date)
 
             };
             return View(dtmV);
@@ -34,7 +34,7 @@ namespace BorjesLIA.AdminControllers
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(DMTViewModel dtmChart)
         {
-            var data = await dtmChart.GetDtmData();
+            var data = await dtmChart.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -47,9 +47,9 @@ namespace BorjesLIA.AdminControllers
                 using (var db = new ApplicationDbContext())
                 {
                     db.DtmModels.Add(newDTM.AddDtm);
-                    db.SaveChanges();
+                    db.SaveChanges(); // ToDO {"The conversion of a datetime2 data type to a datetime data type resulted in an out-of-range value.\r\nThe statement has been terminated."}
                     newDTM.newDTMList = db.DtmModels.ToList()
-                        .OrderByDescending(x => x.Month);
+                        .OrderByDescending(x => x.Date);
                     return PartialView("_DtmList", newDTM);
                 }
             }
@@ -59,12 +59,13 @@ namespace BorjesLIA.AdminControllers
             }
         }
 
+        [AllowAnonymous]
         //ge en view
         public ActionResult _DtmGraphData(DMTViewModel dtmV)
         {
             dtmV = new DMTViewModel
             {
-                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Month)
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date)
             };
             return View(dtmV);
         }

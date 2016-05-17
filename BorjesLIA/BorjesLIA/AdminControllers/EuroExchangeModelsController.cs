@@ -61,10 +61,7 @@ namespace BorjesLIA.AdminControllers
 
         public ActionResult _EuroLineGraph(EuroViewModel euroV)
         {
-            //var chartData = db.EuroExchangeModels.ToList().Select(x => x.EuroChartID);
-            //var chartID = chartData.FirstOrDefault();
-            //ViewBag.chartData = chartID;
-            //return View();
+
             euroV = new EuroViewModel
             {
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)

@@ -2,7 +2,6 @@
 using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
-using BorjesLIA.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

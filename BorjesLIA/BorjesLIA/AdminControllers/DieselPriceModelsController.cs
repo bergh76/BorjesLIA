@@ -12,119 +12,119 @@ using BorjesLIA.Models.Diesel;
 namespace BorjesLIA.AdminControllers
 {
     [Authorize]
-    public class DtmModelsController : Controller
+    public class DieselPriceModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: DtmModels
+        // GET: DieselPriceModels
         public ActionResult Index()
         {
-            return View(db.DtmModels.ToList());
+            return View(db.DieselPriceModels.ToList());
         }
 
         [AllowAnonymous]
         public JsonResult GetData()
         {
-            var data = db.DtmModels.ToList();
+            var data = db.DieselPriceModels.ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         //ge en view
-        public ActionResult DtmLineGraph()
+        public ActionResult DieselPriceGraph()
         {
             return View();
         }
 
-        // GET: DtmModels/Details/5
+        // GET: DieselPriceModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DtmModel dtmModel = db.DtmModels.Find(id);
-            if (dtmModel == null)
+            DieselPriceModel dieselPriceModel = db.DieselPriceModels.Find(id);
+            if (dieselPriceModel == null)
             {
                 return HttpNotFound();
             }
-            return View(dtmModel);
+            return View(dieselPriceModel);
         }
 
-        // GET: DtmModels/Create
+        // GET: DieselPriceModels/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DtmModels/Create
+        // POST: DieselPriceModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,dtmPrice,dateNewDtmPrice")] DtmModel dtmModel)
+        public ActionResult Create([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
         {
             if (ModelState.IsValid)
             {
-                db.DtmModels.Add(dtmModel);
+                db.DieselPriceModels.Add(dieselPriceModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(dtmModel);
+            return View(dieselPriceModel);
         }
 
-        // GET: DtmModels/Edit/5
+        // GET: DieselPriceModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DtmModel dtmModel = db.DtmModels.Find(id);
-            if (dtmModel == null)
+            DieselPriceModel dieselPriceModel = db.DieselPriceModels.Find(id);
+            if (dieselPriceModel == null)
             {
                 return HttpNotFound();
             }
-            return View(dtmModel);
+            return View(dieselPriceModel);
         }
 
-        // POST: DtmModels/Edit/5
+        // POST: DieselPriceModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,dtmPrice,dateNewDtmPrice")] DtmModel dtmModel)
+        public ActionResult Edit([Bind(Include = "ID,dieselPrice,dateNewDieselPrice")] DieselPriceModel dieselPriceModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dtmModel).State = EntityState.Modified;
+                db.Entry(dieselPriceModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dtmModel);
+            return View(dieselPriceModel);
         }
 
-        // GET: DtmModels/Delete/5
+        // GET: DieselPriceModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DtmModel dtmModel = db.DtmModels.Find(id);
-            if (dtmModel == null)
+            DieselPriceModel dieselPriceModel = db.DieselPriceModels.Find(id);
+            if (dieselPriceModel == null)
             {
                 return HttpNotFound();
             }
-            return View(dtmModel);
+            return View(dieselPriceModel);
         }
 
-        // POST: DtmModels/Delete/5
+        // POST: DieselPriceModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DtmModel dtmModel = db.DtmModels.Find(id);
-            db.DtmModels.Remove(dtmModel);
+            DieselPriceModel dieselPriceModel = db.DieselPriceModels.Find(id);
+            db.DieselPriceModels.Remove(dieselPriceModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

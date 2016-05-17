@@ -28,6 +28,10 @@ namespace BorjesLIA.AdminControllers
             return View(dieselQ);
         }
 
+        public ActionResult _QuarterPriceDiesel()
+        {
+            return View();
+        }
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel

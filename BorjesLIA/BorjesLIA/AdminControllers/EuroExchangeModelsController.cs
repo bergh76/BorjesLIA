@@ -37,11 +37,33 @@ namespace BorjesLIA.AdminControllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+         public ActionResult _EuroLineGraph(EuroViewModel euroV)
+        {
+
+            euroV = new EuroViewModel
+            {
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+
+            };
+            return View(euroV);
+        }
+        //public ActionResult _EuroLineGraph()
+        //{
+        //    var someTestName = db.EuroExchangeModels.ToList();
+        //    int name = someTestName.FirstOrDefault().ID;
+
+        //    ViewBag.asdf = name;
+
+        //    return View();
+        //}
+
+        //return partial view
 
         //[HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
+
         {
             if (Request.IsAjaxRequest())
             {
@@ -58,18 +80,6 @@ namespace BorjesLIA.AdminControllers
                 return View(newEuro);
             }
         }
-
-        public ActionResult _EuroLineGraph(EuroViewModel euroV)
-        {
-
-            euroV = new EuroViewModel
-            {
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-
-            };
-            return View(euroV);
-        }
-
 
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)

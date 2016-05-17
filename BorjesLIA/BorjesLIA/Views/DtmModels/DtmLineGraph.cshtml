@@ -1,0 +1,62 @@
+﻿<script src="~/Scripts/daJavaScript.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    //google.charts.load('current');
+    google.setOnLoadCallback(drawchart);
+@*</script>*@
+//<!--GOOGLECHART START-->
+@*<script type="text/javascript">*@
+    //$(
+    function drawchart() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            // Calls an Action from Controller ie. HomeController/GetData
+            url: '@Url.Action("GetData")',
+            data: "{ }",
+            // If data connections is success
+            success:
+                function drawchart(dataValues) {
+
+                    // Adds data into columns to DataTable
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Datum');
+                    data.addColumn('number', 'Pris');
+
+                    // Settings for visualization of the graph
+                    var options = {
+                        title: 'Eurokurs',
+                        pointSize: 10,
+                        dataOpacity: 0.4,
+                        lineWidth: 4,
+                        hAxis: {
+                            title: 'Datum', titleTextStyle: { color: '#333' },
+                        }
+                    }
+                    // Loops through the DataTable with data from database
+                    for (var i = 0; i < dataValues.length; i++) {
+                        data.addRow([(dataValues[i].dateNewDtmPrice), dataValues[i].dtmPrice])
+                        
+                        
+                        // Drews the graph into a specified div
+                        new google.visualization.LineChart(document.getElementById('myChartDiv')).
+                            draw(data, options);
+
+                    }
+                },
+            // If collectning data from database fails promp message here
+            error: function () {
+                alert("Ett fel uppstod när datat försökte hämtas!");
+            }
+        });
+    }
+
+</script>
+<div id="myChartDiv"></div>
+

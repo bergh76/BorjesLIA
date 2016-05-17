@@ -205,7 +205,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\SliderHelper.cs" />
     <Compile Include="Migrations\201605151902441_BorjesLIA.cs" />
     <Compile Include="Migrations\201605151902441_BorjesLIA.Designer.cs">
       <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
@@ -214,7 +213,6 @@
     <Compile Include="Models\Charts\ChartModel.cs" />
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
-    <Compile Include="Models\Graphs\GraphModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
@@ -223,12 +221,10 @@
     <Compile Include="Models\Euro\EuroExchangeModel.cs" />
     <Compile Include="Models\UserAccount\IdentityModels.cs" />
     <Compile Include="Models\UserAccount\ManageViewModels.cs" />
-    <Compile Include="Models\StartModel.cs" />
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ContentSliderViewModel.cs" />
-    <Compile Include="ViewModels\StartModelViewModel.cs" />
+    <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
     <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
@@ -881,7 +877,6 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\carousel.js" />
     <None Include="Scripts\jquery-2.2.3-vsdoc.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\css\dataTables.bootstrap.css" />
@@ -934,7 +929,6 @@
     <Content Include="Scripts\jquery.inview.min.js" />
     <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\jquery.prettyPhoto.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -945,13 +939,10 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\mousescroll.js" />
-    <Content Include="Scripts\owl.carousel.js" />
-    <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\wow.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1012,6 +1003,13 @@
     <Content Include="Views\Shared\_Admin_NewEuroIndex.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
+    <Content Include="Views\StartModels\Create.cshtml" />
+    <Content Include="Views\StartModels\Delete.cshtml" />
+    <Content Include="Views\StartModels\Details.cshtml" />
+    <Content Include="Views\StartModels\Edit.cshtml" />
+    <Content Include="Views\StartModels\Index.cshtml" />
+    <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
+    <Content Include="Views\DieselPriceModels\DieselPriceGraph.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />
@@ -1030,7 +1028,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
     <Folder Include="Models\DBContext\" />
-    <Folder Include="Models\localVideo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

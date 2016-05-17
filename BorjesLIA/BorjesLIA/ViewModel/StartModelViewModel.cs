@@ -10,7 +10,7 @@ using BorjesLIA.Models.Img;
 using BorjesLIA.ViewModel;
 using BorjesLIA.Models;
 
-namespace BorjesLIA.ViewModels
+namespace BorjesLIA.ViewModel
 {
     public class StartModelViewModel
     {
@@ -22,12 +22,9 @@ namespace BorjesLIA.ViewModels
             public string name { get; set; }
             public int orderby { get; set; }
 
-<<<<<<< HEAD
-        public DateTime dateTime { get; set; }
 
-=======
             public DateTime dateTime { get; set; }
         }
->>>>>>> ver.1.0.3
+
     }
 }

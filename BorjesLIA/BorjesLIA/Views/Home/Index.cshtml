@@ -1,11 +1,11 @@
-﻿@model BorjesLIA.ViewModels.StartModelViewModel
+﻿@model BorjesLIA.ViewModel.StartModelViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
 <!--bxSlider-->
 <script src="~/Scripts/jquery.bxslider.min.js"></script>
-@*<script src="~/Scripts/daJavaScript.js"></script>*@
+<script src="~/Scripts/daJavaScript.js"></script>
 
 <div id="bx-wrapper">
     <ul class="bxslider">
@@ -14,13 +14,6 @@
             <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
         }
     </ul>
-    @*<ul class="bxslider">
-            <li><iframe src='@Url.Action("returnPartialView", "EuroExchangeModels")' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-            <li><iframe src='~/Content/video/SampleVideo_1280x720_1mb.mp4' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-            <li><iframe src='http://player.vimeo.com/video/17914974' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-            <li><img src='~/Content/images/bilder/landscape-615429_960_720.jpg' width=1040 height="768" /></li>
-            <li><iframe src='http://www.borjes.com/se' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-        </ul>*@
 </div>
 
 

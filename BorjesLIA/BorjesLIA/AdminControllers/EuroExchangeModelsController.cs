@@ -36,54 +36,34 @@ namespace BorjesLIA.AdminControllers
             var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-<<<<<<< HEAD
-        //ge en view
-        public ActionResult _EuroLineGraph()
+
+         public ActionResult _EuroLineGraph(EuroViewModel euroV)
         {
-            var someTestName = db.EuroExchangeModels.ToList();
-            int name = someTestName.FirstOrDefault().ID;
 
-            ViewBag.asdf = name;
-        
-            return View();
+            euroV = new EuroViewModel
+            {
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+
+            };
+            return View(euroV);
         }
-
-        public ActionResult childController()
-        {
-            
-
-            return View();
-        }
-
-        //get optional graph
-        //public ActionResult _EuroLineGraph(int typOfChart)
+        //public ActionResult _EuroLineGraph()
         //{
-        //    if (typOfChart == 1)
-        //    {
-        //        return PartialView(@"~/Views/Graph/GraphLine.cshtml");
-        //    }
-        //    else if (typOfChart == 2)
-        //    {
-        //        return PartialView(@"~/Views/Graph/GraphBar.cshtml");
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
+        //    var someTestName = db.EuroExchangeModels.ToList();
+        //    int name = someTestName.FirstOrDefault().ID;
+
+        //    ViewBag.asdf = name;
+
+        //    return View();
         //}
 
         //return partial view
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult returnPartialView()
-=======
-
 
         //[HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
->>>>>>> ver.1.0.3
+
         {
             if (Request.IsAjaxRequest())
             {
@@ -100,21 +80,6 @@ namespace BorjesLIA.AdminControllers
                 return View(newEuro);
             }
         }
-<<<<<<< HEAD
-=======
-
-        public ActionResult _EuroLineGraph(EuroViewModel euroV)
-        {
-
-            euroV = new EuroViewModel
-            {
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-
-            };
-            return View(euroV);
-        }
->>>>>>> ver.1.0.3
-
 
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)

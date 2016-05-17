@@ -22,6 +22,5 @@ namespace BorjesLIA.Models.Euro
 
         //public int ChartType { get; set; }
         public int EuroChartID { get; set; }
-        public ChartModel ChartID { get; set;}
     }
 }

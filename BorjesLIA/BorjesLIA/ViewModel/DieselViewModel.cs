@@ -10,7 +10,6 @@ namespace BorjesLIA.ViewModel
     {
         public DieselWeekModel AddWeekDiesel { get; set; }
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
-
         public Task<List<DieselWeekModel>> GetWeekData()
         {
             using (var db = new ApplicationDbContext())
@@ -27,11 +26,8 @@ namespace BorjesLIA.ViewModel
             }
         }
 
-
-
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
-
         public Task<List<DieselQuarterPriceModel>> GetQuaerterData()
         {
             using (var db = new ApplicationDbContext())

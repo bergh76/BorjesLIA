@@ -12,9 +12,6 @@
        
         @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
-                @*<li><img src="@Url.Content("~/Images/contentslider/" + element)" /></li>*@
-                @*<li><iframe src='@Url.Action("returnPartialView", "Home", new { element = element})' width=1366 height="768" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>*@
-                @*<li><img src="@element.url"/></li>*@
                 <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
         }
     </ul>

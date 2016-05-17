@@ -11,11 +11,18 @@ namespace BorjesLIA.Models.Diesel
         [Key]
         public int ID { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "År")]
+        public DateTime Year { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Månad")]
+        public string Month { get; set; }
+
         [DataType(DataType.Currency)]
-        [Display(Name = "DTMpris")]
-        public decimal dtmPrice { get; set; }
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Datum")]
-        public DateTime dateNewDtmPrice { get; set; }
+        [Display(Name = "Pris")]
+        public decimal DieselDTMValue { get; set; }
+
+        public DateTime LoggDate { get; set; }
     }
 }

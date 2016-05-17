@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BorjesLIA.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,9 @@ namespace BorjesLIA.AdminControllers
         // GET: Hub
         public ActionResult Index()
         {
-            return View();
+            ResultTilesPanelViewModels rtpv = new ResultTilesPanelViewModels();
+            rtpv.returnTilePanelValues();
+            return View(rtpv);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿@*@model BorjesLIA.Models.Euro.EuroExchangeModel
+﻿@model BorjesLIA.Models.Euro.EuroExchangeModel
 
     @{
-        ViewBag.Title = "Create";
+        ViewBag.Title = "Skapa nytt Euro kursindex";
     }
 @using (Html.BeginForm())
 {
@@ -50,9 +50,12 @@
         </div>
     </div>
 
-}*@
-@*@model BorjesLIA.Models.Euro.EuroExchangeModel*@
-    @using (Html.BeginForm("Create","EuroExchangeModels", FormMethod.Post, new { id = "Create" }))
+}
+
+
+
+@*@model BorjesLIA.Models.Euro.EuroExchangeModel
+    @using (Html.BeginForm("NewEuro","EuroExchangeModels", FormMethod.Post, new { id = "Create" }))
     {
         @Html.AntiForgeryToken()
     <div class="x_panel">
@@ -70,40 +73,17 @@
         </div>
         <div class="x_content">
             <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <!--Need to fixs inputfunction. Cant use "standard" need a workaround -->
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.euroValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })                 
+                <div class="form-group">
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.euroValue, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.euroValue, "", new { @class = "text-danger" })
+                        <label class="control-label" for="form-group-input">Pris</label>
+                        <input type="number" class="form-control" id="form-group-input" placeholder="Pris">
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
-                </div>*@
                 <div class="form-group">
                     <div class="col-md-10">
                         <label class="control-label" for="form-group-input">Datum</label>
-                        <input type="text" class="form-control" id="form-group-input" placeholder="Datum">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <label class="control-label" for="form-group-input">Prisindex</label>
-                        <input type="text" class="form-control" id="form-group-input" placeholder="Prisindex">
+                        <input type="datetime" class="form-control" id="form-group-input" placeholder="Datum">
                     </div>
                 </div>
                 <div class="form-group pull-right">
@@ -111,7 +91,8 @@
                         <input type="submit" value="Create" class="btn btn-default" />
                     </div>
                 </div>
+                    
             </div>
         </div>
     </div>
-    }
+    }*@

@@ -23,7 +23,9 @@ namespace BorjesLIA.Models
 
         public System.Data.Entity.DbSet<BorjesLIA.Models.Img.Img> Imgs { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselPriceModel> DieselPriceModels { get; set; }
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselWeekModel> DieselPriceWeek { get; set; }
+
+        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselQuarterPriceModel> DieselPriceQuarter{ get; set; }
 
         public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DtmModel> DtmModels { get; set; }
 

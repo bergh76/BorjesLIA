@@ -1,28 +1,29 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Börjes Transport</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" /> <!--fuckarup headern-->
-    <link href="~/Content/font-awesome.css" rel="stylesheet"> <!--donow-->
-    <link href="~/Content/prettyPhoto.css" rel="stylesheet"> <!--donow-->
-    <link href="~/Content/responsive.css" rel="stylesheet"> <!--donow-->
-    <link href="~/Content/production/css/custom.css" rel="stylesheet" /> <!--färg n suff-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> <!--bxslider-->
-    <link href="~/Content/jquery.bxslider.css" rel="stylesheet" /> <!--bxSlider-->
-   <!-- <link href="~/Content/main.css" rel="stylesheet"> bxsliderns play,stop knapp borta-->
-
-    <!--bara inte borttaget än-->
-    <!-- <link href="~/Content/owl.transitions.css" rel="stylesheet"> -->
-    <!--<link href="~/Content/owl.carousel.css" rel="stylesheet" />  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    @*<script src="~/Scripts/daJavaScript.js"></script>*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/production/css/custom.css" rel="stylesheet" />
+   
+    <!-- DataTabel CSS-->
+    <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
+    <!-- DataTabel CSS-->
+    
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
     @*<link href="~/Content/animate.min.css" rel="stylesheet">*@
-    <link href="/Images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/main.css" rel="stylesheet">
+    <link href="~/Content/jquery.bxslider.css" rel="stylesheet" /> <!--bxSlider-->
+
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div id="#navbar-start" class="navbar navbar-default navbar-fixed-top">
         <div class="container-dashboard">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,47 +32,31 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    @*@Html.ActionLink("Start", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                     <a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>
                 </div>
             </div>
-                <div class="navbar-collapse collapse">
-                    <!--TODO: hide-->
-                    <ul class="nav navbar-nav text-right">
-                        @*<li ><span class="navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="right" title="Helskärm"></span></li>*@
-                        @*<li>@Html.ActionLink("Admin", "Login", "Account")</li>*@
-                    </ul>
-                    @Html.Partial("_LoginPartial") 
-                    <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="launchIntoFullscreen(document.documentElement)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
-                    @*<span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(document.body)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
-                </div>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_LoginPartial")
+                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(elem)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
+                @*<span class="navbar-right navbar-form btn fa fa-tv fa-2x" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
+
+            </div>
         </div>
     </div>
-
     <div class="container-max">
         @RenderBody()
-        @*<hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
     </div>
-    <!-- <script src="~/Scripts/jquery.js"></script>
-    <script src="~/Scripts/jquery-2.2.3.js"></script>  ofunkis med bxSlider-->
-    <!--<script src="~/Scripts/owl.carousel.min.js"></script> -->
-   
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/mousescroll.js"></script>
-    <script src="~/Scripts/jquery.prettyPhoto.js"></script>
-    <script src="~/Scripts/jquery.isotope.min.js"></script>
-    <script src="~/Scripts/jquery.inview.min.js"></script>
-    <script src="~/Scripts/wow.min.js"></script>
-    <script src="~/Scripts/main.js"></script> 
     <script src="~/Content/production/js/custom.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
+
+
    
-    
-    <!--off-->
-    @*<script src="~/Content/documentation/js/shCore.js"></script>
-        <script src="~/Content/documentation/js/shBrushXml.js"></script>*@
 
     @RenderSection("scripts", required: false)
 </body>

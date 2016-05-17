@@ -11,7 +11,7 @@
     });
 });
 
-// Trigger Fullscreen
+ //Trigger Fullscreen
 function launchIntoFullscreen(element) {
     if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
         if (element.requestFullscreen) {
@@ -24,7 +24,7 @@ function launchIntoFullscreen(element) {
             element.msRequestFullscreen();
         }
     } else {
-        // Whack fullscreen
+         //Whack fullscreen
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.mozCancelFullScreen) {
@@ -39,23 +39,23 @@ function launchIntoFullscreen(element) {
 //    alert("button has been pushed");
 //}
 
-//Hide navbar on Home/Index
-$('.navbar').hide();
-$("html").mousemove(function (event) {
-    $('.navbar').show();
-    myStopFunction();
-    myFunction();
-});
-function myFunction() {
-    myVar = setTimeout(function () {
-        $('.navbar').hide();
-    }, 1000);
-}
-function myStopFunction() {
-    if (typeof myVar != 'undefined') {
-        clearTimeout(myVar);
-    }
-}
+////Hide navbar on Home/Index
+//$('#navbar-start').hide();
+//$("html").mousemove(function (event) {
+//    $('#navbar-start').show();
+//    myStopFunction();
+//    myFunction();
+//});
+//function myFunction() {
+//    myVar = setTimeout(function () {
+//        $('#navbar-start').hide();
+//    }, 1000);
+//}
+//function myStopFunction() {
+//    if (typeof myVar != 'undefined') {
+//        clearTimeout(myVar);
+//    }
+//}
 
 //video test
 $("#videoOne").on("pause", function (e) {

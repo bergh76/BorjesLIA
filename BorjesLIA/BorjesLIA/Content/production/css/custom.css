@@ -4,11 +4,13 @@
 .right_col{
       border-left: 4px solid red;
 }*/
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 .nav-sm .container-dashboard.body .left_col {
   width: 70px;
   height: 100%;
   padding: 0;
-  z-index: 9999;
+  /*z-index: 9999;*/
   position: absolute;
 }
 .nav-sm .hidden-small {
@@ -74,7 +76,7 @@
   position: absolute;
   top: 0;
   width: 210px;
-  z-index: 4000;
+  z-index: 2;
   background: #3E5367;
   display: none;
 }
@@ -280,6 +282,11 @@ body .container-dashboard.body .right_col {
   border: 1px solid #fff !important;
   color: #73879C;
 }
+.bg-gray {
+  background: #e7e7e7 !important;
+  border: 1px solid #ccc  !important;
+  color: #34495E;
+}
 .bg-green {
   background: #1ABB9C !important;
   border: 1px solid #1ABB9C !important;
@@ -327,7 +334,7 @@ body {
   background: #2A3F54;
   /* background: #2A3F54;
   /*#ECF0F1; #FCFCFC*/
-  font-family: Roboto, Arial, "Droid Sans", sans-serif;
+  font-family: Railway, Arial, "Droid Sans", sans-serif;
 
   font-size: 1.5em;
   font-weight: 400;
@@ -444,6 +451,7 @@ a:hover, a:focus {
   text-decoration: none
 }
 .navbar {
+
   margin-bottom: 0
 }
 .navbar-header {

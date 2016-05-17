@@ -6,16 +6,24 @@ using System.Web;
 
 namespace BorjesLIA.Models.Diesel
 {
-    public class DieselPriceModel
+    public class DieselQuarterPriceModel
     {
         [Key]
         public int ID { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "År")]
+        public int Year { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Kvartal")]
+        public string Quarter { get; set; }
+
         [DataType(DataType.Currency)]
-        [Display(Name = "Dieselpris")]
-        public decimal dieselPrice { get; set; }
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Datum")]
-        public DateTime dateNewDieselPrice { get; set; }
+        [Display(Name = "Pris")]
+        public decimal DieselQuarterValue { get; set; }
+
+        public DateTime LoggDate { get; set; }
+        
     }
 }

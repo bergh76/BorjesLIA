@@ -1,45 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
-
-using PagedList;
 using BorjesLIA.ViewModel;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BorjesLIA.AdminControllers
 {
-    //[Authorize]
+    
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: EuroExchangeModels
         [HttpGet]
-        public ActionResult Index(int pageNumber = 1, int pageSize = 10)
+        public ActionResult Index(EuroViewModel euroV)
         {
-            return View(db.EuroExchangeModels.ToList());
+            euroV = new EuroViewModel
+            {
+                AddEuro = new EuroExchangeModel(),
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+
+            };
+            return View(euroV);
         }
 
-        public ActionResult EuroListPagination(int pageNumber = 1, int pageSize = 10)
-        {
-            var euroList = db.EuroExchangeModels.ToList();
-            PagedList<EuroExchangeModel> model = new PagedList<EuroExchangeModel>(euroList, pageNumber, pageSize);
-            return View(model);
-        }
-        //Populates a list with data from database tabel EuroExchangeModel
         [AllowAnonymous]
-        public JsonResult GetData()
+        //Populates a list with data from database tabel EuroExchangeModel
+        public JsonResult GetData(EuroViewModel eurox)
         {
-            ListEuroViewModel eurox = new ListEuroViewModel();
             var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+<<<<<<< HEAD
         //ge en view
         public ActionResult _EuroLineGraph()
         {
@@ -79,9 +76,45 @@ namespace BorjesLIA.AdminControllers
         [HttpGet]
         [AllowAnonymous]
         public ActionResult returnPartialView()
+=======
+
+
+        //[HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddNewEuro(EuroViewModel newEuro)
+>>>>>>> ver.1.0.3
         {
-            return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.EuroExchangeModels.Add(newEuro.AddEuro);
+                    db.SaveChanges();
+                    newEuro.newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date);
+                    return PartialView("_EuroList", newEuro);
+                }
+            }
+            else
+            {
+                return View(newEuro);
+            }
         }
+<<<<<<< HEAD
+=======
+
+        public ActionResult _EuroLineGraph(EuroViewModel euroV)
+        {
+
+            euroV = new EuroViewModel
+            {
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+
+            };
+            return View(euroV);
+        }
+>>>>>>> ver.1.0.3
+
 
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)
@@ -97,29 +130,7 @@ namespace BorjesLIA.AdminControllers
             }
             return View(euroExchangeModel);
         }
-
-        // GET: EuroExchangeModels/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: EuroExchangeModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.EuroExchangeModels.Add(euroExchangeModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(euroExchangeModel);
-        }
+       
 
         // GET: EuroExchangeModels/Edit/5
         public ActionResult Edit(int? id)
@@ -186,5 +197,6 @@ namespace BorjesLIA.AdminControllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

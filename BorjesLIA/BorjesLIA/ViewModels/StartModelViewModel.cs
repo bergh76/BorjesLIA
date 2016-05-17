@@ -7,20 +7,22 @@ using BorjesLIA.Models.Euro;
 using BorjesLIA.Models.Video;
 using BorjesLIA.Models.URL;
 using BorjesLIA.Models.Img;
+using BorjesLIA.ViewModel;
+using BorjesLIA.Models;
 
 namespace BorjesLIA.ViewModels
 {
     public class StartModelViewModel
     {
         public List<listViewModel> listVM { get; set; }
-    }
 
-    public class listViewModel
-    {
-        public string url { get; set; }
-        public string name { get; set; }
-        public int orderby { get; set; }
+        public class listViewModel
+        {
+            public string url { get; set; }
+            public string name { get; set; }
+            public int orderby { get; set; }
 
-        public DateTime dateTime { get; set; }
+            public DateTime dateTime { get; set; }
+        }
     }
 }

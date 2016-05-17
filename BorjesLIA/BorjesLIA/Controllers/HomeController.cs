@@ -1,5 +1,6 @@
 ﻿using BorjesLIA.Helper;
 using BorjesLIA.Models;
+using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using BorjesLIA.ViewModels;
 using System;
@@ -7,49 +8,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static BorjesLIA.ViewModels.StartModelViewModel;
 
 namespace BorjesLIA.Controllers
 {
     public class HomeController : Controller
     {
-
         private ApplicationDbContext db = new ApplicationDbContext();
-        SliderHelper SH = new SliderHelper();
 
         public ActionResult Index()
         {
 
-            if(db.UrlModels !=null || db.EuroExchangeModels !=null || db.Imgs != null)
-            { 
-            var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
-
-            var exPageUrl = db.UrlModels.ToList();
-            var euros = db.EuroExchangeModels.ToList();
-            var model = new StartModelViewModel();
-            model.listVM = new List<listViewModel>();
-            
-            foreach (var item in exPageUrl)
+            if (db.UrlModels != null || db.EuroExchangeModels != null || db.Imgs != null)
             {
-                var listvm = new listViewModel();
-                listvm.url = item.urlString;
-               
-                //listvm.url = "/Images/contentslider/" + item.Url;
-                //listvm.orderby = item.PlacingOrder;
+                var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
 
-                model.listVM.Add(listvm);
-            }
-            if (euros != null)
-            {
-                var listvm = new listViewModel();
-                listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
-                model.listVM.Add(listvm);
-            }
+                var exPageUrl = db.UrlModels.ToList();
+                var euros = db.EuroExchangeModels.ToList();
+                var model = new StartModelViewModel();
+                model.listVM = new List<listViewModel>();
 
-            return View(model);
+                foreach (var item in exPageUrl)
+                {
+                    var listvm = new listViewModel();
+                    listvm.url = item.urlString;
+                    model.listVM.Add(listvm);
+                }
+
+                if (euros != null)
+                {
+                    
+                    var listvm = new listViewModel();
+                    listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
+                    model.listVM.Add(listvm);
+                }
+
+                return View(model);
             }
             return View();
+        }
 
+    }
+}
 
+            /**
             //ContentSliderViewModel model = new ContentSliderViewModel()
             //{
             //    SliderList = db.StartModels.ToList()
@@ -73,20 +75,20 @@ namespace BorjesLIA.Controllers
             //return View();
         }
 
-        public JsonResult GetData()
-        {
-            EuroViewModel eurox = new EuroViewModel();
-            var data = eurox.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetData()
+        //{
+        //    EuroViewModel eurox = new EuroViewModel();
+        //    var data = eurox.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
-        public ActionResult returnPartialView(dynamic element)
-        {
-            var something = SH.returnPartialViewUrl(element);
+        //public ActionResult returnPartialView(dynamic element)
+        //{
+        //    var something = SH.returnPartialViewUrl(element);
 
-            //return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
-            return PartialView(something);
-        }
+        //    //return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
+        //    return PartialView(something);
+        //}
     }
 }
 

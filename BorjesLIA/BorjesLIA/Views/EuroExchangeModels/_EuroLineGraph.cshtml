@@ -1,18 +1,15 @@
 ﻿@model BorjesLIA.ViewModel.EuroViewModel
-@{ 
-    ViewBag.Title = "_EuroLineGraph";
-}
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
- 
-@{    foreach (var item in Model.newEuroList)
+
+@{ var chartID = Model.newEuroList.FirstOrDefault();
+    if (chartID.EuroChartID == 1)
     {
         <script type="text/javascript">
         google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawchart);
-        if (item.EuroChartID == 1)
-        {
               function drawchart() {
                   $.ajax({
                       type: 'POST',
@@ -55,10 +52,13 @@
                       }
                   });
               }
-
-        }
-        if (item.EuroChartID == 2)
-        {
+        </script>
+    }
+    if (chartID.EuroChartID == 2)
+    {
+        <script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+                google.setOnLoadCallback(drawchart);
                   function drawchart() {
                       $.ajax({
                           type: 'POST',
@@ -101,10 +101,13 @@
                           }
                       });
                   }
-
-        }
-        else if (item.EuroChartID == 3)
-        {
+        </script>
+    }
+    if (chartID.EuroChartID == 3)
+    {
+        <script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+                google.setOnLoadCallback(drawchart);
              function drawchart() {
                  $.ajax({
                      type: 'POST',
@@ -148,8 +151,7 @@
                  });
              }
 
-        }
-         </script>
+        </script>
     }
 }
 <div class="x_panel">
@@ -169,3 +171,177 @@
         <div id="myChartDiv" style="width: 100%; height: 450px"></div>
     </div>
 </div>
+
+@*@Url.Action("GetData")
+    @ViewBag.chartData
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @{
+        if (@ViewBag.chartData == 1)
+        {
+            <script type="text/javascript">
+            google.load("visualization", "1", { packages: ["corechart"] });
+            google.setOnLoadCallback(drawchart);
+                  function drawchart() {
+                      $.ajax({
+                          type: 'POST',
+                          dataType: 'json',
+                          contentType: 'application/json',
+                          // Calls an Action from Controller ie. HomeController/GetData
+                          url: '@Url.Action("GetData")',
+                          data: "{ }",
+                          // If data connections is success
+                          success:
+                              function drawchart(dataValues) {
+
+                                  // Adds data into columns to DataTable
+                                  var data = new google.visualization.DataTable();
+                                  data.addColumn('string', 'Datum');
+                                  data.addColumn('number', 'Pris');
+
+                                  // Settings for visualization of the graph
+                                  var options = {
+                                      title: 'Eurokurs',
+                                      pointSize: 3,
+                                      dataOpacity: 0.4,
+                                      lineWidth: 2,
+                                      hAxis: {
+                                          title: 'Datum', titleTextStyle: { color: '#333' },
+                                      }
+                                  }
+                                  // Loops through the DataTable with data from database
+                                  for (var i = 0; i < dataValues.length; i++) {
+                                      data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                  }
+                                      // Drews the graph into a specified div
+                                      new google.visualization.LineChart(document.getElementById('myChartDiv')).
+                                          draw(data, options);
+
+                              },
+                          // If collectning data from database fails promp message here
+                          error: function () {
+                              alert("Ett fel uppstod när datat försökte hämtas!");
+                          }
+                      });
+                  }
+            </script>
+        }
+        if (@ViewBag.chartData == 2)
+        {
+            <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+                    google.setOnLoadCallback(drawchart);
+                      function drawchart() {
+                          $.ajax({
+                              type: 'POST',
+                              dataType: 'json',
+                              contentType: 'application/json',
+                              // Calls an Action from Controller ie. HomeController/GetData
+                              url: '@Url.Action("GetData")',
+                              data: "{ }",
+                              // If data connections is success
+                              success:
+                                  function drawchart(dataValues) {
+
+                                      // Adds data into columns to DataTable
+                                      var data = new google.visualization.DataTable();
+                                      data.addColumn('string', 'Datum');
+                                      data.addColumn('number', 'Pris');
+
+                                      // Settings for visualization of the graph
+                                      var options = {
+                                          title: 'Eurokurs',
+                                          pointSize: 3,
+                                          dataOpacity: 0.4,
+                                          lineWidth: 2,
+                                          hAxis: {
+                                              title: 'Datum', titleTextStyle: { color: '#333' },
+                                          }
+                                      }
+                                      // Loops through the DataTable with data from database
+                                      for (var i = 0; i < dataValues.length; i++) {
+                                          data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                      }
+                                          // Drews the graph into a specified div
+                                          new google.visualization.BarChart(document.getElementById('myChartDiv')).
+                                              draw(data, options);
+
+                                  },
+                              // If collectning data from database fails promp message here
+                              error: function () {
+                                  alert("Ett fel uppstod när datat försökte hämtas!");
+                              }
+                          });
+                      }
+            </script>
+        }
+        if (@ViewBag.chartData == 3)
+        {
+            <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+                    google.setOnLoadCallback(drawchart);
+                 function drawchart() {
+                     $.ajax({
+                         type: 'POST',
+                         dataType: 'json',
+                         contentType: 'application/json',
+                         // Calls an Action from Controller ie. HomeController/GetData
+                         url: '@Url.Action("GetData")',
+                         data: "{ }",
+                         // If data connections is success
+                         success:
+                             function drawchart(dataValues) {
+
+                                 // Adds data into columns to DataTable
+                                 var data = new google.visualization.DataTable();
+                                 data.addColumn('string', 'Datum');
+                                 data.addColumn('number', 'Pris');
+
+                                 // Settings for visualization of the graph
+                                 var options = {
+                                     title: 'Eurokurs',
+                                     pointSize: 3,
+                                     dataOpacity: 0.4,
+                                     lineWidth: 2,
+                                     hAxis: {
+                                         title: 'Datum', titleTextStyle: { color: '#333' },
+                                     }
+                                 }
+                                 // Loops through the DataTable with data from database
+                                 for (var i = 0; i < dataValues.length; i++) {
+                                     data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                 }
+                                     // Drews the graph into a specified div
+                                     new google.visualization.ColumnChart(document.getElementById('myChartDiv')).
+                                         draw(data, options);
+
+                             },
+                         // If collectning data from database fails promp message here
+                         error: function () {
+                             alert("Ett fel uppstod när datat försökte hämtas!");
+                         }
+                     });
+                 }
+
+            </script>
+        }
+    }
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="myChartDiv" style="width: 100%; height: 450px"></div>
+        </div>
+    </div>*@

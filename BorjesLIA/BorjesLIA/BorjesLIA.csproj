@@ -1012,7 +1012,6 @@
     <Content Include="Views\Shared\_Admin_NewEuroIndex.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroList.cshtml" />
     <Content Include="Views\EuroExchangeModels\_EuroLineGraph.cshtml" />
-    <Content Include="Views\EuroExchangeModels\_EuroBarChart.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />

@@ -50,7 +50,6 @@ namespace BorjesLIA.AdminControllers
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro.newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date);
-                    //var getNewChart = newEuro.GetData();
                     return PartialView("_EuroList", newEuro);
                 }
             }
@@ -60,12 +59,19 @@ namespace BorjesLIA.AdminControllers
             }
         }
 
+        public ActionResult _EuroLineGraph(EuroViewModel euroV)
+        {
+            //var chartData = db.EuroExchangeModels.ToList().Select(x => x.EuroChartID);
+            //var chartID = chartData.FirstOrDefault();
+            //ViewBag.chartData = chartID;
+            //return View();
+            euroV = new EuroViewModel
+            {
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
 
-        //public ActionResult _EuroLineGraph (EuroViewModel evm)
-        //{         
-        //    var data = evm.GetData();
-        //    return View(data);
-        //}
+            };
+            return View(euroV);
+        }
 
 
         // GET: EuroExchangeModels/Details/5

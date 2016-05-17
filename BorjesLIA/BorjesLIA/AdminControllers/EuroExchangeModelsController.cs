@@ -40,17 +40,47 @@ namespace BorjesLIA.AdminControllers
             var data = eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        //ge en view
+        public ActionResult _EuroLineGraph()
+        {
+            var someTestName = db.EuroExchangeModels.ToList();
+            int name = someTestName.FirstOrDefault().ID;
+
+            ViewBag.asdf = name;
+        
+            return View();
+        }
+
+        public ActionResult childController()
+        {
+            
+
+            return View();
+        }
+
+        //get optional graph
+        //public ActionResult _EuroLineGraph(int typOfChart)
+        //{
+        //    if (typOfChart == 1)
+        //    {
+        //        return PartialView(@"~/Views/Graph/GraphLine.cshtml");
+        //    }
+        //    else if (typOfChart == 2)
+        //    {
+        //        return PartialView(@"~/Views/Graph/GraphBar.cshtml");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+
         //return partial view
         [HttpGet]
         [AllowAnonymous]
         public ActionResult returnPartialView()
         {
             return PartialView(@"~/Views/EuroExchangeModels/_EuroLineGraph.cshtml");
-        }
-        //ge en view
-        public ActionResult _EuroLineGraph()
-        {
-            return View();
         }
 
         // GET: EuroExchangeModels/Details/5

@@ -22,5 +22,6 @@ namespace BorjesLIA.ViewModels
         public int orderby { get; set; }
 
         public DateTime dateTime { get; set; }
+
     }
 }

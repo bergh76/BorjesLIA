@@ -63,6 +63,7 @@ namespace BorjesLIA.Controllers
                 listvm.url = "/DieselPriceModels/DieselPriceGraph/";
                 model.listVM.Add(listvm);
             }
+            
 
             return View(model);
         }

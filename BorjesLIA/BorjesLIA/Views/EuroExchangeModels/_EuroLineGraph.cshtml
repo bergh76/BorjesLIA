@@ -8,13 +8,9 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
+
     google.load("visualization", "1", { packages: ["corechart"] });
-    //google.charts.load('current');
     google.setOnLoadCallback(drawchart);
-@*</script>*@
-//<!--GOOGLECHART START-->
-@*<script type="text/javascript">*@
-    //$(
     function drawchart() {
         $.ajax({
             type: 'POST',
@@ -60,6 +56,24 @@
     }
    
 </script>
+
+@if(@ViewBag.asdf == 1)
+{
+    <h1>kör kod för barchart</h1>
+    <h1>viebagens värde är @ViewBag.asdf</h1>
+}
+else if (@ViewBag.asdf == 2)
+{
+    <h1>kör kod för linechart</h1>
+    <h1>viebagens värde är @ViewBag.asdf</h1>
+}
+else if (@ViewBag.asdf == 3)
+{
+    <h1>viebagens värde är @ViewBag.asdf</h1>
+}
+
+
+
 <div id="myChartDiv"></div>
 @*<div class="x_panel">
     <div class="x_title">

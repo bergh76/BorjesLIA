@@ -14,17 +14,16 @@ namespace BorjesLIA.ViewModel
 {
     public class StartModelViewModel
     {
+        //list which is used to represent object to show in the slider. 
         public List<listViewModel> listVM { get; set; }
 
         public class listViewModel
         {
+            //possible to add fields to match the needs of values to show data in the slider, only restricted to the fields in each respective model.
             public string url { get; set; }
             public string name { get; set; }
             public int orderby { get; set; }
-
-
             public DateTime dateTime { get; set; }
         }
-
     }
 }

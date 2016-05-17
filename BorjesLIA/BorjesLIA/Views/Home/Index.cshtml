@@ -1,18 +1,20 @@
 ﻿@model BorjesLIA.ViewModel.StartModelViewModel
-@{
+@*@{
     ViewBag.Title = "Home Page";
-}
+}*@
 
-<!--bxSlider-->
+<!--bxSlider -->
 <script src="~/Scripts/jquery.bxslider.min.js"></script>
-<script src="~/Scripts/daJavaScript.js"></script>
+<!--testat att flytta dajavascript kod till mainjs-->
+@*<script src="~/Scripts/daJavaScript.js"></script>*@ 
 
 <div id="bx-wrapper">
+    <!-- using the elements in the models list to represent each slide in slider. -->
     <ul class="bxslider">
         @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
-            <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
-        }
+             <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></li>
+            }
     </ul>
 </div>
 

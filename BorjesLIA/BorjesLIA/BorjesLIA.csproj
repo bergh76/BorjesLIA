@@ -447,12 +447,6 @@
     <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
-    <Content Include="Images\contentslider\dumpmobil.png" />
-    <Content Include="Images\contentslider\emulator.png" />
-    <Content Include="Images\contentslider\home-1353389_960_720.jpg" />
-    <Content Include="Images\contentslider\landscape-615429_960_720.jpg" />
-    <Content Include="Images\contentslider\SelfiNoUno.jpg" />
-    <Content Include="Images\contentslider\sunset-1331088_960_720.jpg" />
     <Content Include="Images\controls.png" />
     <Content Include="Scripts\cropper\dist\cropper.css" />
     <Content Include="Scripts\cropper\dist\cropper.js" />
@@ -1026,6 +1020,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
+    <Folder Include="Images\contentslider\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>

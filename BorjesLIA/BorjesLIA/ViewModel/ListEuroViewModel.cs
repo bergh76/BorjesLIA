@@ -1,4 +1,5 @@
 ﻿using BorjesLIA.Models;
+using BorjesLIA.Models.Charts;
 using BorjesLIA.Models.Euro;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,7 @@ namespace BorjesLIA.ViewModel
 
         public EuroExchangeModel AddEuro { get; set; }
         public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
-
-
+        public ChartModel ChartName { get; set; }
         public List<EuroExchangeModel> GetData()
         {
             using (var db = new ApplicationDbContext())

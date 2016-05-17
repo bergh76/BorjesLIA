@@ -50,6 +50,7 @@ namespace BorjesLIA.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         euroValue = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Date = c.DateTime(nullable: false),
+                        EuroChartID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

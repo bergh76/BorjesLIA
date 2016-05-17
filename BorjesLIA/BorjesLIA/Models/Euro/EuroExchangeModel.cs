@@ -22,5 +22,9 @@ namespace BorjesLIA.Models.Euro
 
         //public int ChartType { get; set; }
         public int EuroChartID { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Skapat")]
+        public DateTime LoggDate { get; set; }
     }
 }

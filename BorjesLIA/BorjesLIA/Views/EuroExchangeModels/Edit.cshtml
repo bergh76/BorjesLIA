@@ -13,10 +13,11 @@
             </div>
             <div class="right_col" role="main">
                 <h2>Edit</h2>
+                 @*@using (Html.BeginForm("_AddNewEuro", "EuroExchangeModels", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+                @using (Html.BeginForm("Edit", "EuroExchangeModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-                @*@using (Html.BeginForm())*@
-                    @using (Ajax.BeginForm("Edit", new AjaxOptions {  OnComplete = "Index" }))
-                    {
+
+                {
                         @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
@@ -43,7 +44,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.EuroChartID, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.EuroChartID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.EuroChartID, "", new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.EuroChartID, "", new { @class = "text-danger" })
                             </div>
                         </div>

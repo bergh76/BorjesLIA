@@ -28,9 +28,13 @@ namespace BorjesLIA.AdminControllers
             return View(dieselQ);
         }
 
-        public ActionResult _QuarterPriceDiesel()
+        public ActionResult _QuarterPriceDiesel(DieselViewModel dqpData)
         {
-            return View();
+            dqpData = new DieselViewModel
+            {
+                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Year)
+            };
+            return View(dqpData);
         }
 
         [AllowAnonymous]
@@ -44,22 +48,22 @@ namespace BorjesLIA.AdminControllers
 
         //[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _AddQuarterDiesel(DieselViewModel newDiesel)
+        public ActionResult _AddQuarterDiesel(DieselViewModel newQDiesel)
         {
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
-                    db.DieselPriceQuarter.Add(newDiesel.AddQuarterDiesel);
+                    db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();
-                    newDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);
+                    newQDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);
                     //var getNewChart = newEuro.GetData();
-                    return PartialView("_DieselQuarterList", newDiesel);
+                    return PartialView("QuarterPriceDiesel", newQDiesel);
                 }
             }
             else
             {
-                return View(newDiesel);
+                return View(newQDiesel);
             }
         }
 

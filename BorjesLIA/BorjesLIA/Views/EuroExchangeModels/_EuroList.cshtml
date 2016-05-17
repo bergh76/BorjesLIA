@@ -1,14 +1,23 @@
 ﻿@model BorjesLIA.ViewModel.EuroViewModel
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
+    <!-- DataTabel CSS-->
+<link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
+<link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
+<!-- DataTabel JS-->
 
+<script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myTable').DataTable({
+            "order": [[1, "desc"]],
             "processing": true,
+
         });
     });
-
 </script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 <div class="x_panel">
     <div class="x_title">
         <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
@@ -92,5 +101,4 @@
         </div>
     </div>
 </div>
-
 

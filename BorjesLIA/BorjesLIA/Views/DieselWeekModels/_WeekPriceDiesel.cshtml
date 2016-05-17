@@ -1,12 +1,16 @@
-﻿@model BorjesLIA.ViewModel.DieselViewModel
+﻿@model BorjesLIA.ViewModel.DieselViewModel 
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myDWeekTable').DataTable({
+            "order": [[1, "desc"]],
             "processing": true,
+
         });
     });
-
 </script>
+
+
 <div class="x_panel">
     <div class="x_title">
         <h2>Dieselpriser <small>bacon ipsum</small></h2>
@@ -88,4 +92,3 @@
         </div>
     </div>
 </div>
-

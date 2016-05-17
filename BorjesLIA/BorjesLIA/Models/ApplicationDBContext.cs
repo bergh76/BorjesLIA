@@ -19,19 +19,21 @@ namespace BorjesLIA.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.URL.URLModel> UrlModels { get; set; }
+        public System.Data.Entity.DbSet<URL.URLModel> UrlModels { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Img.Img> Imgs { get; set; }
+        public System.Data.Entity.DbSet<Img.Img> Imgs { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselWeekModel> DieselPriceWeek { get; set; }
+        public System.Data.Entity.DbSet<Diesel.DieselWeekModel> DieselPriceWeek { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DieselQuarterPriceModel> DieselPriceQuarter{ get; set; }
+        public System.Data.Entity.DbSet<Diesel.DieselQuarterPriceModel> DieselPriceQuarter{ get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Diesel.DtmModel> DtmModels { get; set; }
+        public System.Data.Entity.DbSet<Diesel.DtmModel> DtmModels { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Euro.EuroExchangeModel> EuroExchangeModels { get; set; }
+        public System.Data.Entity.DbSet<Euro.EuroExchangeModel> EuroExchangeModels { get; set; }
 
-        public System.Data.Entity.DbSet<BorjesLIA.Models.Video.VideoModel> VideoModels { get; set; }
+        public System.Data.Entity.DbSet<Video.VideoModel> VideoModels { get; set; }
+
+        public System.Data.Entity.DbSet<Charts.ChartModel> ChartTypeList { get; set; }
 
         //public System.Data.Entity.DbSet<BorjesLIA.Models.StartModel> StartModels { get; set; }
     }

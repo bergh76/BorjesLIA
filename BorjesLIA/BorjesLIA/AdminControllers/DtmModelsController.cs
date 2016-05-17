@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
+using BorjesLIA.ViewModel;
+using System.Threading.Tasks;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -17,21 +16,57 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DtmModels
-        public ActionResult Index()
+
+        public ActionResult Index(DMTViewModel dtmV)
         {
-            return View(db.DtmModels.ToList());
+            dtmV = new DMTViewModel
+            {
+                AddDtm = new DtmModel(),
+                newDTMList = db.DtmModels.ToList()
+                .OrderByDescending(x => x.Month)
+
+            };
+            return View(dtmV);
+            //    return View(db.DtmModels.ToList());
         }
 
         [AllowAnonymous]
-        public JsonResult GetData()
+        //Populates a list with data from database tabel EuroExchangeModel
+        public async Task<JsonResult> GetData(DMTViewModel dtmChart)
         {
-            var data = db.DtmModels.ToList();
+            var data = await dtmChart.GetDtmData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        //ge en view
-        public ActionResult DtmLineGraph()
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddNewDTM(DMTViewModel newDTM)
         {
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.DtmModels.Add(newDTM.AddDtm);
+                    db.SaveChanges();
+                    newDTM.newDTMList = db.DtmModels.ToList()
+                        .OrderByDescending(x => x.Month);
+                    return PartialView("_DtmList", newDTM);
+                }
+            }
+            else
+            {
+                return View(newDTM);
+            }
+        }
+
+        //ge en view
+        public ActionResult _DtmGraphData(DMTViewModel dtmV)
+        {
+            dtmV = new DMTViewModel
+            {
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Month)
+            };
+            return View(dtmV);
         }
 
         // GET: DtmModels/Details/5

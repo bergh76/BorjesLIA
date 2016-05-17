@@ -1,12 +1,14 @@
 ﻿@model BorjesLIA.ViewModel.DieselViewModel
-@*<script type="text/javascript">
+
+<script type="text/javascript">
     $(document).ready(function(){
-        $('#myQWeekTable').DataTable({
+        $('#myDQTable').DataTable({
+            "order": [[1, "desc"]],
             "processing": true,
+
         });
     });
-</script>*@
-
+</script>
 <div class="x_panel">
     <div class="x_title">
         <h2>Dieselpriser Kvartal <small>bacon ipsum</small></h2>
@@ -49,7 +51,7 @@
     </ul>
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <table id="myQWeekTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+            <table id="myDQTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                 <thead>
                     <tr>
                         <th>

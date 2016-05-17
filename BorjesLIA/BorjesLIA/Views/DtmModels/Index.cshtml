@@ -1,8 +1,7 @@
-﻿@model IEnumerable<BorjesLIA.Models.Diesel.DtmModel>
-
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model BorjesLIA.ViewModel.DMTViewModel
+@*@{
+        ViewData["Title"] = "Eurokurs";
+    }*@
 <body class="nav-md">
     <div class="container-dashboard body">
         <div class="main_container">
@@ -12,40 +11,95 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <h2>DTM</h2>
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.dtmPrice)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.dateNewDtmPrice)
-                        </th>
-                        <th></th>
-                    </tr>
+                <div class="row">
+                    <!-- Tabel for Euroexchangecourse starts here -->
+                    <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Eurokurs</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <!--Partial view for form adding new Euroindex-->
 
-                    @foreach (var item in Model)
-            {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.dtmPrice)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.dateNewDtmPrice)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
+                                @using (Ajax.BeginForm("_AddNewEuro", new AjaxOptions { UpdateTargetId = "euroList" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="x_content">
+                                        <div class="x_panel">
+                                            <div class="x_title">
+                                                <h2>Lägg till ny Eurokursindex</h2>
+                                                <ul class="nav navbar-right panel_toolbox">
+                                                    <li>
+                                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div class="form-horizontal">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddDtm., htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.TextBoxFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddEuro.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.TextBoxFor(model => model.AddEuro.Date, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AddEuro.EuroChartID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.TextBoxFor(model => model.AddEuro.EuroChartID, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.AddEuro.EuroChartID, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                            <input type="submit" onClick="drawchart()" value="Lägg till" class="btn btn-default" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                </table>
+                                }
+                            </div><!-- Euroexchangecourse ENDS here -->
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <!-- Datatable starts here -->
+                                <div id="euroList">
+                                    @Html.Partial("_EuroList", Model)
+                                </div>
+                                <!-- Datatable ENDS here -->
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @Html.Partial("_EuroLineGraph")
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
+
+

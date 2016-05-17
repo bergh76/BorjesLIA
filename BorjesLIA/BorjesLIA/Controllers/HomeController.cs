@@ -50,7 +50,7 @@ namespace BorjesLIA.Controllers
             if (dtm != null)
             {
                 var listvm = new listViewModel();
-                listvm.url = "/DtmModels/DtmLineGraph/";
+                listvm.url = "/DtmModels/_DtmLineGraph/";
                 model.listVM.Add(listvm);
             }
             //if (dieselPrice != null)

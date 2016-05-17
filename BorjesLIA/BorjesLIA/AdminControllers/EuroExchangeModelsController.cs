@@ -8,6 +8,7 @@ using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using BorjesLIA.Models.Charts;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -39,27 +40,13 @@ namespace BorjesLIA.AdminControllers
 
          public ActionResult _EuroLineGraph(EuroViewModel euroV)
         {
-
             euroV = new EuroViewModel
             {
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-
             };
             return View(euroV);
-        }
-        //public ActionResult _EuroLineGraph()
-        //{
-        //    var someTestName = db.EuroExchangeModels.ToList();
-        //    int name = someTestName.FirstOrDefault().ID;
+        }     
 
-        //    ViewBag.asdf = name;
-
-        //    return View();
-        //}
-
-        //return partial view
-
-        //[HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
@@ -71,7 +58,8 @@ namespace BorjesLIA.AdminControllers
                 {
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
-                    newEuro.newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date);
+                    newEuro.newEuroList = db.EuroExchangeModels.ToList()
+                        .OrderByDescending(x => x.Date);
                     return PartialView("_EuroList", newEuro);
                 }
             }
@@ -80,6 +68,7 @@ namespace BorjesLIA.AdminControllers
                 return View(newEuro);
             }
         }
+
 
         // GET: EuroExchangeModels/Details/5
         public ActionResult Details(int? id)

@@ -224,6 +224,7 @@
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\DMTViewModel.cs" />
     <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
@@ -1008,7 +1009,7 @@
     <Content Include="Views\StartModels\Details.cshtml" />
     <Content Include="Views\StartModels\Edit.cshtml" />
     <Content Include="Views\StartModels\Index.cshtml" />
-    <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
+    <Content Include="Views\DtmModels\_DtmLineGraph.cshtml" />
     <Content Include="Views\DieselPriceModels\DieselPriceGraph.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
@@ -1021,7 +1022,7 @@
     <Content Include="Views\DieselWeekModels\Edit.cshtml" />
     <Content Include="Views\DieselWeekModels\Index.cshtml" />
     <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\_QuarterPriceDiesel.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\QuarterPriceDiesel.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,6 @@
   
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/production/css/custom.css" rel="stylesheet" />
-   
     <!-- DataTabel CSS-->
     <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
@@ -22,12 +21,14 @@
 
     <!--bxSlider-->
     <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
-    <script src="~/Scripts/daJavaScript.js"></script>
+    <script src="/js/plugins/jquery.fitvids.js"></script>
+
+    @*<script src="~/Scripts/daJavaScript.js"></script>*@
     <!--bxSlider End-->
 
 </head>
 <body>
-    <div id="#navbar-start" class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-dashboard">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -41,20 +42,21 @@
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
-                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(elem)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
+                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen()" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
                 @*<span class="navbar-right navbar-form btn fa fa-tv fa-2x" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
 
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container-max">
         @RenderBody()
     </div>
-
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.bxslider.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Content/production/js/custom.js"></script>
-    <script src="~/Scripts/main.js"></script>
+
     <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>

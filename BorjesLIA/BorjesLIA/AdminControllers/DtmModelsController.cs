@@ -38,7 +38,7 @@ namespace BorjesLIA.AdminControllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        [Authorize]
+
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewDTM(DMTViewModel newDTM)
         {
@@ -47,7 +47,7 @@ namespace BorjesLIA.AdminControllers
                 using (var db = new ApplicationDbContext())
                 {
                     db.DtmModels.Add(newDTM.AddDtm);
-                    db.SaveChanges(); // ToDO {"The conversion of a datetime2 data type to a datetime data type resulted in an out-of-range value.\r\nThe statement has been terminated."}
+                    db.SaveChanges(); 
                     newDTM.newDTMList = db.DtmModels.ToList()
                         .OrderByDescending(x => x.Date);
                     return PartialView("_DtmList", newDTM);
@@ -85,28 +85,6 @@ namespace BorjesLIA.AdminControllers
             return View(dtmModel);
         }
 
-        // GET: DtmModels/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: DtmModels/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,Date,DieselDTMValue,DieselDTMChartID,LoggDate")] DtmModel dtmModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.DtmModels.Add(dtmModel);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(dtmModel);
-        //}
 
         // GET: DtmModels/Edit/5
         public ActionResult Edit(int? id)

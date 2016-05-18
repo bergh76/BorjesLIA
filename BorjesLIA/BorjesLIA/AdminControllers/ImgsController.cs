@@ -42,7 +42,6 @@ namespace BorjesLIA.AdminControllers
             imageV = new ImagesViewModel
             {
                 newImageList = db.Imgs.ToList().OrderByDescending(x => x.Date)
-
             };
             return View(imageV);
         }

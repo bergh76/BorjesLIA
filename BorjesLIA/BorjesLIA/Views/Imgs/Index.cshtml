@@ -28,13 +28,9 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
-                                @*@using (Ajax.BeginForm("_AddNewImage", "Imgs", null, new AjaxOptions { UpdateTargetId = "imgList" }, new { enctype = "multipart/form-data" }))
-                                    {*@
                                 <!--Partial view for form adding new Image-->
                                 @*@using (Ajax.BeginForm("_AddNewImage", new AjaxOptions {  UpdateTargetId = "imgList" }))*@
-                                @*@using (Ajax.BeginForm("_AddNewImage", "Imgs", new { enctype = "multipart/form-data" }, new AjaxOptions() { UpdateTargetId = "imgList" }))
-                                {*@
-
+                             
                                     @using (Html.BeginForm("_AddNewImage", "Imgs", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                         {
                                     @Html.AntiForgeryToken()

@@ -4,12 +4,13 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
-@{ var dtmChartList = Model.newDTMList.ToList();
+@{ var dtmChartList = Model.newDTMList.Select(x => x.DieselDTMChartID).Distinct().ToList();
+    // create a check if newEuroList is empty
     var chartID = dtmChartList.FirstOrDefault();
     // create a check if newEuroList is empty
-    if (chartID.DieselDTMChartID != 0)
+    if (chartID != 0)
     {
-        if (chartID.DieselDTMChartID == 1)
+        if (chartID == 1)
         {
             <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
@@ -58,7 +59,7 @@
               }
             </script>
         }
-        if (chartID.DieselDTMChartID == 2)
+        if (chartID == 2)
         {
             <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
@@ -107,7 +108,7 @@
                   }
             </script>
         }
-        if (chartID.DieselDTMChartID == 3)
+        if (chartID == 3)
         {
             <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });

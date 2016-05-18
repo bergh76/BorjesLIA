@@ -7,19 +7,17 @@
     <title>@ViewBag.Title - Börjes Transport</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     @*<script src="~/Scripts/daJavaScript.js"></script>*@
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/production/css/custom.css" rel="stylesheet" />
-   
-
-    
-    <link href="~/Content/font-awesome.css" rel="stylesheet">
-    @*<link href="~/Content/animate.min.css" rel="stylesheet">*@
-    <link href="~/Content/main.css" rel="stylesheet">
-
+        <link href="~/Content/main.css" rel="stylesheet">
     <!--bxSlider-->
     <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
     <!--bxSlider End-->
-
+    
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/production/css/custom.css" rel="stylesheet" />    
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
+    @*<link href="~/Content/animate.min.css" rel="stylesheet">*@
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+        
 </head>
 <body>
     <div id="#navbar-start" class="navbar navbar-default navbar-fixed-top">
@@ -36,7 +34,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
-                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen(elem)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
+                <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="launchIntoFullscreen(element)" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
                 @*<span class="navbar-right navbar-form btn fa fa-tv fa-2x" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
 
             </div>
@@ -44,13 +42,10 @@
     </div>
     <div class="container-max">
         @RenderBody()
-    </div>
-
-
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    </div>    
+    <script src="~/Scripts/bootstrap.min.js"></script>    
+    @*<script src="~/Scripts/main.js"></script>*@
     <script src="~/Content/production/js/custom.js"></script>
-    <script src="~/Scripts/main.js"></script>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

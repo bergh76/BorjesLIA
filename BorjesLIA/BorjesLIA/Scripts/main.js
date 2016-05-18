@@ -1,5 +1,5 @@
 ﻿jQuery(function ($) {
-    'use strict';
+    //'use strict';
 
     //// ADD PAGINATIONS TO TABLES
     //$(document).ready(function () {
@@ -131,9 +131,9 @@
 
 //försök att flytta daJacaScript till main
 $(document).ready(function () {
-    $('.bxslider').bxSlider({
+    $(".bxslider").bxSlider({
         pager: false,
-        mode: 'fade',
+        mode: "fade",
         captions: true,
         auto: true,
         autoControls: true,
@@ -172,19 +172,19 @@ function launchIntoFullscreen(element) {
 //}
 
 //Hide navbar on Home/Index
-$('#navbar-start').hide();
+$("#navbar-start").hide();
 $("html").mousemove(function (event) {
-    $('#navbar-start').show();
+    $("#navbar-start").show();
     myStopFunction();
     myFunction();
 });
 function myFunction() {
     myVar = setTimeout(function () {
-        $('#navbar-start').hide();
+        $("#navbar-start").hide();
     }, 1000);
 }
 function myStopFunction() {
-    if (typeof myVar != 'undefined') {
+    if (typeof myVar != "undefined") {
         clearTimeout(myVar);
     }
 }

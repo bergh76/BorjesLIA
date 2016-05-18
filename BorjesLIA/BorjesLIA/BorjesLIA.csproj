@@ -205,9 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605151902441_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605151902441_BorjesLIA.Designer.cs">
-      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201605181021086_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605181021086_BorjesLIA.Designer.cs">
+      <DependentUpon>201605181021086_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
@@ -224,6 +224,7 @@
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\DMTViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
     <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
@@ -1018,6 +1019,7 @@
     <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\_QuarterPriceDiesel.cshtml" />
     <Content Include="Views\Imgs\_ImagesList.cshtml" />
+    <Content Include="Views\DtmModels\_DTMList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1030,8 +1032,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605151902441_BorjesLIA.resx">
-      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605181021086_BorjesLIA.resx">
+      <DependentUpon>201605181021086_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

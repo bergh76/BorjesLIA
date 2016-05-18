@@ -86,27 +86,27 @@ namespace BorjesLIA.AdminControllers
         }
 
         // GET: DtmModels/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: DtmModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,dtmPrice,dateNewDtmPrice")] DtmModel dtmModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DtmModels.Add(dtmModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: DtmModels/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,Date,DieselDTMValue,DieselDTMChartID,LoggDate")] DtmModel dtmModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.DtmModels.Add(dtmModel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(dtmModel);
-        }
+        //    return View(dtmModel);
+        //}
 
         // GET: DtmModels/Edit/5
         public ActionResult Edit(int? id)
@@ -128,7 +128,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,dtmPrice,dateNewDtmPrice")] DtmModel dtmModel)
+        public ActionResult Edit([Bind(Include = "ID,Date,DieselDTMValue,DieselDTMChartID,LoggDate")] DtmModel dtmModel)
         {
             if (ModelState.IsValid)
             {

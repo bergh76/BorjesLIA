@@ -25,5 +25,10 @@ namespace BorjesLIA.Models.Diesel
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime LoggDate { get; set; }
+
+        public DtmModel()
+        {
+            LoggDate = DateTime.Now;
+        }
     }
 }

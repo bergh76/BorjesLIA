@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Img;
 using System.IO;
+using BorjesLIA.ViewModel;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -18,9 +19,67 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Imgs
-        public ActionResult Index()
+        public ActionResult Index(ImagesViewModel ImageV)
         {
-            return View(db.Imgs.ToList());
+            ImageV = new ImagesViewModel
+            {
+                AddImage = new Img(),
+                newImageList = db.Imgs.ToList().OrderByDescending(x => x.ID)
+            };
+            return View(ImageV);
+        }
+
+        [AllowAnonymous]
+        //Populates a list with data from database tabel ImagesViewModel
+        public JsonResult GetData(ImagesViewModel imagex)
+        {
+            var data = db.Imgs.OrderBy(x => x.ID).ToList();
+            //var data = imagex.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //public ActionResult _ShowImageView(ImagesViewModel imageV)
+        //{
+
+        //    imageV = new ImagesViewModel
+        //    {
+        //        newImageList = db.Imgs.ToList().OrderByDescending(x => x.Date)
+
+        //    };
+        //    return View(imageV);
+        //}
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddNewImage(ImagesViewModel img, HttpPostedFileBase file)
+        {
+
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
+
+                    var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
+                    file.SaveAs(path);
+
+                    //img.Url = fileName;
+                    //img.Date = DateTime.Now;
+                    //img.Active = true;
+                    //db.Imgs.Add(img);
+                    db.Imgs.Add(img.AddImage);
+
+                    db.SaveChanges();
+                    img.newImageList = db.Imgs.ToList().OrderByDescending(x => x.PlacingOrder);
+
+                }
+                return PartialView("_ImagesList", img);
+            }
+            else
+            {
+                return View(img);
+            }
         }
 
         // GET: Imgs/Details/5
@@ -38,43 +97,46 @@ namespace BorjesLIA.AdminControllers
             return View(img);
         }
 
-        // GET: Imgs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Imgs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Img img, HttpPostedFileBase file)
-        {
-            if (ModelState.IsValid)
-            {
-         
-                if (file != null)
-                {
-                    var fileName = Path.GetFileName(file.FileName);                
-                    var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
-               
-                    var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
-                    file.SaveAs(path);
 
-                    img.Url = fileName;
-                    img.Date = DateTime.Now;
-                    img.Active = true;
-                    
-                    db.Imgs.Add(img);
-                    db.SaveChanges();
-                }
-                
-                return RedirectToAction("Index");
-            }
+        // GET: Imgs/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-            return View(img);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(Img img, HttpPostedFileBase file)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        if (file != null)
+        //        {
+        //            var fileName = Path.GetFileName(file.FileName);
+        //            var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
+
+        //            var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
+        //            file.SaveAs(path);
+
+        //            img.Url = fileName;
+        //            img.Date = DateTime.Now;
+        //            img.Active = true;
+
+        //            db.Imgs.Add(img);
+        //            db.SaveChanges();
+        //        }
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(img);
+        //}
+
 
         // GET: Imgs/Edit/5
         public ActionResult Edit(int? id)

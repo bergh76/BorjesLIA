@@ -11,7 +11,7 @@ namespace BorjesLIA.Models.Img
         [Key]
         public int ID { get; set; }
 
-        [Display(Name = "Unc")]
+        [Display(Name = "Url")]
         public string Url { get; set; }
 
         [Display(Name = "Namn på bilden")]

@@ -25,7 +25,6 @@ namespace BorjesLIA.AdminControllers
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-
             };
             return View(euroV);
         }

@@ -205,9 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605180805378_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605180805378_BorjesLIA.Designer.cs">
-      <DependentUpon>201605180805378_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201605151902441_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605151902441_BorjesLIA.Designer.cs">
+      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
@@ -224,7 +224,7 @@
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\DMTViewModel.cs" />
+    <Compile Include="ViewModel\ImagesViewModel.cs" />
     <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
@@ -448,12 +448,6 @@
     <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
-    <Content Include="Images\contentslider\dumpmobil.png" />
-    <Content Include="Images\contentslider\emulator.png" />
-    <Content Include="Images\contentslider\home-1353389_960_720.jpg" />
-    <Content Include="Images\contentslider\landscape-615429_960_720.jpg" />
-    <Content Include="Images\contentslider\SelfiNoUno.jpg" />
-    <Content Include="Images\contentslider\sunset-1331088_960_720.jpg" />
     <Content Include="Images\controls.png" />
     <Content Include="Scripts\cropper\dist\cropper.css" />
     <Content Include="Scripts\cropper\dist\cropper.js" />
@@ -1022,13 +1016,13 @@
     <Content Include="Views\DieselWeekModels\Edit.cshtml" />
     <Content Include="Views\DieselWeekModels\Index.cshtml" />
     <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\QuarterPriceDiesel.cshtml" />
-    <Content Include="Views\Shared\_Error.cshtml" />
-    <Content Include="Views\DtmModels\_DTMList.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\_QuarterPriceDiesel.cshtml" />
+    <Content Include="Views\Imgs\_ImagesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
+    <Folder Include="Images\contentslider\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>
@@ -1036,8 +1030,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605180805378_BorjesLIA.resx">
-      <DependentUpon>201605180805378_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605151902441_BorjesLIA.resx">
+      <DependentUpon>201605151902441_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -37,26 +37,23 @@ namespace BorjesLIA.AdminControllers
             //var data = imagex.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult _ImagesList(ImagesViewModel imageV)
+        {
+            imageV = new ImagesViewModel
+            {
+                newImageList = db.Imgs.ToList().OrderByDescending(x => x.Date)
 
-        //public ActionResult _ShowImageView(ImagesViewModel imageV)
-        //{
+            };
+            return View(imageV);
+        }
 
-        //    imageV = new ImagesViewModel
-        //    {
-        //        newImageList = db.Imgs.ToList().OrderByDescending(x => x.Date)
-
-        //    };
-        //    return View(imageV);
-        //}
-
-        [Authorize]
+        //[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewImage(ImagesViewModel img, HttpPostedFileBase file)
         {
-
-            if (Request.IsAjaxRequest())
+            if (ModelState.IsValid)
             {
-                using (var db = new ApplicationDbContext())
+                if (file != null)
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
@@ -64,23 +61,21 @@ namespace BorjesLIA.AdminControllers
                     var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
                     file.SaveAs(path);
 
-                    //img.Url = fileName;
-                    //img.Date = DateTime.Now;
-                    //img.Active = true;
-                    //db.Imgs.Add(img);
+                    img.AddImage.Url = fileName;
+                    img.AddImage.Date = DateTime.Now;
+                    img.AddImage.Active = true;
                     db.Imgs.Add(img.AddImage);
-
                     db.SaveChanges();
-                    img.newImageList = db.Imgs.ToList().OrderByDescending(x => x.PlacingOrder);
 
+                    img.newImageList = db.Imgs.ToList().OrderByDescending(x => x.PlacingOrder);
                 }
-                return PartialView("_ImagesList", img);
+                //return PartialView("_ImagesList", img); //kör inte ajax
+                return View("Index", img);
             }
-            else
-            {
-                return View(img);
-            }
+            return View(img);
         }
+
+
 
         // GET: Imgs/Details/5
         public ActionResult Details(int? id)

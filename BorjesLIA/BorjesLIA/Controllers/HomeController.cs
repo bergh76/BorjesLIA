@@ -41,13 +41,13 @@ namespace BorjesLIA.Controllers
                 model.listVM.Add(listvm);
             }
 
-            if (euros != null)
+            if (euros != null && euros.Count != 0)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
                 model.listVM.Add(listvm);
             }
-            if (dtm != null)
+            if (dtm.Count != 0)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/DtmModels/DtmLineGraph/";

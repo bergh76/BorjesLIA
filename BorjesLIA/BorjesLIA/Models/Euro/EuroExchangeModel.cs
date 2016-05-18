@@ -23,5 +23,13 @@ namespace BorjesLIA.Models.Euro
         //public int ChartType { get; set; }
         public int EuroChartID { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Datum")]
+        public DateTime LoggDate { get; set; }
+
+        public EuroExchangeModel()
+        {
+            LoggDate = DateTime.Now;
+        }
     }
 }

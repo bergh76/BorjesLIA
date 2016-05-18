@@ -27,6 +27,13 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "ChartID")]
         public int DieselQuarterChartID { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Datum")]
+        public DateTime LoggDate { get; set; }
 
+        public DieselQuarterPriceModel()
+        {
+            LoggDate = DateTime.Now;
+        }
     }
 }

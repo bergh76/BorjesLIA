@@ -26,6 +26,14 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "ChartID")]
         public int DieselWeekChartID { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Datum")]
+        public DateTime LoggDate { get; set; }
 
+
+        public DieselWeekModel()
+        {
+            LoggDate = DateTime.Now;
+        }
     }
 }

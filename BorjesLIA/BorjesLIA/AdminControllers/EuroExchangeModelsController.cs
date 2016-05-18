@@ -106,7 +106,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
+        public ActionResult Edit([Bind(Include = "ID,euroValue,Date,EuroChartID")] EuroExchangeModel euroExchangeModel)
         {
             if (ModelState.IsValid)
             {

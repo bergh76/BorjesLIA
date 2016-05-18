@@ -7,18 +7,18 @@ namespace BorjesLIA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BorjesLIA1 : IMigrationMetadata
+    public sealed partial class BorjesLIA : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BorjesLIA1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BorjesLIA));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605172300468_BorjesLIA1"; }
+            get { return "201605180805378_BorjesLIA"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

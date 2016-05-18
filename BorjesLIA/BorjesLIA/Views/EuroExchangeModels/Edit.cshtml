@@ -21,7 +21,7 @@
                         @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
-                        <h4>EuroExchangeModel</h4>
+                        <h4>Euroindex</h4>
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.ID)
@@ -58,7 +58,7 @@
                     }
 
                 <div>
-                    @Html.ActionLink("Back to List", "Index")
+                    @Html.ActionLink("Tillbaka", "Index")
                 </div>
             </div>
         </div>

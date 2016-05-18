@@ -75,24 +75,25 @@ namespace BorjesLIA.ViewModel
                 }
 
                 List<EuroExchangeModel> iEPM = new List<EuroExchangeModel>();
-                iEPM = _db.EuroExchangeModels.ToList();
+                iEPM = _db.EuroExchangeModels.OrderByDescending(x => x.Date).ToList();
                 if (iEPM == null || iEPM.GetEnumerator().MoveNext())
                 {
                     var getEuro = iEPM.Select(s => s.euroValue)
                                         .FirstOrDefault();
                     actualEuro = getEuro.ToString();
-                    var getLastEuro = iEPM.OrderByDescending(x => x.Date)
-                        .Select(x => x.euroValue)
-                        .ElementAt(1);
-
-                    if (getLastEuro <= 0)
+                    var countiEPMRow = iEPM.Count();
+                    if (countiEPMRow > 1)
+                    {
+                        var getLastEuro = iEPM//iEPM.OrderBy(x => x.Date)
+                            .Select(x => x.euroValue)
+                            .ElementAt(1);
+                        lastEuro = getLastEuro.ToString();
+                    }
+                    else
                     {
                         lastEuro = "0";
-                    }
-                    
-                    else { 
-                    lastEuro = getLastEuro.ToString();
-                    }
+                    }                      
+
                     var EuroTemp = Math.Round(Convert.ToDecimal(actualEuro) - Convert.ToDecimal(lastEuro), 2);
                     diffEuro = EuroTemp.ToString();
                 }

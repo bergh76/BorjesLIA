@@ -30,7 +30,10 @@ namespace BorjesLIA.Controllers
             foreach (var item in images)
             {
                 var listvm = new listViewModel();
-                var myImages = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
+                listvm.name = item.Name;
+                listvm.url = "/Images/contentslider/" + item.Url;
+                listvm.orderby = item.PlacingOrder;
+
                 model.listVM.Add(listvm);
             }
             foreach (var item in exPageUrl)

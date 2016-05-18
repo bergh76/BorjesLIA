@@ -17,7 +17,7 @@ namespace BorjesLIA.Controllers
 
         public ActionResult Index()
         {
-            
+
             var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
             var exPageUrl = db.UrlModels.ToList();
             var euros = db.EuroExchangeModels.ToList();
@@ -29,12 +29,15 @@ namespace BorjesLIA.Controllers
 
             foreach (var item in images)
             {
-                var listvm = new listViewModel();
-                listvm.name = item.Name;
-                listvm.url = "/Images/contentslider/" + item.Url;
-                listvm.orderby = item.PlacingOrder;
+                if (item.Active == true) //TODO: inte testad om den fungerar som tänkt.
+                {
+                    var listvm = new listViewModel();
+                    listvm.name = item.Name;
+                    listvm.url = "/Images/contentslider/" + item.Url;
+                    listvm.orderby = item.PlacingOrder;
 
-                model.listVM.Add(listvm);
+                    model.listVM.Add(listvm);
+                }
             }
             foreach (var item in exPageUrl)
             {
@@ -44,30 +47,30 @@ namespace BorjesLIA.Controllers
                 model.listVM.Add(listvm);
             }
 
-            if (euros != null && euros.Count != 0)
+            if (euros.Count != 0)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
                 model.listVM.Add(listvm);
             }
-            if (dtm.Count != 0)
-            {
-                var listvm = new listViewModel();
-                listvm.url = "/DtmModels/DtmLineGraph/";
-                model.listVM.Add(listvm);
-            }
+            //if (dtm.Count != 0)
+            //{
+            //    var listvm = new listViewModel();
+            //    listvm.url = "/DtmModels/DtmLineGraph/";
+            //    model.listVM.Add(listvm);
+            //}
             //if (dieselPrice != null)
             //{
             //    var listvm = new listViewModel();
             //    listvm.url = "/DieselQuarterPriceModels/_QuarterPriceDiesel/";
             //    model.listVM.Add(listvm);
             //}
-            
+
             return View(model);
         }
     }
 }
 
-         
+
 
 

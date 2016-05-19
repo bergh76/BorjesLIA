@@ -5,26 +5,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Börjes Transport</title>
+
+    <!--JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-  
+    <!--JQUERY -->
+
+    <!-- BOOTSTRAP -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- BOOTSTRAP -->
+
+    <!-- CUSTOM GUI FOR ADMIN LAYOUT -->
     <link href="~/Content/production/css/custom.css" rel="stylesheet" />
-    <!-- DataTabel CSS-->
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/main.css" rel="stylesheet">
+    @*<link href="~/Content/animate.min.css" rel="stylesheet">*@
+    <!-- CUSTOM GUI FOR ADMIN LAYOUT -->
+
+
+    <!-- DATATABELS CSS-->
     <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
-    <!-- DataTabel CSS-->
-    
-    <link href="~/Content/font-awesome.css" rel="stylesheet">
-    @*<link href="~/Content/animate.min.css" rel="stylesheet">*@
-    <link href="~/Content/main.css" rel="stylesheet">
+    <!-- DATATABELS CSS-->
 
-    <!--bxSlider-->
-    <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
-    <script src="/js/plugins/jquery.fitvids.js"></script>
+    <!-- BXSLIDER-->
 
-    @*<script src="~/Scripts/daJavaScript.js"></script>*@
-    <!--bxSlider End-->
+    <link href="~/Content/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/jquery.bxslider/bxslider_custom.css" rel="stylesheet" />
+    <!-- BXSLIDER-->
 
 </head>
 <body>
@@ -51,18 +59,16 @@
     <div class="container-max">
         @RenderBody()
     </div>
-    <script src="~/Scripts/jquery.bxslider.min.js"></script>
-    <script src="~/Scripts/main.js"></script>
-    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Content/production/js/custom.js"></script>
+    <script src="~/Scripts/jquery.bxslider/jquery.bxslider.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
+
+    <!-- DATATABELS -->
     <script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
-
-
-   
+    <!-- DATATABELS -->
 
     @RenderSection("scripts", required: false)
 </body>

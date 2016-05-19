@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.URL;
+using BorjesLIA.ViewModel;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -17,9 +18,19 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: URLModels
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.UrlModels.ToList());
+        //}
+        [HttpGet]
+        public ActionResult Index(URLViewModel urlV)
         {
-            return View(db.UrlModels.ToList());
+            urlV = new URLViewModel
+            {
+                AddUrl = new URLModel(),
+                newUrlList = db.UrlModels.ToList().OrderByDescending(x => x.ID)
+            };
+            return View(urlV);
         }
 
         // GET: URLModels/Details/5
@@ -37,11 +48,49 @@ namespace BorjesLIA.AdminControllers
             return View(uRLModel);
         }
 
-        // GET: URLModels/Create
-        public ActionResult Create()
+
+        [AllowAnonymous]
+        //Populates a list with data from database tabel EuroExchangeModel
+        public JsonResult GetData(URLViewModel urlx)
         {
-            return View();
+            var data = urlx.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
+     
+        public ActionResult _UrlList(URLViewModel urlV)
+        {
+            urlV = new URLViewModel
+            {
+                newUrlList = db.UrlModels.ToList().OrderByDescending(x => x.ID)
+            };
+            return View(urlV);
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddNewEuro(URLViewModel newUrl)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.UrlModels.Add(newUrl.AddUrl);
+                    db.SaveChanges();
+                    newUrl.newUrlList = db.UrlModels.ToList()
+                        .OrderByDescending(x => x.ID);
+                    return PartialView("_UrlList", newUrl);
+                }
+            }
+            else
+            {
+                return View(newUrl);
+            }
+        }
+
+        // GET: URLModels/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: URLModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

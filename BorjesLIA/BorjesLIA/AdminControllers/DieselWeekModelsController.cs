@@ -36,7 +36,22 @@ namespace BorjesLIA.AdminControllers
             var data = await dieselWeekChart.GetWeekData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult _WeekPriceDiesel(DieselViewModel dvm)
+        {
+            dvm = new DieselViewModel
+            {
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week)
+            };
+            return View(dvm);
+        }
+        public ActionResult _DieselWeekGraph(DieselViewModel dvm)
+        {
+            dvm = new DieselViewModel
+            {
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.ID)
+            };
+            return View(dvm);
+        }
 
         //[HttpPost]
         [ValidateAntiForgeryToken]
@@ -50,7 +65,8 @@ namespace BorjesLIA.AdminControllers
                     db.SaveChanges();
                     newDiesel.newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);
                     //var getNewChart = newEuro.GetData();
-                    return PartialView("_DieselWeekList", newDiesel);
+                    //ModelState.Clear();
+                    return PartialView("_WeekPriceDiesel", newDiesel);
                 }
             }
             else

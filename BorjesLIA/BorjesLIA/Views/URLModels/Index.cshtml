@@ -1,4 +1,102 @@
-﻿@model IEnumerable<BorjesLIA.Models.URL.URLModel>
+﻿@model BorjesLIA.ViewModel.URLViewModel
+
+<body class="nav-md">
+    <div class="container-dashboard body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    @Html.Partial("_AdminPanel")
+                </div>
+            </div>
+            <div class="right_col" role="main">
+                <div class="row">
+                    <!-- Tabel for Images starts here -->
+                    <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>URL</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <!--Partial view for form adding new Image-->
+                                @using (Ajax.BeginForm("_AddNewEuro", new AjaxOptions {  UpdateTargetId = "urlList" }))
+                                { 
+                                    @Html.AntiForgeryToken()
+                                        <div class="x_content">
+                                            <div class="x_panel">
+                                                <div class="x_title">
+                                                    <h2>Lägg till ny bild</h2>
+                                                    <ul class="nav navbar-right panel_toolbox">
+                                                        <li>
+                                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="x_content">
+                                                    <div class="form-horizontal">
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.AddUrl.urlString, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-10">
+                                                                @Html.EditorFor(model => model.AddUrl.urlString, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.AddUrl.urlString, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.AddUrl.dateUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-10">
+                                                                @Html.EditorFor(model => model.AddUrl.dateUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.AddUrl.dateUrl, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input type="submit"  value="Lägg till" class="btn btn-default" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                }
+                            </div><!-- img ENDS here -->
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <!-- Datatable starts here -->
+                                <div id="urlList">
+                                    @Html.Partial("_UrlList", Model)
+                                    </div >
+                                    <!--Datatable ENDS here -->
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+
+
+
+
+
+
+
+
+@*@model IEnumerable<BorjesLIA.Models.URL.URLModel>
 
 @{
     ViewBag.Title = "Index";
@@ -49,4 +147,4 @@
             </div>
         </div>
     </div>
-</body>
+</body>*@

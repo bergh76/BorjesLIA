@@ -2,7 +2,6 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
 @{ var euroChartList = Model.newEuroList.Select(x=> x.EuroChartID).Distinct().ToList();
     var chartID = euroChartList.FirstOrDefault();
@@ -18,147 +17,135 @@
     else
     {
         if (chartID == 1)// if (chartID.EuroChartID == 1)
-            {
+        {
             <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
                             google.setOnLoadCallback(drawchart);
                             function drawchart() {
-                  $.ajax({
-            type: 'POST',
-                      dataType: 'json',
-                      contentType: 'application/json',
-                      // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                      url: '@Url.Action("GetData")',
-                      data: "{ }",
-                      // If data connections is success
-                      success:
-            function drawchart(dataValues) {
-
-                // Adds data into columns to DataTable
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Datum');
-                data.addColumn('number', 'Pris');
-
-                // Settings for visualization of the graph
-                var options ={
-                                  title: 'Eurokurs',
-                                  pointSize: 3,
-                                  dataOpacity: 0.4,
-                                  lineWidth: 2,
-                                  hAxis: { title: 'Datum', titleTextStyle: { color: '#333' },
-                                  }
-                }
-                // Loops through the DataTable with data from database
-                for (var i = 0; i < dataValues.length; i++)
-                {
-                    data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                }
-                // Draws the graph into a specified div
-                new google.visualization.LineChart(document.getElementById('myChartDiv')).draw(data, options);
-            },
-                      // If collectning data from database fails promp message here
-                      error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                  });
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                                    url: '@Url.Action("GetData")',
+                                    data: "{ }",
+                                    // If data connections is success
+                                    success:
+                                        function drawchart(dataValues) {
+                                            // Adds data into columns to DataTable
+                                            var data = new google.visualization.DataTable();
+                                            data.addColumn('string', 'Datum');
+                                            data.addColumn('number', 'Pris');
+                                            // Settings for visualization of the graph
+                                            var options = {
+                                                title: 'Eurokurs',
+                                                pointSize: 3,
+                                                dataOpacity: 0.4,
+                                                lineWidth: 2,
+                                                hAxis: {
+                                                    title: 'Datum', titleTextStyle: { color: '#333' },
+                                                }
+                                            }
+                                            // Loops through the DataTable with data from database
+                                            for (var i = 0; i < dataValues.length; i++)
+                                            {
+                                                data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                            }
+                                            // Draws the graph into a specified div
+                                            new google.visualization.LineChart(document.getElementById('myChartDiv')).draw(data, options);
+                                        },
+                                    // If collectning data from database fails promp message here
+                                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                                });
+                            }
+                        </script>
+        }
+        if (chartID == 2) //(if (chartID.EuroChartID == 2)
+        {
+            <script type="text/javascript">
+                google.load("visualization", "1", { packages: ["corechart"] });
+                            google.setOnLoadCallback(drawchart);
+                            function drawchart() {
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                                    url: '@Url.Action("GetData")',
+                                    data: "{ }",
+                                    // If data connections is success
+                                    success:
+                                        function drawchart(dataValues) {
+                                            // Adds data into columns to DataTable
+                                            var data = new google.visualization.DataTable();
+                                            data.addColumn('string', 'Datum');
+                                            data.addColumn('number', 'Pris');
+                                            // Settings for visualization of the graph
+                                            var options = {
+                                                title: 'Eurokurs',
+                                                pointSize: 3,
+                                                dataOpacity: 0.4,
+                                                lineWidth: 2,
+                                                hAxis: {
+                                                    title: 'Datum', titleTextStyle: { color: '#333' },
+                                                }
+                                            }
+                                            // Loops through the DataTable with data from database
+                                            for (var i = 0; i < dataValues.length; i++)
+                                            {
+                                                data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                            }
+                                            // Draws the graph into a specified div
+                                            new google.visualization.BarChart(document.getElementById('myChartDiv')).draw(data, options);
+                                        },
+                                    // If collectning data from database fails promp message here
+                                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                                });
                             }
             </script>
         }
-        if (chartID == 2) //(if (chartID.EuroChartID == 2)
-            {
-            <script type="text/javascript">
-                google.load("visualization", "1", { packages: ["corechart"] });
-                    google.setOnLoadCallback(drawchart);
-                    function drawchart() {
-                      $.ajax({
-            type: 'POST',
-                          dataType: 'json',
-                          contentType: 'application/json',
-                          // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                          url: '@Url.Action("GetData")',
-                          data: "{ }",
-                          // If data connections is success
-                          success:
-            function drawchart(dataValues) {
-
-                // Adds data into columns to DataTable
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Datum');
-                data.addColumn('number', 'Pris');
-
-                // Settings for visualization of the graph
-                var options = {
-                                      title: 'Eurokurs',
-                                      pointSize: 3,
-                                      dataOpacity: 0.4,
-                                      lineWidth: 2,
-                                      hAxis: {
-                    title: 'Datum', titleTextStyle: { color: '#333' },
-                                      }
-            }
-            // Loops through the DataTable with data from database
-            for (var i = 0; i < dataValues.length; i++) {
-                data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                                  }
-        // Drews the graph into a specified div
-        new google.visualization.BarChart(document.getElementById('myChartDiv')).
-            draw(data, options);
-
-    },
-                          // If collectning data from database fails promp message here
-                          error: function () {
-        alert("Ett fel uppstod när datat försökte hämtas!");
-    }
-                });
-            }
-            </script>
-        }
         if (chartID == 3)  //if (chartID.EuroChartID == 3)
-            {
+        {
             <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
-                google.setOnLoadCallback(drawchart);
-                function drawchart() {
-                 $.ajax({
-            type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                    url: '@Url.Action("GetData")',
-                    data: "{ }",
-                    // If data connections is success
-                    success:
-            function drawchart(dataValues) {
-
-                // Adds data into columns to DataTable
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Datum');
-                data.addColumn('number', 'Pris');
-
-                // Settings for visualization of the graph
-                var options = {
-                                             title: 'Eurokurs',
-                                             pointSize: 3,
-                                             dataOpacity: 0.4,
-                                             lineWidth: 2,
-                                             hAxis: {
-                    title: 'Datum', titleTextStyle: { color: '#333' },
-                                             }
-            }
-            // Loops through the DataTable with data from database
-            for (var i = 0; i < dataValues.length; i++) {
-                data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                        }
-        // Drews the graph into a specified div
-        new google.visualization.ColumnChart(document.getElementById('myChartDiv')).
-            draw(data, options);
-
-    },
-                     // If collectning data from database fails promp message here
-                     error: function () {
-        alert("Ett fel uppstod när datat försökte hämtas!");
-    }
-                 });
-                }
-
+                            google.setOnLoadCallback(drawchart);
+                            function drawchart() {
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                                    url: '@Url.Action("GetData")',
+                                    data: "{ }",
+                                    // If data connections is success
+                                    success:
+                                        function drawchart(dataValues) {
+                                            // Adds data into columns to DataTable
+                                            var data = new google.visualization.DataTable();
+                                            data.addColumn('string', 'Datum');
+                                            data.addColumn('number', 'Pris');
+                                            // Settings for visualization of the graph
+                                            var options = {
+                                                title: 'Eurokurs',
+                                                pointSize: 3,
+                                                dataOpacity: 0.4,
+                                                lineWidth: 2,
+                                                hAxis: {
+                                                    title: 'Datum', titleTextStyle: { color: '#333' },
+                                                }
+                                            }
+                                            // Loops through the DataTable with data from database
+                                            for (var i = 0; i < dataValues.length; i++)
+                                            {
+                                                data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                            }
+                                            // Draws the graph into a specified div
+                                            new google.visualization.ColumnChart(document.getElementById('myChartDiv')).draw(data, options);
+                                        },
+                                    // If collectning data from database fails promp message here
+                                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                                });
+                            }
             </script>
         }
 

@@ -1018,6 +1018,8 @@
     <Content Include="Views\Imgs\_ImagesList.cshtml" />
     <Content Include="Views\DtmModels\_DTMList.cshtml" />
     <Content Include="Views\URLModels\_UrlList.cshtml" />
+    <Content Include="Views\DieselWeekModels\_DieselWeekGraph.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\_DieselQuarterGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

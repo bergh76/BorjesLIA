@@ -1,4 +1,5 @@
-﻿jQuery(function ($) {
+﻿
+jQuery(function ($) {
     'use strict';
 
     //// ADD PAGINATIONS TO TABLES

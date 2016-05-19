@@ -3,6 +3,7 @@
     ViewData["Title"] = "Veckopris Diesel";
 }
 
+
 <body class="nav-md">
     <div class="container-dashboard body">
         <div class="main_container">
@@ -13,7 +14,7 @@
             </div>
             <div class="right_col" role="main">
                 <div class="row">
-                    <!-- Tabel for Euroexchangecourse starts here -->
+                    <!-- Tabel for starts here -->
                     <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
                         <div class="x_panel">
                             <div class="x_title">
@@ -29,9 +30,9 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
-                                <!--Partial view for form adding new Euroindex-->
+                                <!--Partial view for form adding new -->
 
-                                @using (Ajax.BeginForm("_AddWeekDiesel", new AjaxOptions { UpdateTargetId = "dieselWeekList" }))
+                                @using (Ajax.BeginForm("_AddWeekDiesel", new AjaxOptions { UpdateTargetId = "dieselWeekList", OnSuccess = "done" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="x_content">
@@ -56,7 +57,7 @@
                                                         @Html.LabelFor(model => model.AddWeekDiesel.Year, htmlAttributes: new { @class = "control-label col-md-2" })
                                                         <div class="col-md-10">
 
-                                                            @Html.EditorFor(model => model.AddWeekDiesel.Year, new { htmlAttributes = new { @class = "form-control"} })
+                                                            @Html.EditorFor(model => model.AddWeekDiesel.Year, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
@@ -101,12 +102,9 @@
                                 <!-- Datatable ENDS here -->
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            @*@using (Ajax.BeginForm("GetData", new AjaxOptions { UpdateTargetId = "euroLineChart" }))
-                                    {
-                                @Html.Partial("_EuroLineGraph")
 
-                                @*}*@
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @Html.Partial("_DieselWeekGraph")
                         </div>
                     </div>
                 </div>

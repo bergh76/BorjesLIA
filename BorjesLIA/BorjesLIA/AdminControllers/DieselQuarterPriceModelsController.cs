@@ -36,7 +36,14 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dqpData);
         }
-
+        public ActionResult _DieselQuarterGraph(DieselViewModel dvm)
+        {
+            dvm = new DieselViewModel
+            {
+                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.ID)
+            };
+            return View(dvm);
+        }
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(DieselViewModel dieselQuarterChart)

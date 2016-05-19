@@ -36,7 +36,14 @@ namespace BorjesLIA.AdminControllers
             var data = await dieselWeekChart.GetWeekData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult _DieselWeekList(DieselViewModel dvm)
+        {
+            dvm = new DieselViewModel
+            {
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week)
+            };
+            return View(dvm);
+        }
 
         //[HttpPost]
         [ValidateAntiForgeryToken]

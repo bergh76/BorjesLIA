@@ -1,0 +1,86 @@
+﻿@model BorjesLIA.ViewModel.URLViewModel
+
+@*<script type="text/javascript">
+        $(document).ready(function(){
+            $('#myTable').DataTable({
+                "processing": true,
+            });
+        });
+    </script>*@
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <ul class="nav navbar-left panel_toolbox">
+        <li>
+            <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
+                <span>Copy</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
+                <span>CSV</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
+                <span>Excel</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
+                <span>PDF</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
+                <span>Print</span>
+            </a>
+        </li>
+    </ul>
+    <div class="x_content">
+        <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+                <thead>
+                    <tr>
+                        <th>
+                            Url
+                        </th>
+                        <th>
+                            Datum
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.newUrlList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.urlString)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

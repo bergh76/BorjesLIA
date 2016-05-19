@@ -205,19 +205,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605181021086_BorjesLIA.cs" />
-    <Compile Include="Migrations\201605181021086_BorjesLIA.Designer.cs">
-      <DependentUpon>201605181021086_BorjesLIA.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
+    <Compile Include="Models\Diesel\DieselQuarterPriceModel.cs" />
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDBContext.cs" />
-    <Compile Include="Models\Diesel\DieselPriceModel.cs" />
     <Compile Include="Models\Euro\EuroExchangeModel.cs" />
     <Compile Include="Models\UserAccount\IdentityModels.cs" />
     <Compile Include="Models\UserAccount\ManageViewModels.cs" />
@@ -230,6 +226,7 @@
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
     <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
+    <Compile Include="ViewModel\URLViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -940,6 +937,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Edit.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\Index.cshtml" />
+    <Content Include="Views\DieselQuarterPriceModels\QuarterPriceDiesel.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1006,20 +1009,15 @@
     <Content Include="Views\StartModels\Index.cshtml" />
     <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
     <Content Include="Views\DieselPriceModels\DieselPriceGraph.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\Edit.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\Index.cshtml" />
     <Content Include="Views\DieselWeekModels\Create.cshtml" />
     <Content Include="Views\DieselWeekModels\Delete.cshtml" />
     <Content Include="Views\DieselWeekModels\Details.cshtml" />
     <Content Include="Views\DieselWeekModels\Edit.cshtml" />
     <Content Include="Views\DieselWeekModels\Index.cshtml" />
     <Content Include="Views\DieselWeekModels\_WeekPriceDiesel.cshtml" />
-    <Content Include="Views\DieselQuarterPriceModels\_QuarterPriceDiesel.cshtml" />
     <Content Include="Views\Imgs\_ImagesList.cshtml" />
     <Content Include="Views\DtmModels\_DTMList.cshtml" />
+    <Content Include="Views\URLModels\_UrlList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1030,11 +1028,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605181021086_BorjesLIA.resx">
-      <DependentUpon>201605181021086_BorjesLIA.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

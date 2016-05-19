@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BorjesLIA.Models.Diesel
 {
-    public class DieselWeekModel
+    public class DieselQuarterPriceModel
     {
         [Key]
         public int ID { get; set; }
@@ -16,21 +16,22 @@ namespace BorjesLIA.Models.Diesel
         public int Year { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Vecka")]
-        public string Week { get; set; }
+        [Display(Name = "Kvartal")]
+        public string Quarter { get; set; }
 
         [DataType(DataType.Currency)]
         [Display(Name = "Pris")]
-        public decimal DieselWeekValue { get; set; }
+        public decimal DieselQuarterValue { get; set; }
+
 
         [Display(Name = "ChartID")]
-        public int DieselWeekChartID { get; set; }
+        public int DieselQuarterChartID { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime LoggDate { get; set; }
 
-        public DieselWeekModel()
+        public DieselQuarterPriceModel()
         {
             LoggDate = DateTime.Now;
         }

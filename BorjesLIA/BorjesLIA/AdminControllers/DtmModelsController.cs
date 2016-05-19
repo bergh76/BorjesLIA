@@ -47,7 +47,7 @@ namespace BorjesLIA.AdminControllers
                 using (var db = new ApplicationDbContext())
                 {
                     db.DtmModels.Add(newDTM.AddDtm);
-                    db.SaveChanges(); // ToDO {"The conversion of a datetime2 data type to a datetime data type resulted in an out-of-range value.\r\nThe statement has been terminated."}
+                    db.SaveChanges(); 
                     newDTM.newDTMList = db.DtmModels.ToList()
                         .OrderByDescending(x => x.Date);
                     return PartialView("_DtmList", newDTM);
@@ -60,8 +60,18 @@ namespace BorjesLIA.AdminControllers
         }
 
         [AllowAnonymous]
-        //ge en view
-        public ActionResult _DtmGraphData(DMTViewModel dtmV)
+        
+       
+         public ActionResult DtmLineGraph(DMTViewModel dtmV)
+        {
+            dtmV = new DMTViewModel
+            {
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date)
+            };
+            return View(dtmV);
+        }
+        [AllowAnonymous]
+        public ActionResult _DTMList(DMTViewModel dtmV)
         {
             dtmV = new DMTViewModel
             {

@@ -49,9 +49,8 @@ namespace BorjesLIA.AdminControllers
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
-
         {
-            if (Request.IsAjaxRequest())
+            if (Request.IsAjaxRequest() && ModelState.IsValid) 
             {
                 using (var db = new ApplicationDbContext())
                 {
@@ -66,6 +65,13 @@ namespace BorjesLIA.AdminControllers
             {
                 return View(newEuro);
             }
+        }
+
+        public ActionResult _SubmitReload(EuroViewModel newEuro)
+        {
+            //return RedirectToAction("Index", new EuroViewModel { });
+            //return PartialView("_EuroList", newEuro);
+            return View();
         }
 
 

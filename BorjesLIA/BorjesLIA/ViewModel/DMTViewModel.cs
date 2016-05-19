@@ -13,6 +13,7 @@ namespace BorjesLIA.ViewModel
 
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }
+
         public Task<List<DtmModel>> GetData()
         {
             using (var db = new ApplicationDbContext())

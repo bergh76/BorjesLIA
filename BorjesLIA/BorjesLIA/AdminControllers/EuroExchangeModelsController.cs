@@ -12,7 +12,7 @@ using BorjesLIA.Models.Charts;
 
 namespace BorjesLIA.AdminControllers
 {
-    
+
     public class EuroExchangeModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -29,6 +29,35 @@ namespace BorjesLIA.AdminControllers
             return View(euroV);
         }
 
+
+        public ActionResult ShowView(EuroViewModel euroV)
+        {
+            euroV = new EuroViewModel
+            {
+                AddEuro = new EuroExchangeModel(),
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+            };
+            return View(euroV);
+        }
+        //[Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddEuro(EuroViewModel newEuro)
+        {
+            if (Request.IsAjaxRequest() && ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.EuroExchangeModels.Add(newEuro.AddEuro);
+                    db.SaveChanges();
+                    newEuro.newEuroList = db.EuroExchangeModels.ToList()
+                        .OrderByDescending(x => x.Date);
+                    ModelState.Clear();
+                    return PartialView("ShowView", newEuro);
+                }
+            }
+            return View(newEuro);
+        }
+
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public JsonResult GetData(EuroViewModel eurox)
@@ -37,20 +66,20 @@ namespace BorjesLIA.AdminControllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-         public ActionResult _EuroLineGraph(EuroViewModel euroV)
+        public ActionResult _EuroLineGraph(EuroViewModel euroV)
         {
             euroV = new EuroViewModel
             {
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
             };
             return View(euroV);
-        }     
+        }
 
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewEuro(EuroViewModel newEuro)
         {
-            if (Request.IsAjaxRequest() && ModelState.IsValid) 
+            if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
@@ -89,7 +118,7 @@ namespace BorjesLIA.AdminControllers
             }
             return View(euroExchangeModel);
         }
-       
+
 
         // GET: EuroExchangeModels/Edit/5
         public ActionResult Edit(int? id)

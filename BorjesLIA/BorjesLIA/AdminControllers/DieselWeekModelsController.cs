@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
@@ -44,6 +41,7 @@ namespace BorjesLIA.AdminControllers
             var data = await dieselWeekChart.GetWeekData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult _WeekPriceDiesel(DieselViewModel dvm)
         {
             dvm = new DieselViewModel
@@ -52,6 +50,7 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dvm);
         }
+        // kallas på av snurran
         public ActionResult _DieselWeekGraph(DieselViewModel dvm)
         {
             dvm = new DieselViewModel

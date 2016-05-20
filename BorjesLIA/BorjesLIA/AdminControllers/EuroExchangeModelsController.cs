@@ -60,15 +60,9 @@ namespace BorjesLIA.AdminControllers
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
-        //public JsonResult GetData(EuroViewModel eurox)
-        //{
-        //    var data = eurox.GetData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
         public async Task<JsonResult> GetData(EuroViewModel eurox)
         {
-            //var data = await eurox.GetQuaerterData();
-            var data = await eurox.getDataAsync();
+            var data = await eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

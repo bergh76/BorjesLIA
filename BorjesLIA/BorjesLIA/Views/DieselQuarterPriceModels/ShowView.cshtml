@@ -1,0 +1,75 @@
+﻿@model BorjesLIA.ViewModel.DieselViewModel
+<!--ajax script-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!--ajax script end-->
+@using (Ajax.BeginForm("_AddQuarterDiesel", new AjaxOptions { OnSuccess = "OnSuccess" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="x_content">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Lägg till nytt Dieselpris</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddQuarterDiesel.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.AddQuarterDiesel.Year, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddQuarterDiesel.Quarter, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.AddQuarterDiesel.Quarter, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Quarter, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddQuarterDiesel.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lägg till" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<div>
+    @Html.Partial("QuarterPriceDiesel", Model)
+</div>
+<div>
+    @Html.Partial("_DieselQuarterGraph")
+</div>
+<!--script using ajax, relode page to show new graph-->
+<script type="text/javascript">
+    function OnSuccess(response) {
+        location.reload();
+    }
+</script>

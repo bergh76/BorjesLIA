@@ -2,7 +2,7 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<script src="~/Scripts/GraphHideNav.js"></script>
 
 @*@{ var dieselWeekList = Model.newWeekDieselList.Select(x => x.ID).Distinct().ToList();
     var chartID = dieselWeekList.FirstOrDefault();
@@ -40,7 +40,9 @@
 
       // Settings for visualization of the graph
       var options = {
-          title: 'Diesel',
+          title: 'Diesel week',
+          width: '100%',
+          height: '100%',
           pointSize: 3,
           dataOpacity: 0.4,
           lineWidth: 2,
@@ -79,6 +81,5 @@
         <div id="myChartDiv" style="width: 100%; height: 450px"></div>
     </div>
 </div>
-    }
-
-}
+  
+}}

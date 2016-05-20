@@ -17,19 +17,19 @@ namespace BorjesLIA.Controllers
 
         public ActionResult Index()
         {
-
             var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
             var exPageUrl = db.UrlModels.ToList();
             var euros = db.EuroExchangeModels.ToList();
             var dtm = db.DtmModels.ToList();
-            var dieselPrice = db.DieselPriceQuarter.ToList();
+            var dieselPriceQuarter = db.DieselPriceQuarter.ToList();
+            var dieselPriceWeek = db.DieselPriceWeek.ToList();
 
             var model = new StartModelViewModel();
             model.listVM = new List<listViewModel>();
 
             foreach (var item in images)
             {
-                if (item.Active == true) //TODO: inte testad om den fungerar som tänkt.
+                if (item.Active == true) 
                 {
                     var listvm = new listViewModel();
                     listvm.name = item.Name;
@@ -53,18 +53,24 @@ namespace BorjesLIA.Controllers
                 listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
                 model.listVM.Add(listvm);
             }
-            //if (dtm.Count != 0)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/DtmModels/DtmLineGraph/";
-            //    model.listVM.Add(listvm);
-            //}
-            //if (dieselPrice != null)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/DieselQuarterPriceModels/_QuarterPriceDiesel/";
-            //    model.listVM.Add(listvm);
-            //}
+            if (dtm.Count != 0)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DtmModels/DtmLineGraph/";
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceQuarter != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceWeek != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DieselWeekModels/_DieselWeekGraph/";
+                model.listVM.Add(listvm);
+            }
 
             return View(model);
         }

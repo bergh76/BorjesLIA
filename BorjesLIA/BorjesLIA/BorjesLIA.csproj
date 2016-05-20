@@ -845,6 +845,7 @@
     <Content Include="Scripts\DataTables-1.10.11\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables-1.10.11\media\js\jquery.js" />
     <None Include="Scripts\jquery-2.1.0-vsdoc.js" />
+    <Content Include="Scripts\GraphHideNav.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
@@ -860,6 +861,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SliderHideNav.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />

@@ -945,6 +945,7 @@
     <Content Include="Views\DieselWeekModels\_DieselWeekGraph.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\_DieselQuarterGraph.cshtml" />
     <Content Include="Views\EuroExchangeModels\ShowView.cshtml" />
+    <Content Include="Views\DtmModels\ShowView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,6 +28,23 @@ namespace BorjesLIA.ViewModel
                 }
             }
             
-        }      
+        }
+
+        public Task<List<EuroExchangeModel>> getDataAsync()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (db.DieselPriceWeek == null)
+                {
+                    return getDataAsync();
+                }
+                else
+                {
+                    var lEuro = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
+                    return Task.Run(() => lEuro);
+                }
+            }
+        }
+
     }
 }

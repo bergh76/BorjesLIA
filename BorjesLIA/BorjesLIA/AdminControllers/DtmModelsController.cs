@@ -50,7 +50,7 @@ namespace BorjesLIA.AdminControllers
                     db.SaveChanges(); 
                     newDTM.newDTMList = db.DtmModels.ToList()
                         .OrderByDescending(x => x.Date);
-                    return PartialView("_DtmList", newDTM);
+                    return PartialView("_DTMList", newDTM);
                 }
             }
             else

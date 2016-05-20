@@ -286,9 +286,9 @@ function toggleFullScreen() {
         } else if (document.documentElement.webkitRequestFullscreen) {
             document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
-        //$(document).ready(function () {
-        //    $('nav').fadeOut('slow');
-        //});
+
+            $('nav').slideUp('slow');
+
 
 
     } else {

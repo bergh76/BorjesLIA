@@ -26,8 +26,16 @@ namespace BorjesLIA.AdminControllers
                 newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week)
             };
             return View(dieselW);
-        }      
-
+        }
+        public ActionResult ShowView(DieselViewModel dieselW)
+        {
+            dieselW = new DieselViewModel
+            {
+                AddWeekDiesel = new DieselWeekModel(),
+                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week)
+            };
+            return View(dieselW);
+        }
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
@@ -66,7 +74,8 @@ namespace BorjesLIA.AdminControllers
                     newDiesel.newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);
                     //var getNewChart = newEuro.GetData();
                     //ModelState.Clear();
-                    return PartialView("_WeekPriceDiesel", newDiesel);
+                    //return PartialView("_WeekPriceDiesel", newDiesel);
+                    return PartialView("ShowView", newDiesel);
                 }
             }
             else

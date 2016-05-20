@@ -10,7 +10,7 @@
 <script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#myDWeekTable').DataTable({
+        $('#myDWPTable').DataTable({
             "order": [[1, "desc"]],
             "processing": true,
 
@@ -61,7 +61,7 @@
     </ul>
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <table id="myDWeekTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+            <table id="myDWPTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                 <thead>
                     <tr>
                         <th>
@@ -72,6 +72,9 @@
                         </th>
                         <th>
                             Pris
+                        </th>
+                        <th>
+                            Edit
                         </th>
                     </tr>
                 </thead>

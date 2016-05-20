@@ -287,10 +287,6 @@ function toggleFullScreen() {
             document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
 
-            $('nav').slideUp('slow');
-
-
-
     } else {
 
         if (document.exitFullscreen) {

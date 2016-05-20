@@ -1,4 +1,5 @@
-﻿using BorjesLIA.ViewModel;
+﻿using BorjesLIA.Models;
+using BorjesLIA.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BorjesLIA.AdminControllers
 {
     public class AdminController : Controller
     {
+
         // GET: Admin
         [Authorize]
         public ActionResult Index()

@@ -27,7 +27,15 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dieselQ);
         }
-
+        public ActionResult ShowView(DieselViewModel dieselQ)
+        {
+            dieselQ = new DieselViewModel
+            {
+                AddQuarterDiesel = new DieselQuarterPriceModel(),
+                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter)
+            };
+            return View(dieselQ);
+        }
         public ActionResult _QuarterPriceDiesel(DieselViewModel dqpData)
         {
             dqpData = new DieselViewModel
@@ -65,7 +73,8 @@ namespace BorjesLIA.AdminControllers
                     db.SaveChanges();
                     newQDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);
                     //var getNewChart = newEuro.GetData();
-                    return PartialView("QuarterPriceDiesel", newQDiesel);
+                    //return PartialView("QuarterPriceDiesel", newQDiesel);
+                    return PartialView("ShowView", newQDiesel);
                 }
             }
             else

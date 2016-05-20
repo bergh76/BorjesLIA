@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BorjesLIA.AdminControllers
 {
-    [Authorize]
+    //[Authorize]
     public class DtmModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -30,15 +30,30 @@ namespace BorjesLIA.AdminControllers
             //    return View(db.DtmModels.ToList());
         }
 
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetData(DMTViewModel dtmChart)
+        //{
+        //    var data = await dtmChart.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
         public async Task<JsonResult> GetData(DMTViewModel dtmChart)
         {
+            //var data = await eurox.GetQuaerterData();
             var data = await dtmChart.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ShowView(DMTViewModel dtmV)
+        {
+            dtmV = new DMTViewModel
+            {
+                AddDtm = new DtmModel(),
+                newDTMList = db.DtmModels.ToList()
+                 .OrderByDescending(x => x.Date)
 
-
+            };
+            return View(dtmV);
+        }
         [ValidateAntiForgeryToken]
         public ActionResult _AddNewDTM(DMTViewModel newDTM)
         {
@@ -50,7 +65,8 @@ namespace BorjesLIA.AdminControllers
                     db.SaveChanges(); 
                     newDTM.newDTMList = db.DtmModels.ToList()
                         .OrderByDescending(x => x.Date);
-                    return PartialView("_DTMList", newDTM);
+                    //return PartialView("_DtmList", newDTM);
+                    return PartialView("ShowView", newDTM);
                 }
             }
             else
@@ -60,8 +76,6 @@ namespace BorjesLIA.AdminControllers
         }
 
         [AllowAnonymous]
-        
-       
          public ActionResult DtmLineGraph(DMTViewModel dtmV)
         {
             dtmV = new DMTViewModel

@@ -28,84 +28,12 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                <!--Partial view for form adding new Euroindex-->
-
-                                @using (Ajax.BeginForm("_AddQuarterDiesel", new AjaxOptions { UpdateTargetId = "dieselQuarterList" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div class="x_content">
-                                        <div class="x_panel">
-                                            <div class="x_title">
-                                                <h2>Lägg till nytt Dieselpris</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
-                                                    <li>
-                                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                                    </li>
-                                                </ul>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="x_content">
-                                                <div class="form-horizontal">
-                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.AddQuarterDiesel.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-10">
-
-                                                            @Html.EditorFor(model => model.AddQuarterDiesel.Year, new { htmlAttributes = new { @class = "form-control" } })
-                                                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.AddQuarterDiesel.Quarter, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-10">
-
-                                                            @Html.EditorFor(model => model.AddQuarterDiesel.Quarter, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Quarter, "", new { @class = "text-danger" })
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.AddQuarterDiesel.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-10">
-
-                                                            @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-offset-2 col-md-10">
-                                                            <input type="submit" value="Lägg till" class="btn btn-default" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                }
-
-                            </div><!-- Euroexchangecourse ENDS here -->
-                            <!--todo: listan uppdateras fast grafen uppdateras inte-->
-                            <div class="col-md-8 col-sm-12 col-xs-12">
-                                <!-- Datatable starts here -->
-                                <div id="dieselQuarterList">
-                                    @Html.Partial("QuarterPriceDiesel", Model)
+                            <div class="PartialViewInception">
+                                <div>
+                                    @Html.Partial("ShowView", Model)
                                 </div>
-
-                                <!-- Datatable ENDS here -->
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            @Html.Partial("_DieselQuarterGraph")
-                        </div>
-
                     </div>
                 </div>
             </div>

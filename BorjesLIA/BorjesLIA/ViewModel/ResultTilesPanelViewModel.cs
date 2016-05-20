@@ -60,9 +60,19 @@ namespace BorjesLIA.ViewModel
                     var getDieselQ = iDPQ.Select(s => s.DieselQuarterValue)
                                         .FirstOrDefault();
                     actDieselQuarter = getDieselQ.ToString();
-                    var getLastQDiesel = iDPQ.OrderByDescending(x => x.DieselQuarterValue).Select(x => x.DieselQuarterValue).ElementAt(1);
-                    lastDieselQuarter = getLastQDiesel.ToString();
-
+                    var countDPQRow = iDPQ.Count();
+                    if (countDPQRow > 1)
+                    {
+                        var getLastQDiesel = iDPQ.OrderByDescending(x => x.DieselQuarterValue)
+                            .Select(x => x.DieselQuarterValue)
+                            .ElementAt(1);
+                        lastDieselQuarter = getLastQDiesel.ToString();
+                       
+                    }
+                    else
+                    {
+                        lastDieselQuarter = "0";
+                    }
                     var dQTemp = Math.Round(Convert.ToDecimal(actDieselQuarter) - Convert.ToDecimal(lastDieselQuarter), 3);
                     diffDieselWeek = dQTemp.ToString();
                 }

@@ -3,64 +3,139 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-
-@*@{ var dieselWeekList = Model.newWeekDieselList.Select(x => x.ID).Distinct().ToList();
-    var chartID = dieselWeekList.FirstOrDefault();
-    if (chartID == 0)//|| chartID. == 0)
+@{ var dieselWeekChartList = Model.newWeekDieselList.Select(x => x.DieselWeekChartID).Distinct().ToList();
+    var chartID = dieselWeekChartList.FirstOrDefault();
+    if (chartID == 1)
     {
-        <div class="x_panel">
-            <div class="x_title">
-                @Html.Partial("_Error")
-            </div>
-        </div>
+         <script type="text/javascript">
+             google.load("visualization", "1", { packages: ["corechart"] });
+             google.setOnLoadCallback(drawchart);
+             function drawchart() {
+                 $.ajax({
+                     type: 'POST',
+                     dataType: 'json',
+                     contentType: 'application/json',
+                     // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                     url: '@Url.Action("GetData")',
+                     data: "{ }",
+                     // If data connections is success
+                     success:
+                         function drawchart(dataValues) {
+                             // Adds data into columns to DataTable
+                             var data = new google.visualization.DataTable();
+                             data.addColumn('string', 'Datum');
+                             data.addColumn('number', 'Pris');
+                             // Settings for visualization of the graph
+                             var options = {
+                                 title: 'Dieselpris per kvartal',
+                                 pointSize: 3,
+                                 dataOpacity: 0.4,
+                                 lineWidth: 2,
+                                 hAxis: {
+                                     title: 'Datum', titleTextStyle: { color: '#333' },
+                                 }
+                             }
+                             // Loops through the DataTable with data from database
+                             for (var i = 0; i < dataValues.length; i++) {
+                                 data.addRow([(dataValues[i].Week), dataValues[i].DieselWeekValue])
+                             }
+                             // Draws the graph into a specified div
+                             new google.visualization.LineChart(document.getElementById('DPWChartDiv')).draw(data, options);
+                         },
+                     // If collectning data from database fails promp message here
+                     error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                 });
+             }
+                     </script>
     }
-    else
+    
+    if (chartID == 2)
     {
-        if (chartID == 1)// if (chartID.EuroChartID == 1)
-        { }*@
-<script type="text/javascript">
-    google.load("visualization", "1", { packages: ["corechart"] });
-    google.setOnLoadCallback(drawchart);
-    function drawchart() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-            url: '@Url.Action("GetData")',
-            data: "{ }",
-            // If data connections is success
-            success:
-  function drawchart(dataValues) {
-
-      // Adds data into columns to DataTable
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Datum');
-      data.addColumn('number', 'Pris');
-
-      // Settings for visualization of the graph
-      var options = {
-          title: 'Diesel',
-          pointSize: 3,
-          dataOpacity: 0.4,
-          lineWidth: 2,
-          hAxis: {
-              title: 'Datum', titleTextStyle: { color: '#333' },
-          }
-      }
-      // Loops through the DataTable with data from database
-      for (var i = 0; i < dataValues.length; i++) {
-          data.addRow([(dataValues[i].Week), dataValues[i].DieselWeekValue])
-      }
-      // Draws the graph into a specified div
-      new google.visualization.LineChart(document.getElementById('myChartDiv')).draw(data, options);
-  },
-            // If collectning data from database fails promp message here
-            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-        });
+        <script type="text/javascript">
+                google.load("visualization", "1", { packages: ["corechart"] });
+                google.setOnLoadCallback(drawchart);
+                function drawchart() {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                        url: '@Url.Action("GetData")',
+                        data: "{ }",
+                        // If data connections is success
+                        success:
+                            function drawchart(dataValues) {
+                                // Adds data into columns to DataTable
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Datum');
+                                data.addColumn('number', 'Pris');
+                                // Settings for visualization of the graph
+                                var options = {
+                                    title: 'Dieselpris per kvartal',
+                                    pointSize: 3,
+                                    dataOpacity: 0.4,
+                                    lineWidth: 2,
+                                    hAxis: {
+                                        title: 'Datum', titleTextStyle: { color: '#333' },
+                                    }
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    data.addRow([(dataValues[i].Week), dataValues[i].DieselWeekValue])
+                                }
+                                // Draws the graph into a specified div
+                                new google.visualization.BarChart(document.getElementById('DPWChartDiv')).draw(data, options);
+                            },
+                        // If collectning data from database fails promp message here
+                        error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                    });
+                }
+        </script>
     }
-</script>
-
+    if (chartID == 3)
+    {
+         <script type="text/javascript">
+                 google.load("visualization", "1", { packages: ["corechart"] });
+                 google.setOnLoadCallback(drawchart);
+                 function drawchart() {
+                     $.ajax({
+                         type: 'POST',
+                         dataType: 'json',
+                         contentType: 'application/json',
+                         // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                         url: '@Url.Action("GetData")',
+                         data: "{ }",
+                         // If data connections is success
+                         success:
+                             function drawchart(dataValues) {
+                                 // Adds data into columns to DataTable
+                                 var data = new google.visualization.DataTable();
+                                 data.addColumn('string', 'Datum');
+                                 data.addColumn('number', 'Pris');
+                                 // Settings for visualization of the graph
+                                 var options = {
+                                     title: 'Dieselpris per kvartal',
+                                     pointSize: 3,
+                                     dataOpacity: 0.4,
+                                     lineWidth: 2,
+                                     hAxis: {
+                                         title: 'Datum', titleTextStyle: { color: '#333' },
+                                     }
+                                 }
+                                 // Loops through the DataTable with data from database
+                                 for (var i = 0; i < dataValues.length; i++) {
+                                     data.addRow([(dataValues[i].Week), dataValues[i].DieselWeekValue])
+                                 }
+                                 // Draws the graph into a specified div
+                                 new google.visualization.ColumnChart(document.getElementById('DPWChartDiv')).draw(data, options);
+                             },
+                         // If collectning data from database fails promp message here
+                         error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+                     });
+                 }
+         </script>
+     }
+}
 
 <div class="x_panel">
     <div class="x_title">
@@ -76,9 +151,6 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        <div id="myChartDiv" style="width: 100%; height: 450px"></div>
+        <div id="DPWChartDiv" style="width: 100%; height: 450px"></div>
     </div>
 </div>
-    }
-
-}

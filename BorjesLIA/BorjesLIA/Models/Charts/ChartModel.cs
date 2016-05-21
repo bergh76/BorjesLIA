@@ -6,11 +6,12 @@ using System.Web;
 
 namespace BorjesLIA.Models.Charts
 {
-    public class ChartModel
+    public enum ChartType
     {
-        [Key]
-        public int ID { get; set; }
-        public string ChartName { get; set; }
-        public int ChartID { get; set; }
+        Linjediagram = 1,
+        Stapeldiagram,
+        Kolumndiagram,
+        Kombodiagram,
+       
     }
 }

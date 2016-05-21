@@ -1,9 +1,5 @@
-﻿using BorjesLIA.Models.Charts;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace BorjesLIA.Models.Euro
 {
@@ -19,9 +15,6 @@ namespace BorjesLIA.Models.Euro
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime Date { get; set; }
-
-        //public int ChartType { get; set; }
-        public int EuroChartID { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]

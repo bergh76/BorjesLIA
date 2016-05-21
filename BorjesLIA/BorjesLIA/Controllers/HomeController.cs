@@ -74,6 +74,15 @@ namespace BorjesLIA.Controllers
 
             return View(model);
         }
+        public ActionResult GetSettings()
+        {
+            // Load settings to list
+            // Then sett values from SettingsList
+            // Render paget from listsettings 
+
+
+            return View();
+        }
     }
 }
 

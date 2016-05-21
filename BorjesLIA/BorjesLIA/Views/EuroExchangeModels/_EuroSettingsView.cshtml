@@ -1,0 +1,95 @@
+﻿
+@model BorjesLIA.ViewModel.EuroViewModel
+<!--ajax script-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<script src="~/Scripts/DataTables-1.10.11/media/js/jquery.dataTables.min.js"></script>
+<!-- DataTabel CSS-->
+<link href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" />
+<link href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" rel="stylesheet" />
+<!-- DataTabel JS-->
+
+<script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/DataTables-1.10.11/media/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myTable').DataTable({
+            "order": [[1, "desc"]],
+            "processing": true,
+
+        });
+    });
+</script>*@
+<!--ajax script end-->
+<!-- FORMFIELDS START -->
+<div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Inställningar för Eurograf</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            @using (Ajax.BeginForm("SaveEuroSettings", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name).Distinct()), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="dropdown">
+                        @Html.EnumDropDownListFor(model => model.ChartType, new { @class = "btn btn-default dropdown-toggle " })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(model => model.AddEuro.Date, new SelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()), "Year", new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="btn-block">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-eye"></i> Visa</button>
+
+
+                            <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <input type="submit" value="Lägg till" class="btn btn-default" />
+                    </div>*@
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<!--List END-->
+<!--Graph-->
+<div class="col-md-8 col-sm-12 col-xs-12" id="euroGraph">
+    @Html.Partial("_EuroLineGraph")
+</div>
+
+<!--Graph END-->
+<!--script using ajax, relode page to show new graph-->
+@*<script type="text/javascript">
+    function OnSuccess(response) {
+        //alert("alert");
+        location.reload();
+
+    }
+</script>*@
+
+

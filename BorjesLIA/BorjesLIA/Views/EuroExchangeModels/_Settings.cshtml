@@ -19,8 +19,8 @@
     });
 </script>
 <!--ajax script end-->
-    <!-- FORMFIELDS START -->
-    <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+<!-- FORMFIELDS START -->
+<div class="col-md-5 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Eurokurs</h2>
@@ -34,17 +34,14 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-        <div class="x_content">
+        @*<div class="x_content">
             @using (Ajax.BeginForm("_AddEuro", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
             {
                 @Html.AntiForgeryToken()
                 <h2>Lägg till ny Eurokursindex</h2>
                 <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @*<div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2"><i class="glyphicon-eur"></i></span>
-                        <input type="number" class="form-control" placeholder="Euro" aria-describedby="sizing-addon2">
-                    </div>*@
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.AddEuro.euroValue, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -62,18 +59,26 @@
                     </div>
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.AddEuro.EuroChartID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.AddEuro.EuroChartID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddEuro.EuroChartID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-10">
                             <input type="submit" value="Lägg till" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
-            }
+            }*@
             <!-- Create ENDS -->
         </div>
     </div>
 </div>
-    <!--List-->
-    <div class="col-md-7 col-sm-12 col-xs-12 pull-left">
+<!--List-->
+<div class="col-md-7 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
@@ -114,7 +119,7 @@
                 </a>
             </li>
         </ul>
-        <div class="x_content">
+        @*<div class="x_content">
             <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
                     <thead>
@@ -125,9 +130,9 @@
                             <th>
                                 Datum
                             </th>
-                            @*<th>
+                            <th>
                                 ChartID
-                            </th>*@
+                            </th>
                             <th>
                                 Edit
                             </th>
@@ -142,9 +147,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.ChartID)
-                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EuroChartID)
+                            </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |
@@ -155,7 +160,7 @@
 
                 </table>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -176,4 +181,5 @@
         @*$("#myChartDiv").load(@Html.Partial("_EuroLineGraph"));*@
     }
 </script>
+
 

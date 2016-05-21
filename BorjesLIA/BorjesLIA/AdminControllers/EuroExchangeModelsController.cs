@@ -7,8 +7,8 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using BorjesLIA.Models.Charts;
+using System;
+using BorjesLIA.Models.Settings;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -24,22 +24,32 @@ namespace BorjesLIA.AdminControllers
             euroV = new EuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+                settings = db.Settings.Where(x => x.Name == "Eurokurs")
             };
             return View(euroV);
         }
 
 
-        public ActionResult ShowView(EuroViewModel euroV)
-        {
-            euroV = new EuroViewModel
-            {
-                AddEuro = new EuroExchangeModel(),
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-            };
-            return View(euroV);
-        }
+        /// <summary>
+        /// This ActionResult is not "in play" ie. no functionality connected to the site
+        /// </summary>
+        /// <param name="newEuro"></param>
+        /// <returns></returns>
+        //public ActionResult ShowView(EuroViewModel euroV)
+        //{
+        //    euroV = new EuroViewModel
+        //    {
+        //        AddEuro = new EuroExchangeModel(),
+        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+        //    };
+        //    return View(euroV);
+        //}
+
+
         //[Authorize]
+
+
         [ValidateAntiForgeryToken]
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
@@ -69,39 +79,83 @@ namespace BorjesLIA.AdminControllers
         public ActionResult _EuroLineGraph(EuroViewModel euroV)
         {
             euroV = new EuroViewModel
-            {
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
+            {                
+                settings = db.Settings.Where(x => x.Name == "Eurokurs")
             };
             return View(euroV);
         }
 
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult _AddNewEuro(EuroViewModel newEuro)
+        /// <summary>
+        /// This ActionResult is not "in play" ie. no functionality connected to the site
+        /// </summary>
+        /// <param name="euroV"></param>
+        /// <returns></returns>
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult _AddNewEuro(EuroViewModel newEuro)
+        //{
+        //    if (Request.IsAjaxRequest() && ModelState.IsValid)
+        //    {
+        //        using (var db = new ApplicationDbContext())
+        //        {
+        //            db.EuroExchangeModels.Add(newEuro.AddEuro);
+        //            db.SaveChanges();
+        //            newEuro.newEuroList = db.EuroExchangeModels.ToList()
+        //                .OrderByDescending(x => x.Date);
+        //            return PartialView("_EuroList", newEuro);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View(newEuro);
+        //    }
+        //}
+
+
+        /// <summary>
+        ///This ActionResult is not "in play" ie. no functionality connected to the site
+        /// or connected to the site
+        /// </summary>
+        /// <param name="newEuro"></param>
+        /// <returns></returns>
+        //public ActionResult _SubmitReload(EuroViewModel newEuro)
+        //{
+        //    //return RedirectToAction("Index", new EuroViewModel { });
+        //    //return PartialView("_EuroList", newEuro);
+        //    return View();
+        //}
+
+
+        public ActionResult Index_EuroSettings(EuroViewModel euroV)
         {
-            if (Request.IsAjaxRequest() && ModelState.IsValid)
+            euroV = new EuroViewModel
             {
-                using (var db = new ApplicationDbContext())
-                {
-                    db.EuroExchangeModels.Add(newEuro.AddEuro);
-                    db.SaveChanges();
-                    newEuro.newEuroList = db.EuroExchangeModels.ToList()
-                        .OrderByDescending(x => x.Date);
-                    return PartialView("_EuroList", newEuro);
-                }
-            }
-            else
-            {
-                return View(newEuro);
-            }
+                AddEuro = new EuroExchangeModel(),
+                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+                settings = db.Settings.Where(x => x.Name == "Eurokurs")
+            };
+            return View(euroV);
         }
 
-        public ActionResult _SubmitReload(EuroViewModel newEuro)
+
+        [HttpPost]
+        public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
         {
-            //return RedirectToAction("Index", new EuroViewModel { });
-            //return PartialView("_EuroList", newEuro);
-            return View();
+            //var dir = Path.Combine(Server.MapPath("~/Settings/Euro/EuroSettings.txt"));
+            if (Request.IsAjaxRequest())
+            {
+                string name = form[1].ToString();
+                conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
+                conf.Year = Convert.ToInt32(form[3]);
+                conf.Name = form[1];
+                db.Entry(conf).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return PartialView("Index_EuroSettings");
+            }
+            return View(conf);
         }
+
 
 
         // GET: EuroExchangeModels/Details/5
@@ -140,7 +194,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,euroValue,Date,EuroChartID")] EuroExchangeModel euroExchangeModel)
+        public ActionResult Edit([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
         {
             if (ModelState.IsValid)
             {
@@ -178,7 +232,7 @@ namespace BorjesLIA.AdminControllers
         }
 
         protected override void Dispose(bool disposing)
-        {
+       {
             if (disposing)
             {
                 db.Dispose();

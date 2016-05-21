@@ -18,7 +18,7 @@
 }
 
 .nav-sm .container-dashboard.body .right_col {
-  border-left: 4px solid red;
+  /*border-left: 4px solid red;*/
   padding: 10px 20px;
   margin-left: 70px;
   z-index: 2;

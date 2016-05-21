@@ -205,12 +205,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605211923334_BorjesLIA.cs" />
+    <Compile Include="Migrations\201605211923334_BorjesLIA.Designer.cs">
+      <DependentUpon>201605211923334_BorjesLIA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
     <Compile Include="Models\Diesel\DieselQuarterPriceModel.cs" />
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
+    <Compile Include="Models\Settings\DataInputType.cs" />
+    <Compile Include="Models\Settings\Settings.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDBContext.cs" />
@@ -950,6 +956,9 @@
     <Content Include="Views\DtmModels\ShowView.cshtml" />
     <Content Include="Views\DieselWeekModels\ShowView.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\ShowView.cshtml" />
+    <Content Include="Views\EuroExchangeModels\Index_EuroSettings.cshtml" />
+    <Content Include="Views\EuroExchangeModels\_Settings.cshtml" />
+    <Content Include="Views\EuroExchangeModels\_EuroSettingsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -960,6 +969,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605211923334_BorjesLIA.resx">
+      <DependentUpon>201605211923334_BorjesLIA.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

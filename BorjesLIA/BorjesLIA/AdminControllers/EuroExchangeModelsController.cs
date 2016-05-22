@@ -55,7 +55,7 @@ namespace BorjesLIA.AdminControllers
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
             // Adds a new post to Entity EuroExchangeModel
-            if (Request.IsAjaxRequest() && ModelState.IsValid)
+            if (Request.IsAjaxRequest() )
             {
                 using (var db = new ApplicationDbContext())
                 {
@@ -149,15 +149,15 @@ namespace BorjesLIA.AdminControllers
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
-                string name = form[1].ToString();             
+                string name = form[1].ToString();
                 conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
                 conf.Year = Convert.ToInt32(form[3]);
-                conf.Name = name;             
-                if(!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
-                {                    
+                conf.Name = form[1];
+                if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
+                {
                     db.Entry(conf).State = EntityState.Modified;
                     db.SaveChanges();
-                     return View("_EuroSettingsView", conf);
+                    return PartialView("_EuroSettingsView", conf);
                 }
             }
             return View(conf);

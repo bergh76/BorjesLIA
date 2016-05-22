@@ -2,6 +2,7 @@ namespace BorjesLIA.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
+
     
     public partial class BorjesLIA : DbMigration
     {
@@ -52,7 +53,6 @@ namespace BorjesLIA.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         euroValue = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Date = c.DateTime(nullable: false),
-                        ChartID = c.Int(nullable: false),
                         LoggDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -92,6 +92,17 @@ namespace BorjesLIA.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Settings",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Year = c.Int(nullable: true),
+                        ChartType = c.Int(nullable: true),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.URLModels",
@@ -181,6 +192,7 @@ namespace BorjesLIA.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.URLModels");
+            DropTable("dbo.Settings");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Imgs");

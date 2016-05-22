@@ -215,7 +215,6 @@
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />
     <Compile Include="Models\Img\Img.cs" />
-    <Compile Include="Models\Settings\DataInputType.cs" />
     <Compile Include="Models\Settings\Settings.cs" />
     <Compile Include="Models\URL\URLModel.cs" />
     <Compile Include="Models\UserAccount\AccountViewModels.cs" />

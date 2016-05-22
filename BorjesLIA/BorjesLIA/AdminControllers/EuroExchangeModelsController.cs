@@ -25,6 +25,7 @@ namespace BorjesLIA.AdminControllers
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == "Eurokurs")
             };
             return View(euroV);
@@ -53,6 +54,7 @@ namespace BorjesLIA.AdminControllers
         [ValidateAntiForgeryToken]
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
+            // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
@@ -68,6 +70,8 @@ namespace BorjesLIA.AdminControllers
             return View(newEuro);
         }
 
+
+
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(EuroViewModel eurox)
@@ -76,17 +80,17 @@ namespace BorjesLIA.AdminControllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult _EuroLineGraph(EuroViewModel euroV)
+        public ActionResult _EuroLineGraph(EuroViewModel euroGraph)
         {
-            euroV = new EuroViewModel
-            {                
+            euroGraph =  new EuroViewModel
+            {
                 settings = db.Settings.Where(x => x.Name == "Eurokurs")
             };
-            return View(euroV);
+            return View(euroGraph);
         }
 
         /// <summary>
-        /// This ActionResult is not "in play" ie. no functionality connected to the site
+        /// This ActionResult is not "in play" ie. no functionality connected to the View
         /// </summary>
         /// <param name="euroV"></param>
         /// <returns></returns>
@@ -113,8 +117,7 @@ namespace BorjesLIA.AdminControllers
 
 
         /// <summary>
-        ///This ActionResult is not "in play" ie. no functionality connected to the site
-        /// or connected to the site
+        ///This ActionResult is not "in play" ie. no functionality connected to the View
         /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
@@ -126,32 +129,36 @@ namespace BorjesLIA.AdminControllers
         //}
 
 
-        public ActionResult Index_EuroSettings(EuroViewModel euroV)
+        public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
         {
-            euroV = new EuroViewModel
+            euroSettings = new EuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == "Eurokurs")
             };
-            return View(euroV);
+            return View(euroSettings);
         }
 
 
         [HttpPost]
         public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
         {
-            //var dir = Path.Combine(Server.MapPath("~/Settings/Euro/EuroSettings.txt"));
-            if (Request.IsAjaxRequest())
+
+            // Saves new settings to Entity Settings
+            if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
-                string name = form[1].ToString();
+                string name = form[1].ToString();             
                 conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
                 conf.Year = Convert.ToInt32(form[3]);
-                conf.Name = form[1];
-                db.Entry(conf).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return PartialView("Index_EuroSettings");
+                conf.Name = name;             
+                if(!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
+                {                    
+                    db.Entry(conf).State = EntityState.Modified;
+                    db.SaveChanges();
+                     return View("_EuroSettingsView", conf);
+                }
             }
             return View(conf);
         }

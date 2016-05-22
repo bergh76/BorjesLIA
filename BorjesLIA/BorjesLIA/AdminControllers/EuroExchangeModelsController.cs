@@ -17,6 +17,7 @@ namespace BorjesLIA.AdminControllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        string settingsName = "Eurokurs";
         // GET: EuroExchangeModels
         [HttpGet]
         public ActionResult Index(EuroViewModel euroV)
@@ -26,7 +27,7 @@ namespace BorjesLIA.AdminControllers
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == "Eurokurs")
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(euroV);
         }
@@ -136,7 +137,7 @@ namespace BorjesLIA.AdminControllers
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == "Eurokurs")
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(euroSettings);
         }
@@ -157,7 +158,7 @@ namespace BorjesLIA.AdminControllers
                 {
                     db.Entry(conf).State = EntityState.Modified;
                     db.SaveChanges();
-                    return PartialView("_EuroSettingsView", conf);
+                    return View("Index_EuroSettings", conf);
                 }
             }
             return View(conf);

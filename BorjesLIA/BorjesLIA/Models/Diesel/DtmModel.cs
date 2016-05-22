@@ -19,16 +19,18 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Pris")]
         public decimal DieselDTMValue { get; set; }
 
-        [Display(Name = "ChartID")]
-        public int DieselDTMChartID { get; set; }
-
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime LoggDate { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string User { get; set; }
+
         public DtmModel()
         {
             LoggDate = DateTime.Now;
+            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
         }
     }
 }

@@ -23,17 +23,18 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Pris")]
         public decimal DieselQuarterValue { get; set; }
 
-
-        [Display(Name = "ChartID")]
-        public int DieselQuarterChartID { get; set; }
-
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime LoggDate { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string User { get; set; }
+
         public DieselQuarterPriceModel()
         {
             LoggDate = DateTime.Now;
+            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
         }
     }
 }

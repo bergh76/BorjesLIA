@@ -1,13 +1,18 @@
 ﻿using BorjesLIA.Models;
+using BorjesLIA.Models.Charts;
 using BorjesLIA.Models.Diesel;
+using BorjesLIA.Models.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BorjesLIA.ViewModel
 {
-    public class DieselViewModel
+    public class DieselWeekViewModel
     {
+        public Settings Settings { get; set; }
+        public IEnumerable<Settings> settings { get; set; }
+        public ChartType ChartType { get; set; }
         public DieselWeekModel AddWeekDiesel { get; set; }
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
         public Task<List<DieselWeekModel>> GetWeekData()
@@ -25,7 +30,12 @@ namespace BorjesLIA.ViewModel
                 }
             }
         }
-
+    }
+    public class DieselQuarterViewModel
+    {
+        public Settings Settings { get; set; }
+        public IEnumerable<Settings> settings { get; set; }
+        public ChartType ChartType { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
         public Task<List<DieselQuarterPriceModel>> GetQuaerterData()

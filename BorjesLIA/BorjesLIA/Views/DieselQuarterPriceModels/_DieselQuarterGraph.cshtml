@@ -1,13 +1,13 @@
-﻿@model BorjesLIA.ViewModel.DieselViewModel
+﻿@model BorjesLIA.ViewModel.DieselQuarterViewModel
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@{ var dieselQuarterChartList = Model.newQuarterDieselList.Select(x => x.DieselQuarterChartID).Distinct().ToList();
+@{ var dieselQuarterChartList = Model.settings.Select(x => x.ChartType).ToList();
     var chartID = dieselQuarterChartList.FirstOrDefault();
 
-if (chartID == 1)
-{
+    if (chartID == 1)
+    {
     <script type="text/javascript">
         google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawchart);

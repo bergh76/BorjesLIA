@@ -1,10 +1,10 @@
-﻿@model BorjesLIA.ViewModel.DieselViewModel
+﻿@model BorjesLIA.ViewModel.DieselWeekViewModel
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@{ var dieselWeekChartList = Model.newWeekDieselList.Select(x => x.DieselWeekChartID).Distinct().ToList();
-    var chartID = dieselWeekChartList.FirstOrDefault();
+@{ var euroChartList = Model.settings.Select(x => x.ChartType).ToList();
+    var chartID = euroChartList.FirstOrDefault();
     if (chartID == 1)
     {
          <script type="text/javascript">

@@ -20,6 +20,18 @@ namespace BorjesLIA.Models.Settings
         [DataType(DataType.Text)]
         public int ChartType { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Datum")]
+        public DateTime LoggDate { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string User { get; set; }
+
+        public Settings()
+        {
+            LoggDate = DateTime.Now;
+            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
+        }
     }
 }

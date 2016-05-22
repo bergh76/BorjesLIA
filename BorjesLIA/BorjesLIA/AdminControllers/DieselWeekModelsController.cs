@@ -14,55 +14,65 @@ namespace BorjesLIA.AdminControllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // Static name for Settings
+        string settingsName = "Dieselpris Vecka";
         // GET: DieselWeekModels
-        public ActionResult Index(DieselViewModel dieselW)
+        public ActionResult Index(DieselWeekViewModel dieselW)
         {
-            dieselW = new DieselViewModel
+            dieselW = new DieselWeekViewModel
             {
                 AddWeekDiesel = new DieselWeekModel(),
-                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week)
+                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dieselW);
         }
-        public ActionResult ShowView(DieselViewModel dieselW)
+        public ActionResult ShowView(DieselWeekViewModel dieselW)
         {
-            dieselW = new DieselViewModel
+            dieselW = new DieselWeekViewModel
             {
                 AddWeekDiesel = new DieselWeekModel(),
-                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week)
+                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dieselW);
         }
 
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(DieselViewModel dieselWeekChart)
+        public async Task<JsonResult> GetData(DieselWeekViewModel dieselWeekChart)
         {
             var data = await dieselWeekChart.GetWeekData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult _WeekPriceDiesel(DieselViewModel dvm)
+        public ActionResult _WeekPriceDiesel(DieselWeekViewModel dvm)
         {
-            dvm = new DieselViewModel
+            dvm = new DieselWeekViewModel
             {
-                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week)
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dvm);
         }
         // kallas på av snurran
-        public ActionResult _DieselWeekGraph(DieselViewModel dvm)
+        public ActionResult _DieselWeekGraph(DieselWeekViewModel dvm)
         {
-            dvm = new DieselViewModel
+            dvm = new DieselWeekViewModel
             {
-                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.ID)
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.ID),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dvm);
         }
 
         //[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _AddWeekDiesel(DieselViewModel newDiesel)
+        public ActionResult _AddWeekDiesel(DieselWeekViewModel newDiesel)
         {
             if (Request.IsAjaxRequest())
             {

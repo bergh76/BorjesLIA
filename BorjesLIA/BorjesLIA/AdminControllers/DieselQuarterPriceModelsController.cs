@@ -16,45 +16,56 @@ namespace BorjesLIA.AdminControllers
     public class DieselQuarterPriceModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        // Static name for Settings
+        string settingsName = "Dieselpris Kvartal";
         // GET: DieselQuarterPriceModels
-        public ActionResult Index(DieselViewModel dieselQ)
+        public ActionResult Index(DieselQuarterViewModel dieselQ)
         {
-            dieselQ = new DieselViewModel
+            dieselQ = new DieselQuarterViewModel
             {
                 AddQuarterDiesel = new DieselQuarterPriceModel(),
-                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter)
+                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter),
+                 //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dieselQ);
         }
-        public ActionResult ShowView(DieselViewModel dieselQ)
+        public ActionResult ShowView(DieselQuarterViewModel dieselQ)
         {
-            dieselQ = new DieselViewModel
+            dieselQ = new DieselQuarterViewModel
             {
                 AddQuarterDiesel = new DieselQuarterPriceModel(),
-                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter)
+                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dieselQ);
         }
-        public ActionResult _QuarterPriceDiesel(DieselViewModel dqpData)
+
+
+        public ActionResult _QuarterPriceDiesel(DieselQuarterViewModel dqpData)
         {
-            dqpData = new DieselViewModel
+            dqpData = new DieselQuarterViewModel
             {
-                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Year)
+                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Year),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dqpData);
         }
-        public ActionResult _DieselQuarterGraph(DieselViewModel dvm)
+        public ActionResult _DieselQuarterGraph(DieselQuarterViewModel dvm)
         {
-            dvm = new DieselViewModel
+            dvm = new DieselQuarterViewModel
             {
-                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.ID)
+                newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.ID),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dvm);
         }
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(DieselViewModel dieselQuarterChart)
+        public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
         {
             var data = await dieselQuarterChart.GetQuaerterData();
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -63,7 +74,7 @@ namespace BorjesLIA.AdminControllers
 
         //[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _AddQuarterDiesel(DieselViewModel newQDiesel)
+        public ActionResult _AddQuarterDiesel(DieselQuarterViewModel newQDiesel)
         {
             if (Request.IsAjaxRequest())
             {

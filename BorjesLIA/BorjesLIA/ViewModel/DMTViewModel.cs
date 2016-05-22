@@ -1,5 +1,7 @@
 ﻿using BorjesLIA.Models;
+using BorjesLIA.Models.Charts;
 using BorjesLIA.Models.Diesel;
+using BorjesLIA.Models.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace BorjesLIA.ViewModel
 {
     public class DMTViewModel
     {
-
+        public ChartType ChartType { get; set; }
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }
 
@@ -29,5 +31,9 @@ namespace BorjesLIA.ViewModel
                 }
             }
         }
+        public Settings Settings { get; set; }
+
+        public IEnumerable<Settings> settings { get; set; }
+
     }
 }

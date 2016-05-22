@@ -35,7 +35,5 @@ namespace BorjesLIA.Models
 
         public System.Data.Entity.DbSet<Settings.Settings> Settings { get; set; }
 
-        //public System.Data.Entity.DbSet<Charts.ChartType> ChartType { get; set; }
-
     }
 }

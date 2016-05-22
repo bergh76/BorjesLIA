@@ -15,15 +15,19 @@ namespace BorjesLIA.AdminControllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // Static name for Settings
+        string settingsName = "Drivmedelstillägg";
+        
         // GET: DtmModels
-
         public ActionResult Index(DMTViewModel dtmV)
         {
             dtmV = new DMTViewModel
             {
                 AddDtm = new DtmModel(),
                 newDTMList = db.DtmModels.ToList()
-                .OrderByDescending(x => x.Date)
+                .OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
 
             };
             return View(dtmV);
@@ -48,8 +52,9 @@ namespace BorjesLIA.AdminControllers
             dtmV = new DMTViewModel
             {
                 AddDtm = new DtmModel(),
-                newDTMList = db.DtmModels.ToList()
-                 .OrderByDescending(x => x.Date)
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
 
             };
             return View(dtmV);
@@ -80,7 +85,9 @@ namespace BorjesLIA.AdminControllers
         {
             dtmV = new DMTViewModel
             {
-                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date)
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dtmV);
         }
@@ -89,7 +96,9 @@ namespace BorjesLIA.AdminControllers
         {
             dtmV = new DMTViewModel
             {
-                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date)
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
             };
             return View(dtmV);
         }

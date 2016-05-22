@@ -35,5 +35,6 @@ namespace BorjesLIA.Models
 
         public System.Data.Entity.DbSet<Settings.Settings> Settings { get; set; }
 
+
     }
 }

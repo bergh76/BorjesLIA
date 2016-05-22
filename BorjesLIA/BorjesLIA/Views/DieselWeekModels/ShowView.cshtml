@@ -52,6 +52,24 @@
 
                         </div>
                     </div>
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.AddWeekDiesel.User, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.AddWeekDiesel.User, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.User, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddWeekDiesel.LoggDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.AddWeekDiesel.LoggDate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.LoggDate, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>*@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Lägg till" class="btn btn-default" />
@@ -69,7 +87,7 @@
 </div>
 <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
     
-       @{ var dieselWeekChartList = Model.newWeekDieselList.Select(x => x.DieselWeekChartID).Distinct().ToList();
+       @{ var dieselWeekChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
            var chartID = dieselWeekChartList.FirstOrDefault();
            // create a check if newEuroList is empty
            if (chartID == 0)

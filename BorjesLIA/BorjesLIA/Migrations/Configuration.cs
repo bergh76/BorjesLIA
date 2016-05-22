@@ -13,7 +13,7 @@ namespace BorjesLIA.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            //AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         /// <summary>

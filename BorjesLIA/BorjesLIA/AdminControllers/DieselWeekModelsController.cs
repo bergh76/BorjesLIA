@@ -71,7 +71,29 @@ namespace BorjesLIA.AdminControllers
         }
 
         //[HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult _AddWeekDiesel(DieselWeekModel newDiesel)
+        //{
+        //    if (Request.IsAjaxRequest())
+        //    {
+        //        using (var db = new ApplicationDbContext())
+        //        {
+        //            db.DieselPriceWeek.Add(newDiesel);
+        //            db.SaveChanges();
+        //            //newDiesel = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);
+        //            //var getNewChart = newEuro.GetData();
+        //            //ModelState.Clear();
+        //            //return PartialView("_WeekPriceDiesel", newDiesel);
+        //            return PartialView("ShowView", newDiesel);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View(newDiesel);
+        //    }
+        //}
+
+
         public ActionResult _AddWeekDiesel(DieselWeekViewModel newDiesel)
         {
             if (Request.IsAjaxRequest())
@@ -92,7 +114,7 @@ namespace BorjesLIA.AdminControllers
                 return View(newDiesel);
             }
         }
-        
+
 
         // GET: DieselWeekModels/Details/5
         public ActionResult Details(int? id)

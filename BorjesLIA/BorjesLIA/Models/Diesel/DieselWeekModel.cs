@@ -34,7 +34,7 @@ namespace BorjesLIA.Models.Diesel
         public DieselWeekModel()
         {
             LoggDate = DateTime.Now;
-            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
+            User = System.Security.Claims.ClaimsPrincipal.Current.Identity.Name.ToString();
         }
     }
 }

@@ -332,6 +332,7 @@ $(document).ready(function () {
         //pause: 5000, //15000,
         //video: true,
         autoControls: false,
+
     });
 });
 

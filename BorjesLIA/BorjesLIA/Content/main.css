@@ -4,7 +4,9 @@ body {
     margin:0;
     padding:0;
     padding-top: 50px;
-    height: 100%
+    height: 100%;
+
+    background-color:white;
 }
 
 /* Wrapping element 
@@ -36,3 +38,8 @@ body {
  height: 100%;
  }
 
+ .GraphDiv{
+     background-color:white;
+     width: 1000px;
+     height:100%;
+ }

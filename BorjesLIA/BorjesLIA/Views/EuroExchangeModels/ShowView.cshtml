@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            @using (Ajax.BeginForm("ShowView", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
+            @using (Ajax.BeginForm("_AddEuro", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
             {
                 @Html.AntiForgeryToken()
                 <h2>Lägg till ny Eurokursindex</h2>
@@ -170,10 +170,7 @@
 <!--script using ajax, relode page to show new graph-->
 <script type="text/javascript">
     function OnSuccess(response) {
-        //alert("alert");
         location.reload();
-        //$("#euroGraph").load(location.href + " #euroGraph");
-        @*$("#myChartDiv").load(@Html.Partial("_EuroLineGraph"));*@
     }
 </script>
 

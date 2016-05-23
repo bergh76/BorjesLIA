@@ -10,7 +10,6 @@ namespace BorjesLIA.ViewModel
 {
     public class DieselWeekViewModel
     {
-        public Settings Settings { get; set; }
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
         public DieselWeekModel AddWeekDiesel { get; set; }
@@ -33,7 +32,7 @@ namespace BorjesLIA.ViewModel
     }
     public class DieselQuarterViewModel
     {
-        public Settings Settings { get; set; }
+
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }

@@ -7,8 +7,6 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
-using System;
-using BorjesLIA.Models.Settings;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -20,10 +18,10 @@ namespace BorjesLIA.AdminControllers
         string settingsName = "Eurokurs";
         // GET: EuroExchangeModels
         [HttpGet]
-        public ActionResult Index(EuroViewModel euroV)
+        public ActionResult Index(EuroViewModel euroObject)
         {
-            euroV = NewEuroObject();
-            return View(euroV);
+            euroObject = NewEuroObject();
+            return View(euroObject);
         }
 
         private EuroViewModel NewEuroObject()
@@ -39,7 +37,7 @@ namespace BorjesLIA.AdminControllers
             return euroV;
         }
 
-        public ActionResult ShowView(EuroViewModel newEuro)
+        public ActionResult _AddEuro(EuroViewModel newEuro)
         {
             // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest())
@@ -100,20 +98,6 @@ namespace BorjesLIA.AdminControllers
         //    {
         //        return View(newEuro);
         //    }
-        //}
-
-
-        /// <summary>
-        ///This ActionResult is not "in play" ie. no functionality connected to the View
-        /// </summary>
-        /// <param name="newEuro"></param>
-        /// <returns></returns>
-        /// 
-        //public ActionResult _SubmitReload(EuroViewModel newEuro)
-        //{
-        //    //return RedirectToAction("Index", new EuroViewModel { });
-        //    //return PartialView("_EuroList", newEuro);
-        //    return View();
         //}
 
 

@@ -30,6 +30,8 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dieselQ);
         }
+
+
         public ActionResult ShowView(DieselQuarterViewModel dieselQ)
         {
             dieselQ = new DieselQuarterViewModel
@@ -53,6 +55,8 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dqpData);
         }
+
+
         public ActionResult _DieselQuarterGraph(DieselQuarterViewModel dvm)
         {
             dvm = new DieselQuarterViewModel

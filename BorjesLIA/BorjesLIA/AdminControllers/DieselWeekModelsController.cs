@@ -16,49 +16,71 @@ namespace BorjesLIA.AdminControllers
 
         // Static name for Settings
         string settingsName = "Dieselpris Vecka";
+
+
         // GET: DieselWeekModels
         public ActionResult Index(DieselWeekViewModel dieselW)
         {
-            dieselW = new DieselWeekViewModel
-            {
-                AddWeekDiesel = new DieselWeekModel(),
-                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
-                //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
-            };
-            return View(dieselW);
-        }
-        public ActionResult ShowView(DieselWeekViewModel dieselW)
-        {
-            dieselW = new DieselWeekViewModel
-            {
-                AddWeekDiesel = new DieselWeekModel(),
-                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
-                //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
-            };
+            dieselW = NewDieselWeekObject();
             return View(dieselW);
         }
 
+        /// <summary>
+        /// Creats a new DiesleWeekViewModel object, populates needed lists with data and returns the object
+        /// </summary>
+        /// <param name="dieselW"></param>
+        /// <returns></returns>
+        private DieselWeekViewModel NewDieselWeekObject()
+        {
+            DieselWeekViewModel dieselW;
+            dieselW = new DieselWeekViewModel
+            {
+                AddWeekDiesel = new DieselWeekModel(),
+                newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == settingsName)
+            };
+            return dieselW;
+        }
+
+
+        /// <summary>
+        ///This ActionResult is not "in play" ie. no functionality connected to the View
+        /// </summary>
+        /// <param name="dieselWeekChart"></param>
+        /// <returns></returns>
+        //public ActionResult ShowView(DieselWeekViewModel dieselW)
+        //{
+        //    dieselW = new DieselWeekViewModel
+        //    {
+        //        AddWeekDiesel = new DieselWeekModel(),
+        //        newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
+        //        //populates list used for determain charttype from Entity Settings
+        //        settings = db.Settings.Where(x => x.Name == settingsName)
+        //    };
+        //    return View(dieselW);
+        //}
+
+
+        /// <summary>
+        /// Populates the chart with data
+        /// </summary>
+        /// <param name="dieselWeekChart"></param>
+        /// <returns></returns>
         [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(DieselWeekViewModel dieselWeekChart)
         {
             var data = await dieselWeekChart.GetWeekData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult _WeekPriceDiesel(DieselWeekViewModel dvm)
-        {
-            dvm = new DieselWeekViewModel
-            {
-                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week),
-                //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
-            };
-            return View(dvm);
-        }
-        // kallas på av snurran
+
+
+        /// <summary>
+        /// Instansiates an object for startpage
+        /// </summary>
+        /// <param name="dvm"></param>
+        /// <returns></returns>
         public ActionResult _DieselWeekGraph(DieselWeekViewModel dvm)
         {
             dvm = new DieselWeekViewModel
@@ -93,7 +115,11 @@ namespace BorjesLIA.AdminControllers
         //    }
         //}
 
-
+        /// <summary>
+        /// Creats a new DiesleWeekViewModel object, populates needed lists with data and return a view with data
+        /// </summary>
+        /// <param name="newDiesel"></param>
+        /// <returns></returns>
         public ActionResult _AddWeekDiesel(DieselWeekViewModel newDiesel)
         {
             if (Request.IsAjaxRequest())
@@ -103,9 +129,7 @@ namespace BorjesLIA.AdminControllers
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();
                     newDiesel.newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);
-                    //var getNewChart = newEuro.GetData();
-                    //ModelState.Clear();
-                    //return PartialView("_WeekPriceDiesel", newDiesel);
+                    newDiesel = NewDieselWeekObject();
                     return PartialView("ShowView", newDiesel);
                 }
             }

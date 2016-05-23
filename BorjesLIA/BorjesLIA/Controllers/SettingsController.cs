@@ -18,7 +18,7 @@ namespace BorjesLIA.Controllers
     public class SettingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        string settingsName = "Eurokurs";
+        string confEuro = "Eurokurs";
         // GET: Settings
         public ActionResult Index(EuroViewModel euroV)
         {
@@ -27,7 +27,7 @@ namespace BorjesLIA.Controllers
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
+                settings = db.Settings.Where(x => x.Name == confEuro)
             };
             return View(euroV);
         }
@@ -40,21 +40,7 @@ namespace BorjesLIA.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Settings/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Settings settings = db.Settings.Find(id);
-            if (settings == null)
-            {
-                return HttpNotFound();
-            }
-            return View(settings);
-        }
-
+       
         public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
         {
             euroSettings = new EuroViewModel 
@@ -62,7 +48,7 @@ namespace BorjesLIA.Controllers
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
+                settings = db.Settings.Where(x => x.Name == confEuro)
             };
             return View(euroSettings);
         }
@@ -76,15 +62,15 @@ namespace BorjesLIA.Controllers
             {
                 // populate values from Html-form
                 string name = form[1].ToString();
-                conf.ID = db.Settings.Where(x => x.Name == settingsName).Select(x => x.ID).FirstOrDefault();
+                conf.ID = db.Settings.Where(x => x.Name == confEuro).Select(x => x.ID).FirstOrDefault();
                 conf.Year = Convert.ToInt32(form[2]);
-                conf.Name = settingsName;
+                conf.Name = confEuro;
                 if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
                 {
                     // saves data to Settings db Entity
                     db.Entry(conf).State = EntityState.Modified;
                     db.SaveChanges();
-                    return View("Index_EuroSettings", conf);                  
+                    return PartialView("Index_EuroSettings", conf);                  
                 }
                
             }
@@ -105,6 +91,23 @@ namespace BorjesLIA.Controllers
         {
             return View();
         }
+
+
+        // GET: Settings/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Settings settings = db.Settings.Find(id);
+            if (settings == null)
+            {
+                return HttpNotFound();
+            }
+            return View(settings);
+        }
+
 
         // POST: Settings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

@@ -33,25 +33,6 @@ namespace BorjesLIA.AdminControllers
         }
 
 
-        /// <summary>
-        /// This ActionResult is not "in play" ie. no functionality connected to the site
-        /// </summary>
-        /// <param name="newEuro"></param>
-        /// <returns></returns>
-        //public ActionResult ShowView(EuroViewModel euroV)
-        //{
-        //    euroV = new EuroViewModel
-        //    {
-        //        AddEuro = new EuroExchangeModel(),
-        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date)
-        //    };
-        //    return View(euroV);
-        //}
-
-
-        //[Authorize]
-
-
         [ValidateAntiForgeryToken]
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
@@ -122,6 +103,7 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
+        /// 
         //public ActionResult _SubmitReload(EuroViewModel newEuro)
         //{
         //    //return RedirectToAction("Index", new EuroViewModel { });
@@ -167,6 +149,8 @@ namespace BorjesLIA.AdminControllers
 
 
         // GET: EuroExchangeModels/Details/5
+
+
         public ActionResult Details(int? id)
         {
             if (id == null)

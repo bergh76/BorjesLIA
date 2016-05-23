@@ -1,5 +1,7 @@
 ﻿@model BorjesLIA.ViewModel.URLViewModel
-
+<!--ajax script-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!--ajax script end-->
 <body class="nav-md">
     <div class="container-dashboard body">
         <div class="main_container">
@@ -27,7 +29,7 @@
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <!--Partial view for form adding new Image-->
-                                @using (Ajax.BeginForm("_AddNewEuro", new AjaxOptions {  UpdateTargetId = "urlList" }))
+                                @using (Ajax.BeginForm("_AddUrl", new AjaxOptions {  UpdateTargetId = "urlList" }))
                                 { 
                                     @Html.AntiForgeryToken()
                                         <div class="x_content">

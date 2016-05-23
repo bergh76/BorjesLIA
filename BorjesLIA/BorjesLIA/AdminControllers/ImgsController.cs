@@ -30,13 +30,13 @@ namespace BorjesLIA.AdminControllers
         }
 
         [AllowAnonymous]
-        //Populates a list with data from database tabel ImagesViewModel
-        public JsonResult GetData(ImagesViewModel imagex)
-        {
-            var data = db.Imgs.OrderBy(x => x.ID).ToList();
-            //var data = imagex.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        ////Populates a list with data from database tabel ImagesViewModel
+        //public JsonResult GetData(ImagesViewModel imagex)
+        //{
+        //    var data = db.Imgs.OrderBy(x => x.ID).ToList();
+        //    //var data = imagex.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult _ImagesList(ImagesViewModel imageV)
         {
             imageV = new ImagesViewModel

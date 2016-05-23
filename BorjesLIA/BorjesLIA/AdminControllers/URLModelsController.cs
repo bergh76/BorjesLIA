@@ -18,10 +18,6 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: URLModels
-        //public ActionResult Index()
-        //{
-        //    return View(db.UrlModels.ToList());
-        //}
         [HttpGet]
         public ActionResult Index(URLViewModel urlV)
         {
@@ -49,13 +45,13 @@ namespace BorjesLIA.AdminControllers
         }
 
 
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public JsonResult GetData(URLViewModel urlx)
-        {
-            var data = urlx.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public JsonResult GetData(URLViewModel urlx)
+        //{
+        //    var data = urlx.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
      
         public ActionResult _UrlList(URLViewModel urlV)
         {
@@ -67,7 +63,7 @@ namespace BorjesLIA.AdminControllers
         }
 
         [ValidateAntiForgeryToken]
-        public ActionResult _AddNewEuro(URLViewModel newUrl)
+        public ActionResult _AddUrl(URLViewModel newUrl)
         {
             if (Request.IsAjaxRequest())
             {

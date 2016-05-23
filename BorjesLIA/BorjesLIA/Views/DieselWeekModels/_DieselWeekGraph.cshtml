@@ -3,7 +3,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@*<script src="~/Scripts/GraphHideNav.js"></script>*@
+<script src="~/Scripts/GraphHideNav.js"></script>
 
 
 @{ var dieselWeekChartList = Model.newWeekDieselList.Select(x => x.DieselWeekChartID).Distinct().ToList();
@@ -30,7 +30,7 @@
                              data.addColumn('number', 'Pris');
                              // Settings for visualization of the graph
                              var options = {
-                                 title: 'Dieselpris per kvartal',
+                                 title: 'Dieselpris per vecka (#1 line)',
                                  width: '100%',
                                  height: '100%',
                                  pointSize: 3,
@@ -76,7 +76,7 @@
                                 data.addColumn('number', 'Pris');
                                 // Settings for visualization of the graph
                                 var options = {
-                                    title: 'Dieselpris per kvartal',
+                                    title: 'Dieselpris per vecka (#2 bar)',
                                     width: '100%',
                                     height: '100%',
                                     pointSize: 3,
@@ -121,7 +121,7 @@
                                  data.addColumn('number', 'Pris');
                                  // Settings for visualization of the graph
                                  var options = {
-                                     title: 'Dieselpris per kvartal',
+                                     title: 'Dieselpris per vecka (#3 column)',
                                      width: '100%',
                                      height: '100%',
                                      pointSize: 3,
@@ -160,7 +160,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        <div id="DPWChartDiv" style="width: 100%; height: 450px"></div>
+        <div id="DPWChartDiv" style="width: 120%; height: 450px"></div>
     </div>
 </div>
 

@@ -228,6 +228,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\DMTViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
     <Compile Include="ViewModel\DieselViewModel.cs" />
@@ -964,7 +965,7 @@
     <Content Include="Views\Settings\Details.cshtml" />
     <Content Include="Views\Settings\Edit.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\Settings\_EuroLineGraph.cshtml" />
+    <Content Include="Views\Settings\_EuroNewGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

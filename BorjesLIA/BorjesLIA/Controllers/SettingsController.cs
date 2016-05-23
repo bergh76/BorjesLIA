@@ -11,6 +11,7 @@ using BorjesLIA.Models.Settings;
 using BorjesLIA.ViewModel;
 using BorjesLIA.Models.Euro;
 using System.Threading.Tasks;
+using BorjesLIA.Models.Charts;
 
 namespace BorjesLIA.Controllers
 {
@@ -56,7 +57,7 @@ namespace BorjesLIA.Controllers
 
         public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
         {
-            euroSettings = new EuroViewModel
+            euroSettings = new EuroViewModel 
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
@@ -70,20 +71,22 @@ namespace BorjesLIA.Controllers
         [HttpPost]
         public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
         {
-
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
+                // populate values from Html-form
                 string name = form[1].ToString();
-                conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
-                conf.Year = Convert.ToInt32(form[3]);
-                conf.Name = form[1];
+                conf.ID = db.Settings.Where(x => x.Name == settingsName).Select(x => x.ID).FirstOrDefault();
+                conf.Year = Convert.ToInt32(form[2]);
+                conf.Name = settingsName;
                 if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
                 {
+                    // saves data to Settings db Entity
                     db.Entry(conf).State = EntityState.Modified;
                     db.SaveChanges();
-                    return View("Index_EuroSettings", conf);
+                    return View("Index_EuroSettings", conf);                  
                 }
+               
             }
             return View(conf);
         }

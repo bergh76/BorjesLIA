@@ -68,9 +68,9 @@
                         <th>
                             Datum
                         </th>
-                        <th>
+                        @*<th>
                             ChartID
-                        </th>
+                        </th>*@
                         <th>
                             Edit
                         </th>
@@ -85,9 +85,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Date)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.EuroChartID)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.ID }) |

@@ -19,15 +19,15 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            @using (Ajax.BeginForm("SaveEuroSettings", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
+            @using (Ajax.BeginForm("SaveEuroSettings", new AjaxOptions { UpdateTargetId = "graf" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    <div class="dropdown">
+                    @*<div class="dropdown">
                         @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name)), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
                         @Html.ValidationMessageFor(model => model.Settings.Name, "", new { @class = "text-danger" })
-                    </div>
+                    </div>*@
                 </div>
                 <div class="form-group">
                     <div class="dropdown">
@@ -64,18 +64,20 @@
 
 <!--List END-->
 <!--Graph-->
-<div class="col-md-8 col-sm-12 col-xs-12" id="euroGraph">
-    @Html.Partial("_EuroLineGraph")
+<div class="col-md-8 col-sm-12 col-xs-12">
+    <div id="graf">
+        @Html.Partial("_EuroNewGraph")
+    </div>
 </div>
 
 <!--Graph END-->
 <!--script using ajax, relode page to show new graph-->
-@*<script type="text/javascript">
+<script type="text/javascript">
     function OnSuccess(response) {
         //alert("alert");
         document.reload();
 
     }
-</script>*@
+</script>
 
 

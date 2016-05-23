@@ -22,6 +22,13 @@ namespace BorjesLIA.AdminControllers
         [HttpGet]
         public ActionResult Index(EuroViewModel euroV)
         {
+            euroV = NewEuroObject();
+            return View(euroV);
+        }
+
+        private EuroViewModel NewEuroObject()
+        {
+            EuroViewModel euroV;
             euroV = new EuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
@@ -29,23 +36,21 @@ namespace BorjesLIA.AdminControllers
                 //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == settingsName)
             };
-            return View(euroV);
+            return euroV;
         }
 
-
-        [ValidateAntiForgeryToken]
-        public ActionResult _AddEuro(EuroViewModel newEuro)
+        public ActionResult ShowView(EuroViewModel newEuro)
         {
             // Adds a new post to Entity EuroExchangeModel
-            if (Request.IsAjaxRequest() )
+            if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
-                    newEuro.newEuroList = db.EuroExchangeModels.ToList()
-                        .OrderByDescending(x => x.Date);
-                    ModelState.Clear();
+                    newEuro = NewEuroObject();
+                    //newEuro.newEuroList = db.EuroExchangeModels.ToList()
+                    //    .OrderByDescending(x => x.Date);
                     return PartialView("ShowView", newEuro);
                 }
             }

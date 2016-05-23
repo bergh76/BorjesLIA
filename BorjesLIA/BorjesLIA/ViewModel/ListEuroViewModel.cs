@@ -26,14 +26,10 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     var lEuro = db.EuroExchangeModels.OrderBy(x => x.Date).ToList();
-                   return Task.Run(() => lEuro);
+                    return Task.Run(() => lEuro);
                 }
             }
-            
         }
-
-
-        public Settings Settings { get; set; }
 
         public IEnumerable<Settings> settings { get; set; }
 

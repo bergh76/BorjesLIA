@@ -1,4 +1,5 @@
 ﻿using BorjesLIA.Models.Charts;
+using BorjesLIA.Models.Euro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,5 +34,6 @@ namespace BorjesLIA.Models.Settings
             LoggDate = DateTime.Now;
             User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
         }
+
     }
 }

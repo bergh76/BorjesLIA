@@ -963,6 +963,12 @@
     <Content Include="Views\Settings\Index_DtmSettings.cshtml" />
     <Content Include="Views\Settings\_DtmSettingsView.cshtml" />
     <Content Include="Views\Settings\_DtmNewGraph.cshtml" />
+    <Content Include="Views\Settings\Index_DieselWeekSettings.cshtml" />
+    <Content Include="Views\Settings\_DieselWeekSettingsView.cshtml" />
+    <Content Include="Views\Settings\_DieselWeekNewGraph.cshtml" />
+    <Content Include="Views\Settings\_DieselQuarterNewGraph.cshtml" />
+    <Content Include="Views\Settings\_DieselQuarterSettingsView.cshtml" />
+    <Content Include="Views\Settings\Index_DieselQuarterSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

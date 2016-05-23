@@ -1,0 +1,76 @@
+﻿@model BorjesLIA.ViewModel.DieselQuarterViewModel
+<!--ajax script-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!--ajax script end-->
+<!-- FORMFIELDS START -->
+<div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Inställningar för graf veckopris diesel</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            @using (Ajax.BeginForm("SaveDQSettings", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*<div class="dropdown">
+                        @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name)), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.Settings.Name, "", new { @class = "text-danger" })
+                    </div>*@
+                </div>
+                <div class="form-group">
+                    <div class="dropdown">
+                        @Html.EnumDropDownListFor(model => model.ChartType, "Diagramtyp", new { @class = "btn btn-default dropdown-toggle " })
+                        @Html.ValidationMessageFor(model => model.ChartType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(model => model.AddQuarterDiesel.Year, new SelectList(Model.newQuarterDieselList.Select(x => x.Year).Distinct()), "Year", new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="btn-block">
+                            <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<!--List END-->
+<!--Graph-->
+<div class="col-md-8 col-sm-12 col-xs-12">
+    <div>
+        @Html.Partial("_DieselQuarterNewGraph")
+    </div>
+</div>
+
+<!--Graph END-->
+<!--script using ajax, relode page to show new graph-->
+<script type="text/javascript">
+    function OnSuccess(response) {
+        //alert("alert");
+        document.reload();
+
+    }
+</script>
+
+

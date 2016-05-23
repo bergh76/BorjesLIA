@@ -12,6 +12,7 @@ namespace BorjesLIA.ViewModel
 {
     public class DMTViewModel
     {
+        public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }
@@ -31,9 +32,5 @@ namespace BorjesLIA.ViewModel
                 }
             }
         }
-        public Settings Settings { get; set; }
-
-        public IEnumerable<Settings> settings { get; set; }
-
     }
 }

@@ -16,14 +16,19 @@ namespace BorjesLIA.AdminControllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         string settingsName = "Eurokurs";
+
+
         // GET: EuroExchangeModels
-        [HttpGet]
         public ActionResult Index(EuroViewModel euroObject)
         {
             euroObject = NewEuroObject();
             return View(euroObject);
         }
 
+        /// <summary>
+        /// Creats a new DiesleWeekViewModel object, populates needed lists with data and returns the object
+        /// </summary>
+        /// <returns></returns>
         private EuroViewModel NewEuroObject()
         {
             EuroViewModel euroV;
@@ -37,6 +42,11 @@ namespace BorjesLIA.AdminControllers
             return euroV;
         }
 
+
+        /// <summary>
+        /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        /// </summary>
+        /// <param name="newEuro"></param>
+        /// <returns></returns>
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
             // Adds a new post to Entity EuroExchangeModel
@@ -47,8 +57,6 @@ namespace BorjesLIA.AdminControllers
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro = NewEuroObject();
-                    //newEuro.newEuroList = db.EuroExchangeModels.ToList()
-                    //    .OrderByDescending(x => x.Date);
                     return PartialView("ShowView", newEuro);
                 }
             }
@@ -56,7 +64,11 @@ namespace BorjesLIA.AdminControllers
         }
 
 
-
+        /// <summary>
+        /// Populates the chart with data
+        /// </summary>
+        /// <param name="eurox"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(EuroViewModel eurox)

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
@@ -16,24 +13,26 @@ namespace BorjesLIA.AdminControllers
     public class DieselQuarterPriceModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
         // Static name for Settings
         string settingsName = "Dieselpris Kvartal";
+
+
         // GET: DieselQuarterPriceModels
         public ActionResult Index(DieselQuarterViewModel dieselQ)
         {
-            dieselQ = new DieselQuarterViewModel
-            {
-                AddQuarterDiesel = new DieselQuarterPriceModel(),
-                newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter),
-                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
-            };
+            dieselQ = NewDieselQuarterObject();
             return View(dieselQ);
         }
 
-
-        public ActionResult ShowView(DieselQuarterViewModel dieselQ)
+        /// <summary>
+        /// Creats a new DieselQuarterPriceModel object, populates needed lists with data and returns the object
+        /// </summary>
+        /// <param name="dieselQ"></param>
+        /// <returns></returns>
+        private DieselQuarterViewModel NewDieselQuarterObject()
         {
+            DieselQuarterViewModel dieselQ;
             dieselQ = new DieselQuarterViewModel
             {
                 AddQuarterDiesel = new DieselQuarterPriceModel(),
@@ -41,8 +40,25 @@ namespace BorjesLIA.AdminControllers
                 //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == settingsName)
             };
-            return View(dieselQ);
+            return dieselQ;
         }
+
+        /// <summary>
+        /// This ActionResult is not "in play" ie. no functionality connected to the View
+        /// </summary>
+        /// <param name="dieselQ"></param>
+        /// <returns></returns>
+        //public ActionResult ShowView(DieselQuarterViewModel dieselQ)
+        //{
+        //    dieselQ = new DieselQuarterViewModel
+        //    {
+        //        AddQuarterDiesel = new DieselQuarterPriceModel(),
+        //        newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter),
+        //        //populates list used for determain charttype from Entity Settings
+        //        settings = db.Settings.Where(x => x.Name == settingsName)
+        //    };
+        //    return View(dieselQ);
+        //}
 
 
         public ActionResult _QuarterPriceDiesel(DieselQuarterViewModel dqpData)
@@ -56,7 +72,11 @@ namespace BorjesLIA.AdminControllers
             return View(dqpData);
         }
 
-
+        /// <summary>
+        /// Instansiates an object for startpage
+        /// </summary>
+        /// <param name="dvm"></param>
+        /// <returns></returns>
         public ActionResult _DieselQuarterGraph(DieselQuarterViewModel dvm)
         {
             dvm = new DieselQuarterViewModel
@@ -67,6 +87,12 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dvm);
         }
+
+        /// <summary>
+        /// Populates the chart with data
+        /// </summary>
+        /// <param name="dieselQuarterChart"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
@@ -76,8 +102,12 @@ namespace BorjesLIA.AdminControllers
         }
 
 
-        //[HttpPost]
-        [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Creats a new DieselQuarterViewModel object, populates needed lists with data and return a view with data
+        /// </summary>
+        /// </summary>
+        /// <param name="newQDiesel"></param>
+        /// <returns></returns>
         public ActionResult _AddQuarterDiesel(DieselQuarterViewModel newQDiesel)
         {
             if (Request.IsAjaxRequest())
@@ -87,7 +117,7 @@ namespace BorjesLIA.AdminControllers
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();
                     newQDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);
-                    //var getNewChart = newEuro.GetData();
+                    newQDiesel = NewDieselQuarterObject();
                     //return PartialView("QuarterPriceDiesel", newQDiesel);
                     return PartialView("ShowView", newQDiesel);
                 }

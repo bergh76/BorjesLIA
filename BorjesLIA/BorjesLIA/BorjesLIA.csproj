@@ -958,14 +958,11 @@
     <Content Include="Views\DieselWeekModels\ShowView.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\ShowView.cshtml" />
     <Content Include="Views\Settings\Index_EuroSettings.cshtml" />
-    <Content Include="Views\Settings\_Settings.cshtml" />
     <Content Include="Views\Settings\_EuroSettingsView.cshtml" />
-    <Content Include="Views\Settings\Create.cshtml" />
-    <Content Include="Views\Settings\Delete.cshtml" />
-    <Content Include="Views\Settings\Details.cshtml" />
-    <Content Include="Views\Settings\Edit.cshtml" />
-    <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Settings\_EuroNewGraph.cshtml" />
+    <Content Include="Views\Settings\Index_DtmSettings.cshtml" />
+    <Content Include="Views\Settings\_DtmSettingsView.cshtml" />
+    <Content Include="Views\Settings\_DtmNewGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

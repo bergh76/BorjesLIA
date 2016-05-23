@@ -12,35 +12,33 @@ using BorjesLIA.ViewModel;
 using BorjesLIA.Models.Euro;
 using System.Threading.Tasks;
 using BorjesLIA.Models.Charts;
+using BorjesLIA.Models.Diesel;
 
 namespace BorjesLIA.Controllers
 {
     public class SettingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        string confEuro = "Eurokurs";
+        string confEuroSettings = "Eurokurs";
+        string confDtmSettings = "Drivmedelstillägg";
         // GET: Settings
-        public ActionResult Index(EuroViewModel euroV)
-        {
-            euroV = new EuroViewModel
-            {
-                AddEuro = new EuroExchangeModel(),
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
-                //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == confEuro)
-            };
-            return View(euroV);
-        }
+        //public ActionResult Index(EuroViewModel euroV)
+        //{
+        //    euroV = new EuroViewModel
+        //    {
+        //        AddEuro = new EuroExchangeModel(),
+        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+        //        //populates list used for determain charttype from Entity Settings
+        //        settings = db.Settings.Where(x => x.Name == confEuro)
+        //    };
+        //    return View(euroV);
+        //}
 
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(EuroViewModel eurox)
-        {
-            var data = await eurox.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-       
+        /// <summary>
+        /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data
+        /// </summary>
+        /// <param name="euroSettings"></param>
+        /// <returns></returns>
         public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
         {
             euroSettings = new EuroViewModel 
@@ -48,140 +46,116 @@ namespace BorjesLIA.Controllers
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == confEuro)
+                settings = db.Settings.Where(x => x.Name == confEuroSettings)
             };
             return View(euroSettings);
         }
 
+        /// <summary>
+        /// Populates the chart with data
+        /// </summary>
+        /// <param name="eurox"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        //Populates a list with data from database tabel EuroExchangeModel
+        public async Task<JsonResult> GetEuroData(EuroViewModel eurox)
+        {
+            var data = await eurox.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }     
 
+        /// <summary>
+        /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
+        /// </summary>
+        /// <param name="confEuro"></param>
+        /// <param name="formEuro"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
+        public ActionResult SaveEuroSettings(Settings confEuro, FormCollection formEuro)
         {
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 // populate values from Html-form
-                string name = form[1].ToString();
-                conf.ID = db.Settings.Where(x => x.Name == confEuro).Select(x => x.ID).FirstOrDefault();
-                conf.Year = Convert.ToInt32(form[2]);
-                conf.Name = confEuro;
-                if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
+                string name = formEuro[1].ToString();
+                confEuro.ID = db.Settings.Where(x => x.Name == confEuroSettings).Select(x => x.ID).FirstOrDefault();
+                confEuro.Year = Convert.ToInt32(formEuro[2]);
+                confEuro.Name = this.confEuroSettings;
+                if (!string.IsNullOrEmpty(confEuro.Name) && confEuro.Year != 0)
                 {
                     // saves data to Settings db Entity
-                    db.Entry(conf).State = EntityState.Modified;
+                    db.Entry(confEuro).State = EntityState.Modified;
                     db.SaveChanges();
-                    return PartialView("Index_EuroSettings", conf);                  
+                    return PartialView("Index_EuroSettings", confEuro);                  
                 }
                
             }
-            return View(conf);
+            return View(confEuro);
         }
 
 
-        public ActionResult _EuroLineGraph(EuroViewModel euroGraph)
+
+
+        /// <summary>
+        /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data
+        /// </summary>
+        /// <param name="dtmSettings"></param>
+        /// <returns></returns>
+        public ActionResult Index_DtmSettings(DMTViewModel dtmSettings)
         {
-            euroGraph = new EuroViewModel
+            dtmSettings = new DMTViewModel
             {
-                settings = db.Settings.Where(x => x.Name == "Eurokurs")
+                AddDtm = new DtmModel(),
+                newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
+                //populates list used for determain charttype from Entity Settings
+                settings = db.Settings.Where(x => x.Name == confDtmSettings)
             };
-            return View(euroGraph);
+            return View(dtmSettings);
         }
-        // GET: Settings/Create
-        public ActionResult Create()
+
+        /// <summary>
+        /// Populates the chart with data
+        /// </summary>
+        /// <param name="dtmData"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        //Populates a list with data from database tabel EuroExchangeModel
+        public async Task<JsonResult> GetDTMData(DMTViewModel dtmData)
         {
-            return View();
+            var data = await dtmData.GetData();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-
-        // GET: Settings/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Settings settings = db.Settings.Find(id);
-            if (settings == null)
-            {
-                return HttpNotFound();
-            }
-            return View(settings);
-        }
-
-
-        // POST: Settings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
+        /// </summary>
+        /// <param name="confDtm"></param>
+        /// <param name="formDtm"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Year,ChartType,LoggDate,User")] Settings settings)
+        public ActionResult SaveDtmSettings(Settings confDtm, FormCollection formDtm)
         {
-            if (ModelState.IsValid)
+            // Saves new settings to Entity Settings
+            if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
-                db.Settings.Add(settings);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                // populate values from Html-form
+                string name = formDtm[1].ToString();
+                confDtm.ID = db.Settings.Where(x => x.Name == confDtmSettings).Select(x => x.ID).FirstOrDefault();
+                confDtm.Year = Convert.ToInt32(formDtm[2]);
+                confDtm.Name = this.confDtmSettings;
+                if (!string.IsNullOrEmpty(confDtm.Name) && confDtm.Year != 0)
+                {
+                    // saves data to Settings db Entity
+                    db.Entry(confDtm).State = EntityState.Modified;
+                    db.SaveChanges();
+                    
+                    return PartialView("Index_DtmSettings", confDtm);
+                }
 
-            return View(settings);
+            }
+            return View(confDtm);
         }
 
-        // GET: Settings/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Settings settings = db.Settings.Find(id);
-            if (settings == null)
-            {
-                return HttpNotFound();
-            }
-            return View(settings);
-        }
-
-        // POST: Settings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Year,ChartType,LoggDate,User")] Settings settings)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(settings).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(settings);
-        }
-
-        // GET: Settings/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Settings settings = db.Settings.Find(id);
-            if (settings == null)
-            {
-                return HttpNotFound();
-            }
-            return View(settings);
-        }
-
-        // POST: Settings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Settings settings = db.Settings.Find(id);
-            db.Settings.Remove(settings);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

@@ -28,7 +28,6 @@ namespace BorjesLIA.AdminControllers
         /// <summary>
         /// Creats a new DiesleWeekViewModel object, populates needed lists with data and returns the object
         /// </summary>
-        /// <param name="dieselW"></param>
         /// <returns></returns>
         private DieselWeekViewModel NewDieselWeekObject()
         {
@@ -42,7 +41,6 @@ namespace BorjesLIA.AdminControllers
             };
             return dieselW;
         }
-
 
         /// <summary>
         ///This ActionResult is not "in play" ie. no functionality connected to the View
@@ -74,13 +72,12 @@ namespace BorjesLIA.AdminControllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-
-
         /// <summary>
         /// Instansiates an object for startpage
         /// </summary>
         /// <param name="dvm"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         public ActionResult _DieselWeekGraph(DieselWeekViewModel dvm)
         {
             dvm = new DieselWeekViewModel
@@ -92,28 +89,6 @@ namespace BorjesLIA.AdminControllers
             return View(dvm);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult _AddWeekDiesel(DieselWeekModel newDiesel)
-        //{
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        using (var db = new ApplicationDbContext())
-        //        {
-        //            db.DieselPriceWeek.Add(newDiesel);
-        //            db.SaveChanges();
-        //            //newDiesel = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);
-        //            //var getNewChart = newEuro.GetData();
-        //            //ModelState.Clear();
-        //            //return PartialView("_WeekPriceDiesel", newDiesel);
-        //            return PartialView("ShowView", newDiesel);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(newDiesel);
-        //    }
-        //}
 
         /// <summary>
         /// Creats a new DiesleWeekViewModel object, populates needed lists with data and return a view with data

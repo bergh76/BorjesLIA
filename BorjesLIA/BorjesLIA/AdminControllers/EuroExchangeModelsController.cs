@@ -130,39 +130,39 @@ namespace BorjesLIA.AdminControllers
         //}
 
 
-        public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
-        {
-            euroSettings = new EuroViewModel
-            {
-                AddEuro = new EuroExchangeModel(),
-                newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
-                //populates list used for determain charttype from Entity Settings
-                settings = db.Settings.Where(x => x.Name == settingsName)
-            };
-            return View(euroSettings);
-        }
+        //public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
+        //{
+        //    euroSettings = new EuroViewModel
+        //    {
+        //        AddEuro = new EuroExchangeModel(),
+        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
+        //        //populates list used for determain charttype from Entity Settings
+        //        settings = db.Settings.Where(x => x.Name == settingsName)
+        //    };
+        //    return View(euroSettings);
+        //}
 
 
-        [HttpPost]
-        public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
-        {
+        //[HttpPost]
+        //public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
+        //{
 
-            // Saves new settings to Entity Settings
-            if (Request.IsAjaxRequest() && ModelState.IsValid)
-            {
-                string name = form[1].ToString();
-                conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
-                conf.Year = Convert.ToInt32(form[3]);
-                conf.Name = form[1];
-                if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
-                {
-                    db.Entry(conf).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return View("Index_EuroSettings", conf);
-                }
-            }
-            return View(conf);
-        }
+        //    // Saves new settings to Entity Settings
+        //    if (Request.IsAjaxRequest() && ModelState.IsValid)
+        //    {
+        //        string name = form[1].ToString();
+        //        conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
+        //        conf.Year = Convert.ToInt32(form[3]);
+        //        conf.Name = form[1];
+        //        if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
+        //        {
+        //            db.Entry(conf).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //            return View("Index_EuroSettings", conf);
+        //        }
+        //    }
+        //    return View(conf);
+        //}
 
 
 

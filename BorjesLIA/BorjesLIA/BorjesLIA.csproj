@@ -202,6 +202,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -955,9 +956,15 @@
     <Content Include="Views\DtmModels\ShowView.cshtml" />
     <Content Include="Views\DieselWeekModels\ShowView.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\ShowView.cshtml" />
-    <Content Include="Views\EuroExchangeModels\Index_EuroSettings.cshtml" />
-    <Content Include="Views\EuroExchangeModels\_Settings.cshtml" />
-    <Content Include="Views\EuroExchangeModels\_EuroSettingsView.cshtml" />
+    <Content Include="Views\Settings\Index_EuroSettings.cshtml" />
+    <Content Include="Views\Settings\_Settings.cshtml" />
+    <Content Include="Views\Settings\_EuroSettingsView.cshtml" />
+    <Content Include="Views\Settings\Create.cshtml" />
+    <Content Include="Views\Settings\Delete.cshtml" />
+    <Content Include="Views\Settings\Details.cshtml" />
+    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\_EuroLineGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

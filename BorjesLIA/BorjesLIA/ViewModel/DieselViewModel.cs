@@ -14,8 +14,11 @@ namespace BorjesLIA.ViewModel
         public ChartType ChartType { get; set; }
         public DieselWeekModel AddWeekDiesel { get; set; }
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
+        public int Year { get; set; }
+        public string Name { get; set; }
         public Task<List<DieselWeekModel>> GetWeekData()
         {
+            Name = "Dieselpris Vecka";
             using (var db = new ApplicationDbContext())
             {
                 if (db.DieselPriceWeek == null)
@@ -24,7 +27,8 @@ namespace BorjesLIA.ViewModel
                 }
                 else
                 {
-                    var lwDiesel = db.DieselPriceWeek.OrderBy(x => x.Week).ToList();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    var lwDiesel = db.DieselPriceWeek.Where(x=> x.Year == Year).OrderBy(x => x.Year).ToList();
                     return Task.Run(() => lwDiesel);
                 }
             }
@@ -37,17 +41,21 @@ namespace BorjesLIA.ViewModel
         public ChartType ChartType { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
-        public Task<List<DieselQuarterPriceModel>> GetQuaerterData()
+        public int Year { get; set; }
+        public string Name { get; set; }
+        public Task<List<DieselQuarterPriceModel>> GetQuarterData()
         {
+            Name = "Dieselpris Kvartal";
             using (var db = new ApplicationDbContext())
             {
-                if (db.DieselPriceWeek == null)
+                if (db.DieselPriceQuarter == null)
                 {
-                    return GetQuaerterData();
+                    return GetQuarterData();
                 }
                 else
                 {
-                    var lqDiesel = db.DieselPriceQuarter.OrderBy(x => x.Quarter).ToList();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
                     return Task.Run(() => lqDiesel);
                 }
             }

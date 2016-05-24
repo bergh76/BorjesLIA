@@ -97,7 +97,7 @@ namespace BorjesLIA.AdminControllers
         //Populates a list with data from database tabel EuroExchangeModel
         public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
         {
-            var data = await dieselQuarterChart.GetQuaerterData();
+            var data = await dieselQuarterChart.GetQuarterData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

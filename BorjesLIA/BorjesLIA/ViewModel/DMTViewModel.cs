@@ -16,9 +16,11 @@ namespace BorjesLIA.ViewModel
         public ChartType ChartType { get; set; }
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }
-
+        public int Year { get; set; }
+        public string Name { get; set; }
         public Task<List<DtmModel>> GetData()
         {
+            Name = "Drivmedelstillägg";
             using (var db = new ApplicationDbContext())
             {
                 if (db.DtmModels == null)
@@ -27,7 +29,8 @@ namespace BorjesLIA.ViewModel
                 }
                 else
                 {
-                    var lDtm = db.DtmModels.OrderBy(x => x.Date).ToList();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    var lDtm = db.DtmModels.Where(x => x.Date.Year == Year).OrderBy(x => x.Date).ToList();
                     return Task.Run(() => lDtm);
                 }
             }

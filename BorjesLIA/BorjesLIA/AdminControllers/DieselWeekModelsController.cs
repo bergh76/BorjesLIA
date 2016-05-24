@@ -82,7 +82,7 @@ namespace BorjesLIA.AdminControllers
         {
             dvm = new DieselWeekViewModel
             {
-                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.ID),
+                newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Year),
                 //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == settingsName)
             };
@@ -140,8 +140,8 @@ namespace BorjesLIA.AdminControllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Year,Week,DieselWeekValue,loggDate")] DieselWeekModel dieselWeekModel)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(DieselWeekModel dieselWeekModel)
         {
             if (ModelState.IsValid)
             {
@@ -172,8 +172,8 @@ namespace BorjesLIA.AdminControllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Year,Week,DieselWeekValue,loggDate")] DieselWeekModel dieselWeekModel)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(DieselWeekModel dieselWeekModel)
         {
             if (ModelState.IsValid)
             {

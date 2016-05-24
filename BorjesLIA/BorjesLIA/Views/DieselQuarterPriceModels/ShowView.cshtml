@@ -70,7 +70,7 @@
     </div>
 </div>
 
- <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+ <div class="col-md-12 col-sm-12 col-xs-12">
     @{ var dieselQuarterChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
         var chartID = dieselQuarterChartList.FirstOrDefault();
         // create a check if newEuroList is empty

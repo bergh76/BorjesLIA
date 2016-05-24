@@ -30,26 +30,26 @@
                             data.addColumn('number', 'Pris');
                             // Settings for visualization of the graph
                             var options = {
-                                title: 'Dieselpris per vecka (#1 line)',
+                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
                                 width: '100%',
                                 height: '100%',
-                                pointSize: 3,
-                                dataOpacity: 0.4,
-                                lineWidth: 2,
-                                hAxis: {
-                                    title: 'Datum', titleTextStyle: { color: '#333' },
+                            pointSize: 3,
+                            dataOpacity: 0.4,
+                            lineWidth: 2,
+                            hAxis: {
+                                title: 'Datum', titleTextStyle: { color: '#333' },
                                 }
-                            }
-                            // Loops through the DataTable with data from database
+                        }
+                    // Loops through the DataTable with data from database
                             for (var i = 0; i < dataValues.length; i++) {
                                 data.addRow([(dataValues[i].Week), dataValues[i].DieselWeekValue])
                             }
-                            // Draws the graph into a specified div
-                            new google.visualization.LineChart(document.getElementById('DPWChartDiv')).draw(data, options);
-                        },
-                    // If collectning data from database fails promp message here
-                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                });
+                // Draws the graph into a specified div
+                new google.visualization.LineChart(document.getElementById('DPWChartDiv')).draw(data, options);
+            },
+            // If collectning data from database fails promp message here
+            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+            });
             }
         </script>
     }
@@ -76,7 +76,7 @@
                             data.addColumn('number', 'Pris');
                             // Settings for visualization of the graph
                             var options = {
-                                title: 'Dieselpris per vecka (#2 bar)',
+                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
                                 width: '100%',
                                 height: '100%',
                                 pointSize: 3,
@@ -121,7 +121,7 @@
                             data.addColumn('number', 'Pris');
                             // Settings for visualization of the graph
                             var options = {
-                                title: 'Dieselpris per vecka (#3 column)',
+                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
                                 width: '100%',
                                 height: '100%',
                                 pointSize: 3,
@@ -146,8 +146,8 @@
     }
 }
 
-<div class="GraphDiv">
-    <div id="DPWChartDiv" style="width: 120%; height: 450px"></div>
+<div class="x_panel">
+    <div id="DPWChartDiv" style="width: 100%; height: 450px"></div>
 </div>
 
 @*<div class="x_panel">

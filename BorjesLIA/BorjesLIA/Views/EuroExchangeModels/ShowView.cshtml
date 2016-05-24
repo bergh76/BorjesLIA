@@ -162,9 +162,30 @@
 
 <!--List END-->
 <!--Graph-->
-<div class="col-md-12 col-sm-12 col-xs-12" id="euroGraph">
-    @Html.Partial("_EuroLineGraph")
+<div class="col-md-12 col-sm-12 col-xs-12">
+    @{ var euroList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
+        var chartID = euroList.FirstOrDefault();
+        // create a check if newEuroList is empty
+        if (chartID == 0)
+        {
+            <div class="x_panel">
+                <div class="x_title">
+                    @Html.Partial("_Error")
+                </div>
+            </div>
+        }
+        else
+        {
+            <div>
+                @Html.Partial("_EuroLineGraph")
+            </div>
+        }
+    }
 </div>
+
+@*<div class="col-md-12 col-sm-12 col-xs-12" id="euroGraph">
+    @Html.Partial("_EuroLineGraph")
+</div>*@
 
 <!--Graph END-->
 <!--script using ajax, relode page to show new graph-->

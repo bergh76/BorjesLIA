@@ -33,7 +33,7 @@ namespace BorjesLIA.Migrations
                 context.Settings.Add(std);
 
             base.Seed(context);
-        }
 
+        }
     }
 }

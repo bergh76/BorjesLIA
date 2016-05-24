@@ -1,28 +1,12 @@
-﻿@*@model Intranet.Models.ImageViewModel*@
+﻿<!--TEstklass fria att göra som jag vill-->
 @model BorjesLIA.ViewModel.ImagesViewModel
-<h1>Bilder</h1>
-<div class="row">
-    <div class="col-md-8">
-        <h4>Skicka in ny bild</h4>
-        @Html.Partial("ShowView")
-    </div>
-    <div class="col-md-4">
-    </div>
-</div>
 
-
-
-
-@*@model BorjesLIA.ViewModel.ImagesViewModel
-
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-<!--cropper-->
+<!--cropper script-->
 @Scripts.Render("~/jcrop/jquery.form.js")
 @Scripts.Render("~/jcrop/jquery.Jcrop.js")
-
 @Styles.Render("~/jcrop/jquery.Jcrop.css")
 @Styles.Render("~/jcrop/site.avatar.css")
-
+<!--cropper script end-->
 @{
     //Bestämmer format på bilden som ska laddas upp. För en annan upplösning är det bara att ändra de här två variablerna.
     int width = 1920;
@@ -30,9 +14,6 @@
     //Glöm inte att sätta ratio på bilden. T ex 16/9 = widescreen, 1 = fyrkant
 }
 
-<link rel="stylesheet" href="~/Content/cropper.css">
-    <script src="~/Scripts/cropper.js"></script>
-<!--cropper end-->
 <body class="nav-md">
     <div class="container-dashboard body">
         <div class="main_container">
@@ -59,12 +40,12 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
-                                @using (Html.BeginForm("_AddNewImage", "Imgs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                @*@using (Html.BeginForm("_AddNewImage", "Imgs", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="form-horizontal">
                                         <h4>Img</h4>
-                                        <hr />
+                                        <hr/>
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.AddImage.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -92,13 +73,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                }
+                                }*@
                             </div><!-- img ENDS here -->
                             <div class="col-md-8 col-sm-12 col-xs-12">
                                 <!-- Datatable starts here -->
                                 <div id="imgList">
                                     @Html.Partial("_ImagesList", Model)
-                                    </ div >
+                                    </div >
                                     <!--Datatable ENDS here -->
                                 </div>
                             </div>
@@ -232,10 +213,10 @@
                                 function saveAvatar(sorter,altt) {
                                     var img = $('#preview-pane .preview-container img');
                                     $('#avatar-crop-box button').addClass('disabled');
-
+                                    //lägga till fler parametrar
                                     $.ajax({
                                         type: "POST",
-                                        url: "/Img/SaveSingleImage",
+                                        url: "/Imgs/SaveSingleImage",
                                         traditional: true,
                                         data: {
                                             w: img.css('width'),
@@ -267,18 +248,35 @@
                                 }
 
                             </script>
-                            <!--TODO: sätt rätt namn och controller-->
+
+                            <!--Ajax.BeginForm-->
                             <section id="avatar-upload-box">
-                                @using (Ajax.BeginForm("_SingleImage", "Img", new AjaxOptions() { HttpMethod = "GET" }, new { enctype = "multipart/form-data", id = "avatar-upload-form" }))
+                                @using (Ajax.BeginForm("ShowView", "Imgs", new AjaxOptions() { HttpMethod = "GET" }, new { enctype = "multipart/form-data", id = "avatar-upload-form" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <input type="file" name="files" class="btn btn-default" /><br>
                                     <input type="hidden" name="avatarH" value=@height />
-                                                <input type="hidden" name="avatarW" value=@width />
+                                    <input type="hidden" name="avatarW" value=@width />
                                                 <div class="upload-file-notice">
                                                     Maximum Size: <span id="avatar-max-size"></span> MB
                                                 </div>
 
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.AddImage.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.AddImage.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.AddImage.Name, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.AddImage.PlacingOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.AddImage.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.AddImage.PlacingOrder, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            
                                 }
                                 <div class="upload-progress col-md-6 hidden">
                                     <div class="upload-percent-value pull-left">0%</div>
@@ -323,4 +321,5 @@
             </div>
         </div>
     </div>
-</body>*@
+</body>
+

@@ -238,6 +238,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cropper.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.dataTables.css" />
@@ -340,6 +341,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\borjes-logga-jpg.jpg" />
+    <Content Include="Content\images\borjes_logistik_adr.jpg" />
     <Content Include="Content\images\test_user.jpg" />
     <Content Include="Content\jquery.bxslider\jquery.bxslider.css" />
     <Content Include="Content\jquery.bxslider\bxslider_custom.css" />
@@ -412,6 +414,15 @@
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
     <Content Include="Images\controls.png" />
+    <Content Include="jcrop\jquery.form.js" />
+    <Content Include="jcrop\jquery.form.min.js" />
+    <Content Include="jcrop\jquery.Jcrop.css" />
+    <Content Include="jcrop\jquery.Jcrop.js" />
+    <Content Include="jcrop\jquery.Jcrop.min.css" />
+    <Content Include="jcrop\jquery.Jcrop.min.js" />
+    <Content Include="jcrop\site.avatar.css" />
+    <Content Include="jcrop\site.avatar.js" />
+    <Content Include="Scripts\cropper.js" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.css" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.min.css" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.dataTables.css" />
@@ -969,6 +980,7 @@
     <Content Include="Views\Settings\_DieselQuarterNewGraph.cshtml" />
     <Content Include="Views\Settings\_DieselQuarterSettingsView.cshtml" />
     <Content Include="Views\Settings\Index_DieselQuarterSettings.cshtml" />
+    <Content Include="Views\Imgs\ShowView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,8 +62,8 @@
     //$("#videoOne").on("play", function (e) {
     //    slider.stopShow();
     //});
-    //});
-});
+//    //});
+//});
 
 
 // ToDo: Function that maximizes the containter with the bxSlider and explicit set width and hight to fixed values.

@@ -325,14 +325,18 @@ $(document).ready(function () {
         adaptiveHeight: true,
         loading: true,
         controls: false,
-        //pause: 5000, //15000,
+        pause: 5000, //15000,
         //video: true,
         autoControls: false,
 
     });
 });
 
-
+//$(document).ready(function(){
+//    $('.bxslider').bxSlider({
+//        pager: false
+//    });
+//});
 
 ////video test
 //$("#videoOne").on("pause", function (e) {

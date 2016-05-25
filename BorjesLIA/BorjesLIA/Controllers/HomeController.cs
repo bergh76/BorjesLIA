@@ -33,7 +33,8 @@ namespace BorjesLIA.Controllers
                 {
                     var listvm = new listViewModel();
                     listvm.name = item.Name;
-                    listvm.url = "/Images/contentslider/" + item.Url;
+                    //listvm.url = "/Images/contentslider/" + item.Url;
+                    listvm.url = "/Images/UploadedImg/" + item.Url;
                     listvm.orderby = item.PlacingOrder;
 
                     model.listVM.Add(listvm);
@@ -80,12 +81,7 @@ namespace BorjesLIA.Controllers
             // Then sett values from SettingsList
             // Render paget from listsettings 
 
-
             return View();
         }
     }
 }
-
-
-
-

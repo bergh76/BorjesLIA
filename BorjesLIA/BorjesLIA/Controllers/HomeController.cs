@@ -81,12 +81,7 @@ namespace BorjesLIA.Controllers
             // Then sett values from SettingsList
             // Render paget from listsettings 
 
-
             return View();
         }
     }
 }
-
-
-
-

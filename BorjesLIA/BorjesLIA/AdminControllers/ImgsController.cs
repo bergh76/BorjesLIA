@@ -23,7 +23,7 @@ namespace BorjesLIA.AdminControllers
         private const string TempFolder = "/Temp";
         private const string MapTempFolder = "~" + TempFolder;
         public string ActionString = String.Empty;
-        public string AvatarPath = "/Images";
+        public string AvatarPath = "/Images/UploadedImg/";
         private readonly string[] _imageFileExtensions = { ".jpg", ".png", ".gif", ".jpeg" };
 
         // GET: Imgs
@@ -37,49 +37,7 @@ namespace BorjesLIA.AdminControllers
             return View(ImageV);
         }
 
-        //[AllowAnonymous]
-        //public ActionResult _ImagesList(ImagesViewModel imageV)
-        //{
-        //    imageV = new ImagesViewModel
-        //    {
-        //        newImageList = db.Imgs.ToList().OrderByDescending(x => x.Date)
-        //    };
-        //    return View(imageV);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult _AddNewImage(ImagesViewModel img, HttpPostedFileBase file)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (file != null)
-        //        {
-        //            var fileName = Path.GetFileName(file.FileName);
-        //            var directorypath = Path.Combine(Server.MapPath("~/Images/ContentSlider/"));
-
-        //            var path = Path.Combine(Server.MapPath("~/Images/ContentSlider/"), fileName);
-        //            file.SaveAs(path);
-
-        //            img.AddImage.Url = fileName;
-        //            img.AddImage.Date = DateTime.Now;
-        //            img.AddImage.Active = true;
-        //            db.Imgs.Add(img.AddImage);
-        //            db.SaveChanges();
-
-        //            img.newImageList = db.Imgs.ToList().OrderByDescending(x => x.PlacingOrder);
-        //        }
-        //        return View("Index", img);
-        //    }
-        //    return View(img);
-        //}
-
-
-
-
-
-        //titta på tobbes kod
-
+        //borrowed code
 
         [AllowAnonymous]
         public ActionResult MyImages()
@@ -128,10 +86,10 @@ namespace BorjesLIA.AdminControllers
                 System.IO.File.Delete(fn);
                 // ... and save the new one.
                 var filename2 = Path.GetFileName(fn);
-                var user = User.Identity.Name;
+                //var user = User.Identity.Name;
 
-
-                AvatarPath = AvatarPath + String.Format("/UploadedImg/{0}/", user);
+                //AvatarPath = AvatarPath + String.Format("/UploadedImg/{0}/", user);
+                //AvatarPath = AvatarPath + String.Format("/UploadedImg/{0}/", user);
                 var newFileName = Path.Combine(AvatarPath, Path.GetFileName(fn));
                 var newFileLocation = HttpContext.Server.MapPath(newFileName);
                 if (Directory.Exists(Path.GetDirectoryName(newFileLocation)) == false)
@@ -234,7 +192,7 @@ namespace BorjesLIA.AdminControllers
             }
         }
 
-        //sluta titta på tobbes kod 
+        //end borrowed code
 
 
         // GET: Imgs/Details/5

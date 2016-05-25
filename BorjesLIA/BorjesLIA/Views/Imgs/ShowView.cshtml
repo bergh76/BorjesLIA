@@ -1,17 +1,15 @@
-﻿<!--TEstklass fria att göra som jag vill-->
-@model BorjesLIA.ViewModel.ImagesViewModel
+﻿@model BorjesLIA.ViewModel.ImagesViewModel
 
 <!--cropper script-->
-@Scripts.Render("~/jcrop/jquery.form.js")
-@Scripts.Render("~/jcrop/jquery.Jcrop.js")
-@Styles.Render("~/jcrop/jquery.Jcrop.css")
-@Styles.Render("~/jcrop/site.avatar.css")
+@Scripts.Render("~/Scripts/jcrop/jquery.form.js")
+@Scripts.Render("~/Scripts/jcrop/jquery.Jcrop.js")
+@Styles.Render("~/Scripts/jcrop/jquery.Jcrop.css")
+@Styles.Render("~/Scripts/jcrop/site.avatar.css")
 <!--cropper script end-->
 @{
-    //Bestämmer format på bilden som ska laddas upp. För en annan upplösning är det bara att ändra de här två variablerna.
+    //Bestämmer format på bilden som ska laddas upp.
     int width = 1920;
     int height = 1080;
-    //Glöm inte att sätta ratio på bilden. T ex 16/9 = widescreen, 1 = fyrkant
 }
 
 <body class="nav-md">
@@ -40,49 +38,10 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
-                                @*@using (Html.BeginForm("_AddNewImage", "Imgs", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div class="form-horizontal">
-                                        <h4>Img</h4>
-                                        <hr/>
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.AddImage.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.AddImage.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.AddImage.Name, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.AddImage.PlacingOrder, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.AddImage.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.AddImage.PlacingOrder, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.Label("Bild", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                <input type="file" name="file" id="file" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Create" class="btn btn-default" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                }*@
-                            </div><!-- img ENDS here -->
-                            <div class="col-md-8 col-sm-12 col-xs-12">
-                                <!-- Datatable starts here -->
-                                <div id="imgList">
-                                    @Html.Partial("_ImagesList", Model)
-                                    </div >
-                                    <!--Datatable ENDS here -->
-                                </div>
+
+
                             </div>
+
 
                             <!--cropper-->
                             <script>
@@ -211,6 +170,8 @@
                                 }
 
                                 function saveAvatar(sorter,altt) {
+                                    var elemName = document.getElementById("getImageName");
+                                    var elemPlacingORder = document.getElementById("getPlacingORder");
                                     var img = $('#preview-pane .preview-container img');
                                     $('#avatar-crop-box button').addClass('disabled');
                                     //lägga till fler parametrar
@@ -225,7 +186,9 @@
                                             t: img.css('marginTop'),
                                             avatarW: @width,
                                             avatarH: @height,
-                                            fileName: img.attr('src')
+                                            fileName: img.attr('src'),
+                                            imgName: elemName.value,
+                                            placingOrder: elemPlacingORder.value,
                                         }
                                     }).done(function (data) {
                                         if (data.success === true) {
@@ -257,26 +220,9 @@
                                     <input type="file" name="files" class="btn btn-default" /><br>
                                     <input type="hidden" name="avatarH" value=@height />
                                     <input type="hidden" name="avatarW" value=@width />
-                                                <div class="upload-file-notice">
-                                                    Maximum Size: <span id="avatar-max-size"></span> MB
-                                                </div>
-
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                                <div class="form-group">
-                                                    @Html.LabelFor(model => model.AddImage.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.AddImage.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => model.AddImage.Name, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    @Html.LabelFor(model => model.AddImage.PlacingOrder, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.AddImage.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => model.AddImage.PlacingOrder, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                            
+                                        <div class="upload-file-notice">
+                                            Maximum Size: <span id="avatar-max-size"></span> MB
+                                        </div>
                                 }
                                 <div class="upload-progress col-md-6 hidden">
                                     <div class="upload-percent-value pull-left">0%</div>
@@ -293,13 +239,17 @@
                                         </div>
                                     </div>
                                 </p>
+
+                                <input type="text" name="imgName" id="getImageName" value="name"/>
+                                <input type="text" name="placingOrder" id="getPlacingORder" value="PlacingOrder"/>
+
                                 <div class="row">
                                     <span>Bilden skalas om enligt @width <text>x</text> @height pixlar.</span><br />
                                     <span>Notera: Om originalbilden är mindre än denna upplösning kommer bilden att förstoras och skalas om till @width <text>x</text> @height och kan därför tappa lite i bildkvalité.</span><br /><br />
-
                                 </div>
                                 <p>&nbsp;</p>
                                 <p><button class="btn btn-default" onclick="saveAvatar()">Spara bild</button></p>
+
                             </section>
                             <div id="avatar-result" class="hidden">
                                 <img src="" alt="Final Image" />
@@ -309,11 +259,15 @@
                                     <p>Bilden laddades upp korrekt</p>
                                 </div>
 
+                            </div> <!--cropper end-->
+
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <!-- Datatable starts here -->
+                                <div id="imgList">
+                                    @Html.Partial("_ImagesList", Model)
+                                </div>
+                                <!--Datatable ENDS here -->
                             </div>
-
-                            <!--cropper end-->
-
-
 
                         </div>
                     </div>

@@ -238,7 +238,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\cropper.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.dataTables.css" />
@@ -414,15 +413,17 @@
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
     <Content Include="Images\controls.png" />
-    <Content Include="jcrop\jquery.form.js" />
-    <Content Include="jcrop\jquery.form.min.js" />
-    <Content Include="jcrop\jquery.Jcrop.css" />
-    <Content Include="jcrop\jquery.Jcrop.js" />
-    <Content Include="jcrop\jquery.Jcrop.min.css" />
-    <Content Include="jcrop\jquery.Jcrop.min.js" />
-    <Content Include="jcrop\site.avatar.css" />
-    <Content Include="jcrop\site.avatar.js" />
-    <Content Include="Scripts\cropper.js" />
+    <Content Include="Images\UploadedImg\home-1353389_960_720.jpg" />
+    <Content Include="Images\UploadedImg\landscape-615429_960_720.jpg" />
+    <Content Include="Images\UploadedImg\sunset-1331088_960_720.jpg" />
+    <Content Include="Scripts\jcrop\jquery.form.js" />
+    <Content Include="Scripts\jcrop\jquery.form.min.js" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.css" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.js" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.min.css" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\jcrop\site.avatar.css" />
+    <Content Include="Scripts\jcrop\site.avatar.js" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.css" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.min.css" />
     <Content Include="Scripts\DataTables-1.10.11\extensions\AutoFill\css\autoFill.dataTables.css" />
@@ -920,7 +921,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Imgs\Create.cshtml" />
     <Content Include="Views\Imgs\Delete.cshtml" />
     <Content Include="Views\Imgs\Details.cshtml" />
     <Content Include="Views\Imgs\Edit.cshtml" />

@@ -34,7 +34,7 @@ namespace BorjesLIA.Models.Diesel
         public DieselQuarterPriceModel()
         {
             LoggDate = DateTime.Now;
-            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
+            User = HttpContext.Current.User.Identity.Name;
         }
     }
 }

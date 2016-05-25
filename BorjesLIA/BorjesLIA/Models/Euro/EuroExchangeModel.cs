@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace BorjesLIA.Models.Euro
 {
@@ -27,7 +28,7 @@ namespace BorjesLIA.Models.Euro
         public EuroExchangeModel()
         {
             LoggDate = DateTime.Now;
-            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
+            User = HttpContext.Current.User.Identity.Name;
         }
     }
 }

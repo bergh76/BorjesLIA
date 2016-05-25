@@ -416,6 +416,7 @@
     <Content Include="Images\UploadedImg\home-1353389_960_720.jpg" />
     <Content Include="Images\UploadedImg\landscape-615429_960_720.jpg" />
     <Content Include="Images\UploadedImg\sunset-1331088_960_720.jpg" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Scripts\jcrop\jquery.form.js" />
     <Content Include="Scripts\jcrop\jquery.form.min.js" />
     <Content Include="Scripts\jcrop\jquery.Jcrop.css" />
@@ -878,8 +879,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Content\Owl-Carousel\main.css" />
+    <Content Include="Content\Owl-Carousel\owl.carousel.css" />
+    <Content Include="Content\Owl-Carousel\owl.transitions.css" />
+    <Content Include="Scripts\Owl-Carousel\main.js" />
+    <Content Include="Scripts\Owl-Carousel\owl.carousel.min.js" />
     <Content Include="Scripts\SliderHideNav.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />

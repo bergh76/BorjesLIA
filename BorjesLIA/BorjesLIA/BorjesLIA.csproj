@@ -969,6 +969,7 @@
     <Content Include="Views\Settings\_DieselQuarterNewGraph.cshtml" />
     <Content Include="Views\Settings\_DieselQuarterSettingsView.cshtml" />
     <Content Include="Views\Settings\Index_DieselQuarterSettings.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

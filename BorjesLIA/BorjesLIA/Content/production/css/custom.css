@@ -777,6 +777,7 @@ article.media {
   float: left;
 }
 h2 {
+    padding-bottom: 4px;
   font-size: 18px;
   font-weight: 400;
 }

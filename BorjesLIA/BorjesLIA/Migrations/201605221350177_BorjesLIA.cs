@@ -13,7 +13,7 @@ namespace BorjesLIA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Year = c.Int(nullable: false),
+                        Year = c.String(nullable: false),
                         Quarter = c.String(),
                         DieselQuarterValue = c.Decimal(nullable: false, precision: 18, scale: 3),
                         DieselQuarterChartID = c.Int(nullable: false),
@@ -26,7 +26,7 @@ namespace BorjesLIA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Year = c.Int(nullable: false),
+                        Year = c.String(nullable: false),
                         Week = c.String(),
                         DieselWeekValue = c.Decimal(nullable: false, precision: 18, scale: 3),
                         DieselWeekChartID = c.Int(nullable: false),

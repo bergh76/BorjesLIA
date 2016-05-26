@@ -16,7 +16,7 @@ namespace BorjesLIA.Models.Settings
         public string Name { get; set; }
 
         [DataType(DataType.Text)]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [DataType(DataType.Text)]
         public int ChartType { get; set; }
@@ -32,7 +32,7 @@ namespace BorjesLIA.Models.Settings
         public Settings()
         {
             LoggDate = DateTime.Now;
-            User = System.Security.Principal.WindowsIdentity.GetCurrent().ToString();
+            User = HttpContext.Current.User.Identity.Name;
         }
 
     }

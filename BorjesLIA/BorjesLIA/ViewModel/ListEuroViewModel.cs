@@ -15,7 +15,7 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<Settings> settings { get; set; }
         public EuroExchangeModel AddEuro { get; set; }
         public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public string Name { get; set; }
         public Task<List<EuroExchangeModel>> GetData()
         {
@@ -29,7 +29,7 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     Year = db.Settings.ToList().Where(x => x.Name == this.Name).OrderByDescending( x=> x.Year).Select(x => x.Year).FirstOrDefault();
-                    var lEuro = db.EuroExchangeModels.Where(x => x.Date.Year == Year).OrderBy(x => x.Date).ToList();
+                    var lEuro = db.EuroExchangeModels.Where(x => x.Date.Year.ToString() == Year).OrderBy(x => x.Date).ToList();
                     return Task.Run(() => lEuro);
                 }
             }

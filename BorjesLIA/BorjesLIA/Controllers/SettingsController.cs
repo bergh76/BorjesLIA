@@ -70,21 +70,31 @@ namespace BorjesLIA.Controllers
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
         /// <param name="confEuro"></param>
-        /// <param name="formEuro"></param>
+        /// <param name="formEuroData"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveEuroSettings(Settings confEuro, FormCollection formEuro)
+        public ActionResult SaveEuroSettings(Settings confEuro, FormCollection formEuroData)
         {
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 // populate values from Html-form
-                string name = formEuro[1].ToString();
+                string name = formEuroData[1].ToString();
                 confEuro.ID = db.Settings.Where(x => x.Name == confEuroSettings).Select(x => x.ID).FirstOrDefault();
-                confEuro.Year = Convert.ToInt32(formEuro[2]);
+                confEuro.Year = formEuroData[2];
                 confEuro.Name = this.confEuroSettings;
-                if (!string.IsNullOrEmpty(confEuro.Name) && confEuro.Year != 0)
+                if (!string.IsNullOrEmpty(confEuro.Name) && string.IsNullOrEmpty(confEuro.Year))
                 {
+                    confEuro.Year = "Alla";
+                    // saves data to Settings db Entity
+                    db.Entry(confEuro).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return PartialView("Index_EuroSettings", confEuro);
+                }
+                if (!string.IsNullOrEmpty(confEuro.Name) && !string.IsNullOrEmpty(confEuro.Year))
+                {
+                    confEuro.Year = formEuroData[2];
                     // saves data to Settings db Entity
                     db.Entry(confEuro).State = EntityState.Modified;
                     db.SaveChanges();
@@ -96,8 +106,10 @@ namespace BorjesLIA.Controllers
         }
 
 
+
+
         //******************************************************************************************//
-        //*******************************| DRIVMEDELSTILLÄGSETTEING |*******************************//
+        //*******************************| DRIVMEDELSTILLÄGSETTING |*******************************//
         //******************************************************************************************//
         /// <summary>
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data
@@ -133,21 +145,32 @@ namespace BorjesLIA.Controllers
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
         /// <param name="confDtm"></param>
-        /// <param name="formDtm"></param>
+        /// <param name="formDtmData"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveDtmSettings(Settings confDtm, FormCollection formDtm)
+        public ActionResult SaveDtmSettings(Settings confDtm, FormCollection formDtmData)
         {
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 // populate values from Html-form
-                string name = formDtm[1].ToString();
+                string name = formDtmData[1].ToString();
                 confDtm.ID = db.Settings.Where(x => x.Name == confDtmSettings).Select(x => x.ID).FirstOrDefault();
-                confDtm.Year = Convert.ToInt32(formDtm[2]);
+                confDtm.Year = formDtmData[2].ToString();
                 confDtm.Name = this.confDtmSettings;
-                if (!string.IsNullOrEmpty(confDtm.Name) && confDtm.Year != 0)
+
+                if (!string.IsNullOrEmpty(confDtm.Name) && string.IsNullOrEmpty(confDtm.Year))
                 {
+                    confDtm.Year = "Alla";
+                    // saves data to Settings db Entity
+                    db.Entry(confDtm).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return PartialView("Index_DtmSettings", confDtm);
+                }
+                if (!string.IsNullOrEmpty(confDtm.Name) && !string.IsNullOrEmpty(confDtm.Year))
+                {
+                    confDtm.Year = formDtmData[2].ToString();
                     // saves data to Settings db Entity
                     db.Entry(confDtm).State = EntityState.Modified;
                     db.SaveChanges();
@@ -158,6 +181,10 @@ namespace BorjesLIA.Controllers
             }
             return View(confDtm);
         }
+
+
+
+
 
         //******************************************************************************************//
         //**********************************| DIESELWEEKSETTINGS |**********************************//
@@ -196,21 +223,32 @@ namespace BorjesLIA.Controllers
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
         /// <param name="confDw"></param>
-        /// <param name="formDtm"></param>
+        /// <param name="formDWData"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveDWSettings(Settings confDw, FormCollection formDtm)
+        public ActionResult SaveDWSettings(Settings confDw, FormCollection formDWData)
         {
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 // populate values from Html-form
-                string name = formDtm[1].ToString();
+                string name = formDWData[1].ToString();
                 confDw.ID = db.Settings.Where(x => x.Name == confDwSettings).Select(x => x.ID).FirstOrDefault();
-                confDw.Year = Convert.ToInt32(formDtm[2]);
+                confDw.Year = formDWData[2];
                 confDw.Name = this.confDwSettings;
-                if (!string.IsNullOrEmpty(confDw.Name) && confDw.Year != 0)
+                
+                if (!string.IsNullOrEmpty(confDw.Name) && string.IsNullOrEmpty(confDw.Year))
                 {
+                    confDw.Year = "Alla";
+                    // saves data to Settings db Entity
+                    db.Entry(confDw).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return PartialView("Index_DieselWeekSettings", confDw);
+                }
+                if (!string.IsNullOrEmpty(confDw.Name) && !string.IsNullOrEmpty(confDw.Year))
+                {
+                    confDw.Year = formDWData[2];
                     // saves data to Settings db Entity
                     db.Entry(confDw).State = EntityState.Modified;
                     db.SaveChanges();
@@ -223,12 +261,11 @@ namespace BorjesLIA.Controllers
         }
 
 
-        //******************************************************************************************//
-        //********************************| DIESELQUARTERSETTINGS |*********************************//
-        //******************************************************************************************//
+
+
 
         //******************************************************************************************//
-        //**********************************| DIESELWEEKSETTINGS |**********************************//
+        //********************************| DIESELQUARTERSETTINGS |*********************************//
         //******************************************************************************************//
         /// <summary>
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data
@@ -264,21 +301,22 @@ namespace BorjesLIA.Controllers
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
         /// <param name="confDq"></param>
-        /// <param name="formDq"></param>
+        /// <param name="formDQData"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveDQSettings(Settings confDq, FormCollection formDq)
+        public ActionResult SaveDQSettings(Settings confDq, FormCollection formDQData)
         {
             // Saves new settings to Entity Settings
             if (Request.IsAjaxRequest() && ModelState.IsValid)
             {
                 // populate values from Html-form
-                string name = formDq[1].ToString();
+                string name = formDQData[1].ToString();
                 confDq.ID = db.Settings.Where(x => x.Name == confDqSettings).Select(x => x.ID).FirstOrDefault();
-                confDq.Year = Convert.ToInt32(formDq[2]);
+                confDq.Year = formDQData[2];
                 confDq.Name = this.confDqSettings;
-                if (!string.IsNullOrEmpty(confDq.Name) && confDq.Year != 0)
+                if (!string.IsNullOrEmpty(confDq.Name) && string.IsNullOrEmpty(confDq.Year))
                 {
+                    confDq.Year = "Alla";
                     // saves data to Settings db Entity
                     db.Entry(confDq).State = EntityState.Modified;
                     db.SaveChanges();
@@ -286,14 +324,17 @@ namespace BorjesLIA.Controllers
                     return PartialView("Index_DieselQuarterSettings", confDq);
                 }
 
+                else if (string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
+                {
+                    confDq.Year = formDQData[2];
+                    // saves data to Settings db Entity
+                    db.Entry(confDq).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return PartialView("Index_DieselQuarterSettings", confDq);
+                }               
             }
             return View(confDq);
         }
-
-
-
-
-
 
         protected override void Dispose(bool disposing)
         {

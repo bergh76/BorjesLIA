@@ -13,7 +13,7 @@ namespace BorjesLIA.Models.Diesel
 
         [DataType(DataType.Text)]
         [Display(Name = "År")]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Vecka")]

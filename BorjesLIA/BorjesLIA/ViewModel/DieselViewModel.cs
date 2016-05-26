@@ -14,7 +14,7 @@ namespace BorjesLIA.ViewModel
         public ChartType ChartType { get; set; }
         public DieselWeekModel AddWeekDiesel { get; set; }
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public string Name { get; set; }
         public Task<List<DieselWeekModel>> GetWeekData()
         {
@@ -24,6 +24,12 @@ namespace BorjesLIA.ViewModel
                 if (db.DieselPriceWeek == null)
                 {
                     return GetWeekData();
+                  
+                }
+                if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                {
+                    var lqAllDiesel = db.DieselPriceWeek.ToList();
+                    return Task.Run(() => lqAllDiesel);
                 }
                 else
                 {
@@ -41,7 +47,7 @@ namespace BorjesLIA.ViewModel
         public ChartType ChartType { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public string Name { get; set; }
         public Task<List<DieselQuarterPriceModel>> GetQuarterData()
         {
@@ -51,6 +57,11 @@ namespace BorjesLIA.ViewModel
                 if (db.DieselPriceQuarter == null)
                 {
                     return GetQuarterData();
+                }
+                if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                {
+                    var lqAllDiesel = db.DieselPriceQuarter.ToList();
+                    return Task.Run(() => lqAllDiesel);
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -286,7 +286,7 @@ function toggleFullScreen() {
         } else if (document.documentElement.webkitRequestFullscreen) {
             document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
-
+        $('nav').slideUp('slow');
     } else {
 
         if (document.exitFullscreen) {
@@ -312,25 +312,25 @@ function toggleFullScreen() {
 //*****************************************//
 //              BX SLIDER                  //
 //*****************************************//
-$(document).ready(function () {
-    $(".bxslider").bxSlider({
-        pager: false,
-        mode: "fade",
-        captions: false,
-        auto: true,
-        autoControls: false,
-        responsive: true,
-        minSlides: 1,
-        slideMargin: 0,
-        adaptiveHeight: true,
-        loading: true,
-        controls: false,
-        pause: 5000, //15000,
-        //video: true,
-        autoControls: false,
+//$(document).ready(function () {
+//    $(".bxslider").bxSlider({
+//        pager: false,
+//        mode: "fade",
+//        captions: false,
+//        auto: true,
+//        autoControls: false,
+//        responsive: true,
+//        minSlides: 1,
+//        slideMargin: 0,
+//        adaptiveHeight: true,
+//        loading: true,
+//        controls: false,
+//        pause: 5000, //15000,
+//        //video: true,
+//        autoControls: false,
 
-    });
-});
+//    });
+//});
 
 //$(document).ready(function(){
 //    $('.bxslider').bxSlider({

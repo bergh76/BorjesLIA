@@ -51,7 +51,7 @@
 }
 .nav-sm .nav.child_menu li.active,
 .nav-sm .nav.side-menu li.active-sm {
-    
+
   border-right: 5px solid #1ABB9C;
 }
 .nav-sm ul.nav.child_menu ul,
@@ -348,7 +348,7 @@ body {
   min-height:100%;
     position:relative;
 
-  font-size: 1.5em;
+  /*font-size: 1.5em;*/
   font-weight: 400;
   line-height: 1.471;
 }
@@ -463,9 +463,9 @@ a:hover, a:focus {
   text-decoration: none
 }
 .navbar {
-
   margin-bottom: 0
 }
+
 .navbar-header {
   background: #f8f8f8;
 }
@@ -510,11 +510,11 @@ a:hover, a:focus {
   margin-top: 0
 }
 .nav.side-menu> li {
-    /*margin-top: -3px;*/
+    padding-bottom: 5px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-top: 0.5px solid rgba(126, 126, 126, 0.1);
-    border-bottom: 0.5px solid rgba(126, 126, 126, 0.1);
+    /*border-bottom: 0.5px solid rgba(126, 126, 126, 0.1);*/
     border-right: 0.5px solid rgba(126, 126, 126, 0.1);
   position: relative;
   display: block;
@@ -532,15 +532,18 @@ a:hover, a:focus {
   /*background: transparent;*/
 }
 .nav.child_menu {
-
   display: none;
 }
 .nav.child_menu li:hover,
 .nav.child_menu li.active {
-  background-color: rgba(255, 255, 255, 0.06);
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    /*background-color: rgba(255, 255, 255, 0.06);*/
+    background-color: rgba(8, 47, 85, 0.1);
+    margin-bottom: -4px;
 }
 .nav.child_menu li {
-    margin-bottom: -4px;
+  margin-bottom: -4px;
   padding-left: 36px;
 }
 
@@ -551,7 +554,8 @@ a:hover, a:focus {
 .nav.child_menu li li:hover, 
 .nav.child_menu li li.active {
   /*background: none;*/
-            border-right: 1px dashed #34495E;
+  border-right: 1px dashed #34495E;
+  color: red;
 }
 .nav.child_menu li li a:hover, 
 .nav.child_menu li li a.active {
@@ -575,15 +579,7 @@ a:hover, a:focus {
   /*color: #fff;*/
 }
 .nav.side-menu> li.active > a {
-  /*text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5b6479), color-stop(100%, #4c5566)), #686e78;
-  background: -webkit-linear-gradient(#334556, #2C4257), #2A3F54;
-  background: -moz-linear-gradient(#334556, #2C4257), #2A3F54;
-  background: -o-linear-gradient(#334556, #2C4257), #2A3F54;
-  background: linear-gradient(#334556, #2C4257), #2A3F54;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
-  -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;*/
+
 }
 .navbar-brand, .navbar-nav>li>a {
   font-weight: 500;

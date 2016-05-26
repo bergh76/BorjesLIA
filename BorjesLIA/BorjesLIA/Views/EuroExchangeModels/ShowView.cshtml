@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            @using (Ajax.BeginForm("_AddEuro", new AjaxOptions { OnSuccess = "OnSuccess" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
+            @using (Ajax.BeginForm("_AddEuro", new AjaxOptions { OnSuccess = "OnSuccess" })) 
             {
                 @Html.AntiForgeryToken()
                 <h2>Lägg till ny Eurokursindex</h2>

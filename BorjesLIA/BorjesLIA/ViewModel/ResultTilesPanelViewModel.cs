@@ -89,13 +89,13 @@ namespace BorjesLIA.ViewModel
             iDPQ = db.DieselPriceQuarter.ToList();
             if (iDPQ == null || iDPQ.GetEnumerator().MoveNext())
             {
-                var getDieselQ = iDPQ.Select(s => s.DieselQuarterValue)
+                var getDieselQ = iDPQ.OrderByDescending(x => x.Year).Select(s => s.DieselQuarterValue)
                                     .FirstOrDefault();
                 actDieselQuarter = getDieselQ.ToString();
                 var countDPQRow = iDPQ.Count();
                 if (countDPQRow > 1)
                 {
-                    var getLastQDiesel = iDPQ.OrderByDescending(x => x.DieselQuarterValue)
+                    var getLastQDiesel = iDPQ.OrderByDescending(x => x.Year)
                         .Select(x => x.DieselQuarterValue)
                         .ElementAt(1);
 
@@ -106,14 +106,14 @@ namespace BorjesLIA.ViewModel
                     lastDieselQuarter = "0";
                 }
                 var dQSUM = Math.Round(Convert.ToDecimal(actDieselQuarter) - Convert.ToDecimal(lastDieselQuarter), 3);
-                diffDieselWeek = dQSUM.ToString();
+                diffDieselQuarter = dQSUM.ToString();
             }
 
             else
             {
                 actDieselQuarter = error;
                 lastDieselQuarter = error;
-                diffDieselWeek = error;
+                diffDieselQuarter = error;
             }
         }
 
@@ -124,14 +124,14 @@ namespace BorjesLIA.ViewModel
             iDPW = db.DieselPriceWeek.ToList();
             if (iDPW == null || iDPW.GetEnumerator().MoveNext())
             {
-                var getDieselW = iDPW.Select(s => s.DieselWeekValue)
+                var getDieselW = iDPW.OrderByDescending(x=>x.Year).Select(s => s.DieselWeekValue)
                                     .FirstOrDefault();
                 actDieselWeek = getDieselW.ToString();
 
                 var countDPWRow = iDPW.Count();
                 if (countDPWRow > 1)
                 {
-                    var getLastWDiesel = iDPW.OrderByDescending(x => x.DieselWeekValue)
+                    var getLastWDiesel = iDPW.OrderByDescending(x => x.Year)
                         .Select(x => x.DieselWeekValue)
                         .ElementAt(1);
 

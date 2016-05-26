@@ -127,7 +127,7 @@ Author URL:
   background: rgba(221, 23, 38, 0.5);
 }
 #progressBar {
-  margin-top: -5px;
+  margin-top: -10px;
   position: relative;
   z-index: 999;
   width: 100%;

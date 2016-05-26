@@ -1,3 +1,3 @@
-﻿$(document).ready(function () {
-    $('nav').hide();
-});
+﻿//$(document).ready(function () {
+//    $('nav').slideUp('slow');
+//});

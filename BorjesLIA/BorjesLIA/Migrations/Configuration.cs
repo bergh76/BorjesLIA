@@ -24,10 +24,10 @@ namespace BorjesLIA.Migrations
         {
             IList<Settings> intialSettings = new List<Settings>();
 
-            intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year , LoggDate = DateTime.Now, User =""});
-            intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year, LoggDate = DateTime.Now, User = "" }); ;
-            intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year, LoggDate = DateTime.Now, User = "" });
-            intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year, LoggDate = DateTime.Now, User = "" });
+            intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year.ToString() , LoggDate = DateTime.Now, User =""});
+            intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" }); ;
+            intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" });
+            intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" });
 
             foreach (Settings std in intialSettings)
                 context.Settings.Add(std);

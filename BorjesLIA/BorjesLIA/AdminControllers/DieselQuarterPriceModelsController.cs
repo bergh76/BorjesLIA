@@ -63,12 +63,14 @@ namespace BorjesLIA.AdminControllers
 
         public ActionResult _QuarterPriceDiesel(DieselQuarterViewModel dqpData)
         {
+            if(dqpData != null) { 
             dqpData = new DieselQuarterViewModel
             {
                 newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Year),
                 //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == settingsName)
             };
+            }
             return View(dqpData);
         }
 

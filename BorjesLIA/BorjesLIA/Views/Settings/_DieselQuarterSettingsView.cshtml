@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <div class="dropdown">
-                        @Html.DropDownListFor(model => model.AddQuarterDiesel.Year, new SelectList(Model.newQuarterDieselList.Select(x => x.Year).Distinct()), "Year", new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.DropDownListFor(model => model.AddQuarterDiesel.Year, new SelectList(Model.newQuarterDieselList.Select(x => x.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })
                         @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
                     </div>
                 </div>

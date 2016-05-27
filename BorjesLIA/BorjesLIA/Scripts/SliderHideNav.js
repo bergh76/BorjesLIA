@@ -1,14 +1,11 @@
-﻿$(document).ready(function () {
+﻿$(addEventListener).dblclick(function () {
     var timer;
-    $(document).mousemove(function () {
         if (timer) {
             clearTimeout(timer);
             timer = 0;
         }
-
-        $('nav').fadeIn();
+        $('.nav').fadeIn();
         timer = setTimeout(function () {
-            $('nav').fadeOut()
+            $('.nav').fadeOut()
         }, 1000)
     })
-})

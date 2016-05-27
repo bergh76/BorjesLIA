@@ -19,47 +19,49 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            @using (Ajax.BeginForm("_AddQuarterDiesel", new AjaxOptions { OnSuccess = "OnSuccess" }))
+            <section class="form-control-static">
+                @using (Ajax.BeginForm("_AddQuarterDiesel", new AjaxOptions { OnSuccess = "OnSuccess" }))
             {
-                @Html.AntiForgeryToken()
-                <h2>Lägg till ny Kvartalspris Diesel</h2>
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    <h2>Lägg till ny Kvartalspris Diesel</h2>
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddQuarterDiesel.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AddQuarterDiesel.Year, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
 
-                            @Html.EditorFor(model => model.AddQuarterDiesel.Year, new { htmlAttributes = new { @class = "form-group" } })
-                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.AddQuarterDiesel.Year, new { htmlAttributes = new { @class = "form-group" } })
+                                @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AddQuarterDiesel.Quarter, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+
+                                @Html.EditorFor(model => model.AddQuarterDiesel.Quarter, new { @class = "form-group" })
+                                @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Quarter, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AddQuarterDiesel.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+
+                                @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { @class = "form-group" })
+                                @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="submit" value="Lägg till" class="btn btn-default pull-right" />
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddQuarterDiesel.Quarter, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-
-                            @Html.EditorFor(model => model.AddQuarterDiesel.Quarter, new { @class = "form-group" })
-                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Quarter, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddQuarterDiesel.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-
-                            @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { @class = "form-group" })
-                            @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Lägg till" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-            }
+                }
+                </section>
         </div>
     </div>
 </div>

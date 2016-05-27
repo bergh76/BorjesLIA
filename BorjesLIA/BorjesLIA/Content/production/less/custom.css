@@ -33,9 +33,9 @@
   z-index: 2;
 }
 .nav-sm .nav.side-menu li a {
-  text-align: center !important;
+  text-align: left !important;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 14px;
   padding: 10px 5px;
 }
 .nav-sm .nav.child_menu li.active,
@@ -1985,7 +1985,7 @@ span.section {
   width: 100%;
 }
 .form-horizontal .control-label {
-  padding-top: 8px
+  /*padding-top: 8px*/
 }
 .form-control:focus {
   border-color: #CCD0D7;

@@ -219,6 +219,7 @@ body .container-dashboard.body .right_col {
 @media (max-width: 991px) {
   .nav-md .container-dashboard.body .right_col, .nav-md .container-dashboard.body .top_nav {
     width: 100%;
+    height: 100%;
     margin: 0;
   }
   .nav-md .container-dashboard.body .col-md-3.left_col {
@@ -289,7 +290,7 @@ body .container-dashboard.body .right_col {
 .bg-white {
   background: #fff !important;
   border: 1px solid #fff !important;
-  color: #73879C;
+  color: #333333;
 }
 .bg-gray {
   background: #e7e7e7 !important;
@@ -2011,7 +2012,7 @@ span.section {
   width: 100%;
 }
 .form-horizontal .control-label {
-  padding-top: 8px
+  /*padding-top: 8px*/
 }
 .form-control:focus {
   border-color: #CCD0D7;
@@ -2971,7 +2972,7 @@ ul.project_files li a i {
   display: block;
   text-align: center;
   font-size: 15px;
-  font-weight: 700;
+  /*font-weight: 700;*/
   color: #fff;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -3504,7 +3505,7 @@ a.hiddenanchor {
   margin: 0 auto;
   padding: 25px 0 0;
   position: relative;
-  text-align: center;
+  /*text-align: center;*/
   text-shadow: 0 1px 0 #fff;
   min-width: 280px;
 }
@@ -3516,7 +3517,7 @@ a.hiddenanchor {
   text-decoration: underline;
 }
 .login_content h1 {
-  font: normal 25px Helvetica, Arial, sans-serif;
+  font: normal 25px 'Segoe UI', Arial, sans-serif;
   letter-spacing: -0.05em;
   line-height: 20px;
   margin: 10px 0 30px;
@@ -3848,8 +3849,8 @@ fieldset {
 }
 /** /Normalize.css **/
 
-/** Cropper **/
-.cropper .img-container,
+/*/** Cropper **/
+/*.cropper .img-container,
 .cropper .img-preview {
   background-color: #f7f7f7;
   width: 100%;
@@ -3960,7 +3961,7 @@ fieldset {
 .cropper .btn-toggle > .docs-tooltip {
   margin: -6px;
   padding: 6px;
-}
+}*/
 
 @media (max-width: 400px) {
   .cropper .btn-group-crop {
@@ -4011,7 +4012,7 @@ fieldset {
 
 .cropper .docs-cropped canvas {
   max-width: 100%;
-}
+}*/
 /** /Cropper **/
 
 /** jQuery Smart Wizard  **/

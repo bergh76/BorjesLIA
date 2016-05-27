@@ -72,7 +72,6 @@ namespace BorjesLIA.Controllers
         /// <param name="confEuro"></param>
         /// <param name="formEuroData"></param>
         /// <returns></returns>
-        [HttpPost]
         public ActionResult SaveEuroSettings(Settings confEuro, FormCollection formEuroData)
         {
             // Saves new settings to Entity Settings
@@ -98,9 +97,11 @@ namespace BorjesLIA.Controllers
                     // saves data to Settings db Entity
                     db.Entry(confEuro).State = EntityState.Modified;
                     db.SaveChanges();
-                    return PartialView("Index_EuroSettings", confEuro);                  
+                    return PartialView("Index_EuroSettings", confEuro);
+                    //return PartialView("_EuroSettingsView", confEuro);
+                    //return Json(new { success = true, fileName = webPath.Replace("/", "\\") }); 
+                    //return Json(new { OnSuccess = "OnSuccess" });
                 }
-               
             }
             return View(confEuro);
         }

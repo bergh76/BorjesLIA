@@ -286,7 +286,7 @@ function toggleFullScreen() {
         } else if (document.documentElement.webkitRequestFullscreen) {
             document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
-        $('nav').slideUp('slow');
+        //$('nav').slideUp('slow');
     } else {
 
         if (document.exitFullscreen) {
@@ -298,10 +298,36 @@ function toggleFullScreen() {
         } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
         }
-
+        //$('navbar').slideDown('slow');
     }
 
 }
+
+//Hide mouse when inactive
+$(document).ready(function () {
+
+    var myVar;
+    $(".navbar").hide();
+
+    $("html").mousemove(function (event) {
+        $(".navbar").show();
+
+        myStopFunction();
+        myFunction();
+    });
+
+    function myFunction() {
+        myVar = setTimeout(function () {
+            $(".navbar").hide();
+        }, 1000);
+    }
+    function myStopFunction() {
+        if (typeof myVar != 'undefined') {
+            clearTimeout(myVar);
+        }
+    }
+});
+
 
 //*****************************************//
 //          * MAIN FUNCTIONS END *         //

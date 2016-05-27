@@ -1,19 +1,5 @@
 ﻿@model BorjesLIA.ViewModel.StartModelViewModel
 <script src="~/Scripts/SliderHideNav.js"></script>
-@*<div class="bx-container">
-    <div class="col-fullsize-carousel">
-
-        <!-- using the elements in the models list to represent each slide in slider. -->
-
-        <ul class="bxslider">
-           @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
-           {
-                <li><iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe></li>
-            }
-        </ul>
-    </div>
-</div>
-    *@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-dashboard">
         <div class="navbar-header">
@@ -33,12 +19,13 @@
     </div>
 </nav>
 <div>
-    <section id="main-slider">
-        <div class="owl-carousel">
+    <div style="height: 2px;"></div>
+        <section id="main-slider">
+            <div class="owl-carousel">
                 @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
                 {
                     <iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                 }
-        </div>
-    </section>
+            </div>
+        </section>
 </div>

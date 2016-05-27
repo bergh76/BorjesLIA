@@ -48,25 +48,25 @@ namespace BorjesLIA.Controllers
                 model.listVM.Add(listvm);
             }
 
-            if (euros.Count != 0)
+            if (euros.Count != 0 || euros != null)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
                 model.listVM.Add(listvm);
             }
-            if (dtm.Count != 0)
+            if (dtm.Count != 0 || dtm != null)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/DtmModels/DtmLineGraph/";
                 model.listVM.Add(listvm);
             }
-            if (dieselPriceQuarter != null)
+            if (dieselPriceQuarter != null || dieselPriceQuarter != null)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
                 model.listVM.Add(listvm);
             }
-            if (dieselPriceWeek != null)
+            if (dieselPriceWeek != null || dieselPriceWeek != null)
             {
                 var listvm = new listViewModel();
                 listvm.url = "/DieselWeekModels/_DieselWeekGraph/";

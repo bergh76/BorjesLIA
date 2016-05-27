@@ -19,12 +19,13 @@
     </div>
 </nav>
 <div>
-    <section id="main-slider">
-        <div class="owl-carousel">
+    <div style="height: 2px;"></div>
+        <section id="main-slider">
+            <div class="owl-carousel">
                 @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
                 {
                     <iframe src="@element.url" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                 }
-        </div>
-    </section>
+            </div>
+        </section>
 </div>

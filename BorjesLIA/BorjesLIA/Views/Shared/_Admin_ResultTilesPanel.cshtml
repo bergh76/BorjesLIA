@@ -5,7 +5,7 @@
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-calendar-check-o"></i> Dieselpris Vecka</span>
+                <span class="count_top"><i class="glyphicon glyphicon-fire red"></i> Dieselpris Vecka</span>
                 <div class="count">@Html.DisplayFor(x => x.actDieselWeek) </div>
                 @{  if (@Model.diffDieselWeek.AsDecimal() == 0)
                     {
@@ -13,11 +13,11 @@
                     }
                     else if (@Model.diffDieselWeek.AsDecimal() > 0)
                     {
-                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> Upp</span>
+                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> <i class="fa fa-angle-up green"></i></span>
                     }
                     else
                     {
-                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDieselWeek) </i> Ner </span>
+                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDieselWeek) </i> <i class="fa fa-angle-down red"></i> </span>
                     }
                 }
             </div>
@@ -26,7 +26,7 @@
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-calendar-check-o"></i> Dieselpris Kvartal</span>
+                <span class="count_top"><i class="glyphicon glyphicon-fire red"></i> Dieselpris Kvartal</span>
                 <div class="count">@Html.DisplayFor(x => x.actDieselQuarter) </div>
                 @{ if (@Model.diffDieselQuarter.AsDecimal() == 0)
                     {
@@ -34,11 +34,11 @@
                     }
                     else if (@Model.diffDieselQuarter.AsDecimal() > 0)
                     {
-                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselQuarter) </i> Upp </span>
+                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselQuarter) </i> <i class="fa fa-angle-up green"></i> </span>
                     }
                     else
                     {
-                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDieselQuarter) </i> Ned </span>
+                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDieselQuarter) </i> <i class="fa fa-angle-down red"></i> </span>
                     }
                 }
             </div>
@@ -46,7 +46,7 @@
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-calendar-check-o"></i> Euroindex</span>
+                <span class="count_top"><i class="glyphicon glyphicon-euro blue"></i> Euroindex</span>
                 <div class="count">@Html.DisplayFor(x => x.actualEuro) </div>
                 @{
                     if (@Model.diffEuro.AsDecimal() == 0)
@@ -55,11 +55,11 @@
                     }
                     else if (@Model.diffEuro.AsDecimal() > 0)
                     {
-                        <span class="count_bottom"> <i class="green">@Html.DisplayFor(x => x.diffEuro) </i> Upp </span>
+                        <span class="count_bottom"> <i class="green">@Html.DisplayFor(x => x.diffEuro) </i> <i class="fa fa-angle-up green"></i> </span>
                     }
                     else
                     {
-                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffEuro) </i> Ner </span>
+                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffEuro) </i> <i class="fa fa-angle-down red"></i> </span>
                     }
                 }
             </div>
@@ -67,7 +67,7 @@
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-calendar-check-o"></i> DTM</span>
+                <span class="count_top"><i class="glyphicon glyphicon-fire red"></i> DTM</span>
                 <div class="count">@Html.DisplayFor(x => x.actDTM) </div>
                 @{
                     if (@Model.diffDTM.AsDecimal() == 0)
@@ -76,11 +76,11 @@
                     }
                     if (@Model.diffDTM.AsDecimal() > 0)
                     {
-                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDTM) </i> Upp </span>
+                        <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDTM) </i> <i class="fa fa-angle-up green"></i> </span>
                     }
                     else
                     {
-                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDTM) </i> Ner </span>
+                        <span class="count_bottom"><i class="red">@Html.DisplayFor(x => x.diffDTM) </i> <i class="fa fa-angle-down red"></i> </span>
                     }
                 }
             </div>
@@ -88,17 +88,17 @@
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+                <span class="count_top"><i class="fa fa-user"></i> Not In Use</span>
                 <div class="count">@Html.DisplayFor(x => x.actDieselWeek) </div>
-                <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> Upp </span>
+                <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> <i class="fa fa-angle-up green"></i> </span>
             </div>
         </div>
         <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-                <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+                <span class="count_top"><i class="fa fa-user"></i> Not In Use</span>
                 <div class="count">@Html.DisplayFor(x => x.actDieselWeek) </div>
-                <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> Ner </span>
+                <span class="count_bottom"><i class="green">@Html.DisplayFor(x => x.diffDieselWeek) </i> <i class="fa fa-angle-down red"></i> </span>
             </div>
         </div>
     </div>

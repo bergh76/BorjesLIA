@@ -1,0 +1,54 @@
+﻿@model BorjesLIA.ViewModel.VideoViewModel
+
+<table class="table">
+    <tr>
+        <th>
+            url
+
+        </th>
+        <th>
+            name
+            @*@Html.DisplayNameFor(model => model.name)*@
+        </th>
+        <th>
+            orderby
+            @*@Html.DisplayNameFor(model => model.orderby)*@
+        </th>
+        <th>
+            active
+            @*@Html.DisplayNameFor(model => model.active)*@
+        </th>
+        <th>
+            dt
+            @*@Html.DisplayNameFor(model => model.dt)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListOfVideoModels)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlacingOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

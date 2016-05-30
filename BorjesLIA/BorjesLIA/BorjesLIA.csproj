@@ -234,6 +234,7 @@
     <Compile Include="ViewModel\DieselViewModel.cs" />
     <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
     <Compile Include="ViewModel\URLViewModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -395,6 +396,7 @@
     <Content Include="Content\production\js\moment\moment.min.js" />
     <Content Include="Content\production\less\custom.css" />
     <Content Include="Content\responsive.css" />
+    <Content Include="Content\videos\SampleVideo_1280x720_1mb.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -986,6 +988,13 @@
     <Content Include="Views\Settings\_DieselQuarterSettingsView.cshtml" />
     <Content Include="Views\Settings\Index_DieselQuarterSettings.cshtml" />
     <Content Include="Views\Imgs\ShowView.cshtml" />
+    <Content Include="Views\VideoModels\Index.cshtml" />
+    <Content Include="Views\VideoModels\ShowView.cshtml" />
+    <Content Include="Views\VideoModels\_VideoList.cshtml" />
+    <Content Include="Views\VideoModels\Edit.cshtml" />
+    <Content Include="Views\VideoModels\Delete.cshtml" />
+    <Content Include="Views\VideoModels\Details.cshtml" />
+    <Content Include="Views\VideoModels\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

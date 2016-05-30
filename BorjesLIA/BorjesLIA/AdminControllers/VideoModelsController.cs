@@ -47,7 +47,21 @@ namespace BorjesLIA.AdminControllers
             {
                 if (file == null)
                 {
-                    ModelState.AddModelError("File", "Please Upload Your file");
+                    if(VM.Url != null)
+                    {
+
+                        var video = new VideoModel();
+                        video.Url = VM.Url;
+                        video.Name = VM.Name;
+                        video.PlacingOrder = 0;
+                        video.Active = true;
+                        video.Date = DateTime.Now;
+                        video.Type = 2; //TODO: borde kanske vara enum. 2 för youtube
+                        db.VideoModels.Add(video);
+                        db.SaveChanges();
+
+                    }
+                    //ModelState.AddModelError("File", "Please Upload Your file");
                 }
                 else if (file.ContentLength > 0)
                 {
@@ -78,6 +92,7 @@ namespace BorjesLIA.AdminControllers
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
+                        video.Type = 1; //TODO: borde kanske vara enum. 1 för mp4
                         db.VideoModels.Add(video);
                         db.SaveChanges();
                     }
@@ -128,12 +143,25 @@ namespace BorjesLIA.AdminControllers
                 {
                     return HttpNotFound();
                 }
+                //om internlänk
+                if (videoModel.Type == 1) 
+                {
+                    string fileName = videoModel.Url;
+                    string myPath = @"/Content/videos/";
+                    string myFilePath = Path.Combine(myPath, fileName);
+                    return Json(new { success = true, returnData = myFilePath });
+                }
+                //om externlänk
+                else if(videoModel.Type == 2)
+                {
+                    string fileName = videoModel.Url;
+                    return Json(new { success = true, returnData = fileName });
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
 
-                string fileName = videoModel.Url;
-                string myPath = @"/Content/videos/";
-                string myFilePath = Path.Combine(myPath, fileName);
-
-                return Json(new { success = true, returnData = myFilePath });
             }
             catch (Exception ex)
             {

@@ -45,6 +45,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
+         
             <td>
                 <button class="btnView" data-prop="@item.ID">Show</button>
             </td>
@@ -53,11 +54,24 @@
 
 </table>
 
-<section id="show-result-box" class="hidden">
+@*<section id="show-result-box" class="hidden">
     <video controls="controls" width="320" height="240" id="myVideoID">
             <source src="" type="video/mp4" />
         </video>
-</section>
+</section>*@
+
+@*<video controls="controls" width="320" height="240" >
+        <source src="https://www.youtube.com/embed/inBKFMB-yPg" type="video/mp4" />
+    </video>*@
+
+<section id="show-result-box" class="hidden">
+        <iframe width="560"
+                height="315"
+                id="myVideoID"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+    </section>
 
 <script>
     //<!--http://stackoverflow.com/questions/25616043/passing-parameters-to-javascript-button-click-handler-->

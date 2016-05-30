@@ -396,7 +396,6 @@
     <Content Include="Content\production\js\moment\moment.min.js" />
     <Content Include="Content\production\less\custom.css" />
     <Content Include="Content\responsive.css" />
-    <Content Include="Content\videos\home-1353389_960_720.jpg" />
     <Content Include="Content\videos\SampleVideo_1280x720_1mb.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />

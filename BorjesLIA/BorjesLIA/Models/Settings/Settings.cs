@@ -30,9 +30,14 @@ namespace BorjesLIA.Models.Settings
         public string User { get; set; }
 
         public Settings()
-        {
+        {            
             LoggDate = DateTime.Now;
-            User = HttpContext.Current.User.Identity.Name;
+            if (string.IsNullOrEmpty(User)){
+                User = "init";
+            }
+            else {
+                User = HttpContext.Current.User.Identity.Name;
+            }
         }
 
     }

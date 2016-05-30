@@ -22,16 +22,18 @@ namespace BorjesLIA.Migrations
         /// <param name="context"></param>
         protected override void Seed(ApplicationDbContext context)
         {
-            IList<Settings> intialSettings = new List<Settings>();
+            if (context.Settings.ToList() == null)
+            {
+                IList<Settings> intialSettings = new List<Settings>();
 
-            intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year.ToString() , LoggDate = DateTime.Now, User =""});
-            intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" }); ;
-            intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" });
-            intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "" });
+                intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" }); ;
+                intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
 
-            foreach (Settings std in intialSettings)
-                context.Settings.Add(std);
-
+                foreach (Settings std in intialSettings)
+                    context.Settings.Add(std);
+            }
             base.Seed(context);
 
         }

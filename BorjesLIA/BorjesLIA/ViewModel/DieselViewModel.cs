@@ -28,8 +28,8 @@ namespace BorjesLIA.ViewModel
                 }
                 else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
-                    var lqAllDiesel = db.DieselPriceWeek.ToList();
-                    return Task.Run(() => lqAllDiesel);
+                    var lwAllDiesel = db.DieselPriceWeek.ToList();
+                    return Task.Run(() => lwAllDiesel);
                 }
                 else
                 {

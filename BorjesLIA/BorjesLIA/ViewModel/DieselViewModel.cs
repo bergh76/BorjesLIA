@@ -26,7 +26,7 @@ namespace BorjesLIA.ViewModel
                     return GetWeekData();
                   
                 }
-                if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
                     var lqAllDiesel = db.DieselPriceWeek.ToList();
                     return Task.Run(() => lqAllDiesel);
@@ -58,10 +58,10 @@ namespace BorjesLIA.ViewModel
                 {
                     return GetQuarterData();
                 }
-                if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
-                    var lqAllDiesel = db.DieselPriceQuarter.ToList();
-                    return Task.Run(() => lqAllDiesel);
+                    var lAllDiesel = db.DieselPriceQuarter.ToList();
+                    return Task.Run(() => lAllDiesel);
                 }
                 else
                 {

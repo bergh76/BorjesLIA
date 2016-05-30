@@ -27,6 +27,11 @@ namespace BorjesLIA.ViewModel
                 {
                     return GetData();
                 }
+                else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                {
+                    var lAllDtm = db.DtmModels.ToList();
+                    return Task.Run(() => lAllDtm);
+                }
                 else
                 {
                     Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();

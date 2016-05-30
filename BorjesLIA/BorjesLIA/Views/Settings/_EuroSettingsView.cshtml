@@ -1,7 +1,7 @@
 ﻿
 @model BorjesLIA.ViewModel.EuroViewModel
 <!--ajax script-->
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 <!--ajax script end-->
 <!-- FORMFIELDS START -->
 <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
@@ -39,6 +39,9 @@
 
                 <div class="form-group">
                     <div class="dropdown">
+                        @*@Html.ListBoxFor(model => model.newEuroList, new MultiSelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()), new { @class = "btn btn-default dropdown-toggle" })*@
+
+
                         @Html.DropDownListFor(model => model.AddEuro.Date, new SelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })
                         @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
                     </div>

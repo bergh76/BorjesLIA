@@ -6,7 +6,7 @@
 @*<script src="~/Scripts/GraphHideNav.js"></script>*@
 @{ var euroChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList(); 
     var chartID = euroChartList.FirstOrDefault();
-    if (chartID == 0)
+    @*if (chartID == 0)
     {
         <div class="x_panel">
             <div class="x_title">
@@ -15,7 +15,7 @@
         </div>
     }
     else
-    {
+    {*@
         if (chartID == 1)
         {
             <script type="text/javascript">
@@ -23,7 +23,7 @@
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
                     $.ajax({
-                        type: 'POST',
+                        type: 'GET',
                         dataType: 'json',
                         contentType: 'application/json',
                         // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
@@ -36,54 +36,92 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {                                    
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        (new Date(date).toDateString()), dataValues[i].euroValue])
+                                }
+                                // Settings for visualization of the graph
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0, 1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                ]);
+
                                 // Settings for visualization of the graph
                                 var options = {
                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
                                     title: 'Eurokurs',
                                     width: '100%',
                                     height: '100%',
-                                    pointSize: 3,
-                                    dataOpacity: 0.4,
+                                    pointSize: 5,
+                                    dataOpacity: 0.8,
                                     lineWidth: 2,
                                     vAxis: {
                                         viewWindow: {
-                                            min: 6.50,
-                                            max: 10.00
+                                            min: 8.00,
+                                            //max: 10.00
                                         },
-                                        ticks: [
-                                              0, 2.00, 3.00, 4.00, 5.00,
-                                              6.00, 6.05, 6.10, 6.15, 6.20,
-                                              6.25, 6.30, 6.35, 6.40, 6.45,
-                                              6.50, 6.55, 6.60, 6.65, 6.70,
-                                              6.75, 6.80, 6.85, 6.90, 6.95,
-                                              7.00, 7.05, 7.10, 7.15, 7.20,
-                                              7.25, 7.30, 7.35, 7.40, 7.45,
-                                              7.50, 7.55, 7.60, 7.65, 7.70,
-                                              7.75, 7.80, 7.85, 7.90, 7.95,
-                                              8.00, 8.05, 8.10, 8.15, 8.20,
-                                              8.25, 8.30, 8.35, 8.40, 8.45,
-                                              8.50, 8.55, 8.60, 8.65, 8.70,
-                                              8.75, 8.80, 8.85, 8.90, 8.95,
-                                              9.00, 9.05, 9.10, 9.15, 9.20,
-                                              9.25, 9.30, 9.35, 9.40, 9.45,
-                                              9.50, 9.55, 9.60, 9.65, 9.70,
-                                              9.75, 9.80, 9.85, 9.90, 9.95,
-                                              10.00, 10.05, 10.10, 10.15, 10.20,
-                                              10.25, 10.30, 10.35, 10.40, 10.45,
-                                              10.50, 10.55, 10.60, 10.65, 10.70,
-                                              10.75, 10.80, 10.85, 10.90, 10.95,
-                                        ]
+                                        //ticks: [
+                                        //      0, 2.00, 3.00, 4.00, 5.00,
+                                        //      6.00, 6.05, 6.10, 6.15, 6.20,
+                                        //      6.25, 6.30, 6.35, 6.40, 6.45,
+                                        //      6.50, 6.55, 6.60, 6.65, 6.70,
+                                        //      6.75, 6.80, 6.85, 6.90, 6.95,
+                                        //      7.00, 7.05, 7.10, 7.15, 7.20,
+                                        //      7.25, 7.30, 7.35, 7.40, 7.45,
+                                        //      7.50, 7.55, 7.60, 7.65, 7.70,
+                                        //      7.75, 7.80, 7.85, 7.90, 7.95,
+                                        //      8.00, 8.05, 8.10, 8.15, 8.20,
+                                        //      8.25, 8.30, 8.35, 8.40, 8.45,
+                                        //      8.50, 8.55, 8.60, 8.65, 8.70,
+                                        //      8.75, 8.80, 8.85, 8.90, 8.95,
+                                        //      9.00, 9.05, 9.10, 9.15, 9.20,
+                                        //      9.25, 9.30, 9.35, 9.40, 9.45,
+                                        //      9.50, 9.55, 9.60, 9.65, 9.70,
+                                        //      9.75, 9.80, 9.85, 9.90, 9.95,
+                                        //      10.00, 10.05, 10.10, 10.15, 10.20,
+                                        //      10.25, 10.30, 10.35, 10.40, 10.45,
+                                        //      10.50, 10.55, 10.60, 10.65, 10.70,
+                                        //      10.75, 10.80, 10.85, 10.90, 10.95,
+                                        //]
                                     },
                                     hAxis: {
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                                }
+                               
                                 // Draws the graph into a specified div
-                                new google.visualization.LineChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                                //new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                                var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
+                                chart.draw(view, options);
                             },
                         // If collectning data from database fails promp message here
                         error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
@@ -98,7 +136,7 @@
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
                     $.ajax({
-                        type: 'POST',
+                        type: 'GET',
                         dataType: 'json',
                         contentType: 'application/json',
                         // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
@@ -111,54 +149,94 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        //(dataValues[i].Date), dataValues[i].euroValue])
+                                        (new Date(date).toDateString()), dataValues[i].euroValue])
+                                    console.log(data);
+
+                                }
+                                // Settings for visualization of the graph
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0, 1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                ]);
+
                                 // Settings for visualization of the graph
                                 var options = {
-                                    chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
+                                    chartArea: { left: 150, top: 20, width: "100%", height: "80%" },
                                     title: 'Eurokurs',
                                     width: '100%',
                                     height: '100%',
-                                    pointSize: 3,
-                                    dataOpacity: 0.4,
+                                    //pointSize: 3,
+                                    dataOpacity: 0.8,
                                     lineWidth: 2,
                                     vAxis: {
                                         viewWindow: {
-                                            min: 6.50,
-                                            max: 10.00
+                                            min: 8.00,
+                                            //max: 10.00
                                         },
-                                        ticks: [
-                                              0, 2.00, 3.00, 4.00, 5.00,
-                                              6.00, 6.05, 6.10, 6.15, 6.20,
-                                              6.25, 6.30, 6.35, 6.40, 6.45,
-                                              6.50, 6.55, 6.60, 6.65, 6.70,
-                                              6.75, 6.80, 6.85, 6.90, 6.95,
-                                              7.00, 7.05, 7.10, 7.15, 7.20,
-                                              7.25, 7.30, 7.35, 7.40, 7.45,
-                                              7.50, 7.55, 7.60, 7.65, 7.70,
-                                              7.75, 7.80, 7.85, 7.90, 7.95,
-                                              8.00, 8.05, 8.10, 8.15, 8.20,
-                                              8.25, 8.30, 8.35, 8.40, 8.45,
-                                              8.50, 8.55, 8.60, 8.65, 8.70,
-                                              8.75, 8.80, 8.85, 8.90, 8.95,
-                                              9.00, 9.05, 9.10, 9.15, 9.20,
-                                              9.25, 9.30, 9.35, 9.40, 9.45,
-                                              9.50, 9.55, 9.60, 9.65, 9.70,
-                                              9.75, 9.80, 9.85, 9.90, 9.95,
-                                              10.00, 10.05, 10.10, 10.15, 10.20,
-                                              10.25, 10.30, 10.35, 10.40, 10.45,
-                                              10.50, 10.55, 10.60, 10.65, 10.70,
-                                              10.75, 10.80, 10.85, 10.90, 10.95,
-                                        ]
+                                        //ticks: [
+                                        //      0, 2.00, 3.00, 4.00, 5.00,
+                                        //      6.00, 6.05, 6.10, 6.15, 6.20,
+                                        //      6.25, 6.30, 6.35, 6.40, 6.45,
+                                        //      6.50, 6.55, 6.60, 6.65, 6.70,
+                                        //      6.75, 6.80, 6.85, 6.90, 6.95,
+                                        //      7.00, 7.05, 7.10, 7.15, 7.20,
+                                        //      7.25, 7.30, 7.35, 7.40, 7.45,
+                                        //      7.50, 7.55, 7.60, 7.65, 7.70,
+                                        //      7.75, 7.80, 7.85, 7.90, 7.95,
+                                        //      8.00, 8.05, 8.10, 8.15, 8.20,
+                                        //      8.25, 8.30, 8.35, 8.40, 8.45,
+                                        //      8.50, 8.55, 8.60, 8.65, 8.70,
+                                        //      8.75, 8.80, 8.85, 8.90, 8.95,
+                                        //      9.00, 9.05, 9.10, 9.15, 9.20,
+                                        //      9.25, 9.30, 9.35, 9.40, 9.45,
+                                        //      9.50, 9.55, 9.60, 9.65, 9.70,
+                                        //      9.75, 9.80, 9.85, 9.90, 9.95,
+                                        //      10.00, 10.05, 10.10, 10.15, 10.20,
+                                        //      10.25, 10.30, 10.35, 10.40, 10.45,
+                                        //      10.50, 10.55, 10.60, 10.65, 10.70,
+                                        //      10.75, 10.80, 10.85, 10.90, 10.95,
+                                        //]
                                     },
                                     hAxis: {
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                                }
+
                                 // Draws the graph into a specified div
-                                new google.visualization.BarChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                                var chart = new google.visualization.BarChart(document.getElementById("EuroGraphDiv"));
+                                chart.draw(view, options);
                             },
                         // If collectning data from database fails promp message here
                         error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
@@ -173,7 +251,7 @@
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
                     $.ajax({
-                        type: 'POST',
+                        type: 'GET',
                         dataType: 'json',
                         contentType: 'application/json',
                         // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
@@ -186,54 +264,92 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        //(dataValues[i].Date), dataValues[i].euroValue])
+                                        (new Date(date).toDateString()), dataValues[i].euroValue])
+                                    console.log(data);
+
+                                }
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0,1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                                 ]);
+
                                 // Settings for visualization of the graph
                                 var options = {
                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
                                     title: 'Eurokurs',
                                     width: '100%',
                                     height: '100%',
-                                    pointSize: 3,
-                                    dataOpacity: 0.4,
+                                    //pointSize: 3,
+                                    dataOpacity: 0.8,
                                     lineWidth: 2,
                                     vAxis: {
                                         viewWindow: {
-                                            min: 6.50,
-                                            max: 10.00
+                                            min: 8.00,
+                                            //max: 10.00
                                         },
-                                        ticks: [
-                                              0, 2.00, 3.00, 4.00, 5.00,
-                                              6.00, 6.05, 6.10, 6.15, 6.20,
-                                              6.25, 6.30, 6.35, 6.40, 6.45,
-                                              6.50, 6.55, 6.60, 6.65, 6.70,
-                                              6.75, 6.80, 6.85, 6.90, 6.95,
-                                              7.00, 7.05, 7.10, 7.15, 7.20,
-                                              7.25, 7.30, 7.35, 7.40, 7.45,
-                                              7.50, 7.55, 7.60, 7.65, 7.70,
-                                              7.75, 7.80, 7.85, 7.90, 7.95,
-                                              8.00, 8.05, 8.10, 8.15, 8.20,
-                                              8.25, 8.30, 8.35, 8.40, 8.45,
-                                              8.50, 8.55, 8.60, 8.65, 8.70,
-                                              8.75, 8.80, 8.85, 8.90, 8.95,
-                                              9.00, 9.05, 9.10, 9.15, 9.20,
-                                              9.25, 9.30, 9.35, 9.40, 9.45,
-                                              9.50, 9.55, 9.60, 9.65, 9.70,
-                                              9.75, 9.80, 9.85, 9.90, 9.95,
-                                              10.00, 10.05, 10.10, 10.15, 10.20,
-                                              10.25, 10.30, 10.35, 10.40, 10.45,
-                                              10.50, 10.55, 10.60, 10.65, 10.70,
-                                              10.75, 10.80, 10.85, 10.90, 10.95,
-                                        ]
+                                        //ticks: [
+                                        //      0, 2.00, 3.00, 4.00, 5.00,
+                                        //      6.00, 6.05, 6.10, 6.15, 6.20,
+                                        //      6.25, 6.30, 6.35, 6.40, 6.45,
+                                        //      6.50, 6.55, 6.60, 6.65, 6.70,
+                                        //      6.75, 6.80, 6.85, 6.90, 6.95,
+                                        //      7.00, 7.05, 7.10, 7.15, 7.20,
+                                        //      7.25, 7.30, 7.35, 7.40, 7.45,
+                                        //      7.50, 7.55, 7.60, 7.65, 7.70,
+                                        //      7.75, 7.80, 7.85, 7.90, 7.95,
+                                        //      8.00, 8.05, 8.10, 8.15, 8.20,
+                                        //      8.25, 8.30, 8.35, 8.40, 8.45,
+                                        //      8.50, 8.55, 8.60, 8.65, 8.70,
+                                        //      8.75, 8.80, 8.85, 8.90, 8.95,
+                                        //      9.00, 9.05, 9.10, 9.15, 9.20,
+                                        //      9.25, 9.30, 9.35, 9.40, 9.45,
+                                        //      9.50, 9.55, 9.60, 9.65, 9.70,
+                                        //      9.75, 9.80, 9.85, 9.90, 9.95,
+                                        //      10.00, 10.05, 10.10, 10.15, 10.20,
+                                        //      10.25, 10.30, 10.35, 10.40, 10.45,
+                                        //      10.50, 10.55, 10.60, 10.65, 10.70,
+                                        //      10.75, 10.80, 10.85, 10.90, 10.95,
+                                        //]
                                     },
                                     hAxis: {
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                                }
                                 // Draws the graph into a specified div
-                                new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                                var chart = new google.visualization.ColumnChart(document.getElementById("EuroGraphDiv"));
+                                chart.draw(view, options);
                             },
                         // If collectning data from database fails promp message here
                         error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
@@ -242,9 +358,9 @@
             </script>
         }
     }
-}
+@*}*@
 <div class="x_panel">
     <div class="x_content">
-        <div id="EuroGraphDiv" style="width: 100%; height:650px"></div>
+        <div id="EuroGraphDiv" style="width: 100%; height:750px"></div>
     </div>
 </div>

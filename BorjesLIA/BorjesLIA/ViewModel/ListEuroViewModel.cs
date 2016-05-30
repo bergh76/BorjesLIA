@@ -6,6 +6,7 @@ using BorjesLIA.Models.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BorjesLIA.ViewModel
 {
@@ -22,15 +23,19 @@ namespace BorjesLIA.ViewModel
             Name = "Eurokurs";
             using (var db = new ApplicationDbContext())
             {
+
                 if (db.EuroExchangeModels == null)
                 {
                     return GetData();
                 }
+
+               
                 else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
                     var lAllEuro = db.EuroExchangeModels.ToList();
                     return Task.Run(() => lAllEuro);
                 }
+
                 else
                 {
                     Year = db.Settings.ToList().Where(x => x.Name == this.Name).OrderByDescending( x=> x.Year).Select(x => x.Year).FirstOrDefault();

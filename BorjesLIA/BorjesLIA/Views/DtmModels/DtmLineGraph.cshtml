@@ -29,7 +29,46 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        //(dataValues[i].Date), dataValues[i].euroValue])
+                                        (new Date(date).toDateString()), dataValues[i].DieselDTMValue])
+                                    console.log(data);
+
+                                }
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0, 1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                ]);
                                 // Settings for visualization of the graph
                                 var options = {
                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
@@ -43,13 +82,9 @@
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].DieselDTMValue])
-                                }
                                 // Draws the graph into a specified div
-                                new google.visualization.LineChart(document.getElementById('DTMGraphDiv')).
-                                        draw(data, options);
+                                var chart = new google.visualization.LineChart(document.getElementById("DTMGraphDiv"));
+                                chart.draw(view, options);
 
                             },
                         // If collectning data from database fails promp message here
@@ -81,7 +116,46 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        //(dataValues[i].Date), dataValues[i].euroValue])
+                                        (new Date(date).toDateString()), dataValues[i].DieselDTMValue])
+                                    console.log(data);
+
+                                }
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0, 1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                ]);
                                 // Settings for visualization of the graph
                                 var options = {
                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
@@ -95,13 +169,11 @@
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].DieselDTMValue])
-                                }
-                                // Drews the graph into a specified div
-                                new google.visualization.BarChart(document.getElementById('DTMGraphDiv')).
-                                        draw(data, options);
+
+                                // Draws the graph into a specified div
+                                var chart = new google.visualization.BarChart(document.getElementById("DTMGraphDiv"));
+                                chart.draw(view, options);
+
 
                             },
                         // If collectning data from database fails promp message here
@@ -133,7 +205,46 @@
                                 var data = new google.visualization.DataTable();
                                 data.addColumn('string', 'Datum');
                                 data.addColumn('number', 'Pris');
+                                if (window.JSON && !window.JSON.dateParser) {
+                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
+                                    JSON.dateParser = function (key, value) {
+                                        if (typeof value === 'string') {
+                                            var a = reISO.exec(value);
+                                            if (a)
+                                                return new Date(value);
+                                            a = reMsAjax.exec(value);
+                                            if (a) {
+                                                var b = a[1].split(/[-+,.]/);
+                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                            }
+                                        }
+                                        return value;
+                                    };
+
+                                }
+                                // Loops through the DataTable with data from database
+                                for (var i = 0; i < dataValues.length; i++) {
+                                    var str = window.JSON.stringify(dataValues[i].Date);
+                                    //console.log("Här var det strängat",str);
+                                    var date = JSON.parse(str, JSON.dateParser);
+                                    //console.log("Här ska det vara datum", date);
+                                    data.addRow([
+                                        //(dataValues[i].Date), dataValues[i].euroValue])
+                                        (new Date(date).toDateString()), dataValues[i].DieselDTMValue])
+                                    console.log(data);
+
+                                }
+                                var view = new google.visualization.DataView(data);
+                                view.setColumns([0, 1,
+                                                 {
+                                                     calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation",
+                                                 },
+                                ]);
                                 // Settings for visualization of the graph
                                 var options = {
                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
@@ -147,13 +258,9 @@
                                         title: 'Datum', titleTextStyle: { color: '#333' },
                                     }
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    data.addRow([(dataValues[i].Date), dataValues[i].DieselDTMValue])
-                                }
-                                // Drews the graph into a specified div
-                                new google.visualization.ColumnChart(document.getElementById('DTMGraphDiv')).
-                                    draw(data, options);
+                                // Draws the graph into a specified div
+                                var chart = new google.visualization.ColumnChart(document.getElementById("DTMGraphDiv"));
+                                chart.draw(view, options);
 
                             },
                         // If collectning data from database fails promp message here

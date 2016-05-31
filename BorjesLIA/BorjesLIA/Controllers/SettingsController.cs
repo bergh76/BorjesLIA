@@ -322,7 +322,7 @@ namespace BorjesLIA.Controllers
                     return PartialView("Index_DieselQuarterSettings", confDq);
                 }
 
-                else if (string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
+                else if (!string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
                 {
                     confDq.Year = formDQData[2];
                     // saves data to Settings db Entity

@@ -132,7 +132,26 @@ jQuery(function($) {'use strict';
 
     */
 });
+//var owl = $('.owl-carousel');
 
+//owl.owlCarousel({
+//    items: 1,
+//    loop: true,
+
+//    autoplay: true,
+//    autoplayTimeout: 5000,
+//    autoplayHoverPause: true,
+
+//    nav: true
+//});
+
+//// Open Accordion
+//$('figcaption').on('click', function () {
+//    /* 	    owl.trigger('stop.owl.autoplay'); */
+//    /* 	    owl.trigger('autoplay.stop.owl'); */
+//    owl.trigger('stop.autoplay.owl');
+//    $(this).toggleClass('active');
+//});
 function adjustIframes() {
     $('iframe').each(function () {
         var

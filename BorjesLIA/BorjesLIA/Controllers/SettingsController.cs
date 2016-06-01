@@ -312,6 +312,7 @@ namespace BorjesLIA.Controllers
                 confDq.ID = db.Settings.Where(x => x.Name == confDqSettings).Select(x => x.ID).FirstOrDefault();
                 confDq.Year = formDQData[2];
                 confDq.Name = this.confDqSettings;
+                
                 if (!string.IsNullOrEmpty(confDq.Name) && string.IsNullOrEmpty(confDq.Year))
                 {
                     confDq.Year = "Alla";

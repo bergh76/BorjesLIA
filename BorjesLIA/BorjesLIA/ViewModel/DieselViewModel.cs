@@ -2,6 +2,7 @@
 using BorjesLIA.Models.Charts;
 using BorjesLIA.Models.Diesel;
 using BorjesLIA.Models.Settings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace BorjesLIA.ViewModel
                 if (db.DieselPriceWeek == null)
                 {
                     return GetWeekData();
-                  
+
                 }
                 else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
@@ -34,7 +35,7 @@ namespace BorjesLIA.ViewModel
                 else
                 {
                     Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
-                    var lwDiesel = db.DieselPriceWeek.Where(x=> x.Year == Year).OrderBy(x => x.Year).ToList();
+                    var lwDiesel = db.DieselPriceWeek.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
                     return Task.Run(() => lwDiesel);
                 }
             }
@@ -42,13 +43,13 @@ namespace BorjesLIA.ViewModel
     }
     public class DieselQuarterViewModel
     {
-
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
         public string Year { get; set; }
         public string Name { get; set; }
+        public IEnumerable<DieselQuarterPriceModel> comboDataList { get; set; }
         public Task<List<DieselQuarterPriceModel>> GetQuarterData()
         {
             Name = "Dieselpris Kvartal";
@@ -60,8 +61,20 @@ namespace BorjesLIA.ViewModel
                 }
                 else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
-                    var lAllDiesel = db.DieselPriceQuarter.ToList();
-                    return Task.Run(() => lAllDiesel);
+                    //List<DieselQuarterPriceModel> grpList = new List<DieselQuarterPriceModel>();
+                    var lAllDiesel = db.DieselPriceQuarter.ToList()
+                        .GroupBy(x => new { x.Year, x.Quarter, x.DieselQuarterValue })
+                        .Select(group => 
+                        new DieselQuarterPriceModel
+                        {
+                            Year = group.Key.Year,
+                            Quarter = group.Key.Quarter,
+                            DieselQuarterValue = group.Key.DieselQuarterValue,
+                            
+                        }).ToArray();
+
+                    comboDataList = lAllDiesel;
+                    return Task.Run(() => comboDataList.ToList());
                 }
                 else
                 {

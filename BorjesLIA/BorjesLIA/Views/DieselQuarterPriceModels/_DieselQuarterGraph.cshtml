@@ -269,16 +269,22 @@
                     dataType: 'json',
                     contentType: 'application/json',
                     // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                    @*url: '@Url.Action("GetComboData")',*@
                     url: '@Url.Action("GetData")',
                     data: "{ }",
                     // If data connections is success
                     success:
                         function drawchart(dataValues) {
-                            // Adds data into columns to DataTable
-                            var data = new google.visualization.arrayToDataTable([
-                            data.addColumn('number', 'År'),
-                            data.addColumn('string', 'Kvartal'),
-                            data.addColumn('number', 'Pris')]);
+                            var data = google.visualization.arrayToDataTable([
+                                    ['År', 'Kvartal', 'Pris'],
+                                   // ['Kvartal','År','Pris']
+                            ]);
+                            //var data = new google.visualization.DataTable();
+                            //data.addColumn('string', 'År');
+                            //data.addColumn('string', 'Kvartal'); 
+                            //data.addColumn('number', 'Pris');
+                            console.log("DataArray:", data);
+                            
                             if (window.JSON && !window.JSON.dateParser) {
                                 var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
                                 var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
@@ -298,23 +304,25 @@
                                 };
 
                             }
-                            // Loops through the DataTable with data from database
+                             //Loops through the DataTable with data from database
                             for (var i = 0; i < dataValues.length; i++) {
-                                var str = window.JSON.stringify(dataValues[i].Date);
-                                //console.log("Här var det strängat",str);
-                                var date = JSON.parse(str, JSON.dateParser);
-                                //console.log("Här ska det vara datum", date);
-                                data.addRow([
-                                    //(dataValues[i].Date), dataValues[i].euroValue])
-                                    (new Date(date).toDateString()), dataValues[i].DieselQuarterValue])
-                                console.log(data);
-
+                                
+                            //    console.log("DataValues innan addRow:", dataValues);
+                                var str = dataValues[i].DieselQuarterValue;                                
+                            //    //console.log("Här var det strängat", str);
+                                var numVal = parseFloat(str);
+                               //console.log("Här ska det vara numval", numVal);
+                            ////    //var date = JSON.parse(str, JSON.dateParser);
+                            ////    //console.log("Här ska det vara datum", date);
+                                data.addRow([dataValues[i].Year.toString(), dataValues[i].Quarter.toString(), dataValues[i].DieselQuarterValue.toString()])
+                                console.log("Data efter iSnurra:", data);
                             }
+                            
                             var view = new google.visualization.DataView(data);
-                            view.setColumns([0, 1,
+                            view.setColumns([0,
                                              {
                                                  calc: "stringify",
-                                                 sourceColumn: 1,
+                                                 sourceColumn: 2,
                                                  type: "string",
                                                  role: "annotation",
                                              },
@@ -326,7 +334,7 @@
                                 seriesType: 'bars',
                                 series:
                                     {
-                                        0: {type: 'line'}
+                                        3: {type: 'column'}
                                     },
                                 title: 'Dieselpris per kvartal Kombo',
                                 //width: '100%',

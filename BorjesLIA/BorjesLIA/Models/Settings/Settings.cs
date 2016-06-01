@@ -31,12 +31,13 @@ namespace BorjesLIA.Models.Settings
 
         public Settings()
         {            
+            string _user = HttpContext.Current.User.Identity.Name;
             LoggDate = DateTime.Now;
-            if (string.IsNullOrEmpty(User)){
+            if (string.IsNullOrEmpty(_user)){
                 User = "init";
             }
             else {
-                User = HttpContext.Current.User.Identity.Name;
+                User = _user;
             }
         }
 

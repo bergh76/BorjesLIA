@@ -31,20 +31,21 @@ namespace BorjesLIA.Models.Euro
 
         public EuroExchangeModel()
         {
-            var _user = "default";
+            var _user = HttpContext.Current.User.Identity.Name.ToString();
             var _year = DateTime.Now.Year.ToString();
             Date = DateTime.Now;
-            if (!string.IsNullOrEmpty(User) || !string.IsNullOrEmpty(Year) || LoggDate != null)
+            if (string.IsNullOrEmpty(_user) && string.IsNullOrEmpty(Year) && LoggDate == null)
             {
-                LoggDate = DateTime.Now;
-                User = HttpContext.Current.User.Identity.Name;
-                Year = Date.Year.ToString();
-            }
-            else
-            {  //Quarter = Date
-                User = _user;
+                //Quarter = Date
+                User = "default";
                 Year = _year;
                 LoggDate = DateTime.Now;
+            }
+            else
+            {
+                LoggDate = DateTime.Now;
+                User = _user;
+                Year = Date.Year.ToString();
             }
         }
     }

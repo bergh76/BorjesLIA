@@ -10,6 +10,8 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Video;
 using BorjesLIA.ViewModel;
 using System.IO;
+using MediaToolkit.Model;
+using MediaToolkit;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -42,30 +44,36 @@ namespace BorjesLIA.AdminControllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
+
             //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            bool test = true;
+            if (test)
             {
                 if (file == null)
                 {
+                    //om det är en länkad video
                     if(VM.Url != null)
                     {
 
                         var video = new VideoModel();
-                        video.Url = VM.Url;
+                        video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
                         video.Type = 2; //TODO: borde kanske vara enum. 2 för youtube
+                        video.Duration = VM.Duration +=3;
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 
                     }
                     //ModelState.AddModelError("File", "Please Upload Your file");
                 }
+                //om det är en fil
                 else if (file.ContentLength > 0)
                 {
-                    int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                    int MaxContentLength = 1024 * 1024 * 10; //3 MB
                     string[] AllowedFileExtensions = new string[] { ".mp4" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
@@ -79,11 +87,22 @@ namespace BorjesLIA.AdminControllers
                     }
                     else
                     {
-                        //TO:DO
+                       
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/videos"), fileName);
                         file.SaveAs(path);
-                        //ModelState.Clear();
+                        //funktionalitet för att du ut hur lång en videofil är
+                        //https://github.com/AydinAdn/MediaToolkit#retrieve-metadata
+                        var inputFile = new MediaFile { Filename = path };
+                        using (var engine = new Engine())
+                        {
+                            engine.GetMetadata(inputFile);
+                        }
+                        var getTimeSpan = inputFile.Metadata.Duration;
+                        double videoTotalSeconds = getTimeSpan.TotalSeconds;
+                        int VideoSeconds = Convert.ToInt32(videoTotalSeconds);
+                        VideoSeconds += 3;
+
                         ViewBag.Message = "File uploaded successfully";
 
                         var video = new VideoModel();
@@ -93,6 +112,7 @@ namespace BorjesLIA.AdminControllers
                         video.Active = true;
                         video.Date = DateTime.Now;
                         video.Type = 1; //TODO: borde kanske vara enum. 1 för mp4
+                        video.Duration = VideoSeconds;
                         db.VideoModels.Add(video);
                         db.SaveChanges();
                     }
@@ -249,5 +269,7 @@ namespace BorjesLIA.AdminControllers
             }
             base.Dispose(disposing);
         }
+
+       
     }
 }

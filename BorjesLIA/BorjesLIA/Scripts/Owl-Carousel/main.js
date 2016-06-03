@@ -1,138 +1,212 @@
-jQuery(function($) {'use strict';
-	//Slider
-	$(document).ready(function() {
-		var time = 7; // time in seconds
+jQuery(function ($) {
+    'use strict';
+    var thisCurrentSlideURL;
+    var newYT = false;
+    var time = 7;
+    var numberOfYtURL = [20];
 
-	 	var $progressBar,
-	      $bar, 
-	      $elem, 
-	      isPause, 
-	      tick,
-	      percentTime;
+    var $progressBar,
+      $bar,
+      $elem,
+      isPause,
+      tick,
+      percentTime;
 
-	 
-	    //Init the carousel
-	    $("#main-slider").find('.owl-carousel').owlCarousel({
-	      slideSpeed : 500,
-	      paginationSpeed : 500,
-	      singleItem : true,
-	      navigation : true,
-			navigationText: [
+    //Slider
+    $(document).ready(function () {
+        loadPlayer();
+        //Init the carousel
+        $("#main-slider").find('.owl-carousel').owlCarousel({
+            slideSpeed: 500,
+            paginationSpeed: 500,
+            singleItem: true,
+            navigation: true,
+            navigationText: [
 			"<i class='fa fa-angle-left'></i>",
 			"<i class='fa fa-angle-right'></i>"
-			],
-	      afterInit : progressBar,
-	      afterMove : moved,
-	      startDragging : pauseOnDragging,
-	      autoHeight : true,
-	      transitionStyle : "fadeUp"
-	    });
-	 
-	    //Init progressBar where elem is $("#owl-demo")
-	    function progressBar(elem){
-	      $elem = elem;
-	      //build progress bar elements
-	      buildProgressBar();
-	      //start counting
-	      start();
-	    }
-	 
-	    //create div#progressBar and div#bar then append to $(".owl-carousel")
-	    function buildProgressBar(){
-	      $progressBar = $("<div>",{
-	        id:"progressBar"
-	      });
-	      $bar = $("<div>",{
-	        id:"bar"
-	      });
-	      $progressBar.append($bar).appendTo($elem);
-	    }
-	 
-	    function start() {
-	      //reset timer
-	      percentTime = 0;
-	      isPause = false;
-	      //run interval every 0.01 second
-	      tick = setInterval(interval, 10);
-	    };
-	 
-	    function interval() {
-	      if(isPause === false){
-	        percentTime += 1 / time;
-	        $bar.css({
-	           width: percentTime+"%"
-	         });
-	        //if percentTime is equal or greater than 100
-	        if(percentTime >= 100){
-	          //slide to next item 
-	          $elem.trigger('owl.next')
-	        }
-	      }
-	    }
-	 
-	    //pause while dragging 
-	    function pauseOnDragging(){
-	      isPause = true;
-	    }
-	 
-	    //moved callback
-	    function moved(){
-	      //clear interval
-	      clearTimeout(tick);
-	      //start again
-	      start();
-	    }
-	});
-/*
-	////Initiat WOW JS
-	//new WOW().init();
-	////smoothScroll
-	//smoothScroll.init();
+            ],
+            afterInit: progressBar,
+            afterMove: moved,
+            startDragging: pauseOnDragging,
+            autoHeight: true,
+            transitionStyle: "fadeUp",
+            callbacks: true,
+            afterAction: thisSlide
+        });
 
-	//// portfolio filter
-	//$(window).load(function(){'use strict';
-	//	var $portfolio_selectors = $('.portfolio-filter >li>a');
-	//	var $portfolio = $('.portfolio-items');
-	//	$portfolio.isotope({
-	//		itemSelector : '.portfolio-item',
-	//		layoutMode : 'fitRows'
-	//	});
-		
-	//	$portfolio_selectors.on('click', function(){
-	//		$portfolio_selectors.removeClass('active');
-	//		$(this).addClass('active');
-	//		var selector = $(this).attr('data-filter');
-	//		$portfolio.isotope({ filter: selector });
-	//		return false;
-	//	});
-	//});
+        //Init progressBar where elem is $("#owl-demo")
+        function progressBar(elem) {
+            $elem = elem;
+            //build progress bar elements
+            buildProgressBar();
+            //start counting
+            start();
+        }
+
+        //create div#progressBar and div#bar then append to $(".owl-carousel")
+        function buildProgressBar() {
+            $progressBar = $("<div>", {
+                id: "progressBar"
+            });
+            $bar = $("<div>", {
+                id: "bar"
+            });
+            $progressBar.append($bar).appendTo($elem);
+        }
+
+        function start() {
+            //reset timer
+            percentTime = 0;
+            isPause = false;
+            //run interval every 0.01 second
+            tick = setInterval(interval, 10);
+        };
+
+        function interval() {
+            if (isPause === false) {
+                percentTime += 1 / time;
+                $bar.css({
+                    width: percentTime + "%"
+                });
+                //if percentTime is equal or greater than 100
+                if (percentTime >= 100) {
+                    //slide to next item 
+                    $elem.trigger('owl.next')
+                }
+            }
+        }
+
+        //pause while dragging 
+        function pauseOnDragging() {
+            isPause = true;
+        }
+
+        ////moved callback
+        function moved(elem) {
+            //clear interval
+            clearTimeout(tick);
+            //start again
+            start();
+        }
+    });
 
 
+    function thisSlide(current) {
 
-	//// Contact form
-	//var form = $('#main-contact-form');
-	//form.submit(function(event){
-	//	event.preventDefault();
-	//	var form_status = $('<div class="form_status"></div>');
-	//	$.ajax({
-	//		url: $(this).attr('action'),
-	//		beforeSend: function(){
-	//			form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
-	//		}
-	//	}).done(function(data){
-	//		form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
-	//	});
-	//});
+        var thisSlideIndex = this.currentItem;
+        var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
 
-	////Pretty Photo
-	//$("a[rel^='prettyPhoto']").prettyPhoto({
-	//	social_tools: false
-	//});
+        var checkOne = getSrc.includes("mp4");
+        var checkTwo = getSrc.includes("youtube");
 
+        if (checkOne) {
+            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            time = getDuration;
+            var video = document.getElementById(getSrc);
+            video.play();
+        }
+        if (checkTwo) {
+            if (thisCurrentSlideURL == getSrc)
+            {
+                newYT = false;
+            }
+            else {
+                newYT = true;
+                thisCurrentSlideURL = getSrc;
+                numberOfYtURL[thisSlideIndex] = getSrc;
+            }
+            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            time = getDuration;
 
-    */
+            loadPlayer();
+
+        }
+        else {
+            time = 7;
+        }
+    }
+
+    function loadPlayer() {
+        //console.log('loadPlayer');
+        if (typeof (YT) == 'undefined' || typeof (YT.Player) == 'undefined') {
+            console.log('if: undefined');
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            window.onYouTubePlayerAPIReady = function () {
+                //console.log('onYouTubePlayerAPIReady => onYouTubePlayer');
+                onYouTubePlayer();
+            };
+
+        } else {
+            //console.log('else: undefined => onPlayerReady');
+            if (newYT) {
+                onYouTubePlayer();
+            }
+            else {
+                onPlayerReady();
+            }
+        }
+    }
+    var player;
+
+    function onYouTubePlayer() {
+        //console.log('onYouTubePlayer');
+        var stringUrl = thisCurrentSlideURL;
+
+        //set up YT-player api
+        player = new YT.Player(stringUrl, {
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+                'onError': catchError
+            }
+        });
+    }
+    function onPlayerReady(event) {
+        //console.log('onPlayerReady');
+        player.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        //console.log('onPlayerStateChange:');
+        switch (event.data) {
+            case YT.PlayerState.UNSTARTED:
+                console.log('unstarted');
+                break;
+            case YT.PlayerState.ENDED:
+                console.log('ended');
+                event.target.stopVideo();
+                break;
+            case YT.PlayerState.PLAYING:
+                console.log('playing');
+                break;
+            case YT.PlayerState.PAUSED:
+                console.log('paused');
+                break;
+            case YT.PlayerState.BUFFERING:
+                console.log('buffering');
+                break;
+            case YT.PlayerState.CUED:
+                console.log('video cued');
+                break;
+        }
+    }
+
+    function stopVideo() {
+        //console.log('stopVideo');
+        player.stopVideo();
+    }
+    function catchError(event) {
+        //console.log('catchError');
+        if (event.data == 100) console.log("catch error");
+    }
+
 });
 
+//adjustIframes
 function adjustIframes() {
     $('iframe').each(function () {
         var

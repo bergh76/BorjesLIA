@@ -31,8 +31,8 @@ namespace BorjesLIA.Models.Settings
 
         public Settings()
         {
-            LoggDate = DateTime.Now;
-            User = HttpContext.Current.User.Identity.Name;
+            //LoggDate = DateTime.Now;
+            //User = HttpContext.Current.User.Identity.Name;
         }
 
     }

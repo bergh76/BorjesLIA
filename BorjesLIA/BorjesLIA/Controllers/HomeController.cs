@@ -28,26 +28,26 @@ namespace BorjesLIA.Controllers
             var model = new StartModelViewModel();
             model.listVM = new List<listViewModel>();
 
-            //foreach (var item in images)
-            //{
-            //    if (item.Active == true) 
-            //    {
-            //        var listvm = new listViewModel();
-            //        listvm.name = item.Name;
-            //        //listvm.url = "/Images/contentslider/" + item.Url;
-            //        listvm.url = "/Images/UploadedImg/" + item.Url;
-            //        listvm.orderby = item.PlacingOrder;
+            foreach (var item in images)
+            {
+                if (item.Active == true)
+                {
+                    var listvm = new listViewModel();
+                    listvm.name = item.Name;
+                    //listvm.url = "/Images/contentslider/" + item.Url;
+                    listvm.url = "/Images/UploadedImg/" + item.Url;
+                    listvm.orderby = item.PlacingOrder;
 
-            //        model.listVM.Add(listvm);
-            //    }
-            //}
-            //foreach (var item in exPageUrl)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = item.urlString;
+                    model.listVM.Add(listvm);
+                }
+            }
+            foreach (var item in exPageUrl)
+            {
+                var listvm = new listViewModel();
+                listvm.url = item.urlString;
 
-            //    model.listVM.Add(listvm);
-            //}
+                model.listVM.Add(listvm);
+            }
             foreach (var item in videos)
             {
                 var listvm = new listViewModel();
@@ -65,30 +65,30 @@ namespace BorjesLIA.Controllers
                 }
             }
 
-            //if (euros.Count != 0 || euros != null)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
-            //    model.listVM.Add(listvm);
-            //}
-            //if (dtm.Count != 0 || dtm != null)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/DtmModels/DtmLineGraph/";
-            //    model.listVM.Add(listvm);
-            //}
-            //if (dieselPriceQuarter != null || dieselPriceQuarter != null)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
-            //    model.listVM.Add(listvm);
-            //}
-            //if (dieselPriceWeek != null || dieselPriceWeek != null)
-            //{
-            //    var listvm = new listViewModel();
-            //    listvm.url = "/DieselWeekModels/_DieselWeekGraph/";
-            //    model.listVM.Add(listvm);
-            //}
+            if (euros.Count != 0 || euros != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
+                model.listVM.Add(listvm);
+            }
+            if (dtm.Count != 0 || dtm != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DtmModels/DtmLineGraph/";
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceQuarter != null || dieselPriceQuarter != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceWeek != null || dieselPriceWeek != null)
+            {
+                var listvm = new listViewModel();
+                listvm.url = "/DieselWeekModels/_DieselWeekGraph/";
+                model.listVM.Add(listvm);
+            }
 
             return View(model);
         }

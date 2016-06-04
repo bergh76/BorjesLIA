@@ -3,7 +3,12 @@ jQuery(function ($) {
     var thisCurrentSlideURL;
     var newYT = false;
     var time = 7;
-    var numberOfYtURL = [20];
+    var thisSlideIndex = 0;
+
+    var existURL = new Array();
+    var ytArrayIndex = 0;
+
+      var videoCase = 0
 
     var $progressBar,
       $bar,
@@ -15,6 +20,7 @@ jQuery(function ($) {
     //Slider
     $(document).ready(function () {
         loadPlayer();
+
         //Init the carousel
         $("#main-slider").find('.owl-carousel').owlCarousel({
             slideSpeed: 500,
@@ -93,7 +99,7 @@ jQuery(function ($) {
 
     function thisSlide(current) {
 
-        var thisSlideIndex = this.currentItem;
+        thisSlideIndex = this.currentItem;
         var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
 
         var checkOne = getSrc.includes("mp4");
@@ -106,14 +112,12 @@ jQuery(function ($) {
             video.play();
         }
         if (checkTwo) {
-            if (thisCurrentSlideURL == getSrc)
-            {
+            if (thisCurrentSlideURL == getSrc) {
                 newYT = false;
             }
             else {
                 newYT = true;
                 thisCurrentSlideURL = getSrc;
-                numberOfYtURL[thisSlideIndex] = getSrc;
             }
             var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             time = getDuration;
@@ -143,9 +147,97 @@ jQuery(function ($) {
         } else {
             //console.log('else: undefined => onPlayerReady');
             if (newYT) {
-                onYouTubePlayer();
+                //var videoCase = 0;
+                //// kolla med loop om array (existURL) innehåller thisCurrentSlideURL. om inte kör onYouTubePlayer och lägg till den (kommer regristreras som spelad tidigare). annars skicka vidare "true" och spela thisCurrentSlideURL i player
+                //var videoHasPlayed = false;
+                //var arrayLength = existURL.length;
+                //if (arrayLength <= 0) {
+                //    ytArrayIndex += 1;
+                //    existURL[ytArrayIndex] = thisCurrentSlideURL;
+                //}
+                //else {
+                //    for (var i = 0; i < arrayLength; i++) {
+                //        var checkIfExist = existURL[i].includes(thisCurrentSlideURL);
+                //        if (checkIfExist) {
+                //            videoHasPlayed = true;
+                           
+                //        }
+                //    }
+                //    if (!videoHasPlayed) {
+                //        ytArrayIndex += 1;
+                //        existURL[ytArrayIndex] = thisCurrentSlideURL;
+                //    }
+                //}
+              
+
+
+                //switch (videoCase) {
+                //    case 1:
+                //        console.log('videon har inte spelats innan');
+                //        break;
+                //    case 2:
+                //        console.log('videon har spelats innan');
+                //        event.target.stopVideo();
+                //        break;
+                //    case 3:
+                //        console.log('videon har spelats men en annan ytvideo har spelats efter');
+                //        break;
+                //}
+
+                //// om url är annorluna och inte har spelats innan
+                //onYouTubePlayer();
+                ////om url är annorlunda men har spelats innan (kanske kommer behöva köra både onyoutubeplayer och onplayer ready efter varandra.)
+                ////onPlayerReady();
+
+                //https://www.youtube.com/embed/ztgXC1e6mJI?enablejsapi=1 (första klippet i db)
+                //https://www.youtube.com/embed/GJVwbyAY4Sk?enablejsapi=1 (andra klippet i db)
+                videoCase += 1;
+                switch (videoCase) {
+                    case 1:
+                        console.log("case 1: ")
+                        console.log(thisCurrentSlideURL + " borde vara https://www.youtube.com/embed/GJVwbyAY4Sk?enablejsapi=1 (andra klippet )");
+                          onYouTubePlayer();
+                        break;
+                    case 2:
+                        console.log(":::case 2::: ska spela det första klippet "); // ska spela det första klippet!
+
+                        var someName = YT.get(thisCurrentSlideURL);
+                        someName.playVideo();
+                        //var iframes = document.getElementsByTagName('iframe');
+                        // iframes[thisSlideIndex].contentWindow.postMessage(JSON.stringify({
+                        //        playerVars: { 'autoplay': 1, 'controls': 0 },
+                        //        'event': 'command',
+                        //        'onReady': onPlayerReady,
+                        //    }), '*');
+                       
+                        break;
+                    case 3:
+                        console.log("case 3... ska spela andra klippet");
+                        //onYouTubePlayer();
+                        //player.playVideo(); //om case 2 inte spelar så spelar dne här rätt..
+
+                        ////document.getElementById('thisCurrentSlideURL').playVideo();
+                        ////onYouTubePlayer(); //main.js:242 Uncaught TypeError: player.playVideo is not a function
+                        //onPlayerReady();
+                        var someName = YT.get(thisCurrentSlideURL);
+                        someName.playVideo();
+                        break;
+                    case 4:
+                        console.log("ska spela det första klippet")
+                        var someName = YT.get(thisCurrentSlideURL);
+                        someName.playVideo();
+                        //console.log("case 4... ska spela första klippet"); 
+                        //player.nextVideo();
+                        break;
+                    case 5:
+                        console.log("sska spela det andra klippet")
+                        var someName = YT.get(thisCurrentSlideURL);
+                        someName.playVideo();
+                        break;
+                }
             }
             else {
+                //om det bara finns en yt-video och det var den redan spelats innan, spela den igen när den visas i slider. 
                 onPlayerReady();
             }
         }
@@ -167,7 +259,8 @@ jQuery(function ($) {
     }
     function onPlayerReady(event) {
         //console.log('onPlayerReady');
-        player.playVideo();
+        //player.playVideo(); //main.js:232 Uncaught TypeError: player.playVideo is not a function
+        event.target.playVideo(); //main.js:233 Uncaught TypeError: Cannot read property 'target' of undefined
     }
 
     function onPlayerStateChange(event) {

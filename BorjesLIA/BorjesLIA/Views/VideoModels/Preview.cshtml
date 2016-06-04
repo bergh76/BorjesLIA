@@ -54,16 +54,7 @@
 
 </table>
 
-@*<section id="show-result-box" class="hidden">
-    <video controls="controls" width="320" height="240" id="myVideoID">
-            <source src="" type="video/mp4" />
-        </video>
-</section>*@
-
-@*<video controls="controls" width="320" height="240" >
-        <source src="https://www.youtube.com/embed/inBKFMB-yPg" type="video/mp4" />
-    </video>*@
-
+<!--TODO: denna vill jag ska fungera till alla filmer och spela upp automatiskt.-->
 <section id="show-result-box" class="hidden">
         <iframe width="560"
                 height="315"
@@ -73,38 +64,65 @@
                 allowfullscreen></iframe>
     </section>
 
-<script>
-    //<!--http://stackoverflow.com/questions/25616043/passing-parameters-to-javascript-button-click-handler-->
-    $('.btnView').click(function () {
-        var prop = $(this).attr('data-prop');
-        alert("knapen är klickad. id: " + prop);
-        $.ajax({
-            type: "POST",
-            url: "/VideoModels/CallJsShowVideo",
-            traditional: true,
-            data: {
-                videoID: prop,
-            }
-        }).done(function (data) {
-            if (data.success === true) {
+    <script>
+        //ger yt vad den behöver
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                alert("går in i ajaxen, success. retunerar värde: " + data.returnData);
-                $('#myVideoID').attr("src", data.returnData);
-            
-                $('#show-result-box').removeClass('hidden');
+        var player;
+        //<!--http://stackoverflow.com/questions/25616043/passing-parameters-to-javascript-button-click-handler-->
+        $('.btnView').click(function () {
+            var prop = $(this).attr('data-prop');
+            //skickar in id för att hämta rätt url
+            $.ajax({
+                type: "POST",
+                url: "/VideoModels/CallJsShowVideo",
+                traditional: true,
+                data: {
+                    videoID: prop,
+                }
+            }).done(function (data) {
+                //får tillbaka url
+                if (data.success === true) {
+                    var getString = data.returnData;
+                    var checkString = getString.includes("/Content/videos/");
+                    //on video är lokal
+                    if (checkString) {
 
-                //if (!keepCropBox) {
-                //    $('#avatar-crop-box').addClass('hidden');
-                //}
-                //location.reload();
-            } else {
-                alert(data.errorMessage),
+                        $('#myVideoID').attr("src", data.returnData);
+
+                        $('#show-result-box').removeClass('hidden');
+                    }
+                        // om video är yt
+                    else {
+                        //Skapa spelare med API för att kunna ta ut duration
+                        //lägg till ?enablejsapi=1 för att kunna använda api
+                        //data.returnData += "?enablejsapi=1";
+                        $('#myVideoID').attr("src", data.returnData);
+                        $('#show-result-box').removeClass('hidden');
+                        player = new YT.Player('myVideoID', {
+                            events: {
+                                'onReady': onPlayerReady
+                            }
+                        });
+                    }
+
+                } else {
+                    alert(data.errorMessage),
+                    location.reload();
+                }
+            }).fail(function (e) {
+                alert('Cannot show video at this time'),
                 location.reload();
-            }
-        }).fail(function (e) {
-            alert('Cannot show video at this time'),
-            location.reload();
+            });
         });
-    });
-   
-</script>
+        function onPlayerReady(event) {
+            console.log("skriv ut event: "+ event)
+            var vd = window.player.getDuration();
+            console.log(" - - - - - - - - - -Filmens längd: "+vd+" - - - - - -");
+            event.target.playVideo();
+        }
+    
+    </script>

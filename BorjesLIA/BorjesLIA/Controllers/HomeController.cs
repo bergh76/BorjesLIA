@@ -30,7 +30,7 @@ namespace BorjesLIA.Controllers
 
             foreach (var item in images)
             {
-                if (item.Active == true) 
+                if (item.Active == true)
                 {
                     var listvm = new listViewModel();
                     listvm.name = item.Name;
@@ -54,11 +54,13 @@ namespace BorjesLIA.Controllers
                 if(item.Type==1)
                 {
                     listvm.url = "/Content/videos/" + item.Url;
+                    listvm.Duration = item.Duration;
                     model.listVM.Add(listvm);
                 }
                 else if (item.Type == 2)
                 {
                     listvm.url = item.Url;
+                    listvm.Duration = item.Duration;
                     model.listVM.Add(listvm);
                 }
             }

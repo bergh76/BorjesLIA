@@ -1,11 +1,10 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
-
- @ViewBag.Message
-
+@ViewBag.Message
 <body>
     <p>
         @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
+
             @Html.ValidationSummary();
             <ol>
                 <li class="lifile">
@@ -13,102 +12,144 @@
                     <span class="field-validation-error" id="spanfile"></span>
 
                     <input type="text" id="VideoNameInput" name="Name" value="Name" />
-                    <input type="text" id="exVideo" name="Url" value="exern videolänk"/>
+                    <input type="text" id="exVideo" name="Url" value="exern videolänk" />
+                    <input type="text" id="lengthOfVideo" name="Duration" value="" /> <!--class="hidden"-->
                 </li>
             </ol>
-            <input type="submit" id="btnSubmit" value="Upload" />
+        <p>
+            <button type="submit" class="btn btn-default" @*id="btnSubmit"*@ value="Upload"></button>
+        </p>
         }
-    </p>
-    <p>
-        @Html.Partial("_VideoList", Model)
-    </p>
+        <button class="btn btn-default" onclick="getVideoDuration()">ladda film</button>
 
-    <script type="text/jscript">
-        //get file size
-        function GetFileSize(fileid) {
-            try {
-                var fileSize = 0;
-                //for IE
-                if ($.browser.msie) {
-                    //before making an object of ActiveXObject,
-                    //please make sure ActiveX is enabled in your IE browser
-                    var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
-                    var objFile = objFSO.getFile(filePath);
-                    var fileSize = objFile.size; //size in kb
-                    fileSize = fileSize / 1048576; //size in mb
+        <section id="show-result-box" class="hidden">
+            <iframe width="560"
+                    height="315"
+                    id="myVideoID"
+                    src=""
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </section>
+        <p>
+            @Html.Partial("_VideoList", Model)
+        </p>
+
+        <script type="text/jscript">
+            //ger yt vad den behöver
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            var player;
+
+            //get file size
+            function GetFileSize(fileid) {
+                try {
+                    var fileSize = 0;
+                    //for IE
+                    if ($.browser.msie) {
+                        //before making an object of ActiveXObject,
+                        //please make sure ActiveX is enabled in your IE browser
+                        var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
+                        var objFile = objFSO.getFile(filePath);
+                        var fileSize = objFile.size; //size in kb
+                        fileSize = fileSize / 1048576; //size in mb
+                    }
+                        //for FF, Safari, Opeara and Others
+                    else {
+                        fileSize = $("#" + fileid)[0].files[0].size //size in kb
+                        fileSize = fileSize / 1048576; //size in mb
+                    }
+                    return fileSize;
                 }
-                    //for FF, Safari, Opeara and Others
+                catch (e) {
+                    alert("Error is :" + e);
+
+                }
+            }
+
+            //get file path from client system
+            function getNameFromPath(strFilepath) {
+                var objRE = new RegExp(/([^\/\\]+)$/);
+                var strName = objRE.exec(strFilepath);
+
+                if (strName == null) {
+                    return null;
+                }
                 else {
-                    fileSize = $("#" + fileid)[0].files[0].size //size in kb
-                    fileSize = fileSize / 1048576; //size in mb
-                }
-                return fileSize;
-            }
-            catch (e) {
-                alert("Error is :" + e);
-            }
-        }
-
-        //get file path from client system
-        function getNameFromPath(strFilepath) {
-            var objRE = new RegExp(/([^\/\\]+)$/);
-            var strName = objRE.exec(strFilepath);
-
-            if (strName == null) {
-                return null;
-            }
-            else {
-                return strName[0];
-            }
-        }
-
-        $("#btnSubmit").live("click", function () {
-            if ($('#fileToUpload').val() == "") {
-                $("#spanfile").html("Please upload file");
-                return false;
-            }
-            else {
-                return checkfile();
-            }
-        });
-
-        function checkfile() {
-            var file = getNameFromPath($("#fileToUpload").val());
-            if (file != null) {
-                var extension = file.substr((file.lastIndexOf('.') + 1));
-                // alert(extension);
-                switch (extension) {
-                    case 'jpg':
-                    case 'png':
-                    case 'gif':
-                    case 'pdf':
-                        flag = true;
-                        break;
-                    default:
-                        flag = false;
+                    return strName[0];
                 }
             }
-            if (flag == false) {
-                $("#spanfile").text("You can upload only mp4 extension file");
-                return false;
-            }
-            else {
-                var size = GetFileSize('fileToUpload');
-                if (size > 3) {
-                    $("#spanfile").text("You can upload file up to 3 MB");
+
+            $("#btnSubmit").on("click", function () {
+                console.log("button pressed");
+                //getVideoDuration();
+
+                if ($('#fileToUpload').val() == "") {
+                    $("#spanfile").html("Please upload file");
                     return false;
                 }
                 else {
-                    $("#spanfile").text("");
 
+                    return checkfile();
+                }
+            });
+
+            function checkfile() {
+                console.log("checkfile");
+                var file = getNameFromPath($("#fileToUpload").val());
+                if (file != null) {
+                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                    // alert(extension);
+                    switch (extension) {
+                        case 'jpg':
+                        case 'png':
+                        case 'gif':
+                        case 'pdf':
+                        case 'mp4':
+                            flag = true;
+                            break;
+                        default:
+                            flag = false;
+                    }
+                }
+                if (flag == false) {
+                    $("#spanfile").text("You can upload only mp4 extension file");
+                    return false;
+                }
+                else {
+                    var size = GetFileSize('fileToUpload');
+                    if (size > 3) {
+                        $("#spanfile").text("You can upload file up to 3 MB");
+                        return false;
+                    }
+                    else {
+                        $("#spanfile").text("");
+
+                    }
                 }
             }
-        }
+            //todo: få ut värdet från inmatningen
+            function getVideoDuration() {
+                console.log("enterd getVideoDuration");
+                var div = document.getElementById("exVideo").value;
+                console.log(div);
+                div += "?enablejsapi=1";
+                console.log(div);
+                $('#myVideoID').attr("src", div);
+                //$('#show-result-box').removeClass('hidden');
+                player = new YT.Player('myVideoID', {
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
 
-        $(function () {
-            $("#fileToUpload").change(function () {
-                checkfile();
-            });
-        });
-    </script>
-</body>
+            }
+            function onPlayerReady(event) {
+                var vd = player.getDuration();
+                document.getElementById("lengthOfVideo").value = vd;
+                //event.target.playVideo();
+            }
+        </script>
+    </body>

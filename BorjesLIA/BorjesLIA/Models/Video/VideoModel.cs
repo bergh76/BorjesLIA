@@ -29,5 +29,8 @@ namespace BorjesLIA.Models.Video
 
         [Display(Name = "Typ av video")]
         public int Type { get; set; }
+
+        [Display(Name = "varaktighet")]
+        public int Duration { get; set; }
     }
 }

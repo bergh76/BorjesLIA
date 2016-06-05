@@ -21,6 +21,7 @@ namespace BorjesLIA.AdminControllers
         // GET: DieselQuarterPriceModels
         public ActionResult Index(DieselQuarterViewModel dieselQ)
         {
+            dieselQ = GetData();
             dieselQ = NewDieselQuarterObject();
             return View(dieselQ);
         }
@@ -95,14 +96,25 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="dieselQuarterChart"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
-        {
-            var data = await dieselQuarterChart.GetQuarterData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
+        //{
+        //    var data = await dieselQuarterChart.GetQuarterData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
+        public DieselQuarterViewModel GetData()
+        {
+            DieselQuarterViewModel dataTabel = new DieselQuarterViewModel();
+            var data = db.DieselPriceQuarter.ToArray();
+            return (new DieselQuarterViewModel()
+            {
+                Title = "Kvartalspriser Diesel",
+                Subtitle = "År",
+                DataTable = dataTabel.ConstrucDataTabel(data)
+            });
+        }
 
         /// <summary>
         /// Creats a new DieselQuarterViewModel object, populates needed lists with data and return a view with data

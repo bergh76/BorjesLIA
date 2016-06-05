@@ -261,100 +261,41 @@
     if (chartID == 4)
     {
         <script type="text/javascript">
-            google.load("visualization", "1", { packages: ["corechart"] });
-            google.setOnLoadCallback(drawchart);
-            function drawchart() {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                    @*url: '@Url.Action("GetComboData")',*@
-                    url: '@Url.Action("GetData")',
-                    data: "{ }",
-                    // If data connections is success
-                    success:
-                        function drawchart(dataValues) {
-                            var data = google.visualization.arrayToDataTable([
-                                    ['År', 'Kvartal', 'Pris'],
-                                   // ['Kvartal','År','Pris']
-                            ]);
-                            //var data = new google.visualization.DataTable();
-                            //data.addColumn('string', 'År');
-                            //data.addColumn('string', 'Kvartal'); 
-                            //data.addColumn('number', 'Pris');
-                            console.log("DataArray:", data);
-                            
-                            if (window.JSON && !window.JSON.dateParser) {
-                                var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+           
+            google.charts.load('current', { 'packages': ['corechart', 'bar'] });
 
-                                JSON.dateParser = function (key, value) {
-                                    if (typeof value === 'string') {
-                                        var a = reISO.exec(value);
-                                        if (a)
-                                            return new Date(value);
-                                        a = reMsAjax.exec(value);
-                                        if (a) {
-                                            var b = a[1].split(/[-+,.]/);
-                                            return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                        }
-                                    }
-                                    return value;
-                                };
+            google.charts.setOnLoadCallback(function () {
+                @*var url = '@Url.Action("GetData")';*@
+                var title = '@Model.Title';
+                var subtitle = '@Model.Subtitle';
+                var dataTable = new google.visualization.DataTable(
+                    @Html.Raw(Json.Encode(Model.DataTable))
+                );
 
-                            }
-                             //Loops through the DataTable with data from database
-                            for (var i = 0; i < dataValues.length; i++) {
-                                
-                            //    console.log("DataValues innan addRow:", dataValues);
-                                var str = dataValues[i].DieselQuarterValue;                                
-                            //    //console.log("Här var det strängat", str);
-                                var numVal = parseFloat(str);
-                               //console.log("Här ska det vara numval", numVal);
-                            ////    //var date = JSON.parse(str, JSON.dateParser);
-                            ////    //console.log("Här ska det vara datum", date);
-                                data.addRow([dataValues[i].Year.toString(), dataValues[i].Quarter.toString(), dataValues[i].DieselQuarterValue.toString()])
-                                console.log("Data efter iSnurra:", data);
-                            }
-                            
-                            var view = new google.visualization.DataView(data);
-                            view.setColumns([0,
-                                             {
-                                                 calc: "stringify",
-                                                 sourceColumn: 2,
-                                                 type: "string",
-                                                 role: "annotation",
-                                             },
-                            ]);
+                drawChart('DieselquarterDiv', title, subtitle, dataTable);
+                //drawColumnChart('chart', title, dataTable);
+            });
 
-                            // Settings for visualization of the graph
-                            var options = {
-                                chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                seriesType: 'bars',
-                                series:
-                                    {
-                                        3: {type: 'column'}
-                                    },
-                                title: 'Dieselpris per kvartal Kombo',
-                                //width: '100%',
-                                //height: '100%',
-                                pointSize: 3,
-                                dataOpacity: 0.4,
-                                lineWidth: 2,
-                                hAxis: {
-                                    title: 'Datum', titleTextStyle: { color: '#333' },
-                                }
-                            }
-                            // Draws the graph into a specified div
-                            var chart = new google.visualization.ComboChart(document.getElementById("DieselquarterDiv"));
-                            chart.draw(view, options);
-                        },
-                    // If collectning data from database fails promp message here
-                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                });
+            function drawChart(elementId, title, subtitle, dataTable) {
+                var options = {
+                    chart: {
+                        title: title,
+                        subtitle: subtitle
+                    }
+                };
+                var chart = new google.charts.Bar(document.getElementById(elementId));
+                chart.draw(dataTable, options);
+            }
+
+            function drawColumnChart(elementId, title, dataTable) {
+                var options = {
+                    title: title
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById(elementId));
+                chart.draw(dataTable, options);
             }
         </script>
+
     }
 }
 

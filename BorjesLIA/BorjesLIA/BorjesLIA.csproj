@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
+    <Compile Include="Models\Charts\GoogleChartVisualizationDataTabel.cs" />
     <Compile Include="Models\Diesel\DieselQuarterPriceModel.cs" />
     <Compile Include="Models\Diesel\DieselWeekModel.cs" />
     <Compile Include="Models\Diesel\DtmModel.cs" />

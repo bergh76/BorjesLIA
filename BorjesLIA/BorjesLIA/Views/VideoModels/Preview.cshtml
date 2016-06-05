@@ -1,0 +1,128 @@
+﻿@model BorjesLIA.ViewModel.VideoViewModel
+
+<h2>Preview</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            url
+
+        </th>
+        <th>
+            name
+            @*@Html.DisplayNameFor(model => model.name)*@
+        </th>
+        <th>
+            orderby
+            @*@Html.DisplayNameFor(model => model.orderby)*@
+        </th>
+        <th>
+            active
+            @*@Html.DisplayNameFor(model => model.active)*@
+        </th>
+        <th>
+            dt
+            @*@Html.DisplayNameFor(model => model.dt)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListOfVideoModels)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlacingOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+         
+            <td>
+                <button class="btnView" data-prop="@item.ID">Show</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!--TODO: denna vill jag ska fungera till alla filmer och spela upp automatiskt.-->
+<section id="show-result-box" class="hidden">
+        <iframe width="560"
+                height="315"
+                id="myVideoID"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+    </section>
+
+    <script>
+        //ger yt vad den behöver
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        //<!--http://stackoverflow.com/questions/25616043/passing-parameters-to-javascript-button-click-handler-->
+        $('.btnView').click(function () {
+            var prop = $(this).attr('data-prop');
+            //skickar in id för att hämta rätt url
+            $.ajax({
+                type: "POST",
+                url: "/VideoModels/CallJsShowVideo",
+                traditional: true,
+                data: {
+                    videoID: prop,
+                }
+            }).done(function (data) {
+                //får tillbaka url
+                if (data.success === true) {
+                    var getString = data.returnData;
+                    var checkString = getString.includes("/Content/videos/");
+                    //on video är lokal
+                    if (checkString) {
+
+                        $('#myVideoID').attr("src", data.returnData);
+
+                        $('#show-result-box').removeClass('hidden');
+                    }
+                        // om video är yt
+                    else {
+                        //Skapa spelare med API för att kunna ta ut duration
+                        //lägg till ?enablejsapi=1 för att kunna använda api
+                        //data.returnData += "?enablejsapi=1";
+                        $('#myVideoID').attr("src", data.returnData);
+                        $('#show-result-box').removeClass('hidden');
+                        player = new YT.Player('myVideoID', {
+                            events: {
+                                'onReady': onPlayerReady
+                            }
+                        });
+                    }
+
+                } else {
+                    alert(data.errorMessage),
+                    location.reload();
+                }
+            }).fail(function (e) {
+                alert('Cannot show video at this time'),
+                location.reload();
+            });
+        });
+        function onPlayerReady(event) {
+            console.log("skriv ut event: "+ event)
+            var vd = window.player.getDuration();
+            console.log(" - - - - - - - - - -Filmens längd: "+vd+" - - - - - -");
+            event.target.playVideo();
+        }
+    
+    </script>

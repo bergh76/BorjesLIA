@@ -23,7 +23,9 @@ namespace BorjesLIA.ViewModel
             public string url { get; set; }
             public string name { get; set; }
             public int orderby { get; set; }
+            public bool active { get; set; }
             public DateTime dateTime { get; set; }
+            public int Duration { get; set; }
         }
     }
 }

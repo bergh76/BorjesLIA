@@ -19,6 +19,7 @@ namespace BorjesLIA.Controllers
         {
             var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
             var exPageUrl = db.UrlModels.ToList();
+            var videos = db.VideoModels.ToList();
             var euros = db.EuroExchangeModels.ToList();
             var dtm = db.DtmModels.ToList();
             var dieselPriceQuarter = db.DieselPriceQuarter.ToList();
@@ -29,7 +30,7 @@ namespace BorjesLIA.Controllers
 
             foreach (var item in images)
             {
-                if (item.Active == true) 
+                if (item.Active == true)
                 {
                     var listvm = new listViewModel();
                     listvm.name = item.Name;
@@ -46,6 +47,22 @@ namespace BorjesLIA.Controllers
                 listvm.url = item.urlString;
 
                 model.listVM.Add(listvm);
+            }
+            foreach (var item in videos)
+            {
+                var listvm = new listViewModel();
+                if(item.Type==1)
+                {
+                    listvm.url = "/Content/videos/" + item.Url;
+                    listvm.Duration = item.Duration;
+                    model.listVM.Add(listvm);
+                }
+                else if (item.Type == 2)
+                {
+                    listvm.url = item.Url;
+                    listvm.Duration = item.Duration;
+                    model.listVM.Add(listvm);
+                }
             }
 
             if (euros.Count != 0 || euros != null)

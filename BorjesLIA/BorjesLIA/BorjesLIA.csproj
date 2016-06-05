@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediaToolkit.1.1.0.1\lib\net40\MediaToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -234,6 +238,7 @@
     <Compile Include="ViewModel\DieselViewModel.cs" />
     <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
     <Compile Include="ViewModel\URLViewModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -395,6 +400,7 @@
     <Content Include="Content\production\js\moment\moment.min.js" />
     <Content Include="Content\production\less\custom.css" />
     <Content Include="Content\responsive.css" />
+    <Content Include="Content\videos\SampleVideo_1280x720_1mb.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -985,6 +991,13 @@
     <Content Include="Views\Settings\_DieselQuarterSettingsView.cshtml" />
     <Content Include="Views\Settings\Index_DieselQuarterSettings.cshtml" />
     <Content Include="Views\Imgs\ShowView.cshtml" />
+    <Content Include="Views\VideoModels\Index.cshtml" />
+    <Content Include="Views\VideoModels\ShowView.cshtml" />
+    <Content Include="Views\VideoModels\_VideoList.cshtml" />
+    <Content Include="Views\VideoModels\Edit.cshtml" />
+    <Content Include="Views\VideoModels\Delete.cshtml" />
+    <Content Include="Views\VideoModels\Details.cshtml" />
+    <Content Include="Views\VideoModels\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

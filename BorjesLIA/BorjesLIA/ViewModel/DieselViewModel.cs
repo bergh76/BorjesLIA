@@ -52,39 +52,42 @@ namespace BorjesLIA.ViewModel
 
         public string Title { get; set; }
         public string Subtitle { get; set; }
+        public IEnumerable<DieselQuarterPriceModel> list { get; set; }
+        public DieselQuarterViewModel()
+        {
+            var data = new ApplicationDbContext();
+            Title = "Kvartalspriser Diesel";
+            Subtitle = "År";
+            DataTable = ConstrucDataTabel(data.DieselPriceQuarter.ToArray());
+        }
         public GoogleVisualizationDataTable DataTable { get; set; }
 
         public GoogleVisualizationDataTable ConstrucDataTabel(DieselQuarterPriceModel[] data)
         {
-
-                var dataTable = new GoogleVisualizationDataTable();
-
-                var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
-                var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
-                dataTable.AddColumn("Quarter", "string");
+            var dataTable = new GoogleVisualizationDataTable();
+            var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
+            var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
+            dataTable.AddColumn("Quarter", "string");
+            foreach (var year in years)
+            {
+                dataTable.AddColumn(year.ToString(), "string");
+            }
+            foreach (var quarter in quarters)
+            {
+                var val = new List<object>(new[] { quarter });
                 foreach (var year in years)
                 {
-                    dataTable.AddColumn(year.ToString(), "string");
+                    var result = data
+                        .Where(x => x.Quarter == quarter && x.Year == year)
+                        .Select(x => x.DieselQuarterValue)
+                        .SingleOrDefault();
+                    val.Add(result);
                 }
+                dataTable.AddRow(val);
+            }
 
-                foreach (var quarter in quarters)
-                {
-                    var val = new List<object>(new[] { quarter });
-                    foreach (var year in years)
-                    {
-                        var result = data
-                            .Where(x => x.Quarter == quarter && x.Year == year)
-                            .Select(x => x.DieselQuarterValue)
-                            .SingleOrDefault();
-                        val.Add(result);
-
-                    }
-                    dataTable.AddRow(val);
-
-                }
-                return dataTable;
+            return dataTable;
         }
-
 
         public Task<List<DieselQuarterPriceModel>> GetQuarterData()
 
@@ -96,8 +99,6 @@ namespace BorjesLIA.ViewModel
                 {
                     return GetQuarterData();
                 }
-
-
 
                 else
                 {

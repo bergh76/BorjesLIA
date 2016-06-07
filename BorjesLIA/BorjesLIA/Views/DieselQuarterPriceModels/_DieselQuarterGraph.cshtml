@@ -261,16 +261,19 @@
     if (chartID == 4)
     {
         <script type="text/javascript">           
-            google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
             google.charts.setOnLoadCallback(function () {
                 var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(
-                    @Html.Raw(Json.Encode(Model.DataTable))
-
+                    tdata
+                   @*@Html.Raw(Json.Encode(Model.DataTable))*@
                 );
+                console.log("DataTable Model: ", dataTable);
                 drawChart('DieselquarterDiv', title, dataTable);
                 //drawColumnChart('chart', title, dataTable);
+                console.log("tdata: ",tdata);
 
             });
             
@@ -278,21 +281,28 @@
                 var options = {
                     chart: {
                         title: title,
-                        
-                    }
+                        //vAxis: { minValue: 0, maxValue: 5, gridlines: { count: 6 } }
+                    },//colors: ['#1b9e77', '#d95f02', '#7570b3']
+                    
                 };
                 var chart = new google.charts.Bar(document.getElementById(elementId));
                 chart.draw(dataTable, options);
-
             }
 
-            function drawColumnChart(elementId, title, dataTable) {
-                var options = {
-                    title: title
-                };
-                var chart = new google.visualization.ColumnChart(document.getElementById(elementId));
-                chart.draw(dataTable, options);
-            }
+            //function drawColumnChart(elementId, title, dataTable) {
+            //    var options = {
+            //        chart: {
+            //            title: title,
+            //            vAxis: {
+            //                title: 'Population (millions)',
+            //                ticks: [0, 1000, 2000, 4000, 6000]
+            //            }
+            //        },
+            //    };
+            //    var chart2 = new google.charts.Line(document.getElementById(elementId));
+            //    console.log(elementId);
+            //    chart2.draw(dataTable, options);
+            //}
         </script>
     }
 }
@@ -302,4 +312,9 @@
         <div id="DieselquarterDiv" style="width: 100%; height:650px"></div>
     </div>
 </div>
+@*<div class="x_panel">
+    <div class="x_content">
+        <div id="chart" style="width: 100%; height:650px"></div>
+    </div>
+</div>*@
 

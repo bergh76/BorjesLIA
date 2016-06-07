@@ -33,7 +33,7 @@ namespace BorjesLIA.Models.Settings
         {            
             string _user = HttpContext.Current.User.Identity.Name.ToString();
             string _loggDate = DateTime.Now.ToString();
-            if (string.IsNullOrEmpty(_user) && string.IsNullOrEmpty(_loggDate))
+            if (string.IsNullOrEmpty(_user))
             {
                 User = "init";
                 LoggDate = DateTime.Now;

@@ -158,7 +158,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Year,Quarter,DieselWeekValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
+        public ActionResult Create([Bind(Include = "ID,Year,Quarter,DieselQuarterValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
         {
             if (ModelState.IsValid)
             {
@@ -190,7 +190,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Year,Quarter,DieselWeekValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
+        public ActionResult Edit([Bind(Include = "ID,Year,Quarter,DieselQuarterValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
         {
             if (ModelState.IsValid)
             {

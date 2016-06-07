@@ -4,6 +4,7 @@ using BorjesLIA.Models.Diesel;
 using BorjesLIA.Models.Settings;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,13 +53,17 @@ namespace BorjesLIA.ViewModel
 
         public string Title { get; set; }
         public string Subtitle { get; set; }
+        public GoogleVisualizationDataTable dList { get; set; }
         public IEnumerable<DieselQuarterPriceModel> list { get; set; }
+
         public DieselQuarterViewModel()
         {
-            var data = new ApplicationDbContext();
-            Title = "Kvartalspriser Diesel";
-            Subtitle = "År";
-            DataTable = ConstrucDataTabel(data.DieselPriceQuarter.ToArray());
+            using (var db = new ApplicationDbContext())
+            {
+                Title = "Kvartalspriser Diesel";
+                Subtitle = "År";
+                DataTable = ConstrucDataTabel(db.DieselPriceQuarter.ToArray());
+            }       
         }
         public GoogleVisualizationDataTable DataTable { get; set; }
 
@@ -68,6 +73,27 @@ namespace BorjesLIA.ViewModel
             var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Quarter", "string");
+            /**
+            // makes clusters of quarters
+            //foreach (var q in quarters)
+            //{
+            //    dataTable.AddColumn(q.ToString(), "string");
+            //}
+            //foreach (var y in years)
+            //{
+            //    var val = new List<object>(new[] { y });
+            //    foreach (var q in quarters)
+            //    {
+            //        var result = data
+            //            .Where(x => x.Quarter == q && x.Year == y)
+            //            .Select(x => x.DieselQuarterValue)
+            //            .SingleOrDefault();
+            //        val.Add(result);
+            //    }
+            //    dataTable.AddRow(val);
+            //}
+            // Makes clusters of years
+            **/
             foreach (var year in years)
             {
                 dataTable.AddColumn(year.ToString(), "string");
@@ -85,7 +111,7 @@ namespace BorjesLIA.ViewModel
                 }
                 dataTable.AddRow(val);
             }
-
+           
             return dataTable;
         }
 

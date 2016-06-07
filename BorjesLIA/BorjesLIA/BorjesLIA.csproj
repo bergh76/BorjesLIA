@@ -231,12 +231,13 @@
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\DieselWeekViewModel.cs" />
     <Compile Include="ViewModel\DMTViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StartModelViewModel.cs" />
     <Compile Include="ViewModel\ListEuroViewModel.cs" />
-    <Compile Include="ViewModel\DieselViewModel.cs" />
+    <Compile Include="ViewModel\DieselQuarterViewModel.cs" />
     <Compile Include="ViewModel\ResultTilesPanelViewModel.cs" />
     <Compile Include="ViewModel\URLViewModel.cs" />
     <Compile Include="ViewModel\VideoViewModel.cs" />

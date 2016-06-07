@@ -1,8 +1,28 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
 @ViewBag.Message
 <body>
+
+    @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
+    {
+        @Html.ValidationSummary();
+        <ol>
+            <li class="lifile">
+                <input type="file" id="fileToUpload" name="file" />
+                <span class="field-validation-error" id="spanfile"></span>
+
+                <input type="text" id="VideoNameInput" name="Name" value="Name" />
+                <input type="text" id="exVideo" name="Url" value="Youtube länk" />
+                <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> <!--type="hidden"-->
+            </li>
+        </ol>
+            <div>
+                <button type="submit" class="btn btn-default" @*id="btnSubmit"*@ value="Upload">Ladda upp film</button>
+            </div>
+    }
+
+
     <p>
-        @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @*@using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
             @Html.ValidationSummary();
@@ -12,15 +32,16 @@
                     <span class="field-validation-error" id="spanfile"></span>
 
                     <input type="text" id="VideoNameInput" name="Name" value="Name" />
-                    <input type="text" id="exVideo" name="Url" value="exern videolänk" />
-                    <input type="text" id="lengthOfVideo" name="Duration" value="" /> <!--class="hidden"-->
+                    <input type="text" id="exVideo" name="Url" value="Youtube länk" />
+                    <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> 
                 </li>
             </ol>
-        <p>
-            <button type="submit" class="btn btn-default" @*id="btnSubmit"*@ value="Upload"></button>
-        </p>
+        <div>
+            <button type="submit" class="btn btn-default"  value="Upload">Ladda upp film</button> @*id="btnSubmit"
+        </div>
         }
-        <button class="btn btn-default" onclick="getVideoDuration()">ladda film</button>
+        <button class="btn btn-default" onclick="getVideoDuration()">get duration yt</button>
+        <button  class="btn btn-default" id="btnSubmit" >validera filstorlek</button>*@
 
         <section id="show-result-box" class="hidden">
             <iframe width="560"
@@ -35,7 +56,7 @@
         </p>
 
         <script type="text/jscript">
-            //ger yt vad den behöver
+            //--YT PLAYER
             var tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -43,94 +64,6 @@
 
             var player;
 
-            //get file size
-            function GetFileSize(fileid) {
-                try {
-                    var fileSize = 0;
-                    //for IE
-                    if ($.browser.msie) {
-                        //before making an object of ActiveXObject,
-                        //please make sure ActiveX is enabled in your IE browser
-                        var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
-                        var objFile = objFSO.getFile(filePath);
-                        var fileSize = objFile.size; //size in kb
-                        fileSize = fileSize / 1048576; //size in mb
-                    }
-                        //for FF, Safari, Opeara and Others
-                    else {
-                        fileSize = $("#" + fileid)[0].files[0].size //size in kb
-                        fileSize = fileSize / 1048576; //size in mb
-                    }
-                    return fileSize;
-                }
-                catch (e) {
-                    alert("Error is :" + e);
-
-                }
-            }
-
-            //get file path from client system
-            function getNameFromPath(strFilepath) {
-                var objRE = new RegExp(/([^\/\\]+)$/);
-                var strName = objRE.exec(strFilepath);
-
-                if (strName == null) {
-                    return null;
-                }
-                else {
-                    return strName[0];
-                }
-            }
-
-            $("#btnSubmit").on("click", function () {
-                console.log("button pressed");
-                //getVideoDuration();
-
-                if ($('#fileToUpload').val() == "") {
-                    $("#spanfile").html("Please upload file");
-                    return false;
-                }
-                else {
-
-                    return checkfile();
-                }
-            });
-
-            function checkfile() {
-                console.log("checkfile");
-                var file = getNameFromPath($("#fileToUpload").val());
-                if (file != null) {
-                    var extension = file.substr((file.lastIndexOf('.') + 1));
-                    // alert(extension);
-                    switch (extension) {
-                        case 'jpg':
-                        case 'png':
-                        case 'gif':
-                        case 'pdf':
-                        case 'mp4':
-                            flag = true;
-                            break;
-                        default:
-                            flag = false;
-                    }
-                }
-                if (flag == false) {
-                    $("#spanfile").text("You can upload only mp4 extension file");
-                    return false;
-                }
-                else {
-                    var size = GetFileSize('fileToUpload');
-                    if (size > 3) {
-                        $("#spanfile").text("You can upload file up to 3 MB");
-                        return false;
-                    }
-                    else {
-                        $("#spanfile").text("");
-
-                    }
-                }
-            }
-            //todo: få ut värdet från inmatningen
             function getVideoDuration() {
                 console.log("enterd getVideoDuration");
                 var div = document.getElementById("exVideo").value;
@@ -144,12 +77,57 @@
                         'onReady': onPlayerReady
                     }
                 });
-
             }
+            //spelaren behöver vara redo att spelas för att kunna ta ut längden på klippet. 
             function onPlayerReady(event) {
                 var vd = player.getDuration();
                 document.getElementById("lengthOfVideo").value = vd;
                 //event.target.playVideo();
             }
+            //-- END YT PLAYER
+
+            //-- File UPLOAD
+            function checkfile() {
+                var size = document.getElementById('fileToUpload').files[0].size;
+                alert("storleken på filen: " + size);
+            }
+
+            //-- END File UPLOAD
+          
+           
+
+            //-- ON SUBMIT
+            $(function () {
+                $("#SubmitTarget").submit(function (event) {
+                    if ($('#fileToUpload').val() == "" && $('exVideo').val()!=""||($('exVideo').val()!="Youtube länk") ){
+                   
+                        myYtFunction();
+
+                    }
+                    else if ($('#fileToUpload').val() != "" && $('exVideo').val() == "" || ($('exVideo').val() == "Youtube länk")) {
+
+                        myFileFunction();
+
+                    }
+                    else {
+                        $("#spanfile").html("Ingenting hände. Handlingen som begärdes kändes inte igen");
+                    }
+                   
+                    //$("form").submit();
+                    //Submit
+                    event.preventDefault(); //under test, för att inte nå controller och genomför därför inte submit. 
+                });
+            });
+            function myYtFunction() {
+                alert("youtube är vald att laddas upp");
+                getVideoDuration();
+                //var isYT = document.getElementById('exVideo').value;
+                //alert("ytlänk value: " + isYT);
+            }
+            function myFileFunction() {
+                alert("fil är vald att laddas upp");
+                checkfile();
+            }
+            //--END ON SUBMIT
         </script>
     </body>

@@ -73,7 +73,7 @@ namespace BorjesLIA.AdminControllers
                 //om det är en fil
                 else if (file.ContentLength > 0)
                 {
-                    int MaxContentLength = 1024 * 1024 * 10; //3 MB
+                    int MaxContentLength = 1024 * 1024 * 10; //10 MB
                     string[] AllowedFileExtensions = new string[] { ".mp4" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))

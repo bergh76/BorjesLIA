@@ -42,6 +42,9 @@ namespace BorjesLIA.ViewModel
             }
         }
     }
+
+
+
     public class DieselQuarterViewModel
     {
         public IEnumerable<Settings> settings { get; set; }
@@ -51,11 +54,29 @@ namespace BorjesLIA.ViewModel
         public string Year { get; set; }
         public string Name { get; set; }
 
+        public Task<List<DieselQuarterPriceModel>> GetQuarterData()
+
+        {
+            Name = "Dieselpris Kvartal";
+            using (var db = new ApplicationDbContext())
+            {
+                if (db.DieselPriceQuarter == null)
+                {
+                    return GetQuarterData();
+                }
+
+                else
+                {
+                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
+                    return Task.Run(() => lqDiesel);
+                }
+            }
+
+        }
+
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public GoogleVisualizationDataTable dList { get; set; }
-        public IEnumerable<DieselQuarterPriceModel> list { get; set; }
-
         public DieselQuarterViewModel()
         {
             using (var db = new ApplicationDbContext())
@@ -110,30 +131,9 @@ namespace BorjesLIA.ViewModel
                     val.Add(result);
                 }
                 dataTable.AddRow(val);
-            }
-           
+            }           
             return dataTable;
         }
 
-        public Task<List<DieselQuarterPriceModel>> GetQuarterData()
-
-        {
-            Name = "Dieselpris Kvartal";
-            using (var db = new ApplicationDbContext())
-            {
-                if (db.DieselPriceQuarter == null)
-                {
-                    return GetQuarterData();
-                }
-
-                else
-                {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
-                    var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
-                    return Task.Run(() => lqDiesel);
-                }
-            }
-
-        }
     }
 }

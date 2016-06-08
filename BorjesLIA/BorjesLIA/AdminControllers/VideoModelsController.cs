@@ -44,10 +44,24 @@ namespace BorjesLIA.AdminControllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
+<<<<<<< HEAD
 
             //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
             //if (ModelState.IsValid)
             bool test = true;
+=======
+            //ModelState["varaktighet"].Errors.Clear();
+            //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
+            if (!ModelState.IsValid)
+            {
+                //om varaktighet inte finns med plocka bort error. 
+                foreach (var modelValue in ModelState.Values)
+                {
+                    modelValue.Errors.Clear();
+                }
+            }
+                bool test = true;
+>>>>>>> ver.1.0.4.1
             if (test)
             {
                 if (file == null)
@@ -67,13 +81,19 @@ namespace BorjesLIA.AdminControllers
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 
+                        ViewBag.Message = "Videon har lagts till";
+
                     }
                     //ModelState.AddModelError("File", "Please Upload Your file");
                 }
                 //om det är en fil
                 else if (file.ContentLength > 0)
                 {
+<<<<<<< HEAD
                     int MaxContentLength = 1024 * 1024 * 10; //3 MB
+=======
+                    int MaxContentLength = 1024 * 1024 * 100; //100 MB
+>>>>>>> ver.1.0.4.1
                     string[] AllowedFileExtensions = new string[] { ".mp4" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
@@ -102,9 +122,14 @@ namespace BorjesLIA.AdminControllers
                         double videoTotalSeconds = getTimeSpan.TotalSeconds;
                         int VideoSeconds = Convert.ToInt32(videoTotalSeconds);
                         VideoSeconds += 3;
+<<<<<<< HEAD
 
                         ViewBag.Message = "File uploaded successfully";
+=======
+>>>>>>> ver.1.0.4.1
 
+                        ViewBag.Message = "Videon har lagts till";
+                       
                         var video = new VideoModel();
                         video.Url = fileName;
                         video.Name = VM.Name;
@@ -115,13 +140,14 @@ namespace BorjesLIA.AdminControllers
                         video.Duration = VideoSeconds;
                         db.VideoModels.Add(video);
                         db.SaveChanges();
+                       
                     }
                 }
             }
             modelObj = returnNewObj();
             return View("Index", modelObj);
         }
-
+     
         public ActionResult Preview(VideoViewModel MVM)
         {
             MVM = new VideoViewModel

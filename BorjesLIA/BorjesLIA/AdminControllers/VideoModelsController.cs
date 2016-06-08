@@ -44,12 +44,12 @@ namespace BorjesLIA.AdminControllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
-<<<<<<< HEAD
 
-            //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
-            //if (ModelState.IsValid)
-            bool test = true;
-=======
+
+            ////made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
+            ////if (ModelState.IsValid)
+            //bool test = true;
+
             //ModelState["varaktighet"].Errors.Clear();
             //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace BorjesLIA.AdminControllers
                 }
             }
                 bool test = true;
->>>>>>> ver.1.0.4.1
+
             if (test)
             {
                 if (file == null)
@@ -89,11 +89,11 @@ namespace BorjesLIA.AdminControllers
                 //om det är en fil
                 else if (file.ContentLength > 0)
                 {
-<<<<<<< HEAD
-                    int MaxContentLength = 1024 * 1024 * 10; //3 MB
-=======
+
+                    //int MaxContentLength = 1024 * 1024 * 10; //3 MB
+
                     int MaxContentLength = 1024 * 1024 * 100; //100 MB
->>>>>>> ver.1.0.4.1
+
                     string[] AllowedFileExtensions = new string[] { ".mp4" };
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
@@ -122,11 +122,9 @@ namespace BorjesLIA.AdminControllers
                         double videoTotalSeconds = getTimeSpan.TotalSeconds;
                         int VideoSeconds = Convert.ToInt32(videoTotalSeconds);
                         VideoSeconds += 3;
-<<<<<<< HEAD
 
-                        ViewBag.Message = "File uploaded successfully";
-=======
->>>>>>> ver.1.0.4.1
+                        //ViewBag.Message = "File uploaded successfully";
+
 
                         ViewBag.Message = "Videon har lagts till";
                        

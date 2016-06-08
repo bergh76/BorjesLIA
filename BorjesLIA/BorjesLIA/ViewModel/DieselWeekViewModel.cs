@@ -41,6 +41,68 @@ namespace BorjesLIA.ViewModel
                 }
             }
         }
+
+
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public GoogleVisualizationDataTable DataTable { get; set; }
+        public DieselWeekViewModel()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                Title = "Veckopriser Diesel";
+                Subtitle = "År";
+                DataTable = ConstrucDataTabel(db.DieselPriceWeek.ToList().OrderBy(x => x.Week).ToArray());
+            }
+        }
+        
+        public GoogleVisualizationDataTable ConstrucDataTabel(DieselWeekModel[] data)
+        {
+
+            var dataTable = new GoogleVisualizationDataTable();
+            var weeks = data.Select(x => x.Week).Distinct().OrderBy(x => x);
+            var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
+            dataTable.AddColumn("Week", "string");
+            /**
+            // makes clusters of quarters
+            //foreach (var q in quarters)
+            //{
+            //    dataTable.AddColumn(q.ToString(), "string");
+            //}
+            //foreach (var y in years)
+            //{
+            //    var val = new List<object>(new[] { y });
+            //    foreach (var q in quarters)
+            //    {
+            //        var result = data
+            //            .Where(x => x.Quarter == q && x.Year == y)
+            //            .Select(x => x.DieselQuarterValue)
+            //            .SingleOrDefault();
+            //        val.Add(result);
+            //    }
+            //    dataTable.AddRow(val);
+            //}
+            // Makes clusters of years
+            **/
+            foreach (var yItem in years)
+            {
+                dataTable.AddColumn(yItem.ToString(), "number");
+            }
+            foreach (var w in weeks)
+            {
+                var val = new List<object>(new[] { w.ToString() });
+                foreach (var year in years)
+                {
+                    var result = data
+                        .Where(x => x.Week == w && x.Year == year)
+                        .Select(x => x.DieselWeekValue)
+                        .SingleOrDefault();
+                    val.Add(result);
+                }
+                dataTable.AddRow(val);
+            }
+            return dataTable;
+        }
     }
 }
 

@@ -115,17 +115,17 @@ namespace BorjesLIA.ViewModel
             //}
             // Makes clusters of years
             **/
-            foreach (var year in years)
+            foreach (var yItem in years)
             {
-                dataTable.AddColumn(year.ToString(), "number");
+                dataTable.AddColumn(yItem.ToString(), "number");
             }
-            foreach (var quarter in quarters)
+            foreach (var q in quarters)
             {
-                var val = new List<object>(new[] { quarter });
+                var val = new List<object>(new[] { q });
                 foreach (var year in years)
                 {
                     var result = data
-                        .Where(x => x.Quarter == quarter && x.Year == year)
+                        .Where(x => x.Quarter == q && x.Year == year)
                         .Select(x => x.DieselQuarterValue)
                         .SingleOrDefault();
                     val.Add(result);

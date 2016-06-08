@@ -1,133 +1,189 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
 @ViewBag.Message
 <body>
-
+    <p>
+        <span class="field-validation-error" id="spanfile"></span>
+    </p>
     @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
     {
         @Html.ValidationSummary();
-        <ol>
+        <ul>
             <li class="lifile">
-                <input type="file" id="fileToUpload" name="file" />
-                <span class="field-validation-error" id="spanfile"></span>
-
-                <input type="text" id="VideoNameInput" name="Name" value="Name" />
-                <input type="text" id="exVideo" name="Url" value="Youtube länk" />
-                <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> <!--type="hidden"-->
+               <p>
+                   Välj en fil att ladda upp/ eller klistra in en länk 
+               </p>
+                <div>
+                    <input type="file" id="fileToUpload" name="file" />
+                </div>
+                <div>
+                    <input type="text" id="exVideo" name="Url" value="Youtube länk" />
+                </div>
+                <div>
+                    <input type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+                </div>
+                
+                <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> 
             </li>
-        </ol>
-            <div>
-                <button type="submit" class="btn btn-default" @*id="btnSubmit"*@ value="Upload">Ladda upp film</button>
-            </div>
+        </ul>
+        <div>
+            <button type="submit" class="btn btn-default" value="Upload">Lägg till video</button>
+            <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+        </div>
     }
 
+    
 
+    <section id="show-result-box" class="hidden">
+        <iframe width="560"
+                height="315"
+                id="myVideoID"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+    </section>
     <p>
-        @*@using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
+        @Html.Partial("_VideoList", Model)
+    </p>
 
-            @Html.ValidationSummary();
-            <ol>
-                <li class="lifile">
-                    <input type="file" id="fileToUpload" name="file" />
-                    <span class="field-validation-error" id="spanfile"></span>
+    <script type="text/jscript">
+        //--INIT YT PLAYER
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                    <input type="text" id="VideoNameInput" name="Name" value="Name" />
-                    <input type="text" id="exVideo" name="Url" value="Youtube länk" />
-                    <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> 
-                </li>
-            </ol>
-        <div>
-            <button type="submit" class="btn btn-default"  value="Upload">Ladda upp film</button> @*id="btnSubmit"
-        </div>
-        }
-        <button class="btn btn-default" onclick="getVideoDuration()">get duration yt</button>
-        <button  class="btn btn-default" id="btnSubmit" >validera filstorlek</button>*@
+        var player;
+        //-- END INIT YT PLAYER
 
-        <section id="show-result-box" class="hidden">
-            <iframe width="560"
-                    height="315"
-                    id="myVideoID"
-                    src=""
-                    frameborder="0"
-                    allowfullscreen></iframe>
-        </section>
-        <p>
-            @Html.Partial("_VideoList", Model)
-        </p>
-
-        <script type="text/jscript">
-            //--YT PLAYER
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            var player;
-
-            function getVideoDuration() {
-                console.log("enterd getVideoDuration");
-                var div = document.getElementById("exVideo").value;
-                console.log(div);
-                div += "?enablejsapi=1";
-                console.log(div);
-                $('#myVideoID').attr("src", div);
-                //$('#show-result-box').removeClass('hidden');
-                player = new YT.Player('myVideoID', {
-                    events: {
-                        'onReady': onPlayerReady
+        //-- ON SUBMIT
+        $(function () {
+            $("#SubmitTarget").submit(function (event) {
+                if ($('#fileToUpload').val() == "") {
+                    
+                    if ($('exVideo').val() !== "" || ($('exVideo').val() !== "Youtube länk" || typeof ($('exVideo').val()) !== 'undefined')) {
+                    
+                        validateYouTubeUrl();
                     }
-                });
-            }
-            //spelaren behöver vara redo att spelas för att kunna ta ut längden på klippet. 
-            function onPlayerReady(event) {
-                var vd = player.getDuration();
-                document.getElementById("lengthOfVideo").value = vd;
-                //event.target.playVideo();
-            }
-            //-- END YT PLAYER
-
-            //-- File UPLOAD
-            function checkfile() {
-                var size = document.getElementById('fileToUpload').files[0].size;
-                alert("storleken på filen: " + size);
-            }
-
-            //-- END File UPLOAD
-          
-           
-
-            //-- ON SUBMIT
-            $(function () {
-                $("#SubmitTarget").submit(function (event) {
-                    if ($('#fileToUpload').val() == "" && $('exVideo').val()!=""||($('exVideo').val()!="Youtube länk") ){
+                }
+                else if ($('#fileToUpload').val() !== "") {
+                  
+                    if ($('exVideo').val() === "" || ($('exVideo').val() === "Youtube länk" || typeof ($('exVideo').val()) == 'undefined')) {
                    
-                        myYtFunction();
-
+                    validateFileFunction();
+                        
                     }
-                    else if ($('#fileToUpload').val() != "" && $('exVideo').val() == "" || ($('exVideo').val() == "Youtube länk")) {
 
-                        myFileFunction();
-
-                    }
-                    else {
-                        $("#spanfile").html("Ingenting hände. Handlingen som begärdes kändes inte igen");
-                    }
-                   
-                    //$("form").submit();
-                    //Submit
-                    event.preventDefault(); //under test, för att inte nå controller och genomför därför inte submit. 
-                });
+                }
+                else {
+                    flag = false;
+                    $("#spanfile").html("Ingenting hände. Handlingen som begärdes kändes inte igen.");
+                }
+                
+                //Submit
+                if (!flag) {
+                    event.preventDefault();
+                }
+                //validateName();
+                //event.preventDefault(); //under test, för att inte nå controller och genomför därför inte submit.
+                //alert("preventDefault");
             });
-            function myYtFunction() {
-                alert("youtube är vald att laddas upp");
-                getVideoDuration();
-                //var isYT = document.getElementById('exVideo').value;
-                //alert("ytlänk value: " + isYT);
+        });
+        //--END ON SUBMIT
+
+        //--YT PLAYER
+        function validateYouTubeUrl() {
+            var url = $('#exVideo').val();
+            if (url != undefined || url != '') {
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                if (match && match[2].length == 11) {
+                    flag = true;
+                    getVideoDuration()
+                } else {
+                    flag = false;
+                    $("#spanfile").text("Länken verkar inte vara korrekt.");
+                }
             }
-            function myFileFunction() {
-                alert("fil är vald att laddas upp");
-                checkfile();
+        }
+
+        function getVideoDuration() {
+         
+
+            var div = document.getElementById("exVideo").value;
+            console.log(div);
+            div += "?enablejsapi=1";
+            console.log(div);
+            $('#myVideoID').attr("src", div);
+            //$('#show-result-box').removeClass('hidden');
+            player = new YT.Player('myVideoID', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        //spelaren behöver vara redo att spelas för att kunna ta ut längden på klippet.
+        function onPlayerReady(event) {
+            var vd = player.getDuration();
+            document.getElementById("lengthOfVideo").value = vd;
+            //event.target.playVideo();
+            flag = true;
+            $("#spanfile").text("");
+        }
+        //-- END YT PLAYER
+
+        //-- myFileFunction
+        function validateFileFunction(event) {
+
+            var file = getNameFromPath($("#fileToUpload").val());
+
+            if (file != null) {
+                var extension = file.substr((file.lastIndexOf('.') + 1));
+                // alert(extension);
+                switch (extension) {
+                    case 'mp4':
+                        //case 'ogg':  //fler tänkbara filer tex AVI , MPG
+                        flag = true;
+                        break;
+                    default:
+                        flag = false;
+                }
             }
-            //--END ON SUBMIT
-        </script>
-    </body>
+            if (flag == false) {
+                $("#spanfile").text("Det går endast att ladda upp .mp4-filer");
+            }
+            else {
+                var fileSize = document.getElementById('fileToUpload').files[0].size; //size in kb
+                fileSize = fileSize / 1048576; //size in mb
+                if (fileSize > 100) {
+                    console.log(" > 100mb");
+                    $("#spanfile").text("Det går endast att ladda upp till och med 100mb");
+
+                    flag = false;
+                }
+                else {
+                    flag = true;
+                    $("#spanfile").text("");
+                }
+            }
+        }
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+
+            if (strName == null) {
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+        //-- END myFileFunction
+
+        //-- VAlidateName
+        function validateName() {
+        }
+        //-- END ValidateName
+    </script>
+</body>
+
+

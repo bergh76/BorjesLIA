@@ -20,8 +20,7 @@ namespace BorjesLIA.AdminControllers
 
         // GET: DieselQuarterPriceModels
         public ActionResult Index(DieselQuarterViewModel dieselQ)
-        {
-            
+        {            
             dieselQ = NewDieselQuarterObject();
             return View(dieselQ);
         }

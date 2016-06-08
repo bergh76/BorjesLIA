@@ -23,7 +23,7 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Vecka")]
         public int Week { get; set; }
 
-        [DataType(DataType.Currency)]
+        //[DataType(DataType.Currency)]
         [Display(Name = "Pris")]
         public decimal DieselWeekValue { get; set; }
 

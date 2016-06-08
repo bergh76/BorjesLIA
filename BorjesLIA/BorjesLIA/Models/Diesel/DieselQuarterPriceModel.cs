@@ -23,7 +23,7 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Kvartal")]
         public string Quarter { get; set; }
 
-        [DataType(DataType.Currency)]
+        //[DataType(DataType.Currency)]
         [Display(Name = "Pris")]
         public decimal DieselQuarterValue { get; set; }
 

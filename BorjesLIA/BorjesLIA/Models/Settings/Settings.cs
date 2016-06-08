@@ -31,7 +31,7 @@ namespace BorjesLIA.Models.Settings
 
         public Settings()
         {            
-            string _user = HttpContext.Current.User.Identity.Name.ToString();
+            string _user = HttpContext.Current.User.Identity.Name;
             string _loggDate = DateTime.Now.ToString();
             if (string.IsNullOrEmpty(_user))
             {

@@ -78,17 +78,18 @@ namespace BorjesLIA.ViewModel
         public string Subtitle { get; set; }
         public DieselQuarterViewModel()
         {
-            using (var db = new ApplicationDbContext())
+             using (var db = new ApplicationDbContext())
             {
                 Title = "Kvartalspriser Diesel";
                 Subtitle = "År";
-                DataTable = ConstrucDataTabel(db.DieselPriceQuarter.ToArray());
-            }       
+                DataTable = ConstrucDataTabel(db.DieselPriceQuarter.ToList().OrderBy(x => x.Quarter).ToArray());
+            }
         }
         public GoogleVisualizationDataTable DataTable { get; set; }
 
         public GoogleVisualizationDataTable ConstrucDataTabel(DieselQuarterPriceModel[] data)
         {
+           
             var dataTable = new GoogleVisualizationDataTable();
             var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
@@ -116,7 +117,7 @@ namespace BorjesLIA.ViewModel
             **/
             foreach (var year in years)
             {
-                dataTable.AddColumn(year.ToString(), "string");
+                dataTable.AddColumn(year.ToString(), "number");
             }
             foreach (var quarter in quarters)
             {

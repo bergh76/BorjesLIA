@@ -266,10 +266,7 @@
                 var title = '@Model.Title';
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 console.log("Title", title);
-                var dataTable = new google.visualization.DataTable(
-                    tdata
-                   @*@Html.Raw(Json.Encode(Model.DataTable))*@
-                );
+                var dataTable = new google.visualization.DataTable(tdata);
                 console.log("DataTable Model: ", dataTable);
                 drawChart('DieselquarterDiv', title, dataTable);
                 //drawColumnChart('chart', title, dataTable);

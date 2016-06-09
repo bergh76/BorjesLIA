@@ -31,11 +31,11 @@ namespace BorjesLIA.ViewModel
                 }
 
                
-                else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
-                {
-                    var lAllEuro = db.EuroExchangeModels.ToList();
-                    return Task.Run(() => lAllEuro);
-                }
+                //else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                //{
+                //    var lAllEuro = db.EuroExchangeModels.ToList();
+                //    return Task.Run(() => lAllEuro);
+                //}
 
                 else
                 {
@@ -61,11 +61,9 @@ namespace BorjesLIA.ViewModel
         }
 
         public GoogleVisualizationDataTable ConstrucDataTabel(EuroExchangeModel[] data)
-        {
-            System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-            
+        {         
             var dataTable = new GoogleVisualizationDataTable();
-            var month = data.Select(x => x.Date.Month).Distinct().OrderBy(x => x);
+            var date = data.Select(x => x.Date.Month).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             
             dataTable.AddColumn("Month", "string");
@@ -94,14 +92,15 @@ namespace BorjesLIA.ViewModel
             {
                 dataTable.AddColumn(yItem.ToString(), "number");
             }
-            foreach (var m in month)
+            foreach (var d in date)
             {
-                var strMonthName = mfi.GetMonthName(m).ToString();
+                System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
+                var strMonthName = mfi.GetMonthName(d).ToString();
                 var val = new List<object>(new[] { strMonthName });
                 foreach (var year in years)
                 {
                     var result = data
-                        .Where(x => x.Date.Month == m && x.Year == year)
+                        .Where(x => x.Date.Month == d && x.Year == year)
                         .Select(x => x.euroValue)
                         .SingleOrDefault();
                     val.Add(result);

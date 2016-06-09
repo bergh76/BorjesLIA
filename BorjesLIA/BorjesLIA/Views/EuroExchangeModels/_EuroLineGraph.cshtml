@@ -3,360 +3,366 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@*<script src="~/Scripts/GraphHideNav.js"></script>
-    @{ var euroChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
-        var chartID = euroChartList.FirstOrDefault();
-            if (chartID == 1)
-            {
-                <script type="text/javascript">
-                    google.load("visualization", "1", { packages: ["corechart"] });
-                    google.setOnLoadCallback(drawchart);
-                    function drawchart() {
-                        $.ajax({
-                            type: 'GET',
-                            dataType: 'json',
-                            contentType: 'application/json',
-                            // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                            url: '@Url.Action("GetData")',
-                            data: "{ }",
-                            // If data connections is success
-                            success:
-                                function drawchart(dataValues) {
-                                    // Adds data into columns to DataTable
-                                    var data = new google.visualization.DataTable();
-                                    data.addColumn('string', 'Datum');
-                                    data.addColumn('number', 'Pris');
-                                    if (window.JSON && !window.JSON.dateParser) {
-                                        var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                        var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+@*<script src="~/Scripts/GraphHideNav.js"></script>*@
+@{ var euroChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
+    var chartID = euroChartList.FirstOrDefault();
+    if (chartID == 1)
+    {
+        <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawchart);
+        function drawchart() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                url: '@Url.Action("GetData")',
+                data: "{ }",
+                // If data connections is success
+                success:
+                    function drawchart(dataValues) {
+                        // Adds data into columns to DataTable
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Datum');
+                        data.addColumn('number', 'Pris');
+                        if (window.JSON && !window.JSON.dateParser) {
+                            var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                            var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
-                                        JSON.dateParser = function (key, value) {
-                                            if (typeof value === 'string') {
-                                                var a = reISO.exec(value);
-                                                if (a)
-                                                    return new Date(value);
-                                                a = reMsAjax.exec(value);
-                                                if (a) {
-                                                    var b = a[1].split(/[-+,.]/);
-                                                    return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                                }
-                                            }
-                                            return value;
-                                        };
-
+                            JSON.dateParser = function (key, value) {
+                                if (typeof value === 'string') {
+                                    var a = reISO.exec(value);
+                                    if (a)
+                                        return new Date(value);
+                                    a = reMsAjax.exec(value);
+                                    if (a) {
+                                        var b = a[1].split(/[-+,.]/);
+                                        return new Date(b[0] ? +b[0] : 0 - +b[1]);
                                     }
-                                    // Loops through the DataTable with data from database
-                                    for (var i = 0; i < dataValues.length; i++) {
-                                        var str = window.JSON.stringify(dataValues[i].Date);
-                                        //console.log("Här var det strängat",str);
-                                        var date = JSON.parse(str, JSON.dateParser);
-                                        //console.log("Här ska det vara datum", date);
-                                        data.addRow([
-                                            (new Date(date).toDateString()), dataValues[i].euroValue])
-                                    }
-                                    // Settings for visualization of the graph
-                                    var view = new google.visualization.DataView(data);
-                                    view.setColumns([0, 1,
-                                                     {
-                                                         calc: "stringify",
-                                                         sourceColumn: 1,
-                                                         type: "string",
-                                                         role: "annotation",
-                                                     },
-                                    ]);
-
-                                    // Settings for visualization of the graph
-                                    var options = {
-                                        chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                        title: 'Eurokurs',
-                                        pointSize: 5,
-                                        dataOpacity: 0.8,
-                                        lineWidth: 2,
-                                        vAxis: {
-                                            viewWindow: {
-                                                min: 8.00,
-                                                //max: 10.00
-                                            },
-                                        },
-                                        hAxis: {
-                                            title: 'Datum', titleTextStyle: { color: '#333' },
-                                        }
-                                    }
-
-                                    // Draws the graph into a specified div
-                                    //new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
-                                    var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
-                                    chart.draw(view, options);
-                                },
-                            // If collectning data from database fails promp message here
-                            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                        });
-                    }
-                </script>
-
-            }
-            if (chartID == 2) //(if (chartID.EuroChartID == 2)
-            {
-                <script type="text/javascript">
-                    google.load("visualization", "1", { packages: ["corechart"] });
-                    google.setOnLoadCallback(drawchart);
-                    function drawchart() {
-                        $.ajax({
-                            type: 'GET',
-                            dataType: 'json',
-                            contentType: 'application/json',
-                            // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                            url: '@Url.Action("GetData")',
-                            data: "{ }",
-                            // If data connections is success
-                            success:
-                                function drawchart(dataValues) {
-                                    // Adds data into columns to DataTable
-                                    var data = new google.visualization.DataTable();
-                                    data.addColumn('string', 'Datum');
-                                    data.addColumn('number', 'Pris');
-                                    if (window.JSON && !window.JSON.dateParser) {
-                                        var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                        var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                        JSON.dateParser = function (key, value) {
-                                            if (typeof value === 'string') {
-                                                var a = reISO.exec(value);
-                                                if (a)
-                                                    return new Date(value);
-                                                a = reMsAjax.exec(value);
-                                                if (a) {
-                                                    var b = a[1].split(/[-+,.]/);
-                                                    return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                                }
-                                            }
-                                            return value;
-                                        };
-
-                                    }
-                                    // Loops through the DataTable with data from database
-                                    for (var i = 0; i < dataValues.length; i++) {
-                                        var str = window.JSON.stringify(dataValues[i].Date);
-                                        //console.log("Här var det strängat",str);
-                                        var date = JSON.parse(str, JSON.dateParser);
-                                        //console.log("Här ska det vara datum", date);
-                                        data.addRow([
-                                            //(dataValues[i].Date), dataValues[i].euroValue])
-                                            (new Date(date).toDateString()), dataValues[i].euroValue])
-                                        console.log(data);
-
-                                    }
-                                    // Settings for visualization of the graph
-                                    var view = new google.visualization.DataView(data);
-                                    view.setColumns([0, 1,
-                                                     {
-                                                         calc: "stringify",
-                                                         sourceColumn: 1,
-                                                         type: "string",
-                                                         role: "annotation",
-                                                     },
-                                    ]);
-
-                                    // Settings for visualization of the graph
-                                    var options = {
-                                        chartArea: { left: 150, top: 20, width: "100%", height: "80%" },
-                                        title: 'Eurokurs',
-                                        //pointSize: 3,
-                                        dataOpacity: 0.8,
-                                        lineWidth: 2,
-                                        vAxis: {
-                                            viewWindow: {
-                                                min: 8.00,
-                                                //max: 10.00
-                                            },
-
-                                        },
-                                        hAxis: {
-                                            title: 'Datum', titleTextStyle: { color: '#333' },
-                                        }
-                                    }
-
-                                    // Draws the graph into a specified div
-                                    var chart = new google.visualization.BarChart(document.getElementById("EuroGraphDiv"));
-                                    chart.draw(view, options);
-                                },
-                            // If collectning data from database fails promp message here
-                            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                        });
-                    }
-                </script>
-            }
-            if (chartID == 3)  //if (chartID.EuroChartID == 3)
-            {
-                <script type="text/javascript">
-                    google.load("visualization", "1", { packages: ["corechart"] });
-                    google.setOnLoadCallback(drawchart);
-                    function drawchart() {
-                        $.ajax({
-                            type: 'GET',
-                            dataType: 'json',
-                            contentType: 'application/json',
-                            // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                            url: '@Url.Action("GetData")',
-                            data: "{ }",
-                            // If data connections is success
-                            success:
-                                function drawchart(dataValues) {
-                                    // Adds data into columns to DataTable
-                                    var data = new google.visualization.DataTable();
-                                    data.addColumn('string', 'Datum');
-                                    data.addColumn('number', 'Pris');
-                                    if (window.JSON && !window.JSON.dateParser) {
-                                        var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                        var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                        JSON.dateParser = function (key, value) {
-                                            if (typeof value === 'string') {
-                                                var a = reISO.exec(value);
-                                                if (a)
-                                                    return new Date(value);
-                                                a = reMsAjax.exec(value);
-                                                if (a) {
-                                                    var b = a[1].split(/[-+,.]/);
-                                                    return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                                }
-                                            }
-                                            return value;
-                                        };
-
-                                    }
-                                    // Loops through the DataTable with data from database
-                                    for (var i = 0; i < dataValues.length; i++) {
-                                        var str = window.JSON.stringify(dataValues[i].Date);
-                                        //console.log("Här var det strängat",str);
-                                        var date = JSON.parse(str, JSON.dateParser);
-                                        //console.log("Här ska det vara datum", date);
-                                        data.addRow([
-                                            //(dataValues[i].Date), dataValues[i].euroValue])
-                                            (new Date(date).toDateString()), dataValues[i].euroValue])
-                                        console.log(data);
-
-                                    }
-                                    var view = new google.visualization.DataView(data);
-                                    view.setColumns([0,1,
-                                                     {
-                                                         calc: "stringify",
-                                                         sourceColumn: 1,
-                                                         type: "string",
-                                                         role: "annotation",
-                                                     },
-                                                     ]);
-
-                                    // Settings for visualization of the graph
-                                    var options = {
-                                        chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                        title: 'Eurokurs',
-                                        width: '100%',
-                                        height: '100%',
-                                        //pointSize: 3,
-                                        dataOpacity: 0.8,
-                                        lineWidth: 2,
-                                        vAxis: {
-                                            viewWindow: {
-                                                min: 8.00,
-                                                //max: 10.00
-                                            },
-
-                                        },
-                                        hAxis: {
-                                            title: 'Datum', titleTextStyle: { color: '#333' },
-                                        }
-                                    }
-                                    // Draws the graph into a specified div
-                                    var chart = new google.visualization.ColumnChart(document.getElementById("EuroGraphDiv"));
-                                    chart.draw(view, options);
-                                },
-                            // If collectning data from database fails promp message here
-                            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                        });
-                    }
-                </script>
-        }
-        if (chartID == 4)
-        {
-                <script type="text/javascript">
-
-                    google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
-                    google.charts.setOnLoadCallback(function () {
-                        var title = '@Model.Title';
-                        var tdata = @Html.Raw(Json.Encode(Model.DataTable));
-                        console.log("Title", title);
-                        var dataTable = new google.visualization.DataTable(tdata);
-                        drawChart('EuroGraphDiv', title, dataTable);
-                        //drawLineChart('chart', title, dataTable);
-
-                    });
-                        function drawChart(elementId, title, dataTable) {
-                            var options = {
-                                chart: {
-                                    title: title,
-                                    pointSize: 5,
-                                    dataOpacity: 0.8,
-                                    lineWidth: 2,
-                                    vAxis: {
-                                        viewWindow: {
-                                            min: 8.00,
-                                            //max: 10.00
-                                        },
-                                    },
-                                },
-
+                                }
+                                return value;
                             };
-                            var chart = new google.charts.Line(document.getElementById(elementId));
-                            chart.draw(dataTable, options);
+
+                        }
+                        // Loops through the DataTable with data from database
+                        for (var i = 0; i < dataValues.length; i++) {
+                            var str = window.JSON.stringify(dataValues[i].Date);
+                            //console.log("Här var det strängat",str);
+                            var date = JSON.parse(str, JSON.dateParser);
+                            //console.log("Här ska det vara datum", date);
+                            data.addRow([
+                                (new Date(date).toDateString()), dataValues[i].euroValue])
+                        }
+                        // Settings for visualization of the graph
+                        var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 1,
+                                         {
+                                             calc: "stringify",
+                                             sourceColumn: 1,
+                                             type: "string",
+                                             role: "annotation",
+                                         },
+                        ]);
+
+                        // Settings for visualization of the graph
+                        var options = {
+                            chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
+                            title: 'Eurokurs',
+                            pointSize: 5,
+                            dataOpacity: 0.8,
+                            lineWidth: 2,
+                            vAxis: {
+                                viewWindow: {
+                                    min: 8.00,
+                                    //max: 10.00
+                                },
+                            },
+                            hAxis: {
+                                title: 'Datum', titleTextStyle: { color: '#333' },
+                            }
                         }
 
-                </script>
-            }
+                        // Draws the graph into a specified div
+                        //new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                        var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
+                        chart.draw(view, options);
+                    },
+                // If collectning data from database fails promp message here
+                error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+            });
         }
-    *@
+        </script>
 
+    }
+    if (chartID == 2) //(if (chartID.EuroChartID == 2)
+    {
+        <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawchart);
+        function drawchart() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+                url: '@Url.Action("GetData")',
+                data: "{ }",
+                // If data connections is success
+                success:
+                    function drawchart(dataValues) {
+                        // Adds data into columns to DataTable
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Datum');
+                        data.addColumn('number', 'Pris');
+                        if (window.JSON && !window.JSON.dateParser) {
+                            var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                            var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
-<script type="text/javascript">
+                            JSON.dateParser = function (key, value) {
+                                if (typeof value === 'string') {
+                                    var a = reISO.exec(value);
+                                    if (a)
+                                        return new Date(value);
+                                    a = reMsAjax.exec(value);
+                                    if (a) {
+                                        var b = a[1].split(/[-+,.]/);
+                                        return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                    }
+                                }
+                                return value;
+                            };
+
+                        }
+                        // Loops through the DataTable with data from database
+                        for (var i = 0; i < dataValues.length; i++) {
+                            var str = window.JSON.stringify(dataValues[i].Date);
+                            //console.log("Här var det strängat",str);
+                            var date = JSON.parse(str, JSON.dateParser);
+                            //console.log("Här ska det vara datum", date);
+                            data.addRow([
+                                //(dataValues[i].Date), dataValues[i].euroValue])
+                                (new Date(date).toDateString()), dataValues[i].euroValue])
+                            console.log(data);
+
+                        }
+                        // Settings for visualization of the graph
+                        var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 1,
+                                         {
+                                             calc: "stringify",
+                                             sourceColumn: 1,
+                                             type: "string",
+                                             role: "annotation",
+                                         },
+                        ]);
+
+                        // Settings for visualization of the graph
+                        var options = {
+                            chartArea: { left: 150, top: 20, width: "100%", height: "80%" },
+                            title: 'Eurokurs',
+                            //pointSize: 3,
+                            dataOpacity: 0.8,
+                            lineWidth: 2,
+                            vAxis: {
+                                viewWindow: {
+                                    min: 8.00,
+                                    //max: 10.00
+                                },
+
+                            },
+                            hAxis: {
+                                title: 'Datum', titleTextStyle: { color: '#333' },
+                            }
+                        }
+
+                        // Draws the graph into a specified div
+                        var chart = new google.visualization.BarChart(document.getElementById("EuroGraphDiv"));
+                        chart.draw(view, options);
+                    },
+                // If collectning data from database fails promp message here
+                error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+            });
+        }
+        </script>
+    }
+    if (chartID == 3)  //if (chartID.EuroChartID == 3)
+    {
+        <script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawchart);
+    function drawchart() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
+            url: '@Url.Action("GetData")',
+            data: "{ }",
+            // If data connections is success
+            success:
+                function drawchart(dataValues) {
+                    // Adds data into columns to DataTable
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Datum');
+                    data.addColumn('number', 'Pris');
+                    if (window.JSON && !window.JSON.dateParser) {
+                        var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                        var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+                        JSON.dateParser = function (key, value) {
+                            if (typeof value === 'string') {
+                                var a = reISO.exec(value);
+                                if (a)
+                                    return new Date(value);
+                                a = reMsAjax.exec(value);
+                                if (a) {
+                                    var b = a[1].split(/[-+,.]/);
+                                    return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                                }
+                            }
+                            return value;
+                        };
+
+                    }
+                    // Loops through the DataTable with data from database
+                    for (var i = 0; i < dataValues.length; i++) {
+                        var str = window.JSON.stringify(dataValues[i].Date);
+                        //console.log("Här var det strängat",str);
+                        var date = JSON.parse(str, JSON.dateParser);
+                        //console.log("Här ska det vara datum", date);
+                        data.addRow([
+                            //(dataValues[i].Date), dataValues[i].euroValue])
+                            (new Date(date).toDateString()), dataValues[i].euroValue])
+                        console.log(data);
+
+                    }
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0,1,
+                                     {
+                                         calc: "stringify",
+                                         sourceColumn: 1,
+                                         type: "string",
+                                         role: "annotation",
+                                     },
+                                     ]);
+
+                    // Settings for visualization of the graph
+                    var options = {
+                        chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
+                        title: 'Eurokurs',
+                        width: '100%',
+                        height: '100%',
+                        //pointSize: 3,
+                        dataOpacity: 0.8,
+                        lineWidth: 2,
+                        vAxis: {
+                            viewWindow: {
+                                min: 8.00,
+                                //max: 10.00
+                            },
+
+                        },
+                        hAxis: {
+                            title: 'Datum', titleTextStyle: { color: '#333' },
+                        }
+                    }
+                    // Draws the graph into a specified div
+                    var chart = new google.visualization.ColumnChart(document.getElementById("EuroGraphDiv"));
+                    chart.draw(view, options);
+                },
+            // If collectning data from database fails promp message here
+            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
+        });
+    }
+        </script>
+    }
+    if (chartID == 4)
+    {
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('EuroGraphDiv', title, dataTable);
+                //drawLineChart('chart', title, dataTable);
+
+            });
+            var view = new google.chart
+            function drawChart(elementId, title, dataTable) {
+                var options = {
+                    chart: {
+                        title: title,
+                        pointSize: 5,
+                        dataOpacity: 0.8,
+                        lineWidth: 5,
+                        vAxis: {
+                            viewWindow: {
+                                min: 8.00,
+                                //max: 10.00
+                            },
+                        },
+
+                    },
+                };
+                var chart = new google.charts.Line(document.getElementById(elementId));
+                chart.draw(dataTable, options);
+            }
+
+        </script>
+    }
+}
+
+<!--
+@*<script type="text/javascript">
     google.load('visualization', '1.0', {packages: ['charteditor']});
 </script>
 <script type="text/javascript">
-    google.setOnLoadCallback(drawVisualization);
-    function drawVisualization() {
-        var wrap = new google.visualization.ChartWrapper({
-            'chartType': 'LineChart',
-            'dataSourceUrl': '@Html.Raw(Json.Encode(Model.DataTable))',
-            'containerId': 'EuroGraphDiv',
-            'query': 'SELECT A,D WHERE D > 100 ORDER BY D',
-            'options': { 'title': 'Population Density (people/km^2)', 'legend': 'none' }
-        });
-        wrap.draw();
-    }
-    var chartEditor = null;
-    function loadEditor() {
-        // Create the chart to edit.
+  google.setOnLoadCallback(drawVisualization);
 
-        var wrapper = new google.visualization.ChartWrapper({
-         'chartType':'LineChart',
-         'dataTable':'@Html.Raw(Json.Encode(Model.DataTable))',
-            //'query':'SELECT A,D WHERE D > 100 ORDER BY D',
-         'options': { 'title': 'Population Density (people/km^2)', 'legend': 'none' }
-        });
-
-     chartEditor = new google.visualization.ChartEditor();
-     google.visualization.events.addListener(chartEditor, 'ok', redrawChart);
-     chartEditor.openDialog(wrapper, {});
- }
-
- // On "OK" save the chart to a <div> on the page.
- function redrawChart() {
-     chartEditor.getChartWrapper().draw(document.getElementById('EuroGraphDiv'));
- }
-
+  function drawVisualization() {
+    var wrap = new google.visualization.ChartWrapper({
+       'chartType':'LineChart',
+       'dataTable': '@Html.Raw(Json.Encode(Model.DataTable))',
+        'containerId': 'EuroGraphDiv',
+       'query':'SELECT A,D WHERE D > 100 ORDER BY D',
+       'options': {'title':'Euroindex', 'legend':'none'}
+       });
+     wrap.draw();
+  }
 </script>
+<script type="text/javascript">
+    google.setOnLoadCallback();
+    var chartEditor = null;
+
+    function loadEditor() {
+      // Create the chart to edit.
+      var wrapper = new google.visualization.ChartWrapper({
+         //'chartType':'LineChart',
+          //'dataSourceUrl':'http://spreadsheets.google.com/tq?key=pCQbetd-CptGXxxQIG7VFIQ&pub=1',
+          'dataTable':'@Html.Raw(Json.Encode(Model.DataTable))',
+         //'query':'SELECT A,D WHERE D > 100 ORDER BY D',
+         'options': {'title':'Population Density (people/km^2)', 'legend':'none'}
+      });
+
+      chartEditor = new google.visualization.ChartEditor();
+      google.visualization.events.addListener(chartEditor, 'ok', redrawChart);
+      chartEditor.openDialog(wrapper, {});
+    }
+
+    // On "OK" save the chart to a <div> on the page.
+    function redrawChart(){
+        chartEditor.getChartWrapper().draw(document.getElementById('EuroGraphDiv'));
+    }
+
+</script>*@
+-->
+
 <div class="x_panel">
     <div class="x_content">
-        <button class="btn btn-xs" type="submit" onclick="loadEditor()"></button>
+        @*<button class="btn btns" type="submit" onclick="loadEditor()"></button>*@
         <div id="EuroGraphDiv" style="width: 100%; height:750px"></div>
     </div>
 </div>

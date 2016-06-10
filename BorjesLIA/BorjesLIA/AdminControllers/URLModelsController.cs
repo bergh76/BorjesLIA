@@ -69,6 +69,7 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    newUrl.AddUrl.Type = 2.1M;
                     db.UrlModels.Add(newUrl.AddUrl);
                     db.SaveChanges();
                     newUrl.newUrlList = db.UrlModels.ToList()

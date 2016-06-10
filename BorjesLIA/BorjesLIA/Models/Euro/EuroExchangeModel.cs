@@ -29,6 +29,17 @@ namespace BorjesLIA.Models.Euro
         [Display(Name = "Användare")]
         public string User { get; set; }
 
+        [Display(Name = "OrderIndex")]
+        public int PlacingOrder { get; set; }
+
+        [Display(Name = "Typ")]
+        public decimal Type { get; set; }
+
+        [Display(Name = "Aktiv")]
+        public bool Active { get; set; }
+
+      
+
         public EuroExchangeModel()
         {
             var _user = HttpContext.Current.User.Identity.Name.ToString();

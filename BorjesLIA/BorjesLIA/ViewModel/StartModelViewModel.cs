@@ -19,13 +19,15 @@ namespace BorjesLIA.ViewModel
 
         public class listViewModel
         {
-            //possible to add fields to match the needs of values to show data in the slider, only restricted to the fields in each respective model.
+            public int ID { get; set; }
             public string url { get; set; }
             public string name { get; set; }
             public int orderby { get; set; }
             public bool active { get; set; }
             public DateTime dateTime { get; set; }
             public int Duration { get; set; }
+            public decimal type { get; set; }
+     
         }
     }
 }

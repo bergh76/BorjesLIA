@@ -26,5 +26,10 @@ namespace BorjesLIA.Models.Img
 
         [Display(Name = "Aktiv")]
         public bool Active { get; set; }
+
+        [Display(Name = "Typ")]
+        public decimal Type { get; set; }
+
+    
     }
 }

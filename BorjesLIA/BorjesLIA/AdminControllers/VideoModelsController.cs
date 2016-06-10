@@ -76,7 +76,7 @@ namespace BorjesLIA.AdminControllers
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Type = 2; //TODO: borde kanske vara enum. 2 för youtube
+                        video.Type = 4.2M; //TODO: borde kanske vara enum. 4.2 för youtube
                         video.Duration = VM.Duration +=3;
                         db.VideoModels.Add(video);
                         db.SaveChanges();
@@ -134,7 +134,7 @@ namespace BorjesLIA.AdminControllers
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Type = 1; //TODO: borde kanske vara enum. 1 för mp4
+                        video.Type = 4.1M; //TODO: borde kanske vara enum. 4.1 för mp4
                         video.Duration = VideoSeconds;
                         db.VideoModels.Add(video);
                         db.SaveChanges();

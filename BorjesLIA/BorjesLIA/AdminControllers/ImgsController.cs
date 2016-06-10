@@ -104,6 +104,7 @@ namespace BorjesLIA.AdminControllers
                 image.Url = filename2;
                 image.Date = DateTime.Now;
                 image.Active = true;
+                image.Type = 3.1M; //TODO: borde kanske vara enum. 3.1 för image
                 image.PlacingOrder = placingOrder; 
 
                

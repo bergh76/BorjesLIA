@@ -54,6 +54,7 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    newEuro.AddEuro.Type = 1.1M;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro = NewEuroObject();

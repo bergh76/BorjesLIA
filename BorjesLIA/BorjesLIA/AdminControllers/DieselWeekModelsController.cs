@@ -101,6 +101,7 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    newDiesel.AddWeekDiesel.Type = 1.4M;
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();
                     newDiesel.newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);

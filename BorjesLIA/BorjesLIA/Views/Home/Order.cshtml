@@ -1,0 +1,73 @@
+﻿@model BorjesLIA.ViewModel.StartModelViewModel
+
+<h2>Placering</h2>
+@using (Html.BeginForm("SetOrderPlacing", "Home", FormMethod.Post))
+{
+    @*@Html.ValidationSummary();*@
+    //foreach (var element in Model.listVM.OrderBy(x => x.orderby))
+    @*foreach (var element in Model.listVM.Select((x, i) => new { Value = x, Index = i }))
+    {
+        @Html.HiddenFor(model => element.Value.OrderPlacingID)
+        <ul>
+            <li class="lifile">
+                <p>
+                  name: @element.Value.name
+                </p>
+                <p> Nuvarande placering: @element.Value.orderby (utav totalt: @Model.listVM.Count() ) </p>
+                <div>
+                    <p> Skriv ny placering, eller lämna lämna fältet tomt för att behålla nuvarande placering.</p>
+                    @Html.EditorFor(model => element.Value.orderby)
+                </div>
+                <p>
+                 type: @element.Value.type
+                </p>
+                <p>
+                    aktiv: @element.Value.active
+                </p>
+                <p>
+                    ID: @element.Value.ID
+                </p>
+                <p>
+                    placeringsOrderID: @element.Value.OrderPlacingID
+                </p>
+            
+            </li>
+        </ul>
+    }*@
+    @*<input type="text" id="" name="@element.Value.OrderPlacingID" value="" />*@
+
+    @*for (int i = 0; i < Model.listVM.Count(); i++)
+    {
+        @Html.HiddenFor(model => Model.listVM[i].OrderPlacingID)
+        <div class="formrow">
+            @Html.EditorFor(model => Model.listVM[i].orderby)
+        </div>
+    }*@
+
+for (int i = 0; i < Model.listVM.Count(); i++)
+{
+    @*@Html.HiddenFor(model => Model.listVM[i].OrderPlacingID)*@
+    @Html.HiddenFor(model => Model.listVM[i].type)
+    <div class="formrow">
+        <p> name: @Model.listVM[i].name </p>
+        <p> Nuvarande placering: @Model.listVM[i].orderby (utav totalt: @Model.listVM.Count() ) </p>
+        <p> Skriv ny placering, eller lämna lämna fältet tomt för att behålla nuvarande placering.</p>
+        <div>
+            @Html.EditorFor(model => Model.listVM[i].orderby)
+        </div>
+        <div>
+            @Html.CheckBoxFor(model => Model.listVM[i].active)
+        </div>
+        <div>
+          
+            <p>aktiv: @Model.listVM[i].active</p> @Html.HiddenFor(model => Model.listVM[i].active)
+            <p>ID: @Model.listVM[i].ID</p> @Html.HiddenFor(model => Model.listVM[i].ID)
+         
+        </div>
+    </div>
+}
+    <div>
+        <button type="submit" class="btn btn-default" value="Upload">Ändra placering</button>
+        <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+    </div>
+}

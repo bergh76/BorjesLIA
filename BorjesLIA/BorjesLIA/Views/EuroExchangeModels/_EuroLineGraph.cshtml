@@ -29,7 +29,6 @@
                         if (window.JSON && !window.JSON.dateParser) {
                             var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
                             var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
                             JSON.dateParser = function (key, value) {
                                 if (typeof value === 'string') {
                                     var a = reISO.exec(value);
@@ -132,7 +131,6 @@
                                 }
                                 return value;
                             };
-
                         }
                         // Loops through the DataTable with data from database
                         for (var i = 0; i < dataValues.length; i++) {
@@ -280,7 +278,7 @@
     if (chartID == 4)
     {
         <script type="text/javascript">
-            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.load('41', { 'packages': ['corechart','bar', 'line'], });
             google.charts.setOnLoadCallback(function () {
                 var title = '@Model.Title';
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
@@ -295,70 +293,24 @@
                 var options = {
                     chart: {
                         title: title,
-                        pointSize: 5,
-                        dataOpacity: 0.8,
-                        lineWidth: 5,
-                        vAxis: {
-                            viewWindow: {
-                                min: 8.00,
-                                //max: 10.00
-                            },
+                    },
+                    pointSize: 5,
+                    dataOpacity: 0.8,
+                    lineWidth: 5,
+                    vAxis: {
+                        viewWindow: {
+                            min: 8.00,
+                            //max: 10.00
                         },
-
                     },
                 };
                 var chart = new google.charts.Line(document.getElementById(elementId));
                 chart.draw(dataTable, options);
             }
-
         </script>
     }
 }
 
-<!--
-@*<script type="text/javascript">
-    google.load('visualization', '1.0', {packages: ['charteditor']});
-</script>
-<script type="text/javascript">
-  google.setOnLoadCallback(drawVisualization);
-
-  function drawVisualization() {
-    var wrap = new google.visualization.ChartWrapper({
-       'chartType':'LineChart',
-       'dataTable': '@Html.Raw(Json.Encode(Model.DataTable))',
-        'containerId': 'EuroGraphDiv',
-       'query':'SELECT A,D WHERE D > 100 ORDER BY D',
-       'options': {'title':'Euroindex', 'legend':'none'}
-       });
-     wrap.draw();
-  }
-</script>
-<script type="text/javascript">
-    google.setOnLoadCallback();
-    var chartEditor = null;
-
-    function loadEditor() {
-      // Create the chart to edit.
-      var wrapper = new google.visualization.ChartWrapper({
-         //'chartType':'LineChart',
-          //'dataSourceUrl':'http://spreadsheets.google.com/tq?key=pCQbetd-CptGXxxQIG7VFIQ&pub=1',
-          'dataTable':'@Html.Raw(Json.Encode(Model.DataTable))',
-         //'query':'SELECT A,D WHERE D > 100 ORDER BY D',
-         'options': {'title':'Population Density (people/km^2)', 'legend':'none'}
-      });
-
-      chartEditor = new google.visualization.ChartEditor();
-      google.visualization.events.addListener(chartEditor, 'ok', redrawChart);
-      chartEditor.openDialog(wrapper, {});
-    }
-
-    // On "OK" save the chart to a <div> on the page.
-    function redrawChart(){
-        chartEditor.getChartWrapper().draw(document.getElementById('EuroGraphDiv'));
-    }
-
-</script>*@
--->
 
 <div class="x_panel">
     <div class="x_content">

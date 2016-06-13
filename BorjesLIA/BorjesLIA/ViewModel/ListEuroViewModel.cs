@@ -18,10 +18,14 @@ namespace BorjesLIA.ViewModel
         public EuroExchangeModel AddEuro { get; set; }
         public IEnumerable<EuroExchangeModel> newEuroList { get; set; }
         public string Year { get; set; }
-        public string Name { get; set; }
+        public string ChartName { get; set; }
+        public IEnumerable<int> SelectedFeatures { get; set; }
+        public IEnumerable<SelectListItem> Features { get; set; }
+        public int ID { get; set; }
+
         public Task<List<EuroExchangeModel>> GetData()
         {
-            Name = "Eurokurs";
+            ChartName = "Eurokurs";
             using (var db = new ApplicationDbContext())
             {
 
@@ -30,16 +34,15 @@ namespace BorjesLIA.ViewModel
                     return GetData();
                 }
 
-               
-                //else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
-                //{
-                //    var lAllEuro = db.EuroExchangeModels.ToList();
-                //    return Task.Run(() => lAllEuro);
-                //}
+                else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
+                {
+                    var lAllEuro = db.EuroExchangeModels.ToList();
+                    return Task.Run(() => lAllEuro);
+                }
 
                 else
                 {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).OrderByDescending( x=> x.Year).Select(x => x.Year).FirstOrDefault();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending( x=> x.Year).Select(x => x.Year).FirstOrDefault();
                     var lEuro = db.EuroExchangeModels.Where(x => x.Date.Year.ToString() == Year).OrderBy(x => x.Date).ToList();
                     return Task.Run(() => lEuro);
                 }
@@ -59,53 +62,36 @@ namespace BorjesLIA.ViewModel
                 DataTable = ConstrucDataTabel(db.EuroExchangeModels.ToList().OrderBy(x => x.Date).ToArray());
             }
         }
-
         public GoogleVisualizationDataTable ConstrucDataTabel(EuroExchangeModel[] data)
-        {         
+        {
+            ChartName = "Eurokurs";
             var dataTable = new GoogleVisualizationDataTable();
             var date = data.Select(x => x.Date.Month).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
-            
             dataTable.AddColumn("Month", "string");
-            /**
-            // makes clusters of quarters
-            //foreach (var q in quarters)
-            //{
-            //    dataTable.AddColumn(q.ToString(), "string");
-            //}
-            //foreach (var y in years)
-            //{
-            //    var val = new List<object>(new[] { y });
-            //    foreach (var q in quarters)
-            //    {
-            //        var result = data
-            //            .Where(x => x.Quarter == q && x.Year == y)
-            //            .Select(x => x.DieselQuarterValue)
-            //            .SingleOrDefault();
-            //        val.Add(result);
-            //    }
-            //    dataTable.AddRow(val);
-            //}
-            // Makes clusters of years
-            **/
-            foreach (var yItem in years)
+            using (var db = new ApplicationDbContext())
             {
-                dataTable.AddColumn(yItem.ToString(), "number");
-            }
-            foreach (var d in date)
-            {
-                System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-                var strMonthName = mfi.GetMonthName(d).ToString();
-                var val = new List<object>(new[] { strMonthName });
-                foreach (var year in years)
+                Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
+                string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                foreach (string yItem in values)
                 {
-                    var result = data
-                        .Where(x => x.Date.Month == d && x.Year == year)
-                        .Select(x => x.euroValue)
-                        .SingleOrDefault();
-                    val.Add(result);
+                    dataTable.AddColumn(yItem.ToString(), "number");
                 }
-                dataTable.AddRow(val);
+                foreach (var d in date)
+                {
+                    System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
+                    var strMonthName = mfi.GetMonthName(d).ToString();
+                    var val = new List<object>(new[] { strMonthName });
+                    foreach (var year in values)
+                    {
+                        var result = data
+                            .Where(x => x.Date.Month == d && x.Year == year)
+                            .Select(x => x.euroValue)
+                            .SingleOrDefault();
+                        val.Add(result);
+                    }
+                    dataTable.AddRow(val);
+                }
             }
             return dataTable;
         }

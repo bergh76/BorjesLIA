@@ -890,6 +890,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Owl-Carousel\owl.carousel.css" />
     <Content Include="Content\Owl-Carousel\owl.transitions.css" />
+    <Content Include="Scripts\MorrisChart\morris.js" />
+    <Content Include="Scripts\MorrisChart\morris.min.js" />
     <Content Include="Scripts\Owl-Carousel\main.js" />
     <Content Include="Scripts\Owl-Carousel\owl.carousel.min.js" />
     <Content Include="Scripts\SliderHideNav.js" />

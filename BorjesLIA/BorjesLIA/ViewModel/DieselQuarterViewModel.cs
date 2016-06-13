@@ -49,14 +49,15 @@ namespace BorjesLIA.ViewModel
     {
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
+        public string ChartName { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
         public string Year { get; set; }
-        public string Name { get; set; }
+        //public string Name { get; set; }
         public Task<List<DieselQuarterPriceModel>> GetQuarterData()
 
         {
-            Name = "Dieselpris Kvartal";
+            ChartName = "Dieselpris Kvartal";
             using (var db = new ApplicationDbContext())
             {
                 if (db.DieselPriceQuarter == null)
@@ -66,7 +67,7 @@ namespace BorjesLIA.ViewModel
 
                 else
                 {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
                     var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
                     return Task.Run(() => lqDiesel);
                 }
@@ -89,49 +90,34 @@ namespace BorjesLIA.ViewModel
 
         public GoogleVisualizationDataTable ConstrucDataTabel(DieselQuarterPriceModel[] data)
         {
-           
+            ChartName = "Dieselpris Kvartal";
             var dataTable = new GoogleVisualizationDataTable();
             var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Quarter", "string");
-            /**
-            // makes clusters of quarters
-            //foreach (var q in quarters)
-            //{
-            //    dataTable.AddColumn(q.ToString(), "string");
-            //}
-            //foreach (var y in years)
-            //{
-            //    var val = new List<object>(new[] { y });
-            //    foreach (var q in quarters)
-            //    {
-            //        var result = data
-            //            .Where(x => x.Quarter == q && x.Year == y)
-            //            .Select(x => x.DieselQuarterValue)
-            //            .SingleOrDefault();
-            //        val.Add(result);
-            //    }
-            //    dataTable.AddRow(val);
-            //}
-            // Makes clusters of years
-            **/
-            foreach (var yItem in years)
+            using (var db = new ApplicationDbContext())
             {
-                dataTable.AddColumn(yItem.ToString(), "number");
-            }
-            foreach (var q in quarters)
-            {
-                var val = new List<object>(new[] { q });
-                foreach (var year in years)
+                Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
+                string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                foreach (string yItem in values)
                 {
-                    var result = data
-                        .Where(x => x.Quarter == q && x.Year == year)
-                        .Select(x => x.DieselQuarterValue)
-                        .SingleOrDefault();
-                    val.Add(result);
+                    dataTable.AddColumn(yItem.ToString(), "number");
                 }
-                dataTable.AddRow(val);
-            }           
+
+                foreach (var q in quarters)
+                {
+                    var val = new List<object>(new[] { q });
+                    foreach (var year in years)
+                    {
+                        var result = data
+                            .Where(x => x.Quarter == q && x.Year == year)
+                            .Select(x => x.DieselQuarterValue)
+                            .SingleOrDefault();
+                        val.Add(result);
+                    }
+                    dataTable.AddRow(val);
+                }
+            }          
             return dataTable;
         }
 

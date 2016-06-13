@@ -24,12 +24,6 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @*<div class="dropdown">
-                        @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name)), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
-                        @Html.ValidationMessageFor(model => model.Settings.Name, "", new { @class = "text-danger" })
-                    </div>*@
-                </div>
-                <div class="form-group">
                     <div class="dropdown">
                         @Html.EnumDropDownListFor(model => model.ChartType, "Diagramtyp", new { @class = "btn btn-default dropdown-toggle " })
                         @Html.ValidationMessageFor(model => model.ChartType, "", new { @class = "text-danger" })
@@ -38,7 +32,7 @@
 
                 <div class="form-group">
                     <div class="dropdown">
-                        @Html.DropDownListFor(model => model.AddDtm.Date, new SelectList(Model.newDTMList.Select(x => x.Date.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ListBoxFor(model => model.newDTMList, new MultiSelectList(Model.newDTMList.OrderBy(x => x.Year).Select(x => x.Year).Distinct()), new { @class = "list-group-item" })
                         @Html.ValidationMessageFor(model => model.AddDtm.Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -60,7 +54,7 @@
 <!--Graph-->
 <div class="col-md-8 col-sm-12 col-xs-12">
     <div>
-        @Html.Partial("_DtmNewGraph")
+                @Html.Partial("_DtmNewGraph")
     </div>
 </div>
 
@@ -70,7 +64,6 @@
     function OnSuccess(response) {
         //alert("alert");
         document.reload();
-
     }
 </script>
 

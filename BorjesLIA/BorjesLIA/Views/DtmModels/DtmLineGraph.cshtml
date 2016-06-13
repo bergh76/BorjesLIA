@@ -1,16 +1,16 @@
 ﻿@model BorjesLIA.ViewModel.DMTViewModel
 
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
-<script src="~/Scripts/GraphHideNav.js"></script>
 @{ var dtmChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
     // create a check if newEuroList is empty
     var chartID = dtmChartList.FirstOrDefault();
     if (chartID == 1)
     {
-            <script type="text/javascript">
+        <!-- 
+            @*<script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
@@ -93,11 +93,38 @@
                         }
                     });
                 }
-            </script>
+            </script>*@
+            -->
+
+
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DTMGraphDiv', title, dataTable);
+                //drawLineChart('chart', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,                           
+                        },
+                        lineWidth: 10,
+                    };
+                    var chart = new google.charts.Line(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+        </script>
     }
     if (chartID == 2)
     {
-            <script type="text/javascript">
+        <!-- 
+            @*<script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
@@ -182,96 +209,136 @@
                         }
                     });
                 }
-            </script>
+            </script>*@
+            -->
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DTMGraphDiv', title, dataTable);
+            });
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+
+                    };
+                    var chart = new google.charts.Bar(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+        </script>
     }
+
     if (chartID == 3)
     {
-            <script type="text/javascript">
+        <script type="text/javascript">
                 google.load("visualization", "1", { packages: ["corechart"] });
                 google.setOnLoadCallback(drawchart);
                 function drawchart() {
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                        url: '@Url.Action("GetData")',
-                        data: "{ }",
-                        // If data connections is success
+                    var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                            console.log(tdata);
+                            //var data = new google.visualization.DataTable(tdata);
+                            //console.log(data);
+                            //data.addColumn('string','Date');
+                            //data.addColumn('number','Value');
                         success:
-                            function drawchart(dataValues) {
+                        function drawchart(dataValues) {
 
-                                // Adds data into columns to DataTable
-                                var data = new google.visualization.DataTable();
-                                data.addColumn('string', 'Datum');
-                                data.addColumn('number', 'Pris');
-                                if (window.JSON && !window.JSON.dateParser) {
-                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+                            // Adds data into columns to DataTable
 
-                                    JSON.dateParser = function (key, value) {
-                                        if (typeof value === 'string') {
-                                            var a = reISO.exec(value);
-                                            if (a)
-                                                return new Date(value);
-                                            a = reMsAjax.exec(value);
-                                            if (a) {
-                                                var b = a[1].split(/[-+,.]/);
-                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                            }
-                                        }
-                                        return value;
-                                    };
 
+                            //if (window.JSON && !window.JSON.dateParser) {
+                            //    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+                            //    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+                            //    JSON.dateParser = function (key, value) {
+                            //        if (typeof value === 'string') {
+                            //            var a = reISO.exec(value);
+                            //            if (a)
+                            //                return new Date(value);
+                            //            a = reMsAjax.exec(value);
+                            //            if (a) {
+                            //                var b = a[1].split(/[-+,.]/);
+                            //                return new Date(b[0] ? +b[0] : 0 - +b[1]);
+                            //            }
+                            //        }
+                            //        return value;
+                            //    };
+
+                            //}
+                            // Loops through the DataTable with data from database
+                            for (var i = 0; i < dataValues.length; i++) {
+                               data.addRow([(dataValues[i].col), dataValues[i].row])
+                            }
+                            var view = new google.visualization.DataView(data);
+                            view.setColumns([0, 1,
+                                             {
+                                                 calc: "stringify",
+                                                 sourceColumn: 1,
+                                                 type: "string",
+                                                 role: "annotation",
+                                             },
+                            ]);
+                            // Settings for visualization of the graph
+                            var options = {
+                                chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
+                                title: '@Model.Title',
+                                width: '100%',
+                                height: '100%',
+                                pointSize: 3,
+                                dataOpacity: 0.4,
+                                lineWidth: 2,
+                                hAxis: {
+                                    title: 'Datum', titleTextStyle: { color: '#333' },
                                 }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    var str = window.JSON.stringify(dataValues[i].Date);
-                                    //console.log("Här var det strängat",str);
-                                    var date = JSON.parse(str, JSON.dateParser);
-                                    //console.log("Här ska det vara datum", date);
-                                    data.addRow([
-                                        //(dataValues[i].Date), dataValues[i].euroValue])
-                                        (new Date(date).toDateString()), dataValues[i].DieselDTMValue])
-                                    console.log(data);
+                            }
+                            // Draws the graph into a specified div
+                            var chart = new google.visualization.ColumnChart(document.getElementById("DTMGraphDiv"));
+                            chart.draw(view, options);
 
-                                }
-                                var view = new google.visualization.DataView(data);
-                                view.setColumns([0, 1,
-                                                 {
-                                                     calc: "stringify",
-                                                     sourceColumn: 1,
-                                                     type: "string",
-                                                     role: "annotation",
-                                                 },
-                                ]);
-                                // Settings for visualization of the graph
-                                var options = {
-                                    chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                    title: 'Drivmedelstillägg @Model.Year',
-                                    width: '100%',
-                                    height: '100%',
-                                    pointSize: 3,
-                                    dataOpacity: 0.4,
-                                    lineWidth: 2,
-                                    hAxis: {
-                                        title: 'Datum', titleTextStyle: { color: '#333' },
-                                    }
-                                }
-                                // Draws the graph into a specified div
-                                var chart = new google.visualization.ColumnChart(document.getElementById("DTMGraphDiv"));
-                                chart.draw(view, options);
-
-                            },
+                        }
                         // If collectning data from database fails promp message here
-                        error: function () {
+                        error:  {
                             alert("Ett fel uppstod när datat försökte hämtas!");
                         }
-                    });
-                }
-            </script>
-        }
+                };
+
+        </script>
+
+
     }
+
+    if (chartID == 4)
+    {
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DTMGraphDiv', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+
+                    };
+                    var chart = new google.charts.Bar(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+        </script>
+    }
+}
+
 <div class="x_panel">
     <div class="x_content">
         <div id="DTMGraphDiv" style="width: 100%; height:650px"></div>

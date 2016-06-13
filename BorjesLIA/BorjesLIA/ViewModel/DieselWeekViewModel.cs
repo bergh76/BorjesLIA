@@ -17,10 +17,10 @@ namespace BorjesLIA.ViewModel
         public DieselWeekModel AddWeekDiesel { get; set; }
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
         public string Year { get; set; }
-        public string Name { get; set; }
+        public string ChartName { get; set; }
         public Task<List<DieselWeekModel>> GetWeekData()
         {
-            Name = "Dieselpris Vecka";
+            ChartName = "Dieselpris Vecka";
             using (var db = new ApplicationDbContext())
             {
                 if (db.DieselPriceWeek == null)
@@ -28,14 +28,14 @@ namespace BorjesLIA.ViewModel
                     return GetWeekData();
 
                 }
-                else if (db.Settings.Where(x => x.Name == Name).Select(x => x.Year).FirstOrDefault() == "Alla")
+                else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
                 {
                     var lwAllDiesel = db.DieselPriceWeek.ToList();
                     return Task.Run(() => lwAllDiesel);
                 }
                 else
                 {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.Name).Select(x => x.Year).FirstOrDefault();
+                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
                     var lwDiesel = db.DieselPriceWeek.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
                     return Task.Run(() => lwDiesel);
                 }
@@ -55,53 +55,38 @@ namespace BorjesLIA.ViewModel
                 DataTable = ConstrucDataTabel(db.DieselPriceWeek.ToList().OrderBy(x => x.Week).ToArray());
             }
         }
-        
+
         public GoogleVisualizationDataTable ConstrucDataTabel(DieselWeekModel[] data)
         {
-
+            ChartName = "Dieselpris Vecka";
             var dataTable = new GoogleVisualizationDataTable();
             var weeks = data.Select(x => x.Week).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Week", "string");
-            /**
-            // makes clusters of quarters
-            //foreach (var q in quarters)
-            //{
-            //    dataTable.AddColumn(q.ToString(), "string");
-            //}
-            //foreach (var y in years)
-            //{
-            //    var val = new List<object>(new[] { y });
-            //    foreach (var q in quarters)
-            //    {
-            //        var result = data
-            //            .Where(x => x.Quarter == q && x.Year == y)
-            //            .Select(x => x.DieselQuarterValue)
-            //            .SingleOrDefault();
-            //        val.Add(result);
-            //    }
-            //    dataTable.AddRow(val);
-            //}
-            // Makes clusters of years
-            **/
-            foreach (var yItem in years)
+            using (var db = new ApplicationDbContext())
             {
-                dataTable.AddColumn(yItem.ToString(), "number");
-            }
-            foreach (var w in weeks)
-            {
-                var val = new List<object>(new[] { w.ToString() });
-                foreach (var year in years)
+                Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
+                string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                foreach (string yItem in values)
                 {
-                    var result = data
-                        .Where(x => x.Week == w && x.Year == year)
-                        .Select(x => x.DieselWeekValue)
-                        .SingleOrDefault();
-                    val.Add(result);
+                    dataTable.AddColumn(yItem.ToString(), "number");
                 }
-                dataTable.AddRow(val);
+
+                foreach (var w in weeks)
+                {
+                    var val = new List<object>(new[] { w.ToString() });
+                    foreach (var year in years)
+                    {
+                        var result = data
+                            .Where(x => x.Week == w && x.Year == year)
+                            .Select(x => Convert.ToDecimal(x.DieselWeekValue))
+                            .SingleOrDefault();
+                        val.Add(result);
+                    }
+                    dataTable.AddRow(val);
+                }
+                return dataTable;
             }
-            return dataTable;
         }
     }
 }

@@ -38,7 +38,6 @@ namespace BorjesLIA.AdminControllers
                 newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
                 //populates list used for determain charttype from Entity Settings
                 settings = db.Settings.Where(x => x.Name == settingsName)
-
             };
             return dtmV;
         }

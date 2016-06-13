@@ -23,12 +23,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @*<div class="dropdown">
-                        @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name)), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
-                        @Html.ValidationMessageFor(model => model.Settings.Name, "", new { @class = "text-danger" })
-                    </div>*@
-                </div>
+
                 <div class="form-group">
                     <div class="dropdown">
                         @Html.EnumDropDownListFor(model => model.ChartType, "Diagramtyp", new { @class = "btn btn-default dropdown-toggle " })
@@ -38,8 +33,9 @@
 
                 <div class="form-group">
                     <div class="dropdown">
-                        @Html.DropDownListFor(model => model.AddWeekDiesel.Year,new SelectList(Model.newWeekDieselList.Select(x => x.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })
-                        @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
+                        @*@Html.DropDownListFor(model => model.AddWeekDiesel.Year,new SelectList(Model.newWeekDieselList.Select(x => x.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })*@
+                        @Html.ListBoxFor(model => model.newWeekDieselList, new MultiSelectList(Model.newWeekDieselList.OrderBy(x => x.Year).Select(x => x.Year).Distinct()), new { @class = "list-group-item" })
+                         @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div>

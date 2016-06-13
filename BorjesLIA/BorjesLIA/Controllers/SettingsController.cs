@@ -43,7 +43,7 @@ namespace BorjesLIA.Controllers
         /// <returns></returns>
         public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
         {
-            euroSettings = new EuroViewModel 
+            euroSettings = new EuroViewModel
             {
                 AddEuro = new EuroExchangeModel(),
                 newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
@@ -52,7 +52,7 @@ namespace BorjesLIA.Controllers
             };
             return View(euroSettings);
         }
-
+        
         /// <summary>
         /// Populates the chart with data
         /// </summary>
@@ -65,6 +65,7 @@ namespace BorjesLIA.Controllers
             var data = await eurox.GetData();
             return Json(data, JsonRequestBehavior.AllowGet);
         }     
+
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
@@ -102,9 +103,7 @@ namespace BorjesLIA.Controllers
             }
             return View(confEuro);
         }
-
-
-
+        
 
         //******************************************************************************************//
         //*******************************| DRIVMEDELSTILLÄGSETTING |*******************************//
@@ -179,11 +178,7 @@ namespace BorjesLIA.Controllers
             }
             return View(confDtm);
         }
-
-
-
-
-
+        
         //******************************************************************************************//
         //**********************************| DIESELWEEKSETTINGS |**********************************//
         //******************************************************************************************//

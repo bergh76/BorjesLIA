@@ -24,12 +24,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @*<div class="dropdown">
-                        @Html.DropDownListFor(model => model.Settings.Name, new SelectList(Model.settings.Select(x => x.Name)), "Indatatyp", new { @class = "btn btn-default dropdown-toggle" })
-                        @Html.ValidationMessageFor(model => model.Settings.Name, "", new { @class = "text-danger" })
-                    </div>*@
-                </div>
+
                 <div class="form-group">
                     <div class="dropdown">
                         @Html.EnumDropDownListFor(model => model.ChartType, "Diagramtyp", new { @class = "btn btn-default dropdown-toggle " })
@@ -39,15 +34,14 @@
 
                 <div class="form-group">
                     <div class="dropdown">
+
                         @*@Html.ListBoxFor(model => model.newEuroList, new MultiSelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()), new { @class = "btn btn-default dropdown-toggle" })*@
-
-
-                        @Html.DropDownListFor(model => model.AddEuro.Date, new SelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ListBoxFor(model => model.newEuroList, new MultiSelectList(Model.newEuroList.Select(x => x.Date.Year).Distinct()),new { @class = "list-group-item" })
                         @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div>
-                    <div class="form-group">
+                    <div class="form-group ">
                         <div class="btn-block">
                             @*<button type="submit" class="btn btn-default"><i class="fa fa-eye"></i> Visa</button>*@
                                                         

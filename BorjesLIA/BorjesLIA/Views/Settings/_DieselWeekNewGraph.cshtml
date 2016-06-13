@@ -7,169 +7,9 @@
     var chartID = euroChartList.FirstOrDefault();
     if (chartID == 1)
     {
-        <script type="text/javascript">
-             google.load("visualization", "1", { packages: ["corechart"] });
-             google.setOnLoadCallback(drawchart);
-             function drawchart() {
-                 $.ajax({
-                     type: 'POST',
-                     dataType: 'json',
-                     contentType: 'application/json',
-                     // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                     url: '@Url.Action("GetDWData")',
-                     data: "{ }",
-                     // If data connections is success
-                     success:
-                         function drawchart(dataValues) {
-                             // Adds data into columns to DataTable
-                             var data = new google.visualization.DataTable();
-                             data.addColumn('string', 'Datum');
-                             data.addColumn('number', 'Pris');
-                             if (window.JSON && !window.JSON.dateParser) {
-                                 var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                 var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
-                                 JSON.dateParser = function (key, value) {
-                                     if (typeof value === 'string') {
-                                         var a = reISO.exec(value);
-                                         if (a)
-                                             return new Date(value);
-                                         a = reMsAjax.exec(value);
-                                         if (a) {
-                                             var b = a[1].split(/[-+,.]/);
-                                             return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                         }
-                                     }
-                                     return value;
-                                 };
-
-                             }
-                             // Loops through the DataTable with data from database
-                             for (var i = 0; i < dataValues.length; i++) {
-                                 var str = window.JSON.stringify(dataValues[i].Date);
-                                 //console.log("Här var det strängat",str);
-                                 var date = JSON.parse(str, JSON.dateParser);
-                                 //console.log("Här ska det vara datum", date);
-                                 data.addRow([
-                                     //(dataValues[i].Date), dataValues[i].euroValue])
-                                     (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                 console.log(data);
-
-                             }
-                             var view = new google.visualization.DataView(data);
-                             view.setColumns([0, 1,
-                                              {
-                                                  calc: "stringify",
-                                                  sourceColumn: 1,
-                                                  type: "string",
-                                                  role: "annotation",
-                                              },
-                             ]);
-                             // Settings for visualization of the graph
-                             var options = {
-                                 title: 'Dieselpris per kvartal',
-                                 pointSize: 3,
-                                 dataOpacity: 0.4,
-                                 lineWidth: 2,
-                                 hAxis: {
-                                     title: 'Datum', titleTextStyle: { color: '#333' },
-                                 }
-                             }
-                             // Draws the graph into a specified div
-                             var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
-                             chart.draw(view, options);
-                         },
-                     // If collectning data from database fails promp message here
-                     error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                 });
-             }
-        </script>
-    }
-
-    if (chartID == 2)
-    {
-        <script type="text/javascript">
-                google.load("visualization", "1", { packages: ["corechart"] });
-                google.setOnLoadCallback(drawchart);
-                function drawchart() {
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                        url: '@Url.Action("GetDWData")',
-                        data: "{ }",
-                        // If data connections is success
-                        success:
-                            function drawchart(dataValues) {
-                                // Adds data into columns to DataTable
-                                var data = new google.visualization.DataTable();
-                                data.addColumn('string', 'Datum');
-                                data.addColumn('number', 'Pris');
-                                if (window.JSON && !window.JSON.dateParser) {
-                                    var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                    var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                    JSON.dateParser = function (key, value) {
-                                        if (typeof value === 'string') {
-                                            var a = reISO.exec(value);
-                                            if (a)
-                                                return new Date(value);
-                                            a = reMsAjax.exec(value);
-                                            if (a) {
-                                                var b = a[1].split(/[-+,.]/);
-                                                return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                            }
-                                        }
-                                        return value;
-                                    };
-
-                                }
-                                // Loops through the DataTable with data from database
-                                for (var i = 0; i < dataValues.length; i++) {
-                                    var str = window.JSON.stringify(dataValues[i].Date);
-                                    //console.log("Här var det strängat",str);
-                                    var date = JSON.parse(str, JSON.dateParser);
-                                    //console.log("Här ska det vara datum", date);
-                                    data.addRow([
-                                        //(dataValues[i].Date), dataValues[i].euroValue])
-                                        (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                    console.log(data);
-
-                                }
-                                var view = new google.visualization.DataView(data);
-                                view.setColumns([0, 1,
-                                                 {
-                                                     calc: "stringify",
-                                                     sourceColumn: 1,
-                                                     type: "string",
-                                                     role: "annotation",
-                                                 },
-                                ]);
-                                // Settings for visualization of the graph
-                                var options = {
-                                    title: 'Dieselpris per kvartal',
-                                    pointSize: 3,
-                                    dataOpacity: 0.4,
-                                    lineWidth: 2,
-                                    hAxis: {
-                                        title: 'Datum', titleTextStyle: { color: '#333' },
-                                    }
-                                }
-
-                                // Draws the graph into a specified div
-                                var chart = new google.visualization.BarChart(document.getElementById("DPWChartDiv"));
-                                chart.draw(view, options);
-                            },
-                        // If collectning data from database fails promp message here
-                        error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                    });
-                }
-        </script>
-    }
-    if (chartID == 3)
-    {
-        <script type="text/javascript">
+        <!--
+          <script type="text/javascript">
                  google.load("visualization", "1", { packages: ["corechart"] });
                  google.setOnLoadCallback(drawchart);
                  function drawchart() {
@@ -178,7 +18,7 @@
                          dataType: 'json',
                          contentType: 'application/json',
                          // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                         url: '@Url.Action("GetDWData")',
+                         url: '@Url.Action("GetEuroData")',
                          data: "{ }",
                          // If data connections is success
                          success:
@@ -187,37 +27,7 @@
                                  var data = new google.visualization.DataTable();
                                  data.addColumn('string', 'Datum');
                                  data.addColumn('number', 'Pris');
-                                 if (window.JSON && !window.JSON.dateParser) {
-                                     var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                     var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                     JSON.dateParser = function (key, value) {
-                                         if (typeof value === 'string') {
-                                             var a = reISO.exec(value);
-                                             if (a)
-                                                 return new Date(value);
-                                             a = reMsAjax.exec(value);
-                                             if (a) {
-                                                 var b = a[1].split(/[-+,.]/);
-                                                 return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                             }
-                                         }
-                                         return value;
-                                     };
-
-                                 }
-                                 // Loops through the DataTable with data from database
-                                 for (var i = 0; i < dataValues.length; i++) {
-                                     var str = window.JSON.stringify(dataValues[i].Date);
-                                     //console.log("Här var det strängat",str);
-                                     var date = JSON.parse(str, JSON.dateParser);
-                                     //console.log("Här ska det vara datum", date);
-                                     data.addRow([
-                                         //(dataValues[i].Date), dataValues[i].euroValue])
-                                         (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                     console.log(data);
-
-                                 }
+                                 // Settings for visualization of the graph
                                  var view = new google.visualization.DataView(data);
                                  view.setColumns([0, 1,
                                                   {
@@ -230,24 +40,113 @@
 
                                  // Settings for visualization of the graph
                                  var options = {
-                                     title: 'Dieselpris per kvartal',
-                                     pointSize: 3,
-                                     dataOpacity: 0.4,
+                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
+                                     title: 'Eurokurs',
+                                     width: '100%',
+                                     height: '100%',
+                                     pointSize: 5,
+                                     dataOpacity: 0.8,
                                      lineWidth: 2,
+                                     vAxis: {
+                                         viewWindow: {
+                                             min: 8.00,
+                                             //max: 10.00
+                                         },
+
+                                     },
                                      hAxis: {
                                          title: 'Datum', titleTextStyle: { color: '#333' },
                                      }
                                  }
+                                 // Loops through the DataTable with data from database
+                                 for (var i = 0; i < dataValues.length; i++) {
+                                     data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
+                                 }
                                  // Draws the graph into a specified div
-                                 var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
+                                 //new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
+                                 var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
                                  chart.draw(view, options);
                              },
                          // If collectning data from database fails promp message here
                          error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
                      });
                  }
+         </script> -->
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': [['line']], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+
+                    };
+                    var chart = new google.charts.Line(document.getElementById(elementId));
+                    chart.draw(dataTable, google.charts.Line.convertOptions(options));
+                }
+
+        </script>
+    }
+    if (chartID == 2)
+    {
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': [['bar']], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+                        bars: 'horizontal' // Required for Material Bar Charts.
+                    };
+                    var chart = new google.charts.Bar(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+
+        </script>
+    }
+    if (chartID == 3)
+    {
+
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': [['bar']], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+
+                    };
+                    var chart = new google.charts.Bar(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+
         </script>
     }
 }
-<div id="DPWChartDiv" style="width: 100%; height: 450px"></div>
+<div class="x_panel">
+    <div class="x_content">
+        <div id="DPWChartDiv" style="width: 100%; height: 450px"></div>
+    </div>
+</div>
 

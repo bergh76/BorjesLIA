@@ -11,7 +11,6 @@ namespace BorjesLIA.Models.Charts
         Linjediagram = 1,
         Stapeldiagram,
         Kolumndiagram,
-        Kombodiagram,
        
     }
 }

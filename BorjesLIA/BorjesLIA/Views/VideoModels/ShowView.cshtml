@@ -9,20 +9,22 @@
         @Html.ValidationSummary();
         <ul>
             <li class="lifile">
-               <p>
-                   Välj en fil att ladda upp/ eller klistra in en länk 
-               </p>
+                <p>
+                    Välj en fil att ladda upp/ eller klistra in en länk
+                </p>
                 <div>
                     <input type="file" id="fileToUpload" name="file" />
                 </div>
                 <div>
-                    <input type="text" id="exVideo" name="Url" value="Youtube länk" />
+                    <input type="text" id="exVideo" name="Url" value="Youtubelänk" />
+                    <button type="button" class="" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
+                    <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
                 </div>
                 <div>
                     <input type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
                 </div>
-                
-                <input type="hidden" id="lengthOfVideo" name="Duration" value="" /> 
+
+                <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
             </li>
         </ul>
         <div>
@@ -31,7 +33,7 @@
         </div>
     }
 
-    
+
 
     <section id="show-result-box" class="hidden">
         <iframe width="560"
@@ -59,18 +61,18 @@
         $(function () {
             $("#SubmitTarget").submit(function (event) {
                 if ($('#fileToUpload').val() == "") {
-                    
-                    if ($('exVideo').val() !== "" || ($('exVideo').val() !== "Youtube länk" || typeof ($('exVideo').val()) !== 'undefined')) {
-                    
+
+                    if ($('exVideo').val() !== "" || ($('exVideo').val() !== "Youtubelänk" || typeof ($('exVideo').val()) !== 'undefined')) {
+
                         validateYouTubeUrl();
                     }
                 }
                 else if ($('#fileToUpload').val() !== "") {
-                  
-                    if ($('exVideo').val() === "" || ($('exVideo').val() === "Youtube länk" || typeof ($('exVideo').val()) == 'undefined')) {
-                   
-                    validateFileFunction();
-                        
+
+                    if ($('exVideo').val() === "" || ($('exVideo').val() === "Youtubelänk" || typeof ($('exVideo').val()) == 'undefined')) {
+
+                        validateFileFunction();
+
                     }
 
                 }
@@ -78,7 +80,7 @@
                     flag = false;
                     $("#spanfile").html("Ingenting hände. Handlingen som begärdes kändes inte igen.");
                 }
-                
+
                 //Submit
                 if (!flag) {
                     event.preventDefault();
@@ -107,7 +109,7 @@
         }
 
         function getVideoDuration() {
-         
+
 
             var div = document.getElementById("exVideo").value;
             console.log(div);
@@ -183,6 +185,16 @@
         function validateName() {
         }
         //-- END ValidateName
+        //-- info
+        $('#infoBTN').click(function () {
+            var hasHidden = $("#infoIframe").hasClass("hidden");
+            if (hasHidden) {
+                $('#infoIframe').removeClass('hidden');
+            }
+            else {
+                $('#infoIframe').addClass('hidden');
+            }
+        });
     </script>
 </body>
 

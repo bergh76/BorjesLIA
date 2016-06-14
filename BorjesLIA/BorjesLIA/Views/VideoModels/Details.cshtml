@@ -3,69 +3,137 @@
 @{
     ViewBag.Title = "Details";
 }
+<body class="nav-md">
+    <div class="container-dashboard body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    @Html.Partial("_AdminPanel")
+                </div>
+            </div>
+            <div class="right_col" role="main">
+                <h2>Details</h2>
 
-<h2>Details</h2>
+                <div>
+                    <h4>VideoModel</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Url)
+                        </dt>
 
-<div>
-    <h4>VideoModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Url)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Url)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Date)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Duration)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Duration)
+                        </dd>
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PlacingOrder)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PlacingOrder)
-        </dd>
+                <div id="getProp" data-prop="@Html.DisplayFor(model => model.ID)"></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
+                <section id="show-result-box" class="hidden">
+                    <iframe width="560"
+                            height="315"
+                            id="myVideoID"
+                            src=""
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                </section>
+                <video width="560" height="315" controls, id="videoID">
+                    <source src="" type="video/mp4">
+                </video>
 
-        <dd>
-            @Html.DisplayFor(model => model.Active)
-        </dd>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    <script>
+        $(document).ready(function () {
+            //ger yt vad den behöver
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            var player;
+
+            //Skaffa property
+            var propID = document.getElementById('getProp');
+            var prop = propID.getAttribute('data-prop');
+            //skickar in id för att hämta rätt url
+            $.ajax({
+                type: "POST",
+                url: "/VideoModels/CallJsShowVideo",
+                traditional: true,
+                data: {
+                    videoID: prop,
+                }
+            }).done(function (data) {
+                //får tillbaka url
+                if (data.success === true) {
+                    var getString = data.returnData;
+                    var checkString = getString.includes("/Content/videos/");
+                    //on video är lokal
+                    if (checkString) {
+
+                        $('#videoID').attr("src", data.returnData);
+
+                        //$('#show-result-box').removeClass('hidden');
+                    }
+                        // om video är yt
+                    else {
+                        //Skapa spelare med API för att kunna ta ut duration
+                        $('#myVideoID').attr("src", data.returnData);
+                        $('#show-result-box').removeClass('hidden');
+                        player = new YT.Player('myVideoID', {
+                            events: {
+                                'onReady': onPlayerReady
+                            }
+                        });
+                    }
+
+                } else {
+                    alert(data.errorMessage)
+                    //location.reload();
+                }
+            }).fail(function (e) {
+                alert('Fail. Cannot show video at this time')
+                //location.reload();
+            });
+            //});
+            function onPlayerReady(event) {
+
+                //event.target.playVideo();
+            }
+
+        });
+    </script>
+</body>

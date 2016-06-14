@@ -102,7 +102,8 @@ jQuery(function ($) {
         thisSlideIndex = this.currentItem;
         var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
 
-        var checkOne = getSrc.includes("mp4");
+        //var checkOne = getSrc.includes("mp4"); 
+        var checkOne = getSrc.includes("Content/videos");
         var checkTwo = getSrc.includes("youtube");
 
         if (checkOne) {

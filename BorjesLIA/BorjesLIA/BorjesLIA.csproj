@@ -419,10 +419,13 @@
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
     <Content Include="Images\controls.png" />
+    <Content Include="Images\iframeEmbedInfo.png" />
+    <Content Include="Images\Infobox_info_icon.svg.png" />
     <Content Include="Images\UploadedImg\home-1353389_960_720.jpg" />
     <Content Include="Images\UploadedImg\landscape-615429_960_720.jpg" />
     <Content Include="Images\UploadedImg\sunset-1331088_960_720.jpg" />
     <Content Include="Content\animate.min.css" />
+    <Content Include="Readme\Readme.txt" />
     <Content Include="Scripts\jcrop\jquery.form.js" />
     <Content Include="Scripts\jcrop\jquery.form.min.js" />
     <Content Include="Scripts\jcrop\jquery.Jcrop.css" />
@@ -1000,6 +1003,8 @@
     <Content Include="Views\VideoModels\Details.cshtml" />
     <Content Include="Views\VideoModels\Preview.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Settings\Index_PlacingOrder.cshtml" />
+    <Content Include="Views\Settings\_PlacingOrderSettingsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

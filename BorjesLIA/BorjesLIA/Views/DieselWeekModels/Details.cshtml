@@ -3,48 +3,54 @@
 @{
     ViewBag.Title = "Details";
 }
+<body class="nav-md">
+    <div class="container-dashboard body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    @Html.Partial("_AdminPanel")
+                </div>
+            </div>
+            <div class="right_col" role="main">
+                <h2>Details</h2>
 
-<h2>Details</h2>
+                <div>
+                    <h4>DieselWeekModel</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Year)
+                        </dt>
 
-<div>
-    <h4>DieselWeekModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Year)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Week)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Week)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Week)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Week)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DieselWeekValue)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DieselWeekValue)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.DieselWeekValue)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DieselWeekValue)
-        </dd>
+                       
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.loggDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.loggDate)
-        </dd>*@
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+    </div>
+</body>

@@ -116,6 +116,9 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    var previousValue = db.DieselPriceQuarter.FirstOrDefault();
+                    newQDiesel.AddQuarterDiesel.PlacingOrder = previousValue.PlacingOrder;
+                    newQDiesel.AddQuarterDiesel.Active = previousValue.Active;
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();

@@ -306,26 +306,26 @@ function toggleFullScreen() {
 //Hide mouse when inactive
 $(document).ready(function () {
 
-    var myVar;
-    $(".navbar").hide();
+    //var myVar;
+    //$(".navbar").hide();
 
-    $("html").mousemove(function (event) {
-        $(".navbar").show();
+    //$("html").mousemove(function (event) {
+    //    $(".navbar").show();
 
-        myStopFunction();
-        myFunction();
-    });
+    //    myStopFunction();
+    //    myFunction();
+    //});
 
-    function myFunction() {
-        myVar = setTimeout(function () {
-            $(".navbar").hide();
-        }, 1000);
-    }
-    function myStopFunction() {
-        if (typeof myVar != 'undefined') {
-            clearTimeout(myVar);
-        }
-    }
+    //function myFunction() {
+    //    myVar = setTimeout(function () {
+    //        $(".navbar").hide();
+    //    }, 1000);
+    //}
+    //function myStopFunction() {
+    //    if (typeof myVar != 'undefined') {
+    //        clearTimeout(myVar);
+    //    }
+    //}
 });
 
 

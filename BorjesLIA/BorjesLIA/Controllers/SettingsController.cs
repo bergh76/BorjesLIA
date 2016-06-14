@@ -13,6 +13,7 @@ using BorjesLIA.Models.Euro;
 using System.Threading.Tasks;
 using BorjesLIA.Models.Charts;
 using BorjesLIA.Models.Diesel;
+using static BorjesLIA.ViewModel.StartModelViewModel;
 
 namespace BorjesLIA.Controllers
 {
@@ -336,6 +337,264 @@ namespace BorjesLIA.Controllers
             }
             return View(confDq);
         }
+
+
+        //******************************************************************************************//
+        //********************************| PlacingOrderSEttings  |*********************************//
+        //******************************************************************************************//
+        public ActionResult Index_PlacingOrder()
+        {
+
+            var images = db.Imgs.OrderByDescending(x => x.PlacingOrder).ToList();
+            var exPageUrl = db.UrlModels.ToList();
+            var videos = db.VideoModels.ToList();
+            var euros = db.EuroExchangeModels.ToList();
+            var dtm = db.DtmModels.ToList();
+            var dieselPriceQuarter = db.DieselPriceQuarter.ToList();
+            var dieselPriceWeek = db.DieselPriceWeek.ToList();
+            var model = new StartModelViewModel();
+            model.listVM = new List<listViewModel>();
+
+
+            Dictionary<decimal, string> dictionary =
+        new Dictionary<decimal, string>();
+
+            dictionary.Add(1.1M, "Eurochart");
+            dictionary.Add(1.2M, "DTM");
+            dictionary.Add(1.3M, "Dieselchart quarter");
+            dictionary.Add(1.4M, "Dieselchart week");
+            dictionary.Add(2.1M, "Webbadress");
+            dictionary.Add(3.1M, "Bild");
+            dictionary.Add(4.1M, "Video mp4");
+            dictionary.Add(4.2M, "Video YouTube");
+            dictionary.Add(0.0M, "Typ hittades inte");
+
+
+            foreach (var item in images)
+            {
+                var listvm = new listViewModel();
+                listvm.name = String.Format("{0} - {1}", dictionary[item.Type], item.Name);
+                listvm.orderby = item.PlacingOrder;
+                listvm.type = item.Type;
+                listvm.active = item.Active;
+                listvm.ID = item.ID;
+              
+                model.listVM.Add(listvm);
+            }
+            foreach (var item in exPageUrl)
+            {
+                var listvm = new listViewModel();
+                listvm.name = String.Format("{0} - {1}", dictionary[item.Type], item.urlString);
+                listvm.orderby = item.PlacingOrder;
+                listvm.type = item.Type;
+                listvm.active = item.Active;
+                listvm.ID = item.ID;
+              
+                model.listVM.Add(listvm);
+            }
+            foreach (var item in videos)
+            {
+                var listvm = new listViewModel();
+                listvm.name = String.Format("{0} - {1}", dictionary[item.Type], item.Name);
+                listvm.orderby = item.PlacingOrder;
+                listvm.Duration = item.Duration;
+                listvm.type = item.Type;
+                listvm.active = item.Active;
+                listvm.ID = item.ID;
+               
+                model.listVM.Add(listvm);
+            }
+
+            if (euros.Count != 0 || euros != null)
+            {
+                var listvm = new listViewModel();
+                listvm.name = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
+                listvm.orderby = euros.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.type = euros.Select(x => x.Type).FirstOrDefault();
+                listvm.active = euros.Select(x => x.Active).FirstOrDefault();
+                listvm.ID = euros.Select(x => x.ID).FirstOrDefault();
+              
+                model.listVM.Add(listvm);
+            }
+            if (dtm.Count != 0 || dtm != null)
+            {
+                var listvm = new listViewModel();
+                listvm.name = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
+                listvm.orderby = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.type = dtm.Select(x => x.Type).FirstOrDefault();
+                listvm.active = dtm.Select(x => x.Active).FirstOrDefault();
+                listvm.ID = dtm.Select(x => x.ID).FirstOrDefault();
+              
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceQuarter != null || dieselPriceQuarter != null)
+            {
+                var listvm = new listViewModel();
+                listvm.name = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
+                listvm.orderby = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.type = dieselPriceQuarter.Select(x => x.Type).FirstOrDefault();
+                listvm.active = dieselPriceQuarter.Select(x => x.Active).FirstOrDefault();
+                listvm.ID = dieselPriceQuarter.Select(x => x.ID).FirstOrDefault();
+          
+                model.listVM.Add(listvm);
+            }
+            if (dieselPriceWeek != null || dieselPriceWeek != null)
+            {
+                var listvm = new listViewModel();
+                listvm.name = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];
+                listvm.orderby = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.type = dieselPriceWeek.Select(x => x.Type).FirstOrDefault();
+                listvm.active = dieselPriceWeek.Select(x => x.Active).FirstOrDefault();
+                listvm.ID = dieselPriceWeek.Select(x => x.ID).FirstOrDefault();
+
+                model.listVM.Add(listvm);
+            }
+
+            return View(model);
+
+        }//END
+
+        //SetOrderPlacing
+        [HttpPost]
+        public ActionResult SetOrderPlacing(StartModelViewModel listaMVM)
+        {
+            List<listViewModel> TempListOrderList = new List<listViewModel>();
+
+            if (ModelState.IsValid)
+            {
+                foreach (var item in listaMVM.listVM)
+                {
+                    var formOrderBy = item.orderby;
+                    var formType = item.type;
+                    var formId = item.ID;
+                    var formActive = item.active;
+
+                    TempListOrderList.Add(item);
+                }
+            }
+
+            foreach (var item in TempListOrderList)
+            {
+                if (item.type == 1.1m) //eurochart
+                {
+                    var changeOrderPlacing = db.EuroExchangeModels.FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 1.2m) //dtm
+                {
+                    var changeOrderPlacing = db.DtmModels.FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 1.3m) //quarter
+                {
+                    var changeOrderPlacing = db.DieselPriceQuarter.FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 1.4m) //week
+                {
+                    var changeOrderPlacing = db.DieselPriceWeek.FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 2.1m) //url
+                {
+                    var changeOrderPlacing = db.UrlModels.Where(x => x.ID == item.ID).FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 3.1m) //img 
+                {
+                    var changeOrderPlacing = db.Imgs.Where(x => x.ID == item.ID).FirstOrDefault();
+                    var asdf = item.orderby;
+                    var asdfasdf = item.active;
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 4.1m) //mp4
+                {
+                    var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+                else if (item.type == 4.2m) //youtube
+                {
+                    var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+
+            return RedirectToAction("Index_PlacingOrder");
+        }
+        //********************************|PlacingOrderSEttings END|********************************//
 
         protected override void Dispose(bool disposing)
         {

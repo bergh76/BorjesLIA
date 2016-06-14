@@ -1,6 +1,6 @@
-﻿@model BorjesLIA.ViewModel.DieselQuarterViewModel
+﻿@model BorjesLIA.ViewModel.StartModelViewModel
 @{
-    ViewData["Title"] = "Kvartalspriser Diesel";
+    ViewData["Title"] = "Inställningar";
 }
 <body class="nav-md">
     <div class="container-dashboard body">
@@ -12,16 +12,16 @@
             </div>
             <div class="right_col" role="main">
                 <div class="row">
-                    <!-- Tabel for Euroexchangecourse starts here -->
+                    <!-- Tabel starts here -->
                     <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Dieselpriser Kvartal</h2>
+                                <h2>Placering</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="PartialViewInception">
                                 <div>
-                                    @Html.Partial("ShowView", Model)
+                                    @Html.Partial("_PlacingOrderSettingsView")
                                 </div>
                             </div>
                         </div>

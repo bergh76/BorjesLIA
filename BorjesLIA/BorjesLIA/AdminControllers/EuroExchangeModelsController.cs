@@ -49,11 +49,16 @@ namespace BorjesLIA.AdminControllers
         /// <returns></returns>
         public ActionResult _AddEuro(EuroViewModel newEuro)
         {
+           
             // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest())
             {
+
                 using (var db = new ApplicationDbContext())
                 {
+                    var previousValue = db.EuroExchangeModels.FirstOrDefault();
+                    newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
+                    newEuro.AddEuro.Active = previousValue.Active;
                     newEuro.AddEuro.Type = 1.1M;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();

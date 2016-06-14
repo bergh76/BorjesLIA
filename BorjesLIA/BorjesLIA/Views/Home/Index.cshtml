@@ -4,8 +4,8 @@
     int IdIndex = 0;
     string OwlItemIndexID = String.Format("{0},{1}", stringPartOfIdIndex, IdIndex); 
     }
-<script src="~/Scripts/SliderHideNav.js"></script>
-<nav class="navbar navbar-default navbar-fixed-top">
+
+<div> <!--testade att byta till div ist, för att ändra placeringen och få med naven/ <nav class="navbar navbar-default navbar-fixed-top"> -->
     <div class="container-dashboard">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,15 +22,14 @@
             <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen()" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
         </div>
     </div>
-</nav>
+</div> <!--</nav>-->
 <div>
-    <div style="height: 2px;"></div>
     <section id="main-slider">
         <div class="owl-carousel">
             @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
-                var checkOne = element.url.Contains("mp4");
-                if (checkOne)
+                //för att lokal video inte går att styra från iframe.
+                if (element.type == 4.1m) //4.1 typ för mp4
                 {
                     <div class=".owl-item">
                         <video controls="controls" id="@element.url">
@@ -45,16 +44,6 @@
                     </div>
                 }
             }
-
-            @*<div class=".owl-item">
-                    <iframe class="VideoClassTag" id="carouselElem" src="https://www.youtube.com/embed/ztgXC1e6mJI?enablejsapi=1" name="14" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                </div>
-                <div class=".owl-item">
-                    <video controls="controls" id="carouselElem"  >
-                        <source src="/Content/videos/SampleVideo_1280x720_1mb.mp4" type="video/mp4" class="VideoClassTag" name="8"/>
-                    </video>
-                </div>*@
-
         </div>
     </section>
 </div>

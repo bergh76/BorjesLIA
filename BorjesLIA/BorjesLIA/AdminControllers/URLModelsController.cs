@@ -69,6 +69,8 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till
+                    newUrl.AddUrl.Active = true;
                     newUrl.AddUrl.Type = 2.1M;
                     db.UrlModels.Add(newUrl.AddUrl);
                     db.SaveChanges();

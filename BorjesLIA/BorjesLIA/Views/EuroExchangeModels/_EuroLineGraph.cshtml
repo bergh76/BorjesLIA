@@ -120,7 +120,6 @@
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('EuroGraphDiv', title, dataTable);
             });
-
             function drawChart(elementId, title, dataTable) {
                 //var view = new google.visualization.DataView(dataTable);
                 //console.log("View 1 \n",view);
@@ -405,7 +404,6 @@
     if (chartID == 4)
     {
         <script type="text/javascript">
-
             google.charts.load('current', { 'packages': ['corechart'], });
             google.charts.setOnLoadCallback(function () {
                 var title = @Html.Raw(Json.Encode(Model.Title));

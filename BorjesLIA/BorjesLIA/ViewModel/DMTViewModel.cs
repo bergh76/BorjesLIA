@@ -64,7 +64,7 @@ namespace BorjesLIA.ViewModel
             dataTable.AddColumn("Month", "string");
             using (var db = new ApplicationDbContext())
             {
-                Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
+                Year = db.Settings.ToList().Where(x => x.Name == ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
                 string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
                 foreach (string yItem in values)
                 {
@@ -75,10 +75,9 @@ namespace BorjesLIA.ViewModel
                 {
                     System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
                         var strMonthName = mfi.GetMonthName(m).ToString();
-                    var val = new List<object>(new[] { strMonthName.ToString() });
-                    foreach (var year in years)
-                    {
-                       
+                    var val = new List<object>(new[] { strMonthName });
+                    foreach (var year in values)
+                    {                       
                         var result = data
                             .Where(x => x.Date.Month == m && x.Year == year)
                             .Select(x => x.DieselDTMValue)
@@ -86,9 +85,9 @@ namespace BorjesLIA.ViewModel
                         val.Add(result);
                     }
                     dataTable.AddRow(val);
-                }
-                return dataTable;
+                }                
             }
+            return dataTable;
         }
     }
 }

@@ -1,21 +1,13 @@
 ﻿@model BorjesLIA.ViewModel.EuroViewModel
 <!--ajax script-->
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#myTable').DataTable({
-            "order": [[1, "desc"]],
-            "processing": true,
 
-        });
-    });
-</script>
 <!--ajax script end-->
     <!-- FORMFIELDS START -->
-    <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+    <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Eurokurs</h2>
+            <h2>Lägg till ny Eurokursindex</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -31,28 +23,29 @@
                 @using (Ajax.BeginForm("_AddEuro", new AjaxOptions { OnSuccess = "OnSuccess" }))
                 {
                     @Html.AntiForgeryToken()
-                    <h2>Lägg till ny Eurokursindex</h2>
-                    <div class="form-group">
+                    <div class="col-md-9">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-">
-                            @Html.LabelFor(model => model.AddEuro.euroValue, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-controll" } })
-                                @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <div class="input-group input-append date" id="dateRangePicker">
+                                    <input class="form-control" name="date" readonly />
+                                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddEuro.Date, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.AddEuro.Date, new { htmlAttributes = new { @class = "form-group" } })
-                                @Html.ValidationMessageFor(model => model.AddEuro.Date, "", new { @class = "text-danger" })
+                            <div class="input-group date">
+                                <p>Välj vecka </p>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <div class="col-md-10">
-                                <input type="submit" value="Lägg till" class="btn btn-default" />
+                            <div class="input-group date">
+                                <input type="submit" value="Lägg till" class="btn btn-default pull-right" />
                             </div>
                         </div>
                     </div>
@@ -62,8 +55,8 @@
         </div>
     </div>
 </div>
-    <!--List-->
-    <div class="col-md-7 col-sm-12 col-xs-12 pull-left">
+    <!--List
+    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
@@ -148,8 +141,12 @@
         </div>
     </div>
 </div>
-
-
+-->
+<div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+    <div>
+        @Html.Partial("_EuroList", Model)
+    </div>
+</div>
 <!--List END-->
 <!--Graph-->
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -172,11 +169,6 @@
         }
     }
 </div>
-
-@*<div class="col-md-12 col-sm-12 col-xs-12" id="euroGraph">
-    @Html.Partial("_EuroLineGraph")
-</div>*@
-
 <!--Graph END-->
 <!--script using ajax, relode page to show new graph-->
 <script type="text/javascript">

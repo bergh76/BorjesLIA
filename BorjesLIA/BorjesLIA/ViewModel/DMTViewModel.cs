@@ -14,6 +14,7 @@ namespace BorjesLIA.ViewModel
     {
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
+        public Quarters Quarters { get; set; }
         public SortType SortType { get; set; }
         public DtmModel AddDtm { get; set; }
         public IEnumerable<DtmModel> newDTMList { get; set; }

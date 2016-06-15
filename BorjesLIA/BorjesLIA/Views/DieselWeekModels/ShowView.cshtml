@@ -3,7 +3,7 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <!--ajax script end-->
 
-<div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+<div class="col-md-3 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Lista över veckopriser Diesel</h2>
@@ -23,95 +23,91 @@
                 {
 
                     @Html.AntiForgeryToken()
-                    <h2>Lägg till ny Veckopris Diesel</h2>
-                    <div class="form-horizontal">
+                    <div class="col-md-9">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddWeekDiesel.Year, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.AddWeekDiesel.Year, new { htmlAttributes = new { @class = "form-group has-feedback", id = "inputSuccess3" } })
-                                <br /> @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.AddWeekDiesel.Week, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-
-                                @Html.EditorFor(model => model.AddWeekDiesel.Week, new { @class = "form-group" })
-                                <br />@Html.ValidationMessageFor(model => model.AddWeekDiesel.Week, "", new { @class = "text-danger" })
-
+                            <div class="input-group date">
+                                <p>Välj år </p>
+                                <div class="input-group input-append date" id="datepicker-year">
+                                    <input class="form-control" name="date" readonly />
+                                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddWeekDiesel.DieselWeekValue, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-
-                                @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue, new { @class = "form-group" })
-                                <br />@Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
-
+                            <div class="input-group date">
+                                <p>Välj vecka </p>
+                                <div class="input-group input-append date" id="datepicker-week">
+                                    <input class="form-control" name="date" readonly />
+                                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
-                        @*<div class="form-group">
-                        @Html.LabelFor(model => model.AddWeekDiesel.User, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-
-                            @Html.EditorFor(model => model.AddWeekDiesel.User, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.User, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddWeekDiesel.LoggDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-
-                            @Html.EditorFor(model => model.AddWeekDiesel.LoggDate, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.AddWeekDiesel.LoggDate, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>*@
                         <div class="form-group">
-                            <div class="col-md-10">
+                            <div class="input-group date">
+                                <p>Välj vecka </p>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.AddWeekDiesel.Week, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                 @Html.ValidationMessageFor(model => model.AddWeekDiesel.Week, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <p>Skriv in dieselpris </p>
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                    @Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group date">
                                 <input type="submit" value="Lägg till" class="btn btn-default pull-right" />
                             </div>
                         </div>
                     </div>
-
                 }
             </section>
          </div>
     </div>
 </div>
-<div class="col-md-7 col-sm-12 col-xs-12 pull-left">
-    <div>
-        @Html.Partial("_WeekPriceDiesel", Model)
-    </div>
+<div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+                @Html.Partial("_WeekPriceDiesel", Model)
 </div>
+   
 <div class="col-md-12 col-sm-12 col-xs-12">
-    
-       @{ var dieselWeekChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
-           var chartID = dieselWeekChartList.FirstOrDefault();
-           // create a check if newEuroList is empty
-           if (chartID == 0)
-           {
+    @{ var dieselWeekChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
+        var chartID = dieselWeekChartList.FirstOrDefault();
+        // create a check if newEuroList is empty
+        if (chartID == 0)
+        {
             <div class="x_panel">
                 <div class="x_title">
-                    @Html.Partial("_Error")
+                    <div class="clearfix"></div>
                 </div>
+                @Html.Partial("_Error")
             </div>
-           }
-           else
-           {
-            <div>
-                @Html.Partial("_DieselWeekGraph")               
+
+        }
+        else
+        {
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                @Html.Partial("_DieselWeekGraph")
             </div>
-               }
-           }
-</div>
-    <!--script using ajax, relode page to show new graph-->
-<script type="text/javascript">
-    function OnSuccess(response) {
-        location.reload();
+        }
     }
-</script>
+</div>
+
+
+
+        <!--script using ajax, relode page to show new graph-->
+            <script type="text/javascript">
+                function OnSuccess(response) {
+                    location.reload();
+                }
+
+            </script>

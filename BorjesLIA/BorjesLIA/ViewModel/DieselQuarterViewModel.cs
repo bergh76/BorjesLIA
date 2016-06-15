@@ -14,6 +14,7 @@ namespace BorjesLIA.ViewModel
     {
         public IEnumerable<Settings> settings { get; set; }
         public ChartType ChartType { get; set; }
+        public Quarters Quarters { get; set; }
         public SortType SortType { get; set; }
         public string ChartName { get; set; }
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
@@ -21,7 +22,6 @@ namespace BorjesLIA.ViewModel
         public string Year { get; set; }
         //public string Name { get; set; }
         public Task<List<DieselQuarterPriceModel>> GetQuarterData()
-
         {
             ChartName = "Dieselpris Kvartal";
             using (var db = new ApplicationDbContext())

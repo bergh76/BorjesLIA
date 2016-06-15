@@ -243,6 +243,7 @@
     <Compile Include="ViewModel\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\bootstrap-datepicker.sv.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables-1.10.11\extensions\AutoFill\css\autoFill.bootstrap.css" />
@@ -1003,6 +1004,7 @@
     <Content Include="Views\VideoModels\Details.cshtml" />
     <Content Include="Views\VideoModels\Preview.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

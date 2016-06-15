@@ -303,6 +303,7 @@ function toggleFullScreen() {
 
 }
 
+
 //Hide mouse when inactive
 $(document).ready(function () {
 
@@ -328,6 +329,87 @@ $(document).ready(function () {
     }
 });
 
+//***** DATEPICKER FOR DATE *****//
+$(document).ready(function () {
+    $('#dateRangePicker')
+        .datepicker({
+            clearBtn: true,
+            language: "sv",
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true,
+            format: 'yyyy-mm-dd',
+
+        })
+    $("#datepicker-year")
+   .datepicker({
+       autoclose: true,
+       todayHighlight: true,
+       format: " yyyy", // Notice the Extra space at the beginning
+       viewMode: "years",
+       minViewMode: "years"
+   })
+    $("#datepicker-week")
+        .datepicker({
+            format: "MM, yyyy",
+            minViewMode: 1,
+            autoclose: true
+
+        })
+        .on('changeDate', function (e) {
+            $('input[name=week]').datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true
+            }).on('show', function (e) {
+
+                var tr = $('body').find('.datepicker-days table tbody tr');
+
+                tr.mouseover(function () {
+                    $(this).addClass('week');
+                });
+
+                tr.mouseout(function () {
+                    $(this).removeClass('week');
+                });
+
+                calculate_week_range(e);
+
+            }).on('hide', function (e) {
+                console.log('date changed');
+                calculate_week_range(e);
+            });
+
+            var calculate_week_range = function (e) {
+
+                var input = e.currentTarget;
+
+                // remove all active class
+                $('body').find('.datepicker-days table tbody tr').removeClass('week-active');
+
+                // add active class
+                var tr = $('body').find('.datepicker-days table tbody tr td.active.day').parent();
+                tr.addClass('week-active');
+
+                // find start and end date of the week
+
+                var date = e.date;
+                var start_date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+                var end_date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+
+                // make a friendly string
+
+                var friendly_string = start_date.getFullYear() + '-' + (start_date.getMonth() + 1) + '-' + start_date.getDate() + ' to '
+                    + end_date.getFullYear() + '-' + (end_date.getMonth() + 1) + '-' + end_date.getDate();
+
+                console.log(friendly_string);
+
+                $(input).val(friendly_string);
+
+            }
+
+        });
+});
+    
 
 //*****************************************//
 //          * MAIN FUNCTIONS END *         //

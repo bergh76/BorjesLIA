@@ -4,7 +4,7 @@
 <!--ajax script end-->
 
 <!-- FORMFIELDS START -->
-<div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+<div class="col-md-3 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Lista över kvartalspris Diesel</h2>
@@ -23,50 +23,44 @@
                 @using (Ajax.BeginForm("_AddQuarterDiesel", new AjaxOptions { OnSuccess = "OnSuccess" }))
             {
                     @Html.AntiForgeryToken()
-                    <h2>Lägg till ny Kvartalspris Diesel</h2>
-                    <div class="form-horizontal">
+                    <div class="col-md-9">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddQuarterDiesel.Year, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-
-                                @Html.EditorFor(model => model.AddQuarterDiesel.Year, new { htmlAttributes = new { @class = "form-group" } })
-                                @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Year, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.AddQuarterDiesel.Quarter, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-
-                                @Html.EditorFor(model => model.AddQuarterDiesel.Quarter, new { @class = "form-group" })
-                                @Html.ValidationMessageFor(model => model.AddQuarterDiesel.Quarter, "", new { @class = "text-danger" })
-
+                            <div class="input-group date">
+                                <p>Välj år </p>
+                                <div class="input-group input-append date" id="datepicker-year">
+                                    <input class="form-control" name="date" readonly />
+                                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.AddQuarterDiesel.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-
-                                @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { @class = "form-group" })
+                            <div class="input-group date">
+                                <p>Välj kvartal </p>
+                                @Html.EnumDropDownListFor(model => model.Quarters, new { @class = "btn btn-default dropdown-toggle " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <p>Skriv in värde </p>
+                                @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { htmlAttributes = new { @class = "form-control", placeholder = "Lägg till index" } })
                                 @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
 
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-10">
+                            <div class="input-group date">
                                 <input type="submit" value="Lägg till" class="btn btn-default pull-right" />
                             </div>
                         </div>
                     </div>
                 }
-                </section>
+            </section>
         </div>
     </div>
 </div>
 
- <div class="col-md-7 col-sm-12 col-xs-12 pull-left">
+ <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
     <div>
         @Html.Partial("QuarterPriceDiesel", Model)
     </div>

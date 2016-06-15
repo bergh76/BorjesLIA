@@ -7,6 +7,7 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -110,13 +111,20 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newQDiesel"></param>
         /// <returns></returns>
-        public ActionResult _AddQuarterDiesel(DieselQuarterViewModel newQDiesel)
+        public ActionResult _AddQuarterDiesel(DieselQuarterViewModel newQDiesel, FormCollection formCollection)
         {
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
+
+                    var enumInt = Convert.ToInt32(formCollection[2]);
+                    Quarters enumVal = (Quarters)enumInt;
+                    string enumString = enumVal.ToString();
+                    string year = formCollection[1];
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
+                    newQDiesel.AddQuarterDiesel.Year = year;
+                    newQDiesel.AddQuarterDiesel.Quarter = enumString;
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();
                     newQDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);

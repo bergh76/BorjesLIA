@@ -21,6 +21,9 @@ namespace BorjesLIA.Models.Settings
         [DataType(DataType.Text)]
         public int ChartType { get; set; }
 
+        [DataType(DataType.Text)]
+        public int SortType { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         public DateTime LoggDate { get; set; }

@@ -153,7 +153,9 @@ namespace BorjesLIA.Controllers
                 // populate values from Html-form
                 string name = formDtmData[1].ToString();
                 confDtm.ID = db.Settings.Where(x => x.Name == confDtmSettings).Select(x => x.ID).FirstOrDefault();
-                confDtm.Year = formDtmData[2].ToString();
+                confDtm.SortType = Convert.ToInt32(formDtmData[2]);
+                confDtm.Year = formDtmData[3].ToString();
+                //confDtm.SortType = formDtmData
                 confDtm.Name = this.confDtmSettings;
 
                 if (!string.IsNullOrEmpty(confDtm.Name) && string.IsNullOrEmpty(confDtm.Year))
@@ -167,7 +169,7 @@ namespace BorjesLIA.Controllers
                 }
                 if (!string.IsNullOrEmpty(confDtm.Name) && !string.IsNullOrEmpty(confDtm.Year))
                 {
-                    confDtm.Year = formDtmData[2].ToString();
+                    confDtm.Year = formDtmData[3].ToString();
                     // saves data to Settings db Entity
                     db.Entry(confDtm).State = EntityState.Modified;
                     db.SaveChanges();
@@ -252,10 +254,7 @@ namespace BorjesLIA.Controllers
             }
             return View(confDw);
         }
-
-
-
-
+        
 
         //******************************************************************************************//
         //********************************| DIESELQUARTERSETTINGS |*********************************//

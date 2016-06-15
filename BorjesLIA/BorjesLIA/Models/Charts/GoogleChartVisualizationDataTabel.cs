@@ -5,7 +5,6 @@ using System.Web;
 
 namespace BorjesLIA.Models.Charts
 {
-
     public class GoogleVisualizationDataTable
     {
         public IList<Col> cols { get; } = new List<Col>();

@@ -8,9 +8,16 @@ namespace BorjesLIA.Models.Charts
 {
     public enum ChartType
     {
-        Linjediagram = 1,
-        Stapeldiagram,
-        Kolumndiagram,
-       
+        Linje = 1,
+        Stapel,
+        Kolumn,
+        Area
+    }
+    public enum SortType
+    {
+        Datum = 1,
+        Vecka,
+        Kvartal,
+        Månad
     }
 }

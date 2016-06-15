@@ -10,7 +10,8 @@
 
     if (chartID == 1)
     {
-        <script type="text/javascript">
+        <!-- 
+        @*<script type="text/javascript">
             google.load("visualization", "1", { packages: ["corechart"] });
             google.setOnLoadCallback(drawchart);
             function drawchart() {
@@ -110,12 +111,69 @@
             error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
             });
             }
+        </script>*@
+            -->
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart'],});
+            google.charts.setOnLoadCallback(function () {
+                var title = @Html.Raw(Json.Encode(Model.Title));
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+            });
+
+            function drawChart(elementId, title, dataTable) {
+                //var view = new google.visualization.DataView(dataTable);
+                //console.log("View 1 \n",view);
+                //for (var i = 0; i < dataTable.length; i++) {
+                //    view.setColumns([0,[i],
+                //        {
+                //            calc: "stringify",
+                //            sourceColumn: [i],
+                //            type: "string",
+                //            role: "annotation" },
+                //            console.log("Calc \n", calc),
+                //    ]);
+                //    console.log("view.setColumns \n",view.setColumns);
+                //}
+
+                    var options = {
+                        legend: {position: 'top', maxLines: 3},
+                        title: title,
+                        animation:{
+                            "startup" : true,
+                            duration: 1000,
+                            easing: 'linear',
+                        },
+
+                        vAxis: {
+                            fontName: 'Calibri',
+                            minValue: 0,
+                        },
+
+                        hAxis:{
+                            titleTextStyle: {
+                                fontName: 'Calibri',
+                            }
+                        },
+                        chartArea: {
+                            left: 45, top: 75, width: "90%", height: "75%"
+                        },
+                        pointSize: 7,
+                        dataOpacity: 0.9,
+                        lineWidth: 4,
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
+                    chart.draw(dataTable, options);
+                }
         </script>
     }
 
     if (chartID == 2)
     {
-        <script type="text/javascript">
+        <!-- 
+        @*<script type="text/javascript">
             google.load("visualization", "1", { packages: ["corechart"] });
             google.setOnLoadCallback(drawchart);
             function drawchart() {
@@ -215,11 +273,60 @@
                     error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
                 });
             }
+        </script>*@
+            -->
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = @Html.Raw(Json.Encode(Model.Title));
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+                //drawLineChart('chart', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        legend: {position: 'top', maxLines: 3},
+                        title: title,
+                        animation:{
+                            "startup" : true,
+                            duration: 1000,
+                            easing: 'linear',
+                        },
+
+                        vAxis: {
+                            title: "Vecka",
+                            titleTextStyle: {
+                                fontName: 'Calibri',
+                            },
+                            minValue: 0,
+                        },
+
+                        hAxis:{
+                            title: "hAxis",
+                            titleTextStyle: {
+                                fontName: 'Calibri',
+                            }
+                        },
+                        chartArea: {
+                            left: 45, top: 75, width: "90%", height: "75%"
+                        },
+                        pointSize: 7,
+                        dataOpacity: 0.9,
+                        lineWidth: 4,
+                    };
+                    var chart = new google.visualization.BarChart(document.getElementById("DPWChartDiv"));
+                    chart.draw(dataTable, options);
+                }
         </script>
     }
     if (chartID == 3)
     {
-        <script type="text/javascript">
+        <!-- 
+        @*<script type="text/javascript">
             google.load("visualization", "1", { packages: ["corechart"] });
             google.setOnLoadCallback(drawchart);
             function drawchart() {
@@ -320,51 +427,102 @@
                     error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
                 });
             }
+        </script>*@
+            -->
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart'], });
+            google.charts.setOnLoadCallback(function () {
+                var title = '@Model.Title';
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                console.log("Title", title);
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPWChartDiv', title, dataTable);
+            });
+
+            function drawChart(elementId, title, dataTable) {
+                var options = {
+                    legend: {position: 'top', maxLines: 3},
+                    title: title,
+                    animation:{
+                        "startup" : true,
+                        duration: 1000,
+                        easing: 'linear',
+                    },
+
+                    vAxis: {
+                        title: "Pris",
+                        titleTextStyle: {
+                            fontName: 'Calibri',
+                        },
+                        minValue: 0,
+                    },
+
+                    hAxis:{
+                        title: "Vecka",
+                        titleTextStyle: {
+                            fontName: 'Calibri',
+                        }
+                    },
+                    chartArea: {
+                        left: 50, top: 75, width: "90%", height: "75%"
+                    },
+                    pointSize: 7,
+                    dataOpacity: 0.9,
+                    lineWidth: 4,
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
+                    chart.draw(dataTable, options);
+                }
         </script>
     }
     if (chartID == 4)
     {
         <script type="text/javascript">
 
-            google.charts.load('current', { 'packages': ['corechart','bar', 'line'], });
+            google.charts.load('current', { 'packages': ['corechart'], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
-                console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
-
                 drawChart('DPWChartDiv', title, dataTable);
-                //drawLineChart('chart', title, dataTable);
-
             });
+            function drawChart(elementId, title, dataTable) {             
+                var options = {
+                    legend: {position: 'top', maxLines: 3},
+                    title: title,
+                    animation:{
+                        "startup" : true,
+                        duration: 1000,
+                        easing: 'linear',
+                    },
 
-                function drawChart(elementId, title, dataTable) {
-                    var options = {
-                        chart: {
-                            title: title,
+                    vAxis: {
+                        title: "Pris",
+                        titleTextStyle: {
+                            fontName: 'Calibri',
                         },
+                        minValue: 0,
+                    },
 
-                    };
-                    var chart = new google.charts.Line(document.getElementById(elementId));
+                    hAxis:{
+                        title: "Vecka",
+                        titleTextStyle: {
+                            fontName: 'Calibri',
+                        }
+                    },
+                    chartArea: {
+                        left: 45, top: 75, width: "90%", height: "75%"
+                    },
+                    pointSize: 4,
+                    dataOpacity: 0.9,
+                    lineWidth: 2,
+                };
+                var chart = new google.visualization.AreaChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
                 }
-
-            //function drawLineChart(elementId, title, dataTable) {
-            //    var options2 = {
-            //        chart: {
-            //            title: title,
-
-            //        },
-            //    };
-            //    var chart2 = new google.charts.Line(document.getElementById(elementId));
-            //    console.log(elementId);
-            //    chart2.draw(dataTable, options2);
-            //}
         </script>
     }
 }
-<div class="x_panel">
-    <div class="x_content">
-        <div id="DPWChartDiv" style="width: 100%; height:650px"></div>
-    </div>
-</div>
+<div id="DPWChartDiv" style="width: 100%; height:100%"></div>
+   

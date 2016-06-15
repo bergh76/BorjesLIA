@@ -10,7 +10,7 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': [['line']], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('DPQChartDiv', title, dataTable);
@@ -34,7 +34,7 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': [['bar']], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('DPQChartDiv', title, dataTable);
@@ -59,7 +59,7 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': [['bar']], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('DPQChartDiv', title, dataTable);

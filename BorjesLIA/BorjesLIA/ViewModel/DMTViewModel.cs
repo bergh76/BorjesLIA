@@ -74,11 +74,12 @@ namespace BorjesLIA.ViewModel
 
                 foreach (var m in month)
                 {
+                    
                     System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-                        var strMonthName = mfi.GetMonthName(m).ToString();
+                    var strMonthName = mfi.GetMonthName(m).ToString();
                     var val = new List<object>(new[] { strMonthName });
                     foreach (var year in values)
-                    {                       
+                    {
                         var result = data
                             .Where(x => x.Date.Month == m && x.Year == year)
                             .Select(x => x.DieselDTMValue)
@@ -86,7 +87,7 @@ namespace BorjesLIA.ViewModel
                         val.Add(result);
                     }
                     dataTable.AddRow(val);
-                }                
+                }
             }
             return dataTable;
         }

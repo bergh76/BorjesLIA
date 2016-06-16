@@ -8,6 +8,7 @@ using BorjesLIA.Models.Diesel;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
 using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -103,6 +104,21 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
+                    var year = date.Year.ToString();
+                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                    DateTime date1 = date;
+                    Calendar cal = dfi.Calendar;
+                    var monthInt = cal.GetMonth(date1);
+                    var month = dfi.GetMonthName(monthInt);
+                    newDTM.AddDtm.Date = date;
+                    newDTM.AddDtm.Year = year;
+                    newDTM.AddDtm.Month = month;
+                    if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
+                    {
+                        // return a errormessage to the view //
+                        return View(newDTM);
+                    }
                     var previousValue = db.DtmModels.FirstOrDefault();
                     if (previousValue != null)
                     {
@@ -114,10 +130,7 @@ namespace BorjesLIA.AdminControllers
                         newDTM.AddDtm.PlacingOrder = 0;
                         newDTM.AddDtm.Active = true;
                     }
-                    var date = Convert.ToDateTime(formCollection[1]);
-                    var year = date.Year.ToString();
-                    newDTM.AddDtm.Date = date;
-                    newDTM.AddDtm.Year = year;
+                    
                     newDTM.AddDtm.Type = 1.2M;
                     db.DtmModels.Add(newDTM.AddDtm);
                     db.SaveChanges(); 

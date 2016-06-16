@@ -50,13 +50,22 @@ namespace BorjesLIA.AdminControllers
         /// <returns></returns>
         public ActionResult _AddEuro(EuroViewModel newEuro, FormCollection formCollection)
         {
-           
+
             // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest())
             {
 
                 using (var db = new ApplicationDbContext())
                 {
+                    var date = Convert.ToDateTime(formCollection[1]);
+                    var year = date.Year.ToString();
+                    newEuro.AddEuro.Date = date;
+                    newEuro.AddEuro.Year = year;
+                    if (db.EuroExchangeModels.Any(x => x.Date == date) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
+                    {
+                        // return a errormessage to the view //
+                        return View(newEuro);
+                    }
                     var previousValue = db.EuroExchangeModels.FirstOrDefault();
                     if(previousValue != null)
                     {
@@ -68,11 +77,8 @@ namespace BorjesLIA.AdminControllers
                         newEuro.AddEuro.PlacingOrder = 0;
                         newEuro.AddEuro.Active = true;
                     }
-                    var date = Convert.ToDateTime(formCollection[1]);
-                    var year = date.Year.ToString();
+                    
                     newEuro.AddEuro.Type = 1.1M;
-                    newEuro.AddEuro.Date = date;
-                    newEuro.AddEuro.Year = year;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro = NewEuroObject();

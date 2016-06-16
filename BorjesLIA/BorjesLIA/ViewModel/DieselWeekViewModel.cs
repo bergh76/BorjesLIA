@@ -60,7 +60,7 @@ namespace BorjesLIA.ViewModel
         {
             ChartName = "Dieselpris Vecka";
             var dataTable = new GoogleVisualizationDataTable();
-            var weeks = data.Select(x => x.Week).Distinct().OrderBy(x => x);
+            var date = data.Select(x => x.Date).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Week", "string");
             using (var db = new ApplicationDbContext())
@@ -72,13 +72,13 @@ namespace BorjesLIA.ViewModel
                     dataTable.AddColumn(yItem.ToString(), "number");
                 }
 
-                foreach (var w in weeks)
+                foreach (var d in date)
                 {
-                    var val = new List<object>(new[] { w.ToString() });
+                    var val = new List<object>(new[] { d.ToString() });
                     foreach (var year in values)
                     {
                         var result = data
-                            .Where(x => x.Week == w && x.Year == year)
+                            .Where(x => x.Date == d && x.Year == year)
                             .Select(x => Convert.ToDecimal(x.DieselWeekValue))
                             .SingleOrDefault();
                         val.Add(result);

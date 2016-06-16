@@ -9,9 +9,7 @@ namespace BorjesLIA.Models.Euro
         [Key]
         public int ID { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Display(Name = "Europris")]
-        public decimal euroValue { get; set; }
+        
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
@@ -20,6 +18,14 @@ namespace BorjesLIA.Models.Euro
         [DataType(DataType.Text)]
         [Display(Name = "År")]
         public string Year { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Månad")]
+        public string Month { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Display(Name = "Europris")]
+        public decimal euroValue { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]

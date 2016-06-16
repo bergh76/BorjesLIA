@@ -66,7 +66,7 @@ namespace BorjesLIA.ViewModel
         {
             ChartName = "Eurokurs";
             var dataTable = new GoogleVisualizationDataTable();
-            var date = data.Select(x => x.Date.Month).Distinct().OrderBy(x => x);
+            var date = data.Select(x => x.Date).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Month", "string");
             using (var db = new ApplicationDbContext())
@@ -81,13 +81,11 @@ namespace BorjesLIA.ViewModel
                     }
                     foreach (var d in date)
                     {
-                        System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-                        var strMonthName = mfi.GetMonthName(d).ToString();
-                        var val = new List<object>(new[] { strMonthName });
+                        var val = new List<object>(new[] { d.ToString() });
                         foreach (var year in values)
                         {
                             var result = data
-                                .Where(x => x.Date.Month == d && x.Year == year)
+                                .Where(x => x.Date == d && x.Year == year)
                                 .Select(x => x.euroValue)
                                 .SingleOrDefault();
                             val.Add(result);

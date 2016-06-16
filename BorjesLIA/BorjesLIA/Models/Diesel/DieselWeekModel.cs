@@ -20,6 +20,10 @@ namespace BorjesLIA.Models.Diesel
         public string Year { get; set; }
 
         [DataType(DataType.Text)]
+        [Display(Name = "Månad")]
+        public string Month { get; set; }
+
+        [DataType(DataType.Text)]
         [Display(Name = "Vecka")]
         public int Week { get; set; }
 

@@ -58,7 +58,7 @@ namespace BorjesLIA.ViewModel
         {
             ChartName = "Dieselpris Kvartal";
             var dataTable = new GoogleVisualizationDataTable();
-            var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
+            var quarter = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Quarter", "string");
             using (var db = new ApplicationDbContext())
@@ -70,9 +70,9 @@ namespace BorjesLIA.ViewModel
                     dataTable.AddColumn(yItem.ToString(), "number");
                 }
 
-                foreach (var q in quarters)
+                foreach (var q in quarter)
                 {
-                    var val = new List<object>(new[] { q });
+                    var val = new List<object>(new[] { q.ToString() });
                     foreach (var year in values)
                     {
                         var result = data

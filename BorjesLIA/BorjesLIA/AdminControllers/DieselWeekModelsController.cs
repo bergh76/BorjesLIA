@@ -114,6 +114,7 @@ namespace BorjesLIA.AdminControllers
                     newDiesel.AddWeekDiesel.Year = year;
                     if (db.DieselPriceWeek.Any(x => x.Week == week) || db.DieselPriceWeek.ToList().Select(x => x.Week) == null)
                     {
+                        // return a errormessage to the view //
                         return View(newDiesel);
                     }
                     newDiesel.AddWeekDiesel.Week = week;              

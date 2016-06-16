@@ -128,6 +128,7 @@ namespace BorjesLIA.AdminControllers
                     newQDiesel.AddQuarterDiesel.Quarter = quarter;
                     if (db.DieselPriceQuarter.Any(x => x.Quarter == quarter) || db.DieselPriceQuarter.ToList().Select(x => x.Quarter) == null)
                     {
+                        // return a errormessage to the view //
                         return View(newQDiesel);
                     }
                     var previousValue = db.DieselPriceQuarter.FirstOrDefault();

@@ -8,6 +8,7 @@ using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
 using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -48,6 +49,7 @@ namespace BorjesLIA.AdminControllers
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
+
         public ActionResult _AddEuro(EuroViewModel newEuro, FormCollection formCollection)
         {
 
@@ -57,21 +59,36 @@ namespace BorjesLIA.AdminControllers
 
                 using (var db = new ApplicationDbContext())
                 {
-                    var date = Convert.ToDateTime(formCollection[1]);
-                    var year = date.Year.ToString();
-                    newEuro.AddEuro.Date = date;
-                    newEuro.AddEuro.Year = year;
-                    if (db.EuroExchangeModels.Any(x => x.Date == date) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
+                    if (!string.IsNullOrEmpty(formCollection[1]))
+                    {
+                        var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
+                        var year = date.Year.ToString();
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
+                        newEuro.AddEuro.Date = date;
+                        newEuro.AddEuro.Year = year;
+                        newEuro.AddEuro.Month = month;
+                        if (db.EuroExchangeModels.Any(x => x.Year == year && x.Month == month) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
+                        {
+                            // return a errormessage to the view //
+                            return View(newEuro);
+                        }                        
+                    }
+                    else
                     {
                         // return a errormessage to the view //
                         return View(newEuro);
                     }
                     var previousValue = db.EuroExchangeModels.FirstOrDefault();
-                    if(previousValue != null)
-                    {
-                        newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
-                        newEuro.AddEuro.Active = previousValue.Active;
-                    }
+                        if (previousValue != null)
+                        {
+                            newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
+                            newEuro.AddEuro.Active = previousValue.Active;
+                        }
+                    
                     else
                     {
                         newEuro.AddEuro.PlacingOrder = 0;

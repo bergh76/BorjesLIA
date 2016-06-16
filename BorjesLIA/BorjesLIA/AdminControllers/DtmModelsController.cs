@@ -104,17 +104,26 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
-                    var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
-                    var year = date.Year.ToString();
-                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                    DateTime date1 = date;
-                    Calendar cal = dfi.Calendar;
-                    var monthInt = cal.GetMonth(date1);
-                    var month = dfi.GetMonthName(monthInt);
-                    newDTM.AddDtm.Date = date;
-                    newDTM.AddDtm.Year = year;
-                    newDTM.AddDtm.Month = month;
-                    if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
+                    if (!string.IsNullOrEmpty(formCollection[1]))
+                    {
+                        var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
+                        var year = date.Year.ToString();
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
+                        newDTM.AddDtm.Date = date;
+                        newDTM.AddDtm.Year = year;
+                        newDTM.AddDtm.Month = month;
+
+                        if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
+                        {
+                            // return a errormessage to the view //
+                            return View(newDTM);
+                        }
+                    }
+                    else
                     {
                         // return a errormessage to the view //
                         return View(newDTM);

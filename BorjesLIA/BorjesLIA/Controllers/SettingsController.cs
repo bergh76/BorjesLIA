@@ -58,14 +58,14 @@ namespace BorjesLIA.Controllers
         /// Populates the chart with data
         /// </summary>
         /// <param name="eurox"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetEuroData(EuroViewModel eurox)
-        {
-            var data = await eurox.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }     
+        ///// <returns></returns>
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetEuroData(EuroViewModel eurox)
+        //{
+        //    var data = await eurox.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}     
 
 
         /// <summary>
@@ -131,13 +131,13 @@ namespace BorjesLIA.Controllers
         /// </summary>
         /// <param name="dtmData"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetDTMData(DMTViewModel dtmData)
-        {
-            var data = await dtmData.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetDTMData(DMTViewModel dtmData)
+        //{
+        //    var data = await dtmData.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
@@ -207,13 +207,13 @@ namespace BorjesLIA.Controllers
         /// </summary>
         /// <param name="dtmData"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetDWData(DieselWeekViewModel dwData)
-        {
-            var data = await dwData.GetWeekData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetDWData(DieselWeekViewModel dwData)
+        //{
+        //    var data = await dwData.GetWeekData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
@@ -282,13 +282,13 @@ namespace BorjesLIA.Controllers
         /// </summary>
         /// <param name="dtmData"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetDQData(DieselQuarterViewModel dqData)
-        {
-            var data = await dqData.GetQuarterData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetDQData(DieselQuarterViewModel dqData)
+        //{
+        //    var data = await dqData.GetQuarterData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity

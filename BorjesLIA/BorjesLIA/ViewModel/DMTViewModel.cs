@@ -20,38 +20,36 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<DtmModel> newDTMList { get; set; }
         public string Year { get; set; }
         public string ChartName { get; set; }
-        public Task<List<DtmModel>> GetData()
-        {
-            ChartName = "Drivmedelstillägg";
-            using (var db = new ApplicationDbContext())
-            {
-                if (db.DtmModels == null)
-                {
-                    return GetData();
-                }
-                else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
-                {
-                    var lAllDtm = db.DtmModels.ToList();
-                    return Task.Run(() => lAllDtm);
-                }
-                else
-                {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-                    var lDtm = db.DtmModels.Where(x => x.Date.Year.ToString() == Year).OrderBy(x => x.Date).ToList();
-                    return Task.Run(() => lDtm);
-                }
-            }
-        }
+        //public Task<List<DtmModel>> GetData()
+        //{
+        //    ChartName = "Drivmedelstillägg";
+        //    using (var db = new ApplicationDbContext())
+        //    {
+        //        if (db.DtmModels == null)
+        //        {
+        //            return GetData();
+        //        }
+        //        else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
+        //        {
+        //            var lAllDtm = db.DtmModels.ToList();
+        //            return Task.Run(() => lAllDtm);
+        //        }
+        //        else
+        //        {
+        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
+        //            var lDtm = db.DtmModels.Where(x => x.Date.Year.ToString() == Year).OrderBy(x => x.Date).ToList();
+        //            return Task.Run(() => lDtm);
+        //        }
+        //    }
+        //}
 
         public GoogleVisualizationDataTable DataTable { get; set; }
         public string Title { get; set; }
-        public string Subtitle { get; set; }
         public DMTViewModel()
         {
             using (var db = new ApplicationDbContext())
             {
                 Title = "Drivmedelstillägg";
-                Subtitle = "År";
                 DataTable = ConstrucDataTabel(db.DtmModels.ToList().OrderBy(x => x.Date).ToArray());
             }
         }

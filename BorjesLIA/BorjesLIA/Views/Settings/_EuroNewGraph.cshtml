@@ -8,70 +8,6 @@
     if (chartID == 1)
     {
 
-        <!--
-          <script type="text/javascript">
-                 google.load("visualization", "1", { packages: ["corechart"] });
-                 google.setOnLoadCallback(drawchart);
-                 function drawchart() {
-                     $.ajax({
-                         type: 'POST',
-                         dataType: 'json',
-                         contentType: 'application/json',
-                         // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                         url: '@Url.Action("GetEuroData")',
-                         data: "{ }",
-                         // If data connections is success
-                         success:
-                             function drawchart(dataValues) {
-                                 // Adds data into columns to DataTable
-                                 var data = new google.visualization.DataTable();
-                                 data.addColumn('string', 'Datum');
-                                 data.addColumn('number', 'Pris');
-                                 // Settings for visualization of the graph
-                                 var view = new google.visualization.DataView(data);
-                                 view.setColumns([0, 1,
-                                                  {
-                                                      calc: "stringify",
-                                                      sourceColumn: 1,
-                                                      type: "string",
-                                                      role: "annotation",
-                                                  },
-                                 ]);
-
-                                 // Settings for visualization of the graph
-                                 var options = {
-                                     chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                     title: 'Eurokurs',
-                                     width: '100%',
-                                     height: '100%',
-                                     pointSize: 5,
-                                     dataOpacity: 0.8,
-                                     lineWidth: 2,
-                                     vAxis: {
-                                         viewWindow: {
-                                             min: 8.00,
-                                             //max: 10.00
-                                         },
-
-                                     },
-                                     hAxis: {
-                                         title: 'Datum', titleTextStyle: { color: '#333' },
-                                     }
-                                 }
-                                 // Loops through the DataTable with data from database
-                                 for (var i = 0; i < dataValues.length; i++) {
-                                     data.addRow([(dataValues[i].Date), dataValues[i].euroValue])
-                                 }
-                                 // Draws the graph into a specified div
-                                 //new google.visualization.ColumnChart(document.getElementById('EuroGraphDiv')).draw(data, options);
-                                 var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
-                                 chart.draw(view, options);
-                             },
-                         // If collectning data from database fails promp message here
-                         error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                     });
-                 }
-         </script> -->
         <script type="text/javascript">
             google.charts.load('current', { 'packages': [['line']], });
             google.charts.setOnLoadCallback(function () {
@@ -138,6 +74,31 @@
 
                 };
                 var chart = new google.charts.Bar(document.getElementById(elementId));
+                chart.draw(dataTable, options);
+            }
+
+        </script>
+    }
+    if (chartID == 4)
+    {
+
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': [['area']], });
+            google.charts.setOnLoadCallback(function () {
+                var title = @Html.Raw(Json.Encode(Model.Title));
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('EuroGraphDiv', title, dataTable);
+            });
+
+            function drawChart(elementId, title, dataTable) {
+                var options = {
+                    chart: {
+                        title: title,
+                    },
+
+                };
+                var chart = new google.charts.Area(document.getElementById(elementId));
                 chart.draw(dataTable, options);
             }
 

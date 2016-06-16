@@ -67,12 +67,12 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="dieselWeekChart"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        public async Task<JsonResult> GetData(DieselWeekViewModel dieselWeekChart)
-        {
-            var data = await dieselWeekChart.GetWeekData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        //public async Task<JsonResult> GetData(DieselWeekViewModel dieselWeekChart)
+        //{
+        //    var data = await dieselWeekChart.GetWeekData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Instansiates an object for startpage
@@ -103,21 +103,32 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
-                    var date = Convert.ToDateTime(formCollection[1]);
-                    var year = date.Year.ToString();
-                    // week calculator //                
-                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                    DateTime date1 = date;
-                    Calendar cal = dfi.Calendar;
-                    var week = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule,dfi.FirstDayOfWeek);
-                    newDiesel.AddWeekDiesel.Date = date;
-                    newDiesel.AddWeekDiesel.Year = year;
-                    if (db.DieselPriceWeek.Any(x => x.Week == week) || db.DieselPriceWeek.ToList().Select(x => x.Week) == null)
+                    if (!string.IsNullOrEmpty(formCollection[1]))
                     {
-                        // return a errormessage to the view //
+                        var date = Convert.ToDateTime(formCollection[1]);
+                        var year = date.Year.ToString();
+                        // week calculator //                
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
+                        var week = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                        newDiesel.AddWeekDiesel.Date = date;
+                        newDiesel.AddWeekDiesel.Year = year;
+                        newDiesel.AddWeekDiesel.Month = month;
+                        newDiesel.AddWeekDiesel.Week = week;
+                        if (db.DieselPriceWeek.Any(x => x.Year == year && x.Week == week) || db.DieselPriceWeek.ToList().Select(x => x.Week) == null)
+                        {
+                            // ToDo: return a errormessage to the view //
+                            return View(newDiesel);
+                        }
+                    }
+                    else
+                    {
+                        // ToDo: return a errormessage to the view //
                         return View(newDiesel);
                     }
-                    newDiesel.AddWeekDiesel.Week = week;              
 
                     var previousValue = db.DieselPriceWeek.FirstOrDefault();
                     if (previousValue != null)
@@ -130,7 +141,7 @@ namespace BorjesLIA.AdminControllers
                         newDiesel.AddWeekDiesel.PlacingOrder = 0;
                         newDiesel.AddWeekDiesel.Active = true;
                     }
-               
+
                     newDiesel.AddWeekDiesel.Type = 1.4M;
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();
@@ -144,7 +155,6 @@ namespace BorjesLIA.AdminControllers
                 return View(newDiesel);
             }
         }
-
 
         // GET: DieselWeekModels/Details/5
         public ActionResult Details(int? id)

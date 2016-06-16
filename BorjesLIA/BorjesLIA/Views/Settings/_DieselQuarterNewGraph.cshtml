@@ -78,6 +78,32 @@
 
         </script>
     }
+
+    if (chartID == 4)
+    {
+
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': [['area']], });
+            google.charts.setOnLoadCallback(function () {
+                var title = @Html.Raw(Json.Encode(Model.Title));
+                var tdata = @Html.Raw(Json.Encode(Model.DataTable));
+                var dataTable = new google.visualization.DataTable(tdata);
+                drawChart('DPQChartDiv', title, dataTable);
+            });
+
+                function drawChart(elementId, title, dataTable) {
+                    var options = {
+                        chart: {
+                            title: title,
+                        },
+
+                    };
+                    var chart = new google.charts.Area(document.getElementById(elementId));
+                    chart.draw(dataTable, options);
+                }
+
+        </script>
+    }
 }
 <div class="x_panel">
     <div class="x_content">

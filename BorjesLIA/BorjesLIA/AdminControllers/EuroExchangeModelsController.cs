@@ -61,8 +61,9 @@ namespace BorjesLIA.AdminControllers
                 {
                     if (!string.IsNullOrEmpty(formCollection[1]))
                     {
-                        var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
+                        var date = Convert.ToDateTime(formCollection[1]);
                         var year = date.Year.ToString();
+                        // month name //
                         DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                         DateTime date1 = date;
                         Calendar cal = dfi.Calendar;
@@ -73,13 +74,13 @@ namespace BorjesLIA.AdminControllers
                         newEuro.AddEuro.Month = month;
                         if (db.EuroExchangeModels.Any(x => x.Year == year && x.Month == month) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
                         {
-                            // return a errormessage to the view //
+                            // ToDo: return a errormessage to the view //
                             return View(newEuro);
                         }                        
                     }
                     else
                     {
-                        // return a errormessage to the view //
+                        // ToDo: return a errormessage to the view //
                         return View(newEuro);
                     }
                     var previousValue = db.EuroExchangeModels.FirstOrDefault();
@@ -111,13 +112,13 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="eurox"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(EuroViewModel eurox)
-        {
-            var data = await eurox.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetData(EuroViewModel eurox)
+        //{
+        //    var data = await eurox.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult _EuroLineGraph(EuroViewModel euroGraph)
         {

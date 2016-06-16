@@ -49,13 +49,13 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="dtmChart"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        public async Task<JsonResult> GetData(DMTViewModel dtmChart)
-        {
-            //var data = await eurox.GetQuaerterData();
-            var data = await dtmChart.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        //public async Task<JsonResult> GetData(DMTViewModel dtmChart)
+        //{
+        //    //var data = await eurox.GetQuaerterData();
+        //    var data = await dtmChart.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Instansiates an object for startpage
@@ -106,8 +106,9 @@ namespace BorjesLIA.AdminControllers
                 {
                     if (!string.IsNullOrEmpty(formCollection[1]))
                     {
-                        var date = Convert.ToDateTime(formCollection[1], new CultureInfo("sv-SE"));
+                        var date = Convert.ToDateTime(formCollection[1]);
                         var year = date.Year.ToString();
+                        // month name //
                         DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                         DateTime date1 = date;
                         Calendar cal = dfi.Calendar;
@@ -119,13 +120,13 @@ namespace BorjesLIA.AdminControllers
 
                         if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
                         {
-                            // return a errormessage to the view //
+                            // ToDo: return a errormessage to the view //
                             return View(newDTM);
                         }
                     }
                     else
                     {
-                        // return a errormessage to the view //
+                        // ToDo: return a errormessage to the view //
                         return View(newDTM);
                     }
                     var previousValue = db.DtmModels.FirstOrDefault();

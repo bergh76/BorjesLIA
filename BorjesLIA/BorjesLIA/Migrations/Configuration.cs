@@ -24,12 +24,12 @@ namespace BorjesLIA.Migrations
         {
             if (context.Settings.ToList() == null)
             {
-                IList<Settings> intialSettings = new List<Settings>();
+                var intialSettings = new List<Settings>();
 
-                intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
-                intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" }); ;
-                intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
-                intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year.ToString(), LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Dieselpris Vecka", ChartType = 1, Year = DateTime.Now.Year.ToString(), SortType = 0,   LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Dieselpris Kvartal", ChartType = 1, Year = DateTime.Now.Year.ToString(), SortType = 0, LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Eurokurs", ChartType = 1, Year = DateTime.Now.Year.ToString(), SortType = 0, LoggDate = DateTime.Now, User = "intialSettings" });
+                intialSettings.Add(new Settings() { Name = "Drivmedelstillägg", ChartType = 1, Year = DateTime.Now.Year.ToString(), SortType = 0, LoggDate = DateTime.Now, User = "intialSettings" });
 
                 foreach (Settings std in intialSettings)
                     context.Settings.Add(std);

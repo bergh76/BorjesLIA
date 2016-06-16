@@ -8,6 +8,7 @@ using BorjesLIA.Models.Diesel;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
 using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -104,7 +105,7 @@ namespace BorjesLIA.AdminControllers
         //    return Json(data, JsonRequestBehavior.AllowGet);
         //}
 
-        
+
         /// <summary>
         /// Creats a new DieselQuarterViewModel object, populates needed lists with data and return a view with data
         /// </summary>
@@ -117,18 +118,25 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
-
-                    var date = Convert.ToDateTime(formCollection[1]);
-                    var year = date.Year.ToString();
-                    var enumInt = Convert.ToInt32(formCollection[2]);
-                    Quarters qVal = (Quarters)enumInt;
-                    string quarter = qVal.ToString();
-                    newQDiesel.AddQuarterDiesel.Date = date;
-                    newQDiesel.AddQuarterDiesel.Year = year;
-                    newQDiesel.AddQuarterDiesel.Quarter = quarter;
-                    if (db.DieselPriceQuarter.Any(x => x.Quarter == quarter) || db.DieselPriceQuarter.ToList().Select(x => x.Quarter) == null)
+                    if (!string.IsNullOrEmpty(formCollection[1]))
                     {
-                        // return a errormessage to the view //
+                        var date = Convert.ToDateTime(formCollection[1]);
+                        var year = date.Year.ToString();
+                        var enumInt = Convert.ToInt32(formCollection[2]);
+                        Quarters qVal = (Quarters)enumInt;
+                        string quarter = qVal.ToString();
+                        newQDiesel.AddQuarterDiesel.Date = date;
+                        newQDiesel.AddQuarterDiesel.Year = year;
+                        newQDiesel.AddQuarterDiesel.Quarter = quarter;
+                        if (db.DieselPriceQuarter.Any(x => x.Year == year && x.Quarter == quarter) || db.DieselPriceQuarter.ToList().Select(x => x.Quarter) == null)
+                        {
+                            // return a errormessage to the view //
+                            return View(newQDiesel);
+                        }
+                    }
+                    else
+                    {
+                        // ToDo: return a errormessage to the view //
                         return View(newQDiesel);
                     }
                     var previousValue = db.DieselPriceQuarter.FirstOrDefault();
@@ -142,7 +150,7 @@ namespace BorjesLIA.AdminControllers
                         newQDiesel.AddQuarterDiesel.PlacingOrder = 0;
                         newQDiesel.AddQuarterDiesel.Active = true;
                     }
-                   
+
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
 
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
@@ -158,8 +166,6 @@ namespace BorjesLIA.AdminControllers
                 return View(newQDiesel);
             }
         }
-
-
         // GET: DieselQuarterPriceModels/Details/5
         public ActionResult Details(int? id)
         {

@@ -2,7 +2,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myTable').DataTable({
-            "order": [[1, "desc"]],
+            "order": [[0, "desc"]],
             "processing": true,
         });
     });
@@ -10,7 +10,7 @@
 
 <div class="x_panel">
     <div class="x_title">
-        <h2>Google Chart <small>Data ifrån databas via PartialView</small></h2>
+        <h2>Euroindex <small>- värde euro</small></h2>
         <ul class="nav navbar-right panel_toolbox">
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -54,14 +54,14 @@
                 <thead>
                     <tr>
                         <th>
-                            Euro
+                            År
                         </th>
                         <th>
-                            Datum
+                            Månad
                         </th>
-                        @*<th>
-                            ChartID
-                        </th>*@
+                        <th>
+                            Pris
+                        </th>
                         <th>
                             Edit
                         </th>
@@ -71,14 +71,14 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.euroValue)
+                            @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Date)
+                            @Html.DisplayFor(modelItem => item.Month)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.EuroChartID)
-                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.euroValue)
+                        </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.ID }) |

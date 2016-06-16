@@ -73,7 +73,7 @@ namespace BorjesLIA.ViewModel
                 foreach (var q in quarters)
                 {
                     var val = new List<object>(new[] { q });
-                    foreach (var year in years)
+                    foreach (var year in values)
                     {
                         var result = data
                             .Where(x => x.Quarter == q && x.Year == year)

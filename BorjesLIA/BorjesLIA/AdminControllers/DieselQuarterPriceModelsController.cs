@@ -118,7 +118,8 @@ namespace BorjesLIA.AdminControllers
                 using (var db = new ApplicationDbContext())
                 {
 
-
+                    var date = Convert.ToDateTime(formCollection[1]);
+                    var year = date.Year.ToString();
                     var enumInt = Convert.ToInt32(formCollection[2]);
                     Quarters enumVal = (Quarters)enumInt;
                     string enumString = enumVal.ToString();
@@ -136,7 +137,8 @@ namespace BorjesLIA.AdminControllers
                     }
                    
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
-                    newQDiesel.AddQuarterDiesel.Year = formCollection[1];
+                    newQDiesel.AddQuarterDiesel.Date = date;
+                    newQDiesel.AddQuarterDiesel.Year = year;
                     newQDiesel.AddQuarterDiesel.Quarter = enumString;
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();

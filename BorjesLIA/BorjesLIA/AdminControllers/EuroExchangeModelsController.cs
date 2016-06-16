@@ -7,6 +7,7 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -47,7 +48,7 @@ namespace BorjesLIA.AdminControllers
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
-        public ActionResult _AddEuro(EuroViewModel newEuro)
+        public ActionResult _AddEuro(EuroViewModel newEuro, FormCollection formCollection)
         {
            
             // Adds a new post to Entity EuroExchangeModel
@@ -67,8 +68,11 @@ namespace BorjesLIA.AdminControllers
                         newEuro.AddEuro.PlacingOrder = 0;
                         newEuro.AddEuro.Active = true;
                     }
-
+                    var date = Convert.ToDateTime(formCollection[1]);
+                    var year = date.Year.ToString();
                     newEuro.AddEuro.Type = 1.1M;
+                    newEuro.AddEuro.Date = date;
+                    newEuro.AddEuro.Year = year;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro = NewEuroObject();

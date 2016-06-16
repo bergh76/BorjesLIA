@@ -397,8 +397,8 @@ namespace BorjesLIA.Controllers
                
                 model.listVM.Add(listvm);
             }
-
-            if (euros.Count != 0 || euros != null)
+           
+            if (euros.Count != 0 )
             {
                 var listvm = new listViewModel();
                 listvm.name = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
@@ -409,7 +409,7 @@ namespace BorjesLIA.Controllers
               
                 model.listVM.Add(listvm);
             }
-            if (dtm.Count != 0 || dtm != null)
+            if (dtm.Count != 0 ) 
             {
                 var listvm = new listViewModel();
                 listvm.name = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
@@ -420,7 +420,7 @@ namespace BorjesLIA.Controllers
               
                 model.listVM.Add(listvm);
             }
-            if (dieselPriceQuarter != null || dieselPriceQuarter != null)
+            if (dieselPriceQuarter.Count != 0 )
             {
                 var listvm = new listViewModel();
                 listvm.name = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
@@ -431,7 +431,7 @@ namespace BorjesLIA.Controllers
           
                 model.listVM.Add(listvm);
             }
-            if (dieselPriceWeek != null || dieselPriceWeek != null)
+            if (dieselPriceWeek.Count != 0 )
             {
                 var listvm = new listViewModel();
                 listvm.name = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];

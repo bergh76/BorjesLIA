@@ -104,8 +104,17 @@ namespace BorjesLIA.AdminControllers
 
                     newDiesel.AddWeekDiesel.Year = formCollection[1];
                     var previousValue = db.DieselPriceWeek.FirstOrDefault();
-                    newDiesel.AddWeekDiesel.PlacingOrder = previousValue.PlacingOrder;
-                    newDiesel.AddWeekDiesel.Active = previousValue.Active;
+                    if (previousValue != null)
+                    {
+                        newDiesel.AddWeekDiesel.PlacingOrder = previousValue.PlacingOrder;
+                        newDiesel.AddWeekDiesel.Active = previousValue.Active;
+                    }
+                    else
+                    {
+                        newDiesel.AddWeekDiesel.PlacingOrder = 0;
+                        newDiesel.AddWeekDiesel.Active = true;
+                    }
+               
                     newDiesel.AddWeekDiesel.Type = 1.4M;
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();

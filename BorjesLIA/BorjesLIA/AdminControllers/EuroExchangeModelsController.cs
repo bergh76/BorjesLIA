@@ -57,8 +57,17 @@ namespace BorjesLIA.AdminControllers
                 using (var db = new ApplicationDbContext())
                 {
                     var previousValue = db.EuroExchangeModels.FirstOrDefault();
-                    newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
-                    newEuro.AddEuro.Active = previousValue.Active;
+                    if(previousValue != null)
+                    {
+                        newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
+                        newEuro.AddEuro.Active = previousValue.Active;
+                    }
+                    else
+                    {
+                        newEuro.AddEuro.PlacingOrder = 0;
+                        newEuro.AddEuro.Active = true;
+                    }
+
                     newEuro.AddEuro.Type = 1.1M;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();

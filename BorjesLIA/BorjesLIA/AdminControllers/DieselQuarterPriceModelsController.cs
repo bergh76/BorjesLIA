@@ -124,10 +124,18 @@ namespace BorjesLIA.AdminControllers
                     string enumString = enumVal.ToString();
                     string year = formCollection[1];
 
-                    //var previousValue = db.DieselPriceQuarter.FirstOrDefault();
-                    //newQDiesel.AddQuarterDiesel.PlacingOrder = previousValue.PlacingOrder;
-                    //newQDiesel.AddQuarterDiesel.Active = previousValue.Active;
-
+                    var previousValue = db.DieselPriceQuarter.FirstOrDefault();
+                    if (previousValue != null)
+                    {
+                        newQDiesel.AddQuarterDiesel.PlacingOrder = previousValue.PlacingOrder;
+                        newQDiesel.AddQuarterDiesel.Active = previousValue.Active;
+                    }
+                    else
+                    {
+                        newQDiesel.AddQuarterDiesel.PlacingOrder = 0;
+                        newQDiesel.AddQuarterDiesel.Active = true;
+                    }
+                   
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
                     newQDiesel.AddQuarterDiesel.Year = year;
                     newQDiesel.AddQuarterDiesel.Quarter = enumString;

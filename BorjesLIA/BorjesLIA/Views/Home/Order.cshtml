@@ -31,12 +31,38 @@
 <input id="lengthOfVideo" name="Duration" value="" />
 <p>Video status: <span class="status">...</span></p>
 <p><button>Play</button> <button>Pause</button></p>
-<button id='getDurationBtn'>GetDuration</button>
+<button id='getDurationBtn'>playSpecific</button>
+<section id="someID">
+    <iframe width="560"
+            height="315"
+            id="https://player.vimeo.com/video/1084537?api=1"
+            src="https://player.vimeo.com/video/1084537?api=1"
+            frameborder="0"
+            allowfullscreen></iframe>
+</section>
+<button type="button" class="btn btn-default" onClick="justPlayOne()">justPlayOne</button>
+
+
 
 @*<iframe src="https://player.vimeo.com/video/1084537" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     <p><a href="https://vimeo.com/1084537">Big Buck Bunny</a> from <a href="https://vimeo.com/user508904">Blender Foundation</a> on <a href="https://vimeo.com">Vimeo</a>.</p>*@
 
 <script type="text/jscript">
+    function justPlayOne() {
+        console.log("just play one");
+        var data = { method: "play" };
+        var player = document.getElementById('https://player.vimeo.com/video/1084537?api=1');
+        player.contentWindow.postMessage(JSON.stringify(data), '*');
+        //var iframes = document.getElementById('https://player.vimeo.com/video/1084537?api=1');
+        //iframes[0].contentWindow.postMessage(JSON.stringify(data), '*');
+
+       // var f = $('iframe'),
+       //url = f.attr('src').split('?')[1],
+       //status = $('.status');
+       // f[0].contentWindow.postMessage(JSON.stringify(data), url);
+    }
+
+
     //-- ON SUBMIT
     $(function () {
         $("#SubmitTarget").submit(function (event) {
@@ -73,6 +99,16 @@
 
         var match = url.match(regExp);
 
+        //test check url for controller use later
+        if (url.includes("youtube"))
+        {
+            console.log("url inehåller youtube - tänkt controller check");
+        }
+        else if (url.includes("vimeo"))
+        {
+            console.log("url inehåller vimeo - tänkt controller check");
+        }
+        //
         if (match) {
             console.log("validate vimeo sucess");
             console.log("match[2]: " + match[2]);
@@ -94,7 +130,6 @@
         var f = $('iframe'),
         url = f.attr('src').split('?')[0],
         status = $('.status');
-
 
         // Listen for messages from the player
         if (window.addEventListener) {
@@ -201,11 +236,6 @@
         //var data = { method: "play" };
         //var iframes = document.getElementsByTagName('iframe');
         //iframes[0].contentWindow.postMessage(JSON.stringify(data), '*');
-    }
-
-    function sudoPlay(event) {
-        //alert("super user do!.. what ever he wants");
-       
     }
 
 </script>

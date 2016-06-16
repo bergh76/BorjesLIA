@@ -367,6 +367,7 @@ namespace BorjesLIA.Controllers
             dictionary.Add(3.1M, "Bild");
             dictionary.Add(4.1M, "Video mp4");
             dictionary.Add(4.2M, "Video YouTube");
+            dictionary.Add(4.5M, "Video Vimeo");
             dictionary.Add(0.0M, "Typ hittades inte");
 
 
@@ -589,7 +590,20 @@ namespace BorjesLIA.Controllers
                         db.SaveChanges();
                     }
                 }
-
+                else if (item.type == 4.5m) //vimeo
+                {
+                    var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
+                    if (changeOrderPlacing.PlacingOrder != item.orderby)
+                    {
+                        changeOrderPlacing.PlacingOrder = item.orderby;
+                        db.SaveChanges();
+                    }
+                    if (changeOrderPlacing.Active != item.active)
+                    {
+                        changeOrderPlacing.Active = item.active;
+                        db.SaveChanges();
+                    }
+                }
             }
 
             return RedirectToAction("Index_PlacingOrder");

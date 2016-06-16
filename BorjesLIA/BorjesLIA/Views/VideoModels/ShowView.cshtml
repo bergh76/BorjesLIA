@@ -53,13 +53,14 @@
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+        var flag = false;
         var player;
         //-- END INIT YT PLAYER
 
         //-- ON SUBMIT
         $(function () {
-            $("#SubmitTarget").submit(function (event) {
+            //$("#SubmitTarget").submit(function (event) {
+            $("#SubmitTarget").on('submit', function (event) {
                 if ($('#fileToUpload').val() == "") {
 
                     if ($('exVideo').val() !== "" || ($('exVideo').val() !== "Youtubelänk" || typeof ($('exVideo').val()) !== 'undefined')) {
@@ -83,13 +84,51 @@
 
                 //Submit
                 if (!flag) {
-                    event.preventDefault();
+                    console.log("!flag");
+                  
+                    //function checkFlag() {
+                    //    if (flag == false) {
+                    //        setTimeout(function () {
+                    //            console.log("timeout");
+                    //        }, 100); /* this checks the flag every 100 milliseconds*/
+                    //    } else {
+                    //        var form = this;
+                    //        form.submit();
+                    //    }
+                    //}
+                    //checkFlag();
+
+                        var form = this;
+                        setTimeout(function () {
+                            console.log("form submit");
+                            form.submit();
+                        }, 2000);
+                        return false;
+
+                        //if (!flag) {
+                        //    var form = this;
+                        //    setTimeout(function () {
+                        //        console.log("form submit x2");
+                        //        //form.submit();
+                        //    }, 2000);
+                        //}
+                        //else {
+                        //    var form = this;
+                        //    form.submit();
+                        //    return false;
+                        //}
+                       
                 }
+                //else {
+                //    var form = this;
+                //    form.submit();
+                //}
                 //validateName();
                 //event.preventDefault(); //under test, för att inte nå controller och genomför därför inte submit.
-                //alert("preventDefault");
+                //console.log("-Test- preventDefault -Backup to prevent submit.");
             });
         });
+       
         //--END ON SUBMIT
 
         //--YT PLAYER
@@ -102,14 +141,11 @@
                     flag = true;
                     getVideoDuration()
                 } else {
-                    flag = false;
-                    $("#spanfile").text("Länken verkar inte vara korrekt.");
+                    validateVimeoUrl();
                 }
             }
         }
-
         function getVideoDuration() {
-
 
             var div = document.getElementById("exVideo").value;
             console.log(div);
@@ -132,6 +168,85 @@
             $("#spanfile").text("");
         }
         //-- END YT PLAYER
+
+        //-- Vimeo Player
+        function validateVimeoUrl() {
+            var url = $('#exVideo').val();
+            var regExp = /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/;
+            //TODO: kolla att regEpen bara tar embedded vimeo..
+            var match = url.match(regExp);
+
+            if (match) {
+                initVimeo();
+            } else {
+                flag = false;
+                $("#spanfile").text("Länken verkar inte vara korrekt.");
+            }
+        }
+        function initVimeo() {
+            var url = $('#exVideo').val();
+            var apiUrl = url + "?api=1";
+
+            $('#myVideoID').attr("src", apiUrl);
+
+            // http://jsfiddle.net/bdougherty/UTt2K/
+
+            var f = $('iframe'),
+            url = f.attr('src').split('?')[0],
+            status = $('.status');
+
+            // Listen for messages from the player
+            if (window.addEventListener) {
+                window.addEventListener('message', onMessageReceived, false);
+            }
+            else {
+                window.attachEvent('onmessage', onMessageReceived, false);
+            }
+
+            // Handle messages received from the player
+            function onMessageReceived(e) {
+                var data = JSON.parse(e.data);
+                //{"method":"getDuration","value":597,"player_id":"myVideoID"}
+                //{"event":"ready","player_id":"myVideoID"}
+                console.log("e.data: " + e.data);
+                if (typeof data.value != 'undefined') {
+                    console.log("data method: " + data.method);
+                    console.log("data value: " + data.value);
+
+                    var vd = data.value;
+                    document.getElementById("lengthOfVideo").value = vd;
+
+                    flag = true;
+                    $("#spanfile").text("");
+                }
+                else if (typeof data.event != 'undefined') {
+                    console.log("data event: " + data.event);
+
+                    if (data.event == 'ready') {
+                        onReady();
+                    }
+
+                }
+            }
+            function onReady() {
+
+                post("getDuration");
+                //post("play");
+
+            }
+            // Helper function for sending a message to the player
+            function post(action, value) {
+
+                var data = { method: action };
+
+                if (value) {
+                    data.value = value;
+                }
+
+                f[0].contentWindow.postMessage(JSON.stringify(data), url);
+            }
+        }
+        //-- End Vimeo Player
 
         //-- myFileFunction
         function validateFileFunction(event) {
@@ -197,5 +312,3 @@
         });
     </script>
 </body>
-
-

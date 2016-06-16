@@ -86,7 +86,7 @@
                 <section id="show-result-box" class="hidden">
                     <iframe width="560"
                             height="315"
-                            id="iframeID"
+                            id="myVideoID"
                             src=""
                             frameborder="0"
                             allowfullscreen></iframe>
@@ -126,26 +126,31 @@
                 //får tillbaka url
                 if (data.success === true) {
                     var getString = data.returnData;
-                    var checkString = getString.includes("/Content/videos/"); 
+                    var checkOne = getString.includes("Content/videos");
+                    var checkTwo = getString.includes("youtube");
+                    var checkThree = getString.includes("vimeo");
                     //on video är lokal
-                    if (checkString) {
+                    if (checkOne) {
                      
                         $('#videoID').attr("src", data.returnData);
 
                   
                     }
                         // om video är yt
-                    else {
+                    else if (checkTwo) {
                         //Skapa spelare med API för att kunna ta ut duration
                         $('#show-result-box').removeClass('hidden');
-                        $('#iframeID').attr("src", data.returnData);
+                        $('#myVideoID').attr("src", data.returnData);
                         player = new YT.Player('myVideoID', {
                             events: {
                                 'onReady': onPlayerReady
                             }
                         });
                     }
-
+                    else if (checkThree) {
+                        $('#myVideoID').attr("src", data.returnData);
+                        $('#show-result-box').removeClass('hidden');
+                    }
                 } else {
                     alert(data.errorMessage)
                     //location.reload();

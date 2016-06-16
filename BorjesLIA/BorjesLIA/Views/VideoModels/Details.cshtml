@@ -100,16 +100,18 @@
                 //får tillbaka url
                 if (data.success === true) {
                     var getString = data.returnData;
-                    var checkString = getString.includes("/Content/videos/");
+                    var checkOne = getString.includes("Content/videos");
+                    var checkTwo = getString.includes("youtube");
+                    var checkThree = getString.includes("vimeo");
                     //on video är lokal
-                    if (checkString) {
+                    if (checkOne) {
 
                         $('#videoID').attr("src", data.returnData);
 
                         //$('#show-result-box').removeClass('hidden');
                     }
                         // om video är yt
-                    else {
+                    else if (checkTwo) {
                         //Skapa spelare med API för att kunna ta ut duration
                         $('#myVideoID').attr("src", data.returnData);
                         $('#show-result-box').removeClass('hidden');
@@ -119,7 +121,10 @@
                             }
                         });
                     }
-
+                    else if (checkThree) {
+                        $('#myVideoID').attr("src", data.returnData);
+                        $('#show-result-box').removeClass('hidden');
+                    }
                 } else {
                     alert(data.errorMessage)
                     //location.reload();

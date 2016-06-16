@@ -64,13 +64,23 @@ namespace BorjesLIA.AdminControllers
                     {
 
                         var video = new VideoModel();
-                        video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Type = 4.2M; //TODO: borde kanske vara enum. 4.2 för youtube
-                        video.Duration = VM.Duration += 3;
+                        video.Duration = VM.Duration += 6;
+
+                        if (VM.Url.Contains("youtube"))
+                        {
+                            video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
+                            video.Type = 4.2M; // 4.2 för youtube
+                        }
+                        else if (VM.Url.Contains("vimeo"))
+                        {
+                            video.Url = VM.Url += "?api=1"; //för att kunna använda YT api
+                            video.Type = 4.5M; // 4.5 för vimeo
+                        }
+                     
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 
@@ -183,7 +193,7 @@ namespace BorjesLIA.AdminControllers
                     return Json(new { success = true, returnData = myFilePath });
                 }
                 //om externlänk
-                else if (videoModel.Type == 4.2m)
+                else if (videoModel.Type == 4.2m || videoModel.Type == 4.5m) 
                 {
                     string fileName = videoModel.Url;
                     return Json(new { success = true, returnData = fileName });

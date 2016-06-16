@@ -72,6 +72,14 @@ namespace BorjesLIA.Controllers
                         listvm.type = item.Type;
                         model.listVM.Add(listvm);
                     }
+                    else if (item.Type == 4.5m) //vimeo
+                    {
+                        listvm.url = item.Url;
+                        listvm.Duration = item.Duration;
+                        listvm.orderby = item.PlacingOrder;
+                        listvm.type = item.Type;
+                        model.listVM.Add(listvm);
+                    }
                 }
             }
 

@@ -15,10 +15,10 @@ namespace BorjesLIA.Migrations
                         Date = c.DateTime(nullable: false),
                         Year = c.String(),
                         Quarter = c.String(),
-                        DieselQuarterValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselQuarterValue = c.Decimal(nullable: false, precision: 18, scale: 3),
                         LoggDate = c.DateTime(nullable: false),
-                        User = c.String(),
-                        PlacingOrder = c.Int(nullable: false),
+                        User = c.String(nullable: true),
+                    PlacingOrder = c.Int(nullable: false),
                         Type = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Active = c.Boolean(nullable: false),
                     })
@@ -32,10 +32,10 @@ namespace BorjesLIA.Migrations
                         Date = c.DateTime(nullable: false),
                         Year = c.String(),
                         Week = c.Int(nullable: false),
-                        DieselWeekValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselWeekValue = c.Decimal(nullable: false, precision: 18, scale: 3),
                         LoggDate = c.DateTime(nullable: false),
-                        User = c.String(),
-                        PlacingOrder = c.Int(nullable: false),
+                        User = c.String(nullable: true),
+                    PlacingOrder = c.Int(nullable: false),
                         Type = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Active = c.Boolean(nullable: false),
                     })
@@ -48,10 +48,10 @@ namespace BorjesLIA.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Date = c.DateTime(nullable: false),
                         Year = c.String(),
-                        DieselDTMValue = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DieselDTMValue = c.Decimal(nullable: false, precision: 18, scale: 3),
                         LoggDate = c.DateTime(nullable: false),
-                        User = c.String(),
-                        PlacingOrder = c.Int(nullable: false),
+                        User = c.String(nullable: true),
+                    PlacingOrder = c.Int(nullable: false),
                         Type = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Active = c.Boolean(nullable: false),
                     })
@@ -66,8 +66,8 @@ namespace BorjesLIA.Migrations
                         Date = c.DateTime(nullable: false),
                         Year = c.String(),
                         LoggDate = c.DateTime(nullable: false),
-                        User = c.String(),
-                        PlacingOrder = c.Int(nullable: false),
+                        User = c.String(nullable: true),
+                    PlacingOrder = c.Int(nullable: false),
                         Type = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Active = c.Boolean(nullable: false),
                     })
@@ -118,10 +118,11 @@ namespace BorjesLIA.Migrations
                         Name = c.String(),
                         Year = c.String(),
                         ChartType = c.Int(nullable: false),
-                        SortType = c.Int(nullable: false),
-                        LoggDate = c.DateTime(nullable: false),
-                        User = c.String(),
-                    })
+                        SortType = c.Int(nullable: true),                   
+                    LoggDate = c.DateTime(nullable: false),
+                    User = c.String(nullable: true),
+
+                })
                 .PrimaryKey(t => t.ID);
             
             CreateTable(

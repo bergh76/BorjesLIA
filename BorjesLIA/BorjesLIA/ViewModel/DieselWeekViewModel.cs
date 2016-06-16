@@ -75,7 +75,7 @@ namespace BorjesLIA.ViewModel
                 foreach (var w in weeks)
                 {
                     var val = new List<object>(new[] { w.ToString() });
-                    foreach (var year in years)
+                    foreach (var year in values)
                     {
                         var result = data
                             .Where(x => x.Week == w && x.Year == year)

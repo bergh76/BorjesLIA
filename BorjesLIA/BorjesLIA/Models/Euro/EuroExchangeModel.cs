@@ -43,20 +43,17 @@ namespace BorjesLIA.Models.Euro
         public EuroExchangeModel()
         {
             var _user = HttpContext.Current.User.Identity.Name.ToString();
-            var _year = DateTime.Now.Year.ToString();
             Date = DateTime.Now;
             if (string.IsNullOrEmpty(_user) && string.IsNullOrEmpty(Year) && LoggDate == null)
             {
                 //Quarter = Date
                 User = "default";
-                Year = _year;
                 LoggDate = DateTime.Now;
             }
             else
             {
                 LoggDate = DateTime.Now;
                 User = _user;
-                Year = Date.Year.ToString();
             }
         }
     }

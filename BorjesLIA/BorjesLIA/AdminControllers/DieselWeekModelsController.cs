@@ -95,12 +95,14 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newDiesel"></param>
         /// <returns></returns>
-        public ActionResult _AddWeekDiesel(DieselWeekViewModel newDiesel)
+        public ActionResult _AddWeekDiesel(DieselWeekViewModel newDiesel, FormCollection formCollection)
         {
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
+
+                    newDiesel.AddWeekDiesel.Year = formCollection[1];
                     var previousValue = db.DieselPriceWeek.FirstOrDefault();
                     newDiesel.AddWeekDiesel.PlacingOrder = previousValue.PlacingOrder;
                     newDiesel.AddWeekDiesel.Active = previousValue.Active;

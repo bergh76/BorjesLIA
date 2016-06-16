@@ -102,6 +102,9 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    var previousValue = db.DtmModels.FirstOrDefault();
+                    newDTM.AddDtm.PlacingOrder = previousValue.PlacingOrder;
+                    newDTM.AddDtm.Active = previousValue.Active;
                     newDTM.AddDtm.Type = 1.2M;
                     db.DtmModels.Add(newDTM.AddDtm);
                     db.SaveChanges(); 

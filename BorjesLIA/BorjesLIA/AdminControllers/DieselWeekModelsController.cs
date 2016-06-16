@@ -101,6 +101,9 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    var previousValue = db.DieselPriceWeek.FirstOrDefault();
+                    newDiesel.AddWeekDiesel.PlacingOrder = previousValue.PlacingOrder;
+                    newDiesel.AddWeekDiesel.Active = previousValue.Active;
                     newDiesel.AddWeekDiesel.Type = 1.4M;
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();

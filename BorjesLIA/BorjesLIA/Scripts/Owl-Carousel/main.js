@@ -2,7 +2,7 @@ jQuery(function ($) {
     'use strict';
     var thisCurrentSlideURL;
     var newYT = false;
-    var time = 7;
+    var time = 15;
     var thisSlideIndex = 0;
 
     var existURL = new Array();
@@ -102,34 +102,60 @@ jQuery(function ($) {
         thisSlideIndex = this.currentItem;
         var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
 
-        var checkOne = getSrc.includes("mp4");
+        //var checkOne = getSrc.includes("mp4"); 
+        var checkOne = getSrc.includes("Content/videos");
         var checkTwo = getSrc.includes("youtube");
+        var checkThree = getSrc.includes("vimeo");
 
         if (checkOne) {
             var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             time = getDuration;
+
             var video = document.getElementById(getSrc);
             video.play();
         }
-        if (checkTwo) {
-            if (thisCurrentSlideURL == getSrc) {
-                newYT = false;
-            }
-            else {
-                newYT = true;
-                thisCurrentSlideURL = getSrc;
-            }
+        else if (checkTwo) {
+            //if (thisCurrentSlideURL == getSrc) {
+            //    newYT = false;
+            //}
+            //else {
+            //    newYT = true;
+            //    thisCurrentSlideURL = getSrc;
+            //}
+            //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            //time = getDuration;
+            //console.log("getDuration: " + getDuration);
+            //loadPlayer();
+            
+
             var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             time = getDuration;
 
-            loadPlayer();
+            var data = {
+                "event": "command",
+                "func": "playVideo"
+            };
+            var player = document.getElementById(getSrc);
+            player.contentWindow.postMessage(JSON.stringify(data), '*');
+
+        }
+        else if (checkThree) {
+
+            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            time = getDuration;
+
+            setTimeout(function () {
+                var data = { method: "play" };
+                var player = document.getElementById(getSrc);
+                player.contentWindow.postMessage(JSON.stringify(data), '*');
+            }, 3000);
 
         }
         else {
             time = 7;
         }
     }
-
+    //youtube
     function loadPlayer() {
         //console.log('loadPlayer');
         if (typeof (YT) == 'undefined' || typeof (YT.Player) == 'undefined') {
@@ -149,8 +175,7 @@ jQuery(function ($) {
             if (newYT) {
                 var videoCase = 2;
                 var found = $.inArray(thisCurrentSlideURL, existURL) > -1;
-                if (found)
-                {
+                if (found) {
                     var replay = YT.get(thisCurrentSlideURL);
                     replay.playVideo();
                 }
@@ -185,7 +210,7 @@ jQuery(function ($) {
     }
     function onPlayerReady(event) {
         //console.log('onPlayerReady');
-        event.target.playVideo(); 
+        event.target.playVideo();
     }
 
     function onPlayerStateChange(event) {
@@ -221,6 +246,7 @@ jQuery(function ($) {
         //console.log('catchError');
         if (event.data == 100) console.log("catch error");
     }
+    //youtube End
 
 });
 

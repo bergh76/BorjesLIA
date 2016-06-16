@@ -1,73 +1,253 @@
-﻿@model BorjesLIA.ViewModel.StartModelViewModel
-
-<h2>Placering</h2>
-@using (Html.BeginForm("SetOrderPlacing", "Home", FormMethod.Post))
+﻿@using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
 {
-    @*@Html.ValidationSummary();*@
-    //foreach (var element in Model.listVM.OrderBy(x => x.orderby))
-    @*foreach (var element in Model.listVM.Select((x, i) => new { Value = x, Index = i }))
-    {
-        @Html.HiddenFor(model => element.Value.OrderPlacingID)
-        <ul>
-            <li class="lifile">
-                <p>
-                  name: @element.Value.name
-                </p>
-                <p> Nuvarande placering: @element.Value.orderby (utav totalt: @Model.listVM.Count() ) </p>
-                <div>
-                    <p> Skriv ny placering, eller lämna lämna fältet tomt för att behålla nuvarande placering.</p>
-                    @Html.EditorFor(model => element.Value.orderby)
-                </div>
-                <p>
-                 type: @element.Value.type
-                </p>
-                <p>
-                    aktiv: @element.Value.active
-                </p>
-                <p>
-                    ID: @element.Value.ID
-                </p>
-                <p>
-                    placeringsOrderID: @element.Value.OrderPlacingID
-                </p>
-            
-            </li>
-        </ul>
-    }*@
-    @*<input type="text" id="" name="@element.Value.OrderPlacingID" value="" />*@
+    @Html.ValidationSummary();
 
-    @*for (int i = 0; i < Model.listVM.Count(); i++)
-    {
-        @Html.HiddenFor(model => Model.listVM[i].OrderPlacingID)
-        <div class="formrow">
-            @Html.EditorFor(model => Model.listVM[i].orderby)
-        </div>
-    }*@
 
-for (int i = 0; i < Model.listVM.Count(); i++)
-{
-    @*@Html.HiddenFor(model => Model.listVM[i].OrderPlacingID)*@
-    @Html.HiddenFor(model => Model.listVM[i].type)
-    <div class="formrow">
-        <p> name: @Model.listVM[i].name </p>
-        <p> Nuvarande placering: @Model.listVM[i].orderby (utav totalt: @Model.listVM.Count() ) </p>
-        <p> Skriv ny placering, eller lämna lämna fältet tomt för att behålla nuvarande placering.</p>
-        <div>
-            @Html.EditorFor(model => Model.listVM[i].orderby)
-        </div>
-        <div>
-            @Html.CheckBoxFor(model => Model.listVM[i].active)
-        </div>
-        <div>
-          
-            <p>aktiv: @Model.listVM[i].active</p> @Html.HiddenFor(model => Model.listVM[i].active)
-            <p>ID: @Model.listVM[i].ID</p> @Html.HiddenFor(model => Model.listVM[i].ID)
-         
-        </div>
-    </div>
-}
     <div>
-        <button type="submit" class="btn btn-default" value="Upload">Ändra placering</button>
-        <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+        <input type="text" id="exVideo" name="Url" value="Youtubelänk" />
     </div>
+            <div>
+                <input type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+            </div>
+
+            @*<input type="hidden" id="lengthOfVideo" name="Duration" value="" />*@
+
+
+            <div>
+                <button type="submit" class="btn btn-default" value="Upload">Lägg till video</button>
+                <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+            </div>
 }
+
+<p>https://player.vimeo.com/video/1084537</p>
+<section id="show-result-box">
+    <iframe width="560"
+            height="315"
+            id="myVideoID"
+            src=""
+            frameborder="0"
+            allowfullscreen></iframe>
+</section>
+<input id="lengthOfVideo" name="Duration" value="" />
+<p>Video status: <span class="status">...</span></p>
+<p><button>Play</button> <button>Pause</button></p>
+<button id='getDurationBtn'>playSpecific</button>
+<section id="someID">
+    <iframe width="560"
+            height="315"
+            id="https://player.vimeo.com/video/1084537?api=1"
+            src="https://player.vimeo.com/video/1084537?api=1"
+            frameborder="0"
+            allowfullscreen></iframe>
+</section>
+<button type="button" class="btn btn-default" onClick="justPlayOne()">justPlayOne</button>
+
+
+
+@*<iframe src="https://player.vimeo.com/video/1084537" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <p><a href="https://vimeo.com/1084537">Big Buck Bunny</a> from <a href="https://vimeo.com/user508904">Blender Foundation</a> on <a href="https://vimeo.com">Vimeo</a>.</p>*@
+
+<script type="text/jscript">
+    function justPlayOne() {
+        console.log("just play one");
+        var data = { method: "play" };
+        var player = document.getElementById('https://player.vimeo.com/video/1084537?api=1');
+        player.contentWindow.postMessage(JSON.stringify(data), '*');
+        //var iframes = document.getElementById('https://player.vimeo.com/video/1084537?api=1');
+        //iframes[0].contentWindow.postMessage(JSON.stringify(data), '*');
+
+       // var f = $('iframe'),
+       //url = f.attr('src').split('?')[1],
+       //status = $('.status');
+       // f[0].contentWindow.postMessage(JSON.stringify(data), url);
+    }
+
+
+    //-- ON SUBMIT
+    $(function () {
+        $("#SubmitTarget").submit(function (event) {
+            console.log("submit");
+            event.preventDefault();
+            validateYouTubeUrl();
+        });
+    });
+    //--END ON SUBMIT
+
+    //--YT PLAYER
+    function validateYouTubeUrl() {
+        var url = $('#exVideo').val();
+        if (url != undefined || url != '') {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            if (match && match[2].length == 11) {
+                flag = true;
+                //getVideoDuration()
+            } else {
+                console.log("validate vimeo");
+                validateVimeoUrl();
+                //flag = false;
+                //$("#spanfile").text("Länken verkar inte vara korrekt.");
+            }
+        }
+    }
+
+
+    function validateVimeoUrl() {
+        var url = $('#exVideo').val();
+        //var regExp = /(?:https?:\/\/(?:www\.)?)?vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+        var regExp = /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/;
+
+        var match = url.match(regExp);
+
+        //test check url for controller use later
+        if (url.includes("youtube"))
+        {
+            console.log("url inehåller youtube - tänkt controller check");
+        }
+        else if (url.includes("vimeo"))
+        {
+            console.log("url inehåller vimeo - tänkt controller check");
+        }
+        //
+        if (match) {
+            console.log("validate vimeo sucess");
+            console.log("match[2]: " + match[2]);
+            //alert("id: " + match[2]);
+            initVimeo();
+        } else {
+            console.log("not a vimeo url or youtube url.");
+        }
+    }
+
+    function initVimeo() {
+        var url = $('#exVideo').val();
+        var apiUrl = url + "?api=1";
+        //+ "&autoplay=1" + "&player_id=myVideoID"
+        console.log("init vimeo. newApiUrl:" + apiUrl);
+        $('#myVideoID').attr("src", apiUrl);
+        //--------------------------------test listener http://jsfiddle.net/bdougherty/UTt2K/
+
+        var f = $('iframe'),
+        url = f.attr('src').split('?')[0],
+        status = $('.status');
+
+        // Listen for messages from the player
+        if (window.addEventListener) {
+            window.addEventListener('message', onMessageReceived, false);
+        }
+        else {
+            window.attachEvent('onmessage', onMessageReceived, false);
+        }
+
+        // Handle messages received from the player
+        function onMessageReceived(e) {
+            var data = JSON.parse(e.data);
+            //{"method":"getDuration","value":597,"player_id":"myVideoID"}
+            //{"event":"ready","player_id":"myVideoID"}
+            console.log("e.data: " + e.data);
+            if (typeof data.value != 'undefined')
+            {
+                console.log("data method: " + data.method);
+                console.log("data value: " + data.value);
+
+                var vd = data.value;
+                document.getElementById("lengthOfVideo").value = vd;
+            }
+            else if (typeof data.event != 'undefined') {
+                console.log("data event: " + data.event);
+
+                switch (data.event) {
+                    case 'ready':
+                        onReady();
+                        break;
+
+                    case 'playProgress':
+                        onPlayProgress(data.data);
+                        break;
+
+                    case 'pause':
+                        onPause();
+                        break;
+
+                    case 'finish':
+                        onFinish();
+                        break;
+                    default:
+                        console.log("switch default. skriv ut värde: " + data.event);
+                }
+            }
+           
+        }
+
+        // Call the API when a button is pressed
+        $('button').on('click', function () {
+            post($(this).text().toLowerCase());
+        });
+
+        // Helper function for sending a message to the player
+        function post(action, value) {
+            console.log("går in i post");
+            console.log("action: " + action);
+
+            var data = { method: action };
+
+            if (value) {
+                data.value = value;
+            }
+
+            f[0].contentWindow.postMessage(JSON.stringify(data), url);
+        }
+
+        function onReady() {
+            status.text('ready');
+
+            post("getDuration");
+            //post("play");
+
+            //post('addEventListener', 'pause');
+            //post('addEventListener', 'finish');
+            //post('addEventListener', 'playProgress');
+        }
+
+        function onPause() {
+            status.text('paused');
+        }
+
+        function onFinish() {
+            status.text('finished');
+        }
+
+        function onPlayProgress(data) {
+            status.text(data.seconds + 's played');
+        }
+
+      
+    
+     
+        //------------------------------------------------------
+        //var iframes = document.getElementsByTagName('iframe');
+        //iframes[0].contentWindow.postMessage(JSON.stringify(
+        //    {
+        //        "method": "play",
+        //        "value": "value"
+        //    }
+        //    ), '*');
+
+        //var data = { method: "play" };
+        //var iframes = document.getElementsByTagName('iframe');
+        //iframes[0].contentWindow.postMessage(JSON.stringify(data), '*');
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

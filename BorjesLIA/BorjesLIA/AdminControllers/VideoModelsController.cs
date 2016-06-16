@@ -60,24 +60,35 @@ namespace BorjesLIA.AdminControllers
                     modelValue.Errors.Clear();
                 }
             }
-                bool test = true;
+
+            bool test = true;
 
             if (test)
             {
                 if (file == null)
                 {
                     //om det är en länkad video
-                    if(VM.Url != null)
+                    if (VM.Url != null)
                     {
 
                         var video = new VideoModel();
-                        video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Type = 4.2M; //TODO: borde kanske vara enum. 4.2 för youtube
-                        video.Duration = VM.Duration +=3;
+                        video.Duration = VM.Duration += 6;
+
+                        if (VM.Url.Contains("youtube"))
+                        {
+                            video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
+                            video.Type = 4.2M; // 4.2 för youtube
+                        }
+                        else if (VM.Url.Contains("vimeo"))
+                        {
+                            video.Url = VM.Url += "?api=1"; //för att kunna använda YT api
+                            video.Type = 4.5M; // 4.5 för vimeo
+                        }
+                     
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 
@@ -94,20 +105,21 @@ namespace BorjesLIA.AdminControllers
 
                     int MaxContentLength = 1024 * 1024 * 100; //100 MB
 
-                    string[] AllowedFileExtensions = new string[] { ".mp4" };
+                    string[] AllowedFileExtensions = new string[] { ".mp4" }; //TODO: videotaggen som används för att spelaupp lokal video är begränsad till att statiskt använda webm, mp4, ogg. Videotaggen behövs för att kunna kontrollera videons play/paus i snurran. Iframe som används till youtubelänk har ingen aoutoplayfunktion utan använder api för att spela/pausa, vilket inte går att använda för att styra lokala videos.
+
 
                     if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
                     {
-                        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                        ModelState.AddModelError("File", "Använd filtyp: " + string.Join(", ", AllowedFileExtensions));
                     }
 
                     else if (file.ContentLength > MaxContentLength)
                     {
-                        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                        ModelState.AddModelError("File", "Filen är för stor, max tillåten storlek är: " + MaxContentLength + " MB");
                     }
                     else
                     {
-                       
+
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/videos"), fileName);
                         file.SaveAs(path);
@@ -127,25 +139,25 @@ namespace BorjesLIA.AdminControllers
 
 
                         ViewBag.Message = "Videon har lagts till";
-                       
+
                         var video = new VideoModel();
                         video.Url = fileName;
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Type = 4.1M; //TODO: borde kanske vara enum. 4.1 för mp4
                         video.Duration = VideoSeconds;
+                        video.Type = 4.1M; // 4.1 för mp4
                         db.VideoModels.Add(video);
                         db.SaveChanges();
-                       
+
                     }
                 }
             }
             modelObj = returnNewObj();
             return View("Index", modelObj);
         }
-     
+
         public ActionResult Preview(VideoViewModel MVM)
         {
             MVM = new VideoViewModel
@@ -175,6 +187,7 @@ namespace BorjesLIA.AdminControllers
             return File(myFilePath, "Video/mp4");
         }
 
+        //visa previw för video edit/details/delete
         [HttpPost]
         public ActionResult CallJsShowVideo(int videoID)
         {
@@ -188,7 +201,7 @@ namespace BorjesLIA.AdminControllers
                     return HttpNotFound();
                 }
                 //om internlänk
-                if (videoModel.Type == 1) 
+                if (videoModel.Type == 4.1m)
                 {
                     string fileName = videoModel.Url;
                     string myPath = @"/Content/videos/";
@@ -196,7 +209,7 @@ namespace BorjesLIA.AdminControllers
                     return Json(new { success = true, returnData = myFilePath });
                 }
                 //om externlänk
-                else if(videoModel.Type == 2)
+                else if (videoModel.Type == 4.2m || videoModel.Type == 4.5m) 
                 {
                     string fileName = videoModel.Url;
                     return Json(new { success = true, returnData = fileName });
@@ -294,6 +307,6 @@ namespace BorjesLIA.AdminControllers
             base.Dispose(disposing);
         }
 
-       
+
     }
 }

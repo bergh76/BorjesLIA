@@ -42,31 +42,15 @@
                             @Html.DisplayFor(model => model.Date)
                         </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.PlacingOrder)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.PlacingOrder)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Active)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Active)
-                        </dd>
-
                     </dl>
                 </div>
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>
+                <div><img src="~/Images/UploadedImg/@Model.Url" width="50%" height="50%" /></div>
 
-                <img src="~/Images/UploadedImg/@Model.Url"/>
-
+                <p> (förminskad bild)</p>
             </div>
         </div>
     </div>

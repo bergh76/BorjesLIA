@@ -61,7 +61,7 @@
 
                     </dl>
 
-                    <img src="~/Images/UploadedImg/@Model.Url" />
+                
 
                     @using (Html.BeginForm())
                     {
@@ -72,6 +72,10 @@
                             @Html.ActionLink("Back to List", "Index")
                         </div>
                     }
+                    <div>
+                    <img src="~/Images/UploadedImg/@Model.Url" width="50%" height="50%" />
+                    <p> (förminskad bild)</p>
+                    </div>
                 </div>
             </div>
         </div>

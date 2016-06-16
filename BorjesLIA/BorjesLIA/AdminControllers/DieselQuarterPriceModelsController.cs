@@ -121,9 +121,15 @@ namespace BorjesLIA.AdminControllers
                     var date = Convert.ToDateTime(formCollection[1]);
                     var year = date.Year.ToString();
                     var enumInt = Convert.ToInt32(formCollection[2]);
-                    Quarters enumVal = (Quarters)enumInt;
-                    string enumString = enumVal.ToString();
-
+                    Quarters qVal = (Quarters)enumInt;
+                    string quarter = qVal.ToString();
+                    newQDiesel.AddQuarterDiesel.Date = date;
+                    newQDiesel.AddQuarterDiesel.Year = year;
+                    newQDiesel.AddQuarterDiesel.Quarter = quarter;
+                    if (db.DieselPriceQuarter.Any(x => x.Quarter == quarter) || db.DieselPriceQuarter.ToList().Select(x => x.Quarter) == null)
+                    {
+                        return View(newQDiesel);
+                    }
                     var previousValue = db.DieselPriceQuarter.FirstOrDefault();
                     if (previousValue != null)
                     {
@@ -137,9 +143,7 @@ namespace BorjesLIA.AdminControllers
                     }
                    
                     newQDiesel.AddQuarterDiesel.Type = 1.3M;
-                    newQDiesel.AddQuarterDiesel.Date = date;
-                    newQDiesel.AddQuarterDiesel.Year = year;
-                    newQDiesel.AddQuarterDiesel.Quarter = enumString;
+
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();
                     newQDiesel.newQuarterDieselList = db.DieselPriceQuarter.ToList().OrderByDescending(x => x.Quarter);

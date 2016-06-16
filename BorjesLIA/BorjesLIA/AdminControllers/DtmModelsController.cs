@@ -7,6 +7,7 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -96,7 +97,7 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newDTM"></param>
         /// <returns></returns>
-        public ActionResult _AddNewDTM(DMTViewModel newDTM)
+        public ActionResult _AddNewDTM(DMTViewModel newDTM, FormCollection formCollection)
         {
             if (Request.IsAjaxRequest())
             {
@@ -113,7 +114,10 @@ namespace BorjesLIA.AdminControllers
                         newDTM.AddDtm.PlacingOrder = 0;
                         newDTM.AddDtm.Active = true;
                     }
-                   
+                    var date = Convert.ToDateTime(formCollection[1]);
+                    var year = date.Year.ToString();
+                    newDTM.AddDtm.Date = date;
+                    newDTM.AddDtm.Year = year;
                     newDTM.AddDtm.Type = 1.2M;
                     db.DtmModels.Add(newDTM.AddDtm);
                     db.SaveChanges(); 

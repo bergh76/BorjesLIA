@@ -7,6 +7,8 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
 using System.Threading.Tasks;
 using BorjesLIA.ViewModel;
+using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -101,8 +103,21 @@ namespace BorjesLIA.AdminControllers
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    var date = Convert.ToDateTime(formCollection[1]);
+                    var year = date.Year.ToString();
+                    // week calculator //                
+                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                    DateTime date1 = date;
+                    Calendar cal = dfi.Calendar;
+                    var week = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule,dfi.FirstDayOfWeek);
+                    newDiesel.AddWeekDiesel.Date = date;
+                    newDiesel.AddWeekDiesel.Year = year;
+                    if (db.DieselPriceWeek.Any(x => x.Week == week) || db.DieselPriceWeek.ToList().Select(x => x.Week) == null)
+                    {
+                        return View(newDiesel);
+                    }
+                    newDiesel.AddWeekDiesel.Week = week;              
 
-                    newDiesel.AddWeekDiesel.Year = formCollection[1];
                     var previousValue = db.DieselPriceWeek.FirstOrDefault();
                     if (previousValue != null)
                     {

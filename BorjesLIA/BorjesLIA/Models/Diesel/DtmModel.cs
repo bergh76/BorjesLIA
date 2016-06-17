@@ -49,20 +49,15 @@ namespace BorjesLIA.Models.Diesel
 
         public DtmModel()
         {
-
             var _user = "default";
-            var _year = DateTime.Now.Year.ToString();
-            Date = DateTime.Now;
             if (!string.IsNullOrEmpty(User) || !string.IsNullOrEmpty(Year) || LoggDate != null)
             {
                 LoggDate = DateTime.Now;
                 User = HttpContext.Current.User.Identity.Name;
-                Year = Date.Year.ToString();
             }
             else
             {  //Quarter = Date
                 User = _user;
-                Year = _year;
                 LoggDate = DateTime.Now;
             }
         }

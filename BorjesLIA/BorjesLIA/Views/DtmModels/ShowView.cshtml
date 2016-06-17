@@ -29,8 +29,9 @@
                         <div class="input-group date">
                             <p>Välj datum </p>
                             <div class="input-group input-append date" id="dateRangePicker">
-                                <input class="form-control" name="date" readonly/>
+                                <input class="form-control" name="date" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <p class="danger">@ViewBag.DateMonth</p>
                             </div>
                         </div>
                     </div>
@@ -40,7 +41,7 @@
                             <p>Skriv in drivmedelstillägg</p>
                             <div class="input-group">
                                 @Html.EditorFor(model => model.AddDtm.DieselDTMValue, new { htmlAttributes = new { @class = "form-control", placeholder = "Lägg till index" } })
-                                @Html.ValidationMessageFor(model => model.AddDtm.DieselDTMValue, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.AddDtm.DieselDTMValue, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                     </div>
@@ -51,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-
+                
             }
         </section>
         </div>

@@ -155,10 +155,10 @@
                     var elemName = document.getElementById("getImageName");
                     var elemPlacingORder = document.getElementById("getPlacingORder");
                     if(elemName.value == 'Bildens namn'){
-                        elemName.value = 'NN';
+                        elemName.value = 'Inget namn har angetts';
                     }
                     if(elemPlacingORder.value == 'Numerisk placering'){
-                        elemPlacingORder.value = 9;
+                        elemPlacingORder.value = 0;
                     }
                     var img = $('#preview-pane .preview-container img');
                     $('#avatar-crop-box button').addClass('disabled');
@@ -232,7 +232,7 @@
                 </p>
                 <div class="row">
                     <span><input type="text" name="imgName" id="getImageName" value="Bildens namn" /></span><br />
-                    <span><input type="text" name="placingOrder" id="getPlacingORder" value="Numerisk placering" /></span><br />
+                    <span><input type="hidden" name="placingOrder" id="getPlacingORder" value="Numerisk placering" /></span><br />
                 </div>
                 <div class="row">
                     <span>Bilden skalas om enligt @width <text>x</text> @height pixlar.</span><br />

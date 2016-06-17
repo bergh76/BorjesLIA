@@ -1,14 +1,9 @@
 jQuery(function ($) {
     'use strict';
     var thisCurrentSlideURL;
-    var newYT = false;
     var time = 15;
     var thisSlideIndex = 0;
-
-    var existURL = new Array();
-    var ytArrayIndex = 0;
-
-    var videoCase = 0
+    var player;
 
     var $progressBar,
       $bar,
@@ -102,7 +97,6 @@ jQuery(function ($) {
         thisSlideIndex = this.currentItem;
         var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
 
-        //var checkOne = getSrc.includes("mp4"); 
         var checkOne = getSrc.includes("Content/videos");
         var checkTwo = getSrc.includes("youtube");
         var checkThree = getSrc.includes("vimeo");
@@ -115,28 +109,18 @@ jQuery(function ($) {
             video.play();
         }
         else if (checkTwo) {
-            //if (thisCurrentSlideURL == getSrc) {
-            //    newYT = false;
-            //}
-            //else {
-            //    newYT = true;
-            //    thisCurrentSlideURL = getSrc;
-            //}
-            //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
-            //time = getDuration;
-            //console.log("getDuration: " + getDuration);
-            //loadPlayer();
-            
 
             var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             time = getDuration;
 
+            setTimeout(function () {
             var data = {
                 "event": "command",
                 "func": "playVideo"
             };
             var player = document.getElementById(getSrc);
             player.contentWindow.postMessage(JSON.stringify(data), '*');
+            }, 3000);
 
         }
         else if (checkThree) {
@@ -155,99 +139,26 @@ jQuery(function ($) {
             time = 7;
         }
     }
-    //youtube
+    // youtube. init yt player
     function loadPlayer() {
-        //console.log('loadPlayer');
-        if (typeof (YT) == 'undefined' || typeof (YT.Player) == 'undefined') {
-            console.log('if: undefined');
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        console.log('loadPlayer: in use');
 
-            window.onYouTubePlayerAPIReady = function () {
-                //console.log('onYouTubePlayerAPIReady => onYouTubePlayer');
-                onYouTubePlayer();
-            };
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        } else {
-            //console.log('else: undefined => onPlayerReady');
-            if (newYT) {
-                var videoCase = 2;
-                var found = $.inArray(thisCurrentSlideURL, existURL) > -1;
-                if (found) {
-                    var replay = YT.get(thisCurrentSlideURL);
-                    replay.playVideo();
+        window.onYouTubePlayerAPIReady = function () {
+
+            var stringUrl = thisCurrentSlideURL;
+            //set up YT-player api
+            player = new YT.Player(stringUrl, {
+                events: {
+                    'onReady': onPlayerReady
                 }
-                else {
-                    onYouTubePlayer();
-                }
-            }
-            else {
-                //om det bara finns en yt-video och den redan spelats innan, spela den igen när den visas i slider. 
-                onPlayerReady();
-            }
-        }
+            });
+        };
     }
-    var player;
-
-    function onYouTubePlayer() {
-        //console.log('onYouTubePlayer');
-        var stringUrl = thisCurrentSlideURL;
-
-        //lägg till id i array för att markerad som skapad och spelad 
-        ytArrayIndex += 1;
-        existURL[ytArrayIndex] = thisCurrentSlideURL;
-
-        //set up YT-player api
-        player = new YT.Player(stringUrl, {
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange,
-                'onError': catchError
-            }
-        });
-    }
-    function onPlayerReady(event) {
-        //console.log('onPlayerReady');
-        event.target.playVideo();
-    }
-
-    function onPlayerStateChange(event) {
-        //console.log('onPlayerStateChange:');
-        switch (event.data) {
-            case YT.PlayerState.UNSTARTED:
-                console.log('unstarted');
-                break;
-            case YT.PlayerState.ENDED:
-                console.log('ended');
-                event.target.stopVideo();
-                break;
-            case YT.PlayerState.PLAYING:
-                console.log('playing');
-                break;
-            case YT.PlayerState.PAUSED:
-                console.log('paused');
-                break;
-            case YT.PlayerState.BUFFERING:
-                console.log('buffering');
-                break;
-            case YT.PlayerState.CUED:
-                console.log('video cued');
-                break;
-        }
-    }
-
-    function stopVideo() {
-        //console.log('stopVideo');
-        player.stopVideo();
-    }
-    function catchError(event) {
-        //console.log('catchError');
-        if (event.data == 100) console.log("catch error");
-    }
-    //youtube End
-
 });
 
 //adjustIframes

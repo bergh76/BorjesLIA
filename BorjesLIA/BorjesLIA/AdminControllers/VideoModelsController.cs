@@ -45,12 +45,6 @@ namespace BorjesLIA.AdminControllers
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
 
-
-            ////made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
-            ////if (ModelState.IsValid)
-            //bool test = true;
-
-            //ModelState["varaktighet"].Errors.Clear();
             //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
             if (!ModelState.IsValid)
             {
@@ -76,19 +70,21 @@ namespace BorjesLIA.AdminControllers
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Duration = VM.Duration += 6;
+                        video.Duration = VM.Duration += 10;
 
                         if (VM.Url.Contains("youtube"))
                         {
                             video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
                             video.Type = 4.2M; // 4.2 för youtube
+
                         }
                         else if (VM.Url.Contains("vimeo"))
                         {
                             video.Url = VM.Url += "?api=1"; //för att kunna använda YT api
                             video.Type = 4.5M; // 4.5 för vimeo
+
                         }
-                     
+
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 
@@ -146,7 +142,7 @@ namespace BorjesLIA.AdminControllers
                         video.PlacingOrder = 0;
                         video.Active = true;
                         video.Date = DateTime.Now;
-                        video.Duration = VideoSeconds;
+                        video.Duration = VideoSeconds += 6;
                         video.Type = 4.1M; // 4.1 för mp4
                         db.VideoModels.Add(video);
                         db.SaveChanges();
@@ -168,24 +164,24 @@ namespace BorjesLIA.AdminControllers
             return View(MVM);
         }
 
-        public ActionResult WatchPreview(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VideoModel videoModel = db.VideoModels.Find(id);
-            if (videoModel == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult WatchPreview(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    VideoModel videoModel = db.VideoModels.Find(id);
+        //    if (videoModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            string fileName = videoModel.Url;
-            string myPath = @"~\Content\videos\";
-            string myFilePath = Path.Combine(myPath, fileName);
+        //    string fileName = videoModel.Url;
+        //    string myPath = @"~\Content\videos\";
+        //    string myFilePath = Path.Combine(myPath, fileName);
 
-            return File(myFilePath, "Video/mp4");
-        }
+        //    return File(myFilePath, "Video/mp4");
+        //}
 
         //visa previw för video edit/details/delete
         [HttpPost]
@@ -209,7 +205,7 @@ namespace BorjesLIA.AdminControllers
                     return Json(new { success = true, returnData = myFilePath });
                 }
                 //om externlänk
-                else if (videoModel.Type == 4.2m || videoModel.Type == 4.5m) 
+                else if (videoModel.Type == 4.2m || videoModel.Type == 4.5m)
                 {
                     string fileName = videoModel.Url;
                     return Json(new { success = true, returnData = fileName });

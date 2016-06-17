@@ -6,7 +6,7 @@
 <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Lista över veckopriser Diesel</h2>
+            <h2>Lägg till veckopriser Diesel</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -27,37 +27,21 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Välj år </p>
-                                <div class="input-group input-append date" id="datepicker-year">
+                                <p>Välj datum </p>
+                                <div class="input-group input-append date" id="dateRangePicker">
                                     <input class="form-control" name="date" readonly />
                                     <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group date">
-                                <p>Välj vecka </p>
-                                <div class="input-group input-append date" id="datepicker-week">
-                                    <input class="form-control" name="date" readonly />
-                                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group date">
-                                <p>Välj vecka </p>
-                                <div class="input-group">
-                                    @Html.EditorFor(model => model.AddWeekDiesel.Week, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
-                                 @Html.ValidationMessageFor(model => model.AddWeekDiesel.Week, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <div class="input-group date">
                                 <p>Skriv in dieselpris </p>
                                 <div class="input-group">
-                                    @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                    @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue,new { htmlAttributes = new { @class = "form-control checkWeek", placeholder = "" } })
                                     @Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>

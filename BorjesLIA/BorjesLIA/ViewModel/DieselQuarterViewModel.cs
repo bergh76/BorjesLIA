@@ -20,35 +20,33 @@ namespace BorjesLIA.ViewModel
         public DieselQuarterPriceModel AddQuarterDiesel { get; set; }
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
         public string Year { get; set; }
-        //public string Name { get; set; }
-        public Task<List<DieselQuarterPriceModel>> GetQuarterData()
-        {
-            ChartName = "Dieselpris Kvartal";
-            using (var db = new ApplicationDbContext())
-            {
-                if (db.DieselPriceQuarter == null)
-                {
-                    return GetQuarterData();
-                }
 
-                else
-                {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-                    var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
-                    return Task.Run(() => lqDiesel);
-                }
-            }
+        //public Task<List<DieselQuarterPriceModel>> GetQuarterData()
+        //{
+        //    ChartName = "Dieselpris Kvartal";
+        //    using (var db = new ApplicationDbContext())
+        //    {
+        //        if (db.DieselPriceQuarter == null)
+        //        {
+        //            return GetQuarterData();
+        //        }
 
-        }
+        //        else
+        //        {
+        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
+        //            var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
+        //            return Task.Run(() => lqDiesel);
+        //        }
+        //    }
+
+        //}
 
         public string Title { get; set; }
-        public string Subtitle { get; set; }
         public DieselQuarterViewModel()
         {
              using (var db = new ApplicationDbContext())
             {
                 Title = "Kvartalspriser Diesel";
-                Subtitle = "År";
                 DataTable = ConstrucDataTabel(db.DieselPriceQuarter.ToList().OrderBy(x => x.Quarter).ToArray());
             }
         }
@@ -58,7 +56,7 @@ namespace BorjesLIA.ViewModel
         {
             ChartName = "Dieselpris Kvartal";
             var dataTable = new GoogleVisualizationDataTable();
-            var quarters = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
+            var quarter = data.Select(x => x.Quarter).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Quarter", "string");
             using (var db = new ApplicationDbContext())
@@ -70,10 +68,10 @@ namespace BorjesLIA.ViewModel
                     dataTable.AddColumn(yItem.ToString(), "number");
                 }
 
-                foreach (var q in quarters)
+                foreach (var q in quarter)
                 {
-                    var val = new List<object>(new[] { q });
-                    foreach (var year in years)
+                    var val = new List<object>(new[] { q.ToString() });
+                    foreach (var year in values)
                     {
                         var result = data
                             .Where(x => x.Quarter == q && x.Year == year)

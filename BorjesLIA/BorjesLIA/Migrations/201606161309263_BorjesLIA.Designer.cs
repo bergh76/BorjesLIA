@@ -13,7 +13,7 @@ namespace BorjesLIA.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201606160711475_BorjesLIA"; }
+            get { return "201606161309263_BorjesLIA"; }
         }
         
         string IMigrationMetadata.Source

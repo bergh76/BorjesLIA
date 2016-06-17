@@ -18,40 +18,38 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
         public string Year { get; set; }
         public string ChartName { get; set; }
-        public Task<List<DieselWeekModel>> GetWeekData()
-        {
-            ChartName = "Dieselpris Vecka";
-            using (var db = new ApplicationDbContext())
-            {
-                if (db.DieselPriceWeek == null)
-                {
-                    return GetWeekData();
+        //public Task<List<DieselWeekModel>> GetWeekData()
+        //{
+        //    ChartName = "Dieselpris Vecka";
+        //    using (var db = new ApplicationDbContext())
+        //    {
+        //        if (db.DieselPriceWeek == null)
+        //        {
+        //            return GetWeekData();
 
-                }
-                else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
-                {
-                    var lwAllDiesel = db.DieselPriceWeek.ToList();
-                    return Task.Run(() => lwAllDiesel);
-                }
-                else
-                {
-                    Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-                    var lwDiesel = db.DieselPriceWeek.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
-                    return Task.Run(() => lwDiesel);
-                }
-            }
-        }
+        //        }
+        //        else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
+        //        {
+        //            var lwAllDiesel = db.DieselPriceWeek.ToList();
+        //            return Task.Run(() => lwAllDiesel);
+        //        }
+        //        else
+        //        {
+        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
+        //            var lwDiesel = db.DieselPriceWeek.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
+        //            return Task.Run(() => lwDiesel);
+        //        }
+        //    }
+        //}
 
 
         public string Title { get; set; }
-        public string Subtitle { get; set; }
         public GoogleVisualizationDataTable DataTable { get; set; }
         public DieselWeekViewModel()
         {
             using (var db = new ApplicationDbContext())
             {
                 Title = "Veckopriser Diesel";
-                Subtitle = "År";
                 DataTable = ConstrucDataTabel(db.DieselPriceWeek.ToList().OrderBy(x => x.Week).ToArray());
             }
         }
@@ -60,7 +58,7 @@ namespace BorjesLIA.ViewModel
         {
             ChartName = "Dieselpris Vecka";
             var dataTable = new GoogleVisualizationDataTable();
-            var weeks = data.Select(x => x.Week).Distinct().OrderBy(x => x);
+            var week = data.Select(x => x.Week).Distinct().OrderBy(x => x);
             var years = data.Select(x => x.Year).Distinct().OrderBy(x => x);
             dataTable.AddColumn("Week", "string");
             using (var db = new ApplicationDbContext())
@@ -72,10 +70,10 @@ namespace BorjesLIA.ViewModel
                     dataTable.AddColumn(yItem.ToString(), "number");
                 }
 
-                foreach (var w in weeks)
+                foreach (var w in week)
                 {
                     var val = new List<object>(new[] { w.ToString() });
-                    foreach (var year in years)
+                    foreach (var year in values)
                     {
                         var result = data
                             .Where(x => x.Week == w && x.Year == year)

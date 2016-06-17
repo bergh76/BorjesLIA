@@ -7,6 +7,8 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Diesel;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -47,13 +49,13 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="dtmChart"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        public async Task<JsonResult> GetData(DMTViewModel dtmChart)
-        {
-            //var data = await eurox.GetQuaerterData();
-            var data = await dtmChart.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        //public async Task<JsonResult> GetData(DMTViewModel dtmChart)
+        //{
+        //    //var data = await eurox.GetQuaerterData();
+        //    var data = await dtmChart.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// Instansiates an object for startpage
@@ -96,12 +98,37 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newDTM"></param>
         /// <returns></returns>
-        public ActionResult _AddNewDTM(DMTViewModel newDTM)
+        public ActionResult _AddNewDTM(DMTViewModel newDTM, FormCollection formCollection)
         {
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    if (!string.IsNullOrEmpty(formCollection[1]))
+                    {
+                        var date = Convert.ToDateTime(formCollection[1]);
+                        var year = date.Year.ToString();
+                        // month name //
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
+                        newDTM.AddDtm.Date = date;
+                        newDTM.AddDtm.Year = year;
+                        newDTM.AddDtm.Month = month;
+
+                        if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
+                        {
+                            // ToDo: return a errormessage to the view //
+                            return View(newDTM);
+                        }
+                    }
+                    else
+                    {
+                        // ToDo: return a errormessage to the view //
+                        return View(newDTM);
+                    }
                     var previousValue = db.DtmModels.FirstOrDefault();
                     if (previousValue != null)
                     {
@@ -113,7 +140,7 @@ namespace BorjesLIA.AdminControllers
                         newDTM.AddDtm.PlacingOrder = 0;
                         newDTM.AddDtm.Active = true;
                     }
-                   
+                    
                     newDTM.AddDtm.Type = 1.2M;
                     db.DtmModels.Add(newDTM.AddDtm);
                     db.SaveChanges(); 

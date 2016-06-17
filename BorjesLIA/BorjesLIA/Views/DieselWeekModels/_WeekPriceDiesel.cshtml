@@ -15,7 +15,7 @@
 
 <div class="x_panel">
     <div class="x_title">
-        <h2>Dieselpriser <small>bacon ipsum</small></h2>
+        <h2>Diesel <small>- priser per vecka</small></h2>
         <ul class="nav navbar-right panel_toolbox">
             <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -62,17 +62,15 @@
                             År
                         </th>
                         <th>
-                            Vecka
+                            Månad
                         </th>
+                        <th>
+                            Vecka
+                        </th>                        
+                       
                         <th>
                             Pris
                         </th>
-                        @*<th>
-                            Datum
-                        </th>
-                        <th>
-                            Användare
-                        </th>*@
                         <th>
                             Edit
                         </th>
@@ -86,17 +84,18 @@
                             @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Month)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Week)
                         </td>
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.DieselWeekValue)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.LoggDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User)
-                        </td>*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.User)
+    </td>*@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.ID }) |

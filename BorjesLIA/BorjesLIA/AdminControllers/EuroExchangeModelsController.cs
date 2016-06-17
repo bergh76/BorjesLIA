@@ -7,6 +7,8 @@ using BorjesLIA.Models;
 using BorjesLIA.Models.Euro;
 using BorjesLIA.ViewModel;
 using System.Threading.Tasks;
+using System;
+using System.Globalization;
 
 namespace BorjesLIA.AdminControllers
 {
@@ -47,27 +49,53 @@ namespace BorjesLIA.AdminControllers
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
-        public ActionResult _AddEuro(EuroViewModel newEuro)
+
+        public ActionResult _AddEuro(EuroViewModel newEuro, FormCollection formCollection)
         {
-           
+
             // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest())
             {
 
                 using (var db = new ApplicationDbContext())
                 {
-                    var previousValue = db.EuroExchangeModels.FirstOrDefault();
-                    if(previousValue != null)
+                    if (!string.IsNullOrEmpty(formCollection[1]))
                     {
-                        newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
-                        newEuro.AddEuro.Active = previousValue.Active;
+                        var date = Convert.ToDateTime(formCollection[1]);
+                        var year = date.Year.ToString();
+                        // month name //
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
+                        newEuro.AddEuro.Date = date;
+                        newEuro.AddEuro.Year = year;
+                        newEuro.AddEuro.Month = month;
+                        if (db.EuroExchangeModels.Any(x => x.Year == year && x.Month == month) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
+                        {
+                            // ToDo: return a errormessage to the view //
+                            return View(newEuro);
+                        }                        
                     }
+                    else
+                    {
+                        // ToDo: return a errormessage to the view //
+                        return View(newEuro);
+                    }
+                    var previousValue = db.EuroExchangeModels.FirstOrDefault();
+                        if (previousValue != null)
+                        {
+                            newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
+                            newEuro.AddEuro.Active = previousValue.Active;
+                        }
+                    
                     else
                     {
                         newEuro.AddEuro.PlacingOrder = 0;
                         newEuro.AddEuro.Active = true;
                     }
-
+                    
                     newEuro.AddEuro.Type = 1.1M;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
@@ -84,13 +112,13 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="eurox"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        //Populates a list with data from database tabel EuroExchangeModel
-        public async Task<JsonResult> GetData(EuroViewModel eurox)
-        {
-            var data = await eurox.GetData();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //[AllowAnonymous]
+        ////Populates a list with data from database tabel EuroExchangeModel
+        //public async Task<JsonResult> GetData(EuroViewModel eurox)
+        //{
+        //    var data = await eurox.GetData();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult _EuroLineGraph(EuroViewModel euroGraph)
         {

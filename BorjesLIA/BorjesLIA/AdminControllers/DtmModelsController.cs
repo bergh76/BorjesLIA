@@ -98,6 +98,9 @@ namespace BorjesLIA.AdminControllers
         /// </summary>
         /// <param name="newDTM"></param>
         /// <returns></returns>
+        /// 
+        [HttpPost]
+  [ValidateAntiForgeryToken()]
         public ActionResult _AddNewDTM(DMTViewModel newDTM, FormCollection formCollection)
         {
             if (Request.IsAjaxRequest())
@@ -118,15 +121,17 @@ namespace BorjesLIA.AdminControllers
                         newDTM.AddDtm.Year = year;
                         newDTM.AddDtm.Month = month;
 
-                        if (db.DtmModels.Any(x => x.Year == year && x.Month == month) || db.DtmModels.ToList().Select(x => x.Date) == null)
+                        if (db.DtmModels.Any(x => x.Year == year && x.Month == month))
                         {
                             // ToDo: return a errormessage to the view //
+                            
                             return View(newDTM);
                         }
                     }
                     else
                     {
                         // ToDo: return a errormessage to the view //
+                        ViewBag.Empty = "Du får inte ha tomma fält!";
                         return View(newDTM);
                     }
                     var previousValue = db.DtmModels.FirstOrDefault();

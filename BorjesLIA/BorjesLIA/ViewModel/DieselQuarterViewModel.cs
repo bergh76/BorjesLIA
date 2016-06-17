@@ -44,7 +44,7 @@ namespace BorjesLIA.ViewModel
         public string Title { get; set; }
         public DieselQuarterViewModel()
         {
-             using (var db = new ApplicationDbContext())
+            using (var db = new ApplicationDbContext())
             {
                 Title = "Kvartalspriser Diesel";
                 DataTable = ConstrucDataTabel(db.DieselPriceQuarter.ToList().OrderBy(x => x.Quarter).ToArray());
@@ -62,28 +62,34 @@ namespace BorjesLIA.ViewModel
             using (var db = new ApplicationDbContext())
             {
                 Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
-                string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
-                foreach (string yItem in values)
+                if (Year != null)
                 {
-                    dataTable.AddColumn(yItem.ToString(), "number");
-                }
-
-                foreach (var q in quarter)
-                {
-                    var val = new List<object>(new[] { q.ToString() });
-                    foreach (var year in values)
+                    string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                    foreach (string yItem in values)
                     {
-                        var result = data
-                            .Where(x => x.Quarter == q && x.Year == year)
-                            .Select(x => x.DieselQuarterValue)
-                            .SingleOrDefault();
-                        val.Add(result);
+                        dataTable.AddColumn(yItem.ToString(), "number");
                     }
-                    dataTable.AddRow(val);
-                }
-            }          
-            return dataTable;
-        }
 
+                    foreach (var q in quarter)
+                    {
+                        var val = new List<object>(new[] { q.ToString() });
+                        foreach (var year in values)
+                        {
+                            var result = data
+                                .Where(x => x.Quarter == q && x.Year == year)
+                                .Select(x => x.DieselQuarterValue)
+                                .SingleOrDefault();
+                            val.Add(result);
+                        }
+                        dataTable.AddRow(val);
+                    }
+                    return dataTable;
+                }
+                else
+                {
+                    return dataTable;
+                }
+            }
+        }
     }
 }

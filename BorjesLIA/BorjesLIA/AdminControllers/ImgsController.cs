@@ -195,10 +195,10 @@ namespace BorjesLIA.AdminControllers
                         System.IO.File.Delete(fileEntry);
                     }
                 }
-            }
+            } 
             catch
             {
-                // Deliberately empty.
+                // Deliberately empty. 
             }
         }
 

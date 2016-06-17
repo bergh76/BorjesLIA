@@ -39,13 +39,13 @@ namespace BorjesLIA.AdminControllers
 
         //borrowed code
 
-        [AllowAnonymous]
-        public ActionResult MyImages()
-        {
-            var model = new ImagesViewModel();
+        //[AllowAnonymous]
+        //public ActionResult MyImages()
+        //{
+        //    var model = new ImagesViewModel();
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
 
         [AllowAnonymous]
@@ -78,8 +78,17 @@ namespace BorjesLIA.AdminControllers
                 var fn = Path.Combine(Server.MapPath(MapTempFolder), Path.GetFileName(fileName));
                 // ...get image and resize it, ...
                 var img = new WebImage(fn);
-
+                
                 img.Resize(width, height);
+                //Late minute fix. If bottom turns out negative add value by decreasing negative value. 
+                int check = img.Height - top - avatarH;
+                if (check <= 0)
+                {
+                    //should give negative value at this time
+                    int diff = img.Height - height;
+                    //different signs give negative value
+                    top += diff;
+                }
                 // ... crop the part the user selected, ...
                 img.Crop(top, left, img.Height - top - avatarH, img.Width - left - avatarW);
                 // ... delete the temporary file,...
@@ -104,7 +113,7 @@ namespace BorjesLIA.AdminControllers
                 image.Url = filename2;
                 image.Date = DateTime.Now;
                 image.Active = true;
-                image.Type = 3.1M; //TODO: borde kanske vara enum. 3.1 för image
+                image.Type = 3.1M; // 3.1 för image
                 image.PlacingOrder = placingOrder; 
 
                
@@ -121,11 +130,11 @@ namespace BorjesLIA.AdminControllers
             }
         }
 
-        [AllowAnonymous]
-        public ActionResult SingleImage()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public ActionResult SingleImage()
+        //{
+        //    return View();
+        //}
 
         private bool IsImage(HttpPostedFileBase file)
         {

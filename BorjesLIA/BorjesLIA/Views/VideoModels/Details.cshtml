@@ -66,11 +66,13 @@
                             frameborder="0"
                             allowfullscreen></iframe>
                 </section>
-                <video controls width="560" height="315" id="videoID">
-                    <source src="" type="video/mp4">
-                </video>
+                <section id="show-video-result-box" class="hidden">
+                    <video controls width="560" height="315" id="videoID">
+                        <source src="" type="video/mp4">
+                    </video>
+                </section>
 
-            </div>
+</div>
         </div>
     </div>
 
@@ -105,7 +107,7 @@
                     var checkThree = getString.includes("vimeo");
                     //on video är lokal
                     if (checkOne) {
-
+                        $('#show-video-result-box').removeClass('hidden');
                         $('#videoID').attr("src", data.returnData);
 
                         //$('#show-result-box').removeClass('hidden');

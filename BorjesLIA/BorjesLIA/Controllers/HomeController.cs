@@ -131,14 +131,8 @@ namespace BorjesLIA.Controllers
                     model.listVM.Add(listvm);
                 }
             }
-            //model.listVM = listOfViewModel;
+       
             return View(model);
-        }
-
-         public ActionResult Order()
-        {
-
-            return View();
         }
 
         public ActionResult GetSettings()

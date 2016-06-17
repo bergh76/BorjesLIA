@@ -32,7 +32,7 @@
                 if (element.type == 4.1m) //4.1 typ för mp4
                 {
                     <div class=".owl-item">
-                        <video controls="controls" id="@element.url">
+                        <video @*controls="controls"*@ id="@element.url"  @*width="560" height="315"*@ class="center">
                             <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
                         </video>
                     </div>

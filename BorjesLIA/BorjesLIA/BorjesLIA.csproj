@@ -210,9 +210,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606161309263_BorjesLIA.cs" />
-    <Compile Include="Migrations\201606161309263_BorjesLIA.Designer.cs">
-      <DependentUpon>201606161309263_BorjesLIA.cs</DependentUpon>
+    <Compile Include="Migrations\201606170857515_BorjesLIA.cs" />
+    <Compile Include="Migrations\201606170857515_BorjesLIA.Designer.cs">
+      <DependentUpon>201606170857515_BorjesLIA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
@@ -403,7 +403,6 @@
     <Content Include="Content\production\js\moment\moment.min.js" />
     <Content Include="Content\production\less\custom.css" />
     <Content Include="Content\responsive.css" />
-    <Content Include="Content\videos\SampleVideo_1280x720_1mb.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1006,7 +1005,6 @@
     <Content Include="Views\VideoModels\Delete.cshtml" />
     <Content Include="Views\VideoModels\Details.cshtml" />
     <Content Include="Views\VideoModels\Preview.cshtml" />
-    <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Settings\Index_PlacingOrder.cshtml" />
     <Content Include="Views\Settings\_PlacingOrderSettingsView.cshtml" />
@@ -1014,6 +1012,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
+    <Folder Include="Content\videos\" />
     <Folder Include="Images\contentslider\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
@@ -1022,8 +1021,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606161309263_BorjesLIA.resx">
-      <DependentUpon>201606161309263_BorjesLIA.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606170857515_BorjesLIA.resx">
+      <DependentUpon>201606170857515_BorjesLIA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

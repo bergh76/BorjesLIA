@@ -105,8 +105,11 @@ jQuery(function ($) {
             var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             time = getDuration;
 
-            var video = document.getElementById(getSrc);
-            video.play();
+            setTimeout(function () {
+                var video = document.getElementById(getSrc);
+                video.play();
+            }, 3000);
+            
         }
         else if (checkTwo) {
 

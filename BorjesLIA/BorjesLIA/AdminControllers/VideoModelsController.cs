@@ -115,13 +115,14 @@ namespace BorjesLIA.AdminControllers
                     }
                     else
                     {
-
                         var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/videos"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/videos/"), fileName);
                         file.SaveAs(path);
+
                         //funktionalitet för att du ut hur lång en videofil är
                         //https://github.com/AydinAdn/MediaToolkit#retrieve-metadata
                         var inputFile = new MediaFile { Filename = path };
+                        //var inputFile = new MediaFile { Filename = newFileLocation };
                         using (var engine = new Engine())
                         {
                             engine.GetMetadata(inputFile);
@@ -129,10 +130,6 @@ namespace BorjesLIA.AdminControllers
                         var getTimeSpan = inputFile.Metadata.Duration;
                         double videoTotalSeconds = getTimeSpan.TotalSeconds;
                         int VideoSeconds = Convert.ToInt32(videoTotalSeconds);
-                        VideoSeconds += 3;
-
-                        //ViewBag.Message = "File uploaded successfully";
-
 
                         ViewBag.Message = "Videon har lagts till";
 

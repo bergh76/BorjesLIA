@@ -9,7 +9,7 @@
 @{
     //Bestämmer format på bilden som ska laddas upp.
     int width = 1920;
-    int height = 1080;
+    int height = 1024;
 }
 
 <div class="col-md-12 col-sm-12 col-xs-12 pull-left">
@@ -119,7 +119,8 @@
                         jcrop_api.setOptions({ allowSelect: true });
                         jcrop_api.setOptions({ allowMove: true });
                         jcrop_api.setOptions({ allowResize: true });
-                        jcrop_api.setOptions({ aspectRatio: 1.78 });
+                        jcrop_api.setOptions({ aspectRatio: 1.88 });
+                        //1.78
 
                         // Maximise initial selection around the centre of the image,
                         // but leave enough space so that the boundaries are easily identified.

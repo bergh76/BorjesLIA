@@ -68,7 +68,7 @@ Author URL:
  top: 0;
  left: 0;
  width: 100%;
- min-height: 1020px;
+ min-height: 1024px;
  }
 #main-slider .slider-inner {
   position: absolute;
@@ -95,7 +95,7 @@ Author URL:
 #main-slider .owl-next {
   position: absolute;
   top: 50%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 30px;
   display: inline-block;

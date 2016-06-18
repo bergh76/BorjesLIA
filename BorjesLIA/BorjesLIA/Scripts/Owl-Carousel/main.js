@@ -95,14 +95,16 @@ jQuery(function ($) {
     function thisSlide(current) {
 
         thisSlideIndex = this.currentItem;
-        var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
-
-        var checkOne = getSrc.includes("Content/videos");
+        //var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
+        var getSrc = current.find(".VideoClassTag").eq(thisSlideIndex).attr('src');
+        console.log("getSrc: " + getSrc);
+        var checkOne = getSrc.includes("/Content/videos/");
         var checkTwo = getSrc.includes("youtube");
         var checkThree = getSrc.includes("vimeo");
 
         if (checkOne) {
-            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
             time = getDuration;
 
             setTimeout(function () {
@@ -113,7 +115,8 @@ jQuery(function ($) {
         }
         else if (checkTwo) {
 
-            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
             time = getDuration;
 
             setTimeout(function () {
@@ -128,7 +131,8 @@ jQuery(function ($) {
         }
         else if (checkThree) {
 
-            var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
+            var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
             time = getDuration;
 
             setTimeout(function () {
@@ -144,7 +148,6 @@ jQuery(function ($) {
     }
     // youtube. init yt player
     function loadPlayer() {
-        console.log('loadPlayer: in use');
 
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";

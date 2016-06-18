@@ -230,10 +230,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,euroValue,Date")] EuroExchangeModel euroExchangeModel)
+        public ActionResult Edit([Bind(Include = "ID, Year, Month, euroValue, Date, LoggDate, EditByUser")] EuroExchangeModel euroExchangeModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                euroExchangeModel.EditByUser = editBy;
+                euroExchangeModel.LoggDate = DateTime.Now;
                 db.Entry(euroExchangeModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

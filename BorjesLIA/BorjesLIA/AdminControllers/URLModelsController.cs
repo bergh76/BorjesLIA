@@ -63,12 +63,20 @@ namespace BorjesLIA.AdminControllers
         }
 
         [ValidateAntiForgeryToken]
-        public ActionResult _AddUrl(URLViewModel newUrl)
+        public ActionResult _AddUrl(URLViewModel newUrl, FormCollection formCollection)
         {
+            var user = HttpContext.User.Identity.Name;
+            if(user == null)
+            {
+                user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (Request.IsAjaxRequest())
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    newUrl.AddUrl.dateUrl = Convert.ToDateTime(formCollection[2]);
+                    newUrl.AddUrl.User = user;
+                    newUrl.AddUrl.LoggDate = DateTime.Now;
                     newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till
                     newUrl.AddUrl.Active = true;
                     newUrl.AddUrl.Type = 2.1M;
@@ -128,10 +136,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,urlString,dateUrl")] URLModel uRLModel)
+        public ActionResult Edit([Bind(Include = "ID, urlString, dateUrl, LoggDate, EditByUser")] URLModel uRLModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                uRLModel.EditByUser = editBy;
+                uRLModel.LoggDate = DateTime.Now;
                 db.Entry(uRLModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

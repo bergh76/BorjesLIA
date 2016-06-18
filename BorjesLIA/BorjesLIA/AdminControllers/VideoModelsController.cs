@@ -44,7 +44,11 @@ namespace BorjesLIA.AdminControllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
-
+            var user = HttpContext.User.Identity.Name;
+            if (user == null)
+            {
+                user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             //made change in webconfig to increase max upload size (1GB)  <httpRuntime targetFramework="4.5" maxRequestLength="1048576" />
             if (!ModelState.IsValid)
             {
@@ -66,6 +70,8 @@ namespace BorjesLIA.AdminControllers
                     {
 
                         var video = new VideoModel();
+                        video.User = user;
+                        video.LoggDate = DateTime.Now;
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
                         video.Active = true;
@@ -134,6 +140,8 @@ namespace BorjesLIA.AdminControllers
                         ViewBag.Message = "Videon har lagts till";
 
                         var video = new VideoModel();
+                        video.User = user;
+                        video.LoggDate = DateTime.Now;
                         video.Url = fileName;
                         video.Name = VM.Name;
                         video.PlacingOrder = 0;
@@ -254,10 +262,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Url,Name")] VideoModel videoModel)
+        public ActionResult Edit([Bind(Include = "ID, Url, Name, Date, Type, EditByUser, LoggDate")] VideoModel videoModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                videoModel.EditByUser = editBy;
+                videoModel.LoggDate = DateTime.Now;
                 db.Entry(videoModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

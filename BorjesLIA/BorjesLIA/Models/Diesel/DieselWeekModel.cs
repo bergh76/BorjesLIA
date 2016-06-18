@@ -39,6 +39,11 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Användare")]
         public string User { get; set; }
 
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string EditByUser { get; set; }
+
         [Display(Name = "OrderIndex")]
         public int PlacingOrder { get; set; }
 

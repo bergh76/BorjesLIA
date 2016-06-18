@@ -65,7 +65,11 @@ namespace BorjesLIA.AdminControllers
         public ActionResult SaveSingleImage(string t, string l, string h, string w, string fileName, int avatarW, int avatarH, int placingOrder, string imgName)
         {
             TempData["singleupload"] = "nope";
-
+            var user = HttpContext.User.Identity.Name;
+            if (user == null)
+            {
+                user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             try
             {
                 // Calculate dimensions
@@ -109,6 +113,8 @@ namespace BorjesLIA.AdminControllers
                 img.Save(newFileLocation);
                 //TODO: fält som ska vara med
                 var image = new Img();
+                image.User = user;
+                image.LoggDate = DateTime.Now;
                 image.Name = imgName; 
                 image.Url = filename2;
                 image.Date = DateTime.Now;
@@ -240,10 +246,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Url,Name,Date,PlacingOrder,Active")] Img img)
+        public ActionResult Edit([Bind(Include = "ID,Url,Name,Date,PlacingOrder,Active, User, LoggDate, EditByUser")] Img img)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                img.EditByUser = editBy;
+                img.LoggDate = DateTime.Now;
                 db.Entry(img).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -136,13 +136,9 @@
                 //}
 
                     var options = {
-                        legend: {position: 'top', maxLines: 3},
+                        legend: { position: 'top', maxLines: 3 },
                         title: title,
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'linear',
-                        },
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
                         vAxis: {
                             fontName: 'Calibri',
@@ -154,12 +150,10 @@
                                 fontName: 'Calibri',
                             }
                         },
-                        chartArea: {
-                            left: 100, right:100, top: 200, width: "100%", height: "50%"
-                        },
-                        pointSize: 7,
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                        pointSize: 4,
                         dataOpacity: 0.9,
-                        lineWidth: 4,
+                        lineWidth: 2,
                     };
                     var chart = new google.visualization.LineChart(document.getElementById("DieselquarterDiv"));
                     chart.draw(dataTable, options);
@@ -285,13 +279,9 @@
 
                 function drawChart(elementId, title, dataTable) {
                     var options = {
-                        legend: {position: 'top', maxLines: 3},
+                        legend: { position: 'top', maxLines: 3 },
                         title: title,
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'linear',
-                        },
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
                         vAxis: {
                             title: "Kvartal",
@@ -307,11 +297,9 @@
                                 fontName: 'Calibri',
                             }
                         },
-                        chartArea: {
-                            left: 100, right:100, top: 200, width: "100%", height: "50%"
-                        },
-                        pointSize: 7,
-                        dataOpacity: 0.9,
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
+                        pointSize: 7, 
+                        dataOpacity: 0.8, 
                         lineWidth: 4,
                     };
                     var chart = new google.visualization.BarChart(document.getElementById("DieselquarterDiv"));
@@ -429,7 +417,7 @@
 
             google.charts.load('current', { 'packages': ['corechart'], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
@@ -438,13 +426,9 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
+                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
-                    },
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
                     vAxis: {
                         title: "Pris",
@@ -460,11 +444,9 @@
                             fontName: 'Calibri',
                         }
                     },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 7,
-                    dataOpacity: 0.9,
+                    dataOpacity: 0.8,
                     lineWidth: 4,
                 };
                 var chart = new google.visualization.ColumnChart(document.getElementById("DieselquarterDiv"));
@@ -485,13 +467,9 @@
             });
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
+                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
-                    },
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
                     vAxis: {
                         title: "Pris",
@@ -507,25 +485,16 @@
                             fontName: 'Calibri',
                         }
                     },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,
-                    dataOpacity: 0.9,
+                    dataOpacity: 0.4,
                     lineWidth: 2,
                 };
                 var chart = new google.visualization.AreaChart(document.getElementById("DieselquarterDiv"));
                     chart.draw(dataTable, options);
                 }
         </script>
+        }
     }
-}
-
-
-<div class="x_panel">
-    <div class="x_content">
-        <div id="DieselquarterDiv" style="width: 100%; height:1040px"></div>
-    </div>
-</div>
-
+<div class="container" id="DieselquarterDiv" style="width: 100%; height:1010px"></div>
 

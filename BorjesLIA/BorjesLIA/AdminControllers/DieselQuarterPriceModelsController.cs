@@ -192,8 +192,9 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Year,Quarter,DieselQuarterValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
+        public ActionResult Create([Bind(Include = "ID, Date, Year, Month, ,Quarter,DieselQuarterValue,LoggDate, EditByUser")] DieselQuarterPriceModel dieselQuarterPriceModel)
         {
+
             if (ModelState.IsValid)
             {
                 db.DieselPriceQuarter.Add(dieselQuarterPriceModel);
@@ -224,10 +225,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Year,Quarter,DieselQuarterValue,LoggDate")] DieselQuarterPriceModel dieselQuarterPriceModel)
+        public ActionResult Edit([Bind(Include = "ID, Date, Year, Month, ,Quarter,DieselQuarterValue,LoggDate, EditByUser")] DieselQuarterPriceModel dieselQuarterPriceModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                dieselQuarterPriceModel.EditByUser = editBy;
+                dieselQuarterPriceModel.LoggDate = DateTime.Now;
                 db.Entry(dieselQuarterPriceModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

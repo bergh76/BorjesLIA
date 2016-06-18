@@ -18,30 +18,6 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<DieselWeekModel> newWeekDieselList { get; set; }
         public string Year { get; set; }
         public string ChartName { get; set; }
-        //public Task<List<DieselWeekModel>> GetWeekData()
-        //{
-        //    ChartName = "Dieselpris Vecka";
-        //    using (var db = new ApplicationDbContext())
-        //    {
-        //        if (db.DieselPriceWeek == null)
-        //        {
-        //            return GetWeekData();
-
-        //        }
-        //        else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
-        //        {
-        //            var lwAllDiesel = db.DieselPriceWeek.ToList();
-        //            return Task.Run(() => lwAllDiesel);
-        //        }
-        //        else
-        //        {
-        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-        //            var lwDiesel = db.DieselPriceWeek.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
-        //            return Task.Run(() => lwDiesel);
-        //        }
-        //    }
-        //}
-
 
         public string Title { get; set; }
         public GoogleVisualizationDataTable DataTable { get; set; }

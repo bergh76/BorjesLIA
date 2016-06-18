@@ -19,6 +19,18 @@ namespace BorjesLIA.Models.URL
         [Display(Name = "Nytt Datum")]
         public DateTime dateUrl { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Datum")]
+        public DateTime LoggDate { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string User { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Användare")]
+        public string EditByUser { get; set; }
+
         [Display(Name = "OrderIndex")]
         public int PlacingOrder { get; set; }
 

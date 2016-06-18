@@ -138,32 +138,33 @@
                 //    console.log("view.setColumns \n",view.setColumns);
                 //}
 
-                    var options = {
-                        legend: {position: 'top', maxLines: 3},
-                        title: title,
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'linear',
-                        },
+                var options = {
+                    legend: { position: 'top', maxLines: 3 },
+                    title: title,
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',},
 
-                        vAxis: {
-                            fontName: 'Calibri',
-                            minValue: 0,
-                        },
+                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', },
+                        //viewWindow: { max: 11,  min: 0, },
+                        //gridlines: { count: 45,},
+                        //ticks: 
+                        //   [
+                        //       0.00, 
+                        //       10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
+                        //       15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
+                        //       20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
+                        //       25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
+                        //       30.0,
+                        //       //28.00, 28.50, 29.00, 29.50, 30.00
+                        //   ],
 
-                        hAxis:{
-                            titleTextStyle: {
-                                fontName: 'Calibri',
-                            }
-                        },
-                        chartArea: {
-                            left: 100, right:100, top: 200, width: "100%", height: "50%"
-                        },
+                        hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                         pointSize: 7,
                         dataOpacity: 0.9,
                         lineWidth: 4,
-                    };
+                    }
+                };
+
                     var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
                 }
@@ -284,39 +285,24 @@
                 console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('DPWChartDiv', title, dataTable);
-                //drawLineChart('chart', title, dataTable);
             });
 
                 function drawChart(elementId, title, dataTable) {
                     var options = {
-                        legend: {position: 'top', maxLines: 3},
+                        legend: { position: 'top', maxLines: 3},
                         title: title,
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'linear',
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear',
                         },
 
-                        vAxis: {
-                            title: "Vecka",
-                            titleTextStyle: {
-                                fontName: 'Calibri',
-                            },
-                            minValue: 0,
+                        vAxis: {  title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },              
+                       
+                        hAxis:{ titleTextStyle: { fontName: 'Calibri', }, 
+                            viewWindowMode: 'explicit',  
+                            viewWindow: { min: 0, },
+                            gridlines: { count: 20, },
                         },
-
-                        hAxis:{
-                            title: "hAxis",
-                            titleTextStyle: {
-                                fontName: 'Calibri',
-                            }
-                        },
-                        chartArea: {
-                            left: 100, right:100, top: 200, width: "100%", height: "50%"
-                        },
-                        pointSize: 7,
-                        dataOpacity: 0.9,
-                        lineWidth: 4,
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
+                        pointSize: 7, dataOpacity: 0.8, lineWidth: 4,
                     };
                     var chart = new google.visualization.BarChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
@@ -433,7 +419,7 @@
 
             google.charts.load('current', { 'packages': ['corechart'], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
@@ -442,31 +428,14 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
+                    legend: { position: 'top', maxLines: 3},
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
-                    },
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
-                    vAxis: {
-                        title: "Pris",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        minValue: 0,
-                    },
+                    vAxis: {  title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },  
 
-                    hAxis:{
-                        title: "Vecka",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        }
-                    },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
+                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 7,
                     dataOpacity: 0.9,
                     lineWidth: 4,
@@ -489,33 +458,16 @@
             });
             function drawChart(elementId, title, dataTable) {             
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
+                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
-                    },
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
-                    vAxis: {
-                        title: "Pris",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        minValue: 0,
-                    },
+                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
 
-                    hAxis:{
-                        title: "Vecka",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        }
-                    },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
+                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,
-                    dataOpacity: 0.9,
+                    dataOpacity: 0.4,
                     lineWidth: 2,
                 };
                 var chart = new google.visualization.AreaChart(document.getElementById("DPWChartDiv"));
@@ -524,5 +476,5 @@
         </script>
     }
 }
-<div id="DPWChartDiv" style="width: 100%; height:1040px"></div>
+<div class="container" id="DPWChartDiv" style="width: 100%; height:1010px"></div>
    

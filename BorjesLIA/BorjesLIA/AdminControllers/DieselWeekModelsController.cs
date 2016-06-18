@@ -214,10 +214,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit(DieselWeekModel dieselWeekModel)
+        public ActionResult Edit([Bind(Include = "ID, Date, Year, Month, Week,  DieselWeekValue, LoggDate, EditByUser")]DieselWeekModel dieselWeekModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                dieselWeekModel.EditByUser = editBy;
+                dieselWeekModel.LoggDate = DateTime.Now;
                 db.Entry(dieselWeekModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

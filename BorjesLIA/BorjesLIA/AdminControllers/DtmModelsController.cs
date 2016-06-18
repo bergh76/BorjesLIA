@@ -215,10 +215,17 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Date,DieselDTMValue,DieselDTMChartID,LoggDate")] DtmModel dtmModel)
+        public ActionResult Edit([Bind(Include = "ID, Date, DieselDTMValue, LoggDate, EditBYUser")] DtmModel dtmModel)
         {
+            var editBy = HttpContext.User.Identity.Name;
+            if (editBy == null)
+            {
+                editBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
             if (ModelState.IsValid)
             {
+                dtmModel.EditByUser = editBy;
+                dtmModel.LoggDate = DateTime.Now;
                 db.Entry(dtmModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

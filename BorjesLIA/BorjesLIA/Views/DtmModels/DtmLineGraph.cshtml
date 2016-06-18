@@ -14,7 +14,7 @@
                 var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 var dataTable = new google.visualization.DataTable(tdata);
-                drawChart('DTMGraphDiv', title, dataTable);
+                drawChart('DMTGraphDiv', title, dataTable);
             });
 
             function drawChart(elementId, title, dataTable) {
@@ -33,52 +33,32 @@
                 //}
 
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
+                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',},
+                    
+                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', },
+                        //viewWindow: { max: 11,  min: 0, },
+                        //gridlines: { count: 45,},
+                        ticks: 
+                            [
+                                0.00, 
+                                10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
+                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
+                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
+                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
+                                30.0,
+                                //28.00, 28.50, 29.00, 29.50, 30.00
+                            ]
                     },
 
-
-                    vAxis: {
-                        title: "Pris",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        viewWindow: {
-                            //max: 11,
-                            min: 0,
-                        },
-                        gridlines: {
-                            count: 45,
-                        },
-                        //ticks: [
-                        //    0.00, 13.00, 13.50, 14.00, 14.50, 15.00, 15.50,
-                        //    16.00, 16.50, 17.00, 17.50, 18.00, 18.50, 19.00, 19.50,
-                        //    20.00, 20.50, 21.00, 21.50, 22.00, 22.50, 23.00, 23.50,
-                        //    24.00, 24.50, 25.00, 25.50, 26.00, 26.50, 27.00, 27.50
-                        //    //28.00, 28.50, 29.00, 29.50, 30.00
-                        //]
-                    },
-
-                    hAxis:{
-                        title: "Månad",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        minValue: 0,
-
-                    },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
+                    hAxis:{ title: "Månad", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
                     pointSize: 4,
                     dataOpacity: 0.9,
                     lineWidth: 2,
                 };
-                var chart = new google.visualization.LineChart(document.getElementById("DTMGraphDiv"));
+                var chart = new google.visualization.LineChart(document.getElementById("DMTGraphDiv"));
                     chart.draw(dataTable, options);
                 }
         </script>
@@ -179,30 +159,30 @@
             google.charts.setOnLoadCallback(function () {
                 var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
-                console.log("Title", title);
-                var dataTable = new google.visualization.DataTable(tdata);
-                drawChart('DTMGraphDiv', title, dataTable);
-                //drawLineChart('chart', title, dataTable);
+                var dataTable = new google.visualization.DataTable(tdata);                
+                drawChart('DMTGraphDiv',title, dataTable);
             });
 
-                function drawChart(elementId, title, dataTable) {
-                    var options = {
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'in',
-                        },
-                        legend: {position: 'top', maxLines: 3},
+            function drawChart(elementId, title, dataTable) {
+                var options = {
+                        legend: { position: 'top', maxLines: 3},
                         title: title,
-                        chartArea: {
-                            left: 100, right:100, top: 200, width: "100%", height: "50%"
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear',
                         },
-                        pointSize: 10,
-                        dataOpacity: 0.6,
-                        lineWidth: 5,
+
+                        vAxis: {  title: "Månad", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },                       
+                       
+                        hAxis:{ titleTextStyle: { fontName: 'Calibri', }, 
+                            viewWindowMode: 'explicit',  
+                            viewWindow: { min: 0, },
+                            gridlines: { count: 20, },
+
+                        },
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
+                        pointSize: 7, dataOpacity: 0.8, lineWidth: 4,
                     };
-                    var chart = new google.visualization.BarChart(document.getElementById("DTMGraphDiv"));
-                    chart.draw(dataTable, options);
+                    var chart = new google.visualization.BarChart(document.getElementById("DMTGraphDiv"));
+                    chart.draw(dataTable, options );
                 }
         </script>
     }
@@ -214,33 +194,45 @@
 
             google.charts.load('current', { 'packages': ['corechart'], });
             google.charts.setOnLoadCallback(function () {
-                var title = '@Model.Title';
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
-                drawChart('DTMGraphDiv', title, dataTable);
+                drawChart('DMTGraphDiv', title, dataTable);
             });
 
-            function drawChart(elementId, title, dataTable) {    
+            function drawChart(elementId, title, dataTable) {
                 var options = {
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'out',
-                    },
-                    legend: {position: 'top', maxLines: 3},
-                    annotations: true,
+                    legend: { position: 'top', maxLines: 3},
                     title: title,
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+
+                    vAxis: {
+                        title: "Månad",
+                        titleTextStyle: { fontName: 'Calibri', },
+                        //minValue: 0,
+                        //gridlines: { count: 100,  },
+                        ticks:
+                            [
+                                10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
+                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
+                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
+                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
+                                30.0,
+                                //30.5, 31.0, 31.5, 32.0, 32.5, 33.0, 33.5, 34.0, 34.5,
+                            ],
                     },
-                    pointSize: 10,
-                    //dataOpacity: 0.4,
-                    //lineWidth: 5,
-                    annotation: true,
+                    hAxis:{
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', }
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    pointSize: 7,
+                    dataOpacity: 0.8,
+                    lineWidth: 4,
                 };
-                    var chart = new google.visualization.ColumnChart(document.getElementById("DTMGraphDiv"));
-                    chart.draw(dataTable, options);
+                var chart = new google.visualization.ColumnChart(document.getElementById("DMTGraphDiv"));
+                chart.draw(dataTable, options);
                 }
         </script>
     }
@@ -254,53 +246,51 @@
             google.charts.setOnLoadCallback(function () {
                 var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
-                console.log("Title", title);
                 var dataTable = new google.visualization.DataTable(tdata);
-                drawChart('DTMGraphDiv', title, dataTable);
+                drawChart('DMTGraphDiv', title, dataTable);
             });
             function drawChart(elementId, title, dataTable) {
-                var view = new google.visualization.DataView(data);
-                for(var i = 0; i < dataTabel.lenth; i++){                    
-                
-                    view.setColumns([i,
-                                     { calc: "stringify",
-                                         sourceColumn: i,
-                                         type: "string",
-                                         role: "annotation" },
-                                     ]);
-                }
-                var options = { 
-                    legend: {position: 'top', maxLines: 3},
-                    title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
-                    },
+                //var view = new google.visualization.DataView(data);
+                //for(var i = 0; i < dataTabel.lenth; i++){
 
-                    vAxis: {
-                        fontName: 'Calibri',
-                        minValue: 0,
-                    },
+                //    view.setColumns([i,
+                //                     { calc: "stringify",
+                //                         sourceColumn: i,
+                //                         type: "string",
+                //                         role: "annotation" },
+                //                     ]);
+                //}
+                    var options = {
+                        legend: { position: 'top', maxLines: 3 },
+                        title: title,
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear', },
 
-                    hAxis:{
-                        titleTextStyle: {
-                            color: '#000',
-                            fontName: 'Calibri',
-                            fontSize: 18,
-                        }
-                    },
-                    chartArea: {
-                        left: 100, right:100, top: 200, width: "100%", height: "50%"
-                    },
-                    pointSize: 5,
-                    dataOpacity: 0.8,
-                };
-                var chart = new google.visualization.AreaChart(document.getElementById("DTMGraphDiv"));
+                        vAxis: { title: "Pris",
+                            titleTextStyle: { fontName: 'Calibri', },
+                            minValue: 0,
+                            //gridlines: { count: 100, },
+                            ticks:
+                                [
+                                 0.00, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
+                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
+                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
+                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
+                                30.0,
+                                    //30.5, 31.0, 31.5, 32.0, 32.5, 33.0, 33.5, 34.0, 34.5,
+                                ],
+                        },
+                        hAxis:{ title: "Månad", titleTextStyle: { fontName: 'Calibri', },},
+                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                        pointSize: 4,
+                        dataOpacity: 0.4,
+                        lineWidth: 2,
+                    };
+                    var chart = new google.visualization.AreaChart(document.getElementById("DMTGraphDiv"));
                     chart.draw(dataTable, options);
-                }
+            }
+
         </script>
     }
 }
-<div id="DTMGraphDiv" style="width: 100%; height:1040px"></div>
+<div class="container" id="DMTGraphDiv" style="width: 100%; height:1010px"></div>
     

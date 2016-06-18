@@ -540,7 +540,7 @@ namespace BorjesLIA.Controllers
                 }
                 else if (item.type == 3.1m) //img 
                 {
-                    var changeOrderPlacing = db.Imgs.Where(x => x.ID == item.ID).FirstOrDefault();
+                    var changeOrderPlacing = db.Imgs.Where(x => x.ID == item.ID).First();
                     var asdf = item.orderby;
                     var asdfasdf = item.active;
                     if (changeOrderPlacing.PlacingOrder != item.orderby)
@@ -584,7 +584,7 @@ namespace BorjesLIA.Controllers
                 }
                 else if (item.type == 4.5m) //vimeo
                 {
-                    var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
+                    var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).First();
                     if (changeOrderPlacing.PlacingOrder != item.orderby)
                     {
                         changeOrderPlacing.PlacingOrder = item.orderby;

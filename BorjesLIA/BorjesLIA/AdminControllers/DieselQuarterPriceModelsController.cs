@@ -122,12 +122,19 @@ namespace BorjesLIA.AdminControllers
                     {
                         var date = Convert.ToDateTime(formCollection[1]);
                         var year = date.Year.ToString();
+                        // month name //
+                        DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                        DateTime date1 = date;
+                        Calendar cal = dfi.Calendar;
+                        var monthInt = cal.GetMonth(date1);
+                        var month = dfi.GetMonthName(monthInt);
                         var enumInt = Convert.ToInt32(formCollection[2]);
                         Quarters qVal = (Quarters)enumInt;
                         string quarter = qVal.ToString();
                         newQDiesel.AddQuarterDiesel.Date = date;
                         newQDiesel.AddQuarterDiesel.Year = year;
                         newQDiesel.AddQuarterDiesel.Quarter = quarter;
+                        newQDiesel.AddQuarterDiesel.Month = month;
                         if (db.DieselPriceQuarter.Any(x => x.Year == year && x.Quarter == quarter) || db.DieselPriceQuarter.ToList().Select(x => x.Quarter) == null)
                         {
                             // return a errormessage to the view //

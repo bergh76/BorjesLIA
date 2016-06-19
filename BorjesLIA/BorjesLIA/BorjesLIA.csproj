@@ -845,8 +845,6 @@
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
-    <Content Include="Scripts\jquery.bxslider\jquery.bxslider.js" />
-    <Content Include="Scripts\jquery.bxslider\jquery.bxslider.min.js" />
     <Content Include="Scripts\jquery.inview.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -858,8 +856,6 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Owl-Carousel\owl.carousel.css" />
     <Content Include="Content\Owl-Carousel\owl.transitions.css" />
-    <Content Include="Scripts\MorrisChart\morris.js" />
-    <Content Include="Scripts\MorrisChart\morris.min.js" />
     <Content Include="Scripts\Owl-Carousel\main.js" />
     <Content Include="Scripts\Owl-Carousel\owl.carousel.min.js" />
     <Content Include="Scripts\_references.js" />

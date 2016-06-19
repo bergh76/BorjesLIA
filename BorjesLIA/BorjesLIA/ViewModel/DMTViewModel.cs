@@ -20,28 +20,6 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<DtmModel> newDTMList { get; set; }
         public string Year { get; set; }
         public string ChartName { get; set; }
-        //public Task<List<DtmModel>> GetData()
-        //{
-        //    ChartName = "Drivmedelstillägg";
-        //    using (var db = new ApplicationDbContext())
-        //    {
-        //        if (db.DtmModels == null)
-        //        {
-        //            return GetData();
-        //        }
-        //        else if (db.Settings.Where(x => x.Name == ChartName).Select(x => x.Year).FirstOrDefault() == "Alla")
-        //        {
-        //            var lAllDtm = db.DtmModels.ToList();
-        //            return Task.Run(() => lAllDtm);
-        //        }
-        //        else
-        //        {
-        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-        //            var lDtm = db.DtmModels.Where(x => x.Date.Year.ToString() == Year).OrderBy(x => x.Date).ToList();
-        //            return Task.Run(() => lDtm);
-        //        }
-        //    }
-        //}
 
         public GoogleVisualizationDataTable DataTable { get; set; }
         public string Title { get; set; }
@@ -64,7 +42,9 @@ namespace BorjesLIA.ViewModel
             using (var db = new ApplicationDbContext())
             {
                 Year = db.Settings.ToList().Where(x => x.Name == ChartName).OrderByDescending(x => x.Year).Select(x => x.Year).FirstOrDefault();
-                string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                if (Year != null)
+                {
+                    string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
                 foreach (string yItem in values)
                 {
                     dataTable.AddColumn(yItem.ToString(), "number");
@@ -83,11 +63,16 @@ namespace BorjesLIA.ViewModel
                             .Select(x => x.DieselDTMValue)
                             .SingleOrDefault();
                         val.Add(result);
+                        }
+                        dataTable.AddRow(val);
                     }
-                    dataTable.AddRow(val);
+                    return dataTable;
+                }
+                else
+                {
+                    return dataTable;
                 }
             }
-            return dataTable;
         }
     }
 }

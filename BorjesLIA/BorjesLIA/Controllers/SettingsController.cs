@@ -24,19 +24,7 @@ namespace BorjesLIA.Controllers
         string confDtmSettings = "Drivmedelstillägg";
         string confDwSettings = "Dieselpris Vecka";
         string confDqSettings = "Dieselpris Kvartal";
-        // GET: Settings
-        //public ActionResult Index(EuroViewModel euroV)
-        //{
-        //    euroV = new EuroViewModel
-        //    {
-        //        AddEuro = new EuroExchangeModel(),
-        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
-        //        //populates list used for determain charttype from Entity Settings
-        //        settings = db.Settings.Where(x => x.Name == confEuro)
-        //    };
-        //    return View(euroV);
-        //}
-
+        
         /// <summary>
         /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data
         /// </summary>
@@ -53,20 +41,6 @@ namespace BorjesLIA.Controllers
             };
             return View(euroSettings);
         }
-        
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="eurox"></param>
-        ///// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetEuroData(EuroViewModel eurox)
-        //{
-        //    var data = await eurox.GetData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}     
-
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
@@ -126,18 +100,6 @@ namespace BorjesLIA.Controllers
             return View(dtmSettings);
         }
 
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dtmData"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetDTMData(DMTViewModel dtmData)
-        //{
-        //    var data = await dtmData.GetData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
@@ -203,19 +165,6 @@ namespace BorjesLIA.Controllers
         }
 
         /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dtmData"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetDWData(DieselWeekViewModel dwData)
-        //{
-        //    var data = await dwData.GetWeekData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
-
-        /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
         /// <param name="confDw"></param>
@@ -277,18 +226,6 @@ namespace BorjesLIA.Controllers
             return View(dqSettings);
         }
 
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dtmData"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetDQData(DieselQuarterViewModel dqData)
-        //{
-        //    var data = await dqData.GetQuarterData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
 
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity

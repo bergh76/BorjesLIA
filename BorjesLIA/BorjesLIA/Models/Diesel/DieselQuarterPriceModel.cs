@@ -57,7 +57,7 @@ namespace BorjesLIA.Models.Diesel
         public DieselQuarterPriceModel()
         {
             var _user = HttpContext.Current.User.Identity.Name.ToString();
-             Date = DateTime.Now;
+             //Date = DateTime.Now;
             if (string.IsNullOrEmpty(_user) && string.IsNullOrEmpty(Year) && LoggDate == null)
             {
                //Quarter = Date

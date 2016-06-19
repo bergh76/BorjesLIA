@@ -26,7 +26,7 @@
         </div>
     </div>
 </nav>
-    <section id="main-slider">
+<section id="main-slider">
     <div class="owl-carousel">
         @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
@@ -40,21 +40,35 @@
                 </div>
             }
 
-            else if(element.type == 4.2M)
+            else if (element.type == 4.2M)
             {
                 <div class="owl-item">
                     <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                 </div>
             }
             else
-                {
-                    <div class="owl-item">
-                        <iframe id="@element.url"  src="@element.url" class="VideoClassTag" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                    </div>
-                }
+            {
+                <div class="owl-item">
+                    <iframe id="@element.url" src="@element.url" class="VideoClassTag" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                </div>
+            }
         }
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

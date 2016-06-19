@@ -5,7 +5,8 @@
     string OwlItemIndexID = String.Format("{0},{1}", stringPartOfIdIndex, IdIndex); 
     }
 
-<div> <!--testade att byta till div ist, för att ändra placeringen och få med naven/ <nav class="navbar navbar-default navbar-fixed-top"> -->
+<nav class="navbar navbar-default navbar-collapse"><!-- testade att byta till div ist, för att ändra placeringen och få med naven/ -->
+
     <div class="container-dashboard">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,7 +15,11 @@
                 <span class="icon-bar"></span>
             </button>
             <div>
-                <a href="/"><img src="~/Content/images/borjes-logga-jpg.jpg" /></a>
+                <a href="/">
+                    <img src="~/Content/images/logo_blu.png" />
+                </a>
+                @*<img src="~/Content/images/borjes-logga-jpg.jpg" />*@
+                </a>
             </div>
         </div>
         <div class="navbar-collapse collapse">
@@ -22,29 +27,29 @@
             <span class="navbar-right navbar-form btn fa fa-tv fa-2x" onclick="toggleFullScreen()" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>
         </div>
     </div>
-</div> <!--</nav>-->
-<div>
-    <section id="main-slider">
-        <div class="owl-carousel">
-            @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
+</nav>
+    <div>
+        <section id="main-slider">
+            <div class="owl-carousel">
+                @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
                 //för att lokal video inte går att styra från iframe.
                 if (element.type == 4.1m) //4.1 typ för mp4
                 {
 
-                    <div class="owl-item">
-                        <video id="@element.url" class="center">
-                            <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
-                        </video>
-                    </div>
+                        <div class="owl-item">
+                            <video id="@element.url" class="center">
+                                <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
+                            </video>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="owl-item">
+                            <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+                    }
                 }
-                else
-                {
-                    <div class="owl-item">
-                        <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                    </div>
-                }
-            }
-        </div>
-    </section>
-</div>
+            </div>
+        </section>
+    </div>

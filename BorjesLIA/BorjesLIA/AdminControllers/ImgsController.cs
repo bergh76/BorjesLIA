@@ -246,7 +246,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Url,Name,Date,PlacingOrder,Active, User, LoggDate, EditByUser")] Img img)
+        public ActionResult Edit([Bind(Include = "ID,Url,Name,Date, PlacingOrder, Type, Active, User, LoggDate, EditByUser")] Img img)
         {
             var editBy = HttpContext.User.Identity.Name;
             if (editBy == null)

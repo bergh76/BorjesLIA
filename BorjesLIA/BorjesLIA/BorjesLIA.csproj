@@ -247,6 +247,8 @@
     <Compile Include="ViewModel\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\logo_blu.png" />
+    <Content Include="Images\contentslider\picture2.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.sv.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -352,48 +354,12 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\borjes-logga-jpg.jpg" />
-    <Content Include="Content\images\borjes_logistik_adr.jpg" />
     <Content Include="Content\images\test_user.jpg" />
     <Content Include="Content\jquery.bxslider\jquery.bxslider.css" />
     <Content Include="Content\jquery.bxslider\bxslider_custom.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\production\css\custom.css" />
     <Content Include="Content\production\css\maps\jquery-jvectormap-2.0.3.css" />
-    <Content Include="Content\production\images\1.png" />
-    <Content Include="Content\production\images\4.jpg" />
-    <Content Include="Content\production\images\american-express.png" />
-    <Content Include="Content\production\images\back_disabled.png" />
-    <Content Include="Content\production\images\back_enabled.png" />
-    <Content Include="Content\production\images\back_enabled_hover.png" />
-    <Content Include="Content\production\images\bootstrap-colorpicker\alpha-horizontal.png" />
-    <Content Include="Content\production\images\bootstrap-colorpicker\alpha.png" />
-    <Content Include="Content\production\images\bootstrap-colorpicker\hue-horizontal.png" />
-    <Content Include="Content\production\images\bootstrap-colorpicker\hue.png" />
-    <Content Include="Content\production\images\bootstrap-colorpicker\saturation.png" />
-    <Content Include="Content\production\images\data.png" />
-    <Content Include="Content\production\images\favicon.ico" />
-    <Content Include="Content\production\images\forward_disabled.png" />
-    <Content Include="Content\production\images\forward_enabled.png" />
-    <Content Include="Content\production\images\forward_enabled_hover.png" />
-    <Content Include="Content\production\images\icons.png" />
-    <Content Include="Content\production\images\img.jpg" />
-    <Content Include="Content\production\images\loading.gif" />
-    <Content Include="Content\production\images\mastercard.png" />
-    <Content Include="Content\production\images\paypal2.png" />
-    <Content Include="Content\production\images\picture-2.jpg" />
-    <Content Include="Content\production\images\picture.jpg" />
-    <Content Include="Content\production\images\picture2.jpg" />
-    <Content Include="Content\production\images\prod1.jpg" />
-    <Content Include="Content\production\images\prod2.jpg" />
-    <Content Include="Content\production\images\prod3.jpg" />
-    <Content Include="Content\production\images\prod4.jpg" />
-    <Content Include="Content\production\images\prod5.jpg" />
-    <Content Include="Content\production\images\sprite-skin-flat.png" />
-    <Content Include="Content\production\images\sprite-skin-modern.png" />
-    <Content Include="Content\production\images\sprite-skin-nice.png" />
-    <Content Include="Content\production\images\sprite-skin-simple.png" />
-    <Content Include="Content\production\images\user.png" />
-    <Content Include="Content\production\images\visa.png" />
     <Content Include="Content\production\js\custom.js" />
     <Content Include="Content\production\js\datepicker\daterangepicker.js" />
     <Content Include="Content\production\js\flot\curvedLines.js" />
@@ -421,7 +387,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\production\images\Thumbs.db" />
     <Content Include="Content\production\js\maps\us-unemployment.json" />
     <Content Include="Images\bx_loader.gif" />
     <Content Include="Images\controls.png" />
@@ -1015,7 +980,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
     <Folder Include="Content\videos\" />
-    <Folder Include="Images\contentslider\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>

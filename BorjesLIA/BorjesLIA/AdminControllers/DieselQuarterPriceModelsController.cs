@@ -45,24 +45,6 @@ namespace BorjesLIA.AdminControllers
             return dieselQ;
         }
 
-        /// <summary>
-         /// This ActionResult is not "in play" ie. no functionality connected to the View
-         /// </summary>
-         /// <param name="dieselQ"></param>
-         /// <returns></returns>
-        //public ActionResult ShowView(DieselQuarterViewModel dieselQ)
-        //{
-        //    dieselQ = new DieselQuarterViewModel
-        //    {
-        //        AddQuarterDiesel = new DieselQuarterPriceModel(),
-        //        newQuarterDieselList = db.DieselPriceQuarter.OrderByDescending(x => x.Quarter),
-        //        //populates list used for determain charttype from Entity Settings
-        //        settings = db.Settings.Where(x => x.Name == settingsName)
-        //    };
-        //    return View(dieselQ);
-        //}
-
-
         public ActionResult _QuarterPriceDiesel(DieselQuarterViewModel dqpData)
         {
             if(dqpData != null) { 
@@ -91,19 +73,6 @@ namespace BorjesLIA.AdminControllers
             };
             return View(dvm);
         }
-
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dieselQuarterChart"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetData(DieselQuarterViewModel dieselQuarterChart)
-        //{
-        //    var data = await dieselQuarterChart.GetQuarterData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
 
 
         /// <summary>

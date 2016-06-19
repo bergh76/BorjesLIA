@@ -355,8 +355,6 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\borjes-logga-jpg.jpg" />
     <Content Include="Content\images\test_user.jpg" />
-    <Content Include="Content\jquery.bxslider\jquery.bxslider.css" />
-    <Content Include="Content\jquery.bxslider\bxslider_custom.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\production\css\custom.css" />
     <Content Include="Content\production\css\maps\jquery-jvectormap-2.0.3.css" />

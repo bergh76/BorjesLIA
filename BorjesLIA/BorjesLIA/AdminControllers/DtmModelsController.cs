@@ -44,18 +44,6 @@ namespace BorjesLIA.AdminControllers
             return dtmV;
         }
 
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dtmChart"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        //public async Task<JsonResult> GetData(DMTViewModel dtmChart)
-        //{
-        //    //var data = await eurox.GetQuaerterData();
-        //    var data = await dtmChart.GetData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
 
         /// <summary>
         /// Instansiates an object for startpage
@@ -74,24 +62,6 @@ namespace BorjesLIA.AdminControllers
             return View(dtmV);
         }
 
-
-        /// <summary>
-        /// This ActionResult is not "in play" ie. no functionality connected to the View
-        /// </summary>
-        /// <param name="dtmV"></param>
-        /// <returns></returns>
-        //public ActionResult ShowView(DMTViewModel dtmV)
-        //{
-        //    dtmV = new DMTViewModel
-        //    {
-        //        AddDtm = new DtmModel(),
-        //        newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date),
-        //        //populates list used for determain charttype from Entity Settings
-        //        settings = db.Settings.Where(x => x.Name == settingsName)
-
-        //    };
-        //    return View(dtmV);
-        //}
 
         /// <summary>
         /// Creats a new DMTViewModel object, populates needed lists with data and return a view with data

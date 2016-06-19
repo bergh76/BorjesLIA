@@ -106,20 +106,6 @@ namespace BorjesLIA.AdminControllers
             return View(newEuro);
         }
 
-
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="eurox"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        ////Populates a list with data from database tabel EuroExchangeModel
-        //public async Task<JsonResult> GetData(EuroViewModel eurox)
-        //{
-        //    var data = await eurox.GetData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
-
         public ActionResult _EuroLineGraph(EuroViewModel euroGraph)
         {
             euroGraph =  new EuroViewModel
@@ -128,72 +114,6 @@ namespace BorjesLIA.AdminControllers
             };
             return View(euroGraph);
         }
-
-        /// <summary>
-        /// This ActionResult is not "in play" ie. no functionality connected to the View
-        /// </summary>
-        /// <param name="euroV"></param>
-        /// <returns></returns>
-        //[Authorize]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult _AddNewEuro(EuroViewModel newEuro)
-        //{
-        //    if (Request.IsAjaxRequest() && ModelState.IsValid)
-        //    {
-        //        using (var db = new ApplicationDbContext())
-        //        {
-        //            db.EuroExchangeModels.Add(newEuro.AddEuro);
-        //            db.SaveChanges();
-        //            newEuro.newEuroList = db.EuroExchangeModels.ToList()
-        //                .OrderByDescending(x => x.Date);
-        //            return PartialView("_EuroList", newEuro);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(newEuro);
-        //    }
-        //}
-
-
-        //public ActionResult Index_EuroSettings(EuroViewModel euroSettings)
-        //{
-        //    euroSettings = new EuroViewModel
-        //    {
-        //        AddEuro = new EuroExchangeModel(),
-        //        newEuroList = db.EuroExchangeModels.ToList().OrderByDescending(x => x.Date),
-        //        //populates list used for determain charttype from Entity Settings
-        //        settings = db.Settings.Where(x => x.Name == settingsName)
-        //    };
-        //    return View(euroSettings);
-        //}
-
-
-        //[HttpPost]
-        //public ActionResult SaveEuroSettings(Settings conf, FormCollection form)
-        //{
-
-        //    // Saves new settings to Entity Settings
-        //    if (Request.IsAjaxRequest() && ModelState.IsValid)
-        //    {
-        //        string name = form[1].ToString();
-        //        conf.ID = db.Settings.Where(x => x.Name == name).Select(x => x.ID).FirstOrDefault();
-        //        conf.Year = Convert.ToInt32(form[3]);
-        //        conf.Name = form[1];
-        //        if (!string.IsNullOrEmpty(conf.Name) && conf.Year != 0)
-        //        {
-        //            db.Entry(conf).State = EntityState.Modified;
-        //            db.SaveChanges();
-        //            return View("Index_EuroSettings", conf);
-        //        }
-        //    }
-        //    return View(conf);
-        //}
-
-
-
-        // GET: EuroExchangeModels/Details/5
-
 
         public ActionResult Details(int? id)
         {

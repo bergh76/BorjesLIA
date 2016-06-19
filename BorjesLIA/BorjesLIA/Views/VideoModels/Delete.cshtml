@@ -12,97 +12,150 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <h2>Delete</h2>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Borttagning av data</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- fixa en holder för formen-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                        <div class="x_panel">
+                            <div class="x_title alert-danger">
+                                <h2>Du håller på att ta bort data. Vill du fortsätta?</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-md-9">
+                                        @Html.HiddenFor(model => model.ID)
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Namn</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <h3>Are you sure you want to delete this?</h3>
-                <div>
-                    <h4>VideoModel</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Url)
-                        </dt>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Videolänk</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Url)
-                        </dd>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Längd</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </dt>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Typ</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Name)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Date)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Date)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.PlacingOrder)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.PlacingOrder)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Active)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Active)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Type)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Type)
-                        </dd>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Sorteringsindex</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-                    </dl>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <div class="input-group">
+                                                    Aktiv @Html.DisplayFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Tillagd av:</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <h3>Datum</h3>
+                                                <div class="input-group">
+                                                    @Html.DisplayFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
-                            @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                }
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Ta bort" class="btn btn-default" /> |
+                                        @Html.ActionLink("Tillbaka", "Index")
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    }
+                    </div>
+                    <!-- Fixa en form för bilden -->
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Video @Model.Name</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <div id="getProp" data-prop="@Html.DisplayFor(model => model.ID)"></div>
+
+                                <section id="show-result-box" class="hidden">
+                                    <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
+                                </section>
+                                <section id="show-video-result-box" class="hidden">
+                                    <video controls width="560" height="315" id="videoID">
+                                        <source src="" type="video/mp4">
+                                    </video>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div id="getProp" data-prop="@Html.DisplayFor(model => model.ID)"></div>
-
-                <section id="show-result-box" class="hidden">
-                    <iframe width="560"
-                            height="315"
-                            id="myVideoID"
-                            src=""
-                            frameborder="0"
-                            allowfullscreen></iframe>
-
-                </section>
-                <section id="show-video-result-box" class="hidden">
-                    <video controls width="560" height="315" id="videoID">
-                        <source src="" type="video/mp4">
-                    </video>
-                </section>
-</div>
+            </div>
         </div>
     </div>
-
-
-
     <script>
         $(document).ready(function () {
             //ger yt vad den behöver
@@ -135,23 +188,25 @@
                         $('#show-video-result-box').removeClass('hidden');
                         $('#videoID').attr("src", data.returnData);
 
-                  
+
                     }
                         // om video är yt
                     else if (checkTwo) {
                         //Skapa spelare med API för att kunna ta ut duration
-                        $('#show-result-box').removeClass('hidden');
                         $('#myVideoID').attr("src", data.returnData);
-                        player = new YT.Player('myVideoID', {
-                            events: {
-                                'onReady': onPlayerReady
-                            }
-                        });
+                        $('#show-result-box').removeClass('hidden');
+                        //player = new YT.Player('myVideoID', {
+                        //    events: {
+                        //        'onReady': onPlayerReady
+                        //    }
+                        //});
                     }
+                        //om video är vimeo
                     else if (checkThree) {
                         $('#myVideoID').attr("src", data.returnData);
                         $('#show-result-box').removeClass('hidden');
                     }
+
                 } else {
                     alert(data.errorMessage)
                     //location.reload();
@@ -160,10 +215,12 @@
                 alert('Fail. Cannot show video at this time')
                 //location.reload();
             });
+            //});
             function onPlayerReady(event) {
 
                 //event.target.playVideo();
             }
+
         });
     </script>
 </body>

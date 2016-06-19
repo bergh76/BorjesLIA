@@ -12,35 +12,95 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <h2>Details</h2>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Detaljer</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- fixa en holder för formen-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Detaljer för kvartalsdiesel</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Tillagd av:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.User)
+                                    </dd>
 
-                <div>
-                    <h4>EuroExchangeModel</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.euroValue)
-                        </dt>
+                                    <dt>
+                                        Tillagd den:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Date)
+                                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.euroValue)
-                        </dd>
+                                    <dt>
+                                        Editerad av:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EditByUser)
+                                    </dd>
+                                    <dt>
+                                        Editerad den:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.LoggDate)
+                                    </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Date)
-                        </dt>
+                                    <dt>
+                                        År:
+                                    </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Date)
-                        </dd>
-                     
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Year)
+                                    </dd>
 
-                    </dl>
+                                    <dt>
+                                        Månad:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Month)
+                                    </dd>
+
+                                    <dt>
+                                        Euroindex:
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.euroValue)
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                                @Html.ActionLink("Tillbaka", "Index")
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
             </div>
         </div>
     </div>

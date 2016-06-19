@@ -81,7 +81,7 @@ Author URL:
  top: 0;
  left: 0;
  width: 100%;
- min-height: 1023px;
+ min-height: 1020px;
  }
 #main-slider .slider-inner {
   position: absolute;
@@ -123,7 +123,7 @@ Author URL:
 }
 #main-slider .owl-prev:hover,
 #main-slider .owl-next:hover {
-  background-color: #72C05B;
+  background-color: rgba(221, 23, 38, 0.5);
 }
 #main-slider .owl-prev {
   left: -35px;

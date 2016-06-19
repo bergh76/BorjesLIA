@@ -232,7 +232,7 @@ namespace BorjesLIA.AdminControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID, Date, Year, Month, ,Quarter,DieselQuarterValue,LoggDate, EditByUser")] DieselQuarterPriceModel dieselQuarterPriceModel)
+        public ActionResult Edit([Bind(Include = "ID, Date, Year, Month,  Quarter, User, DieselQuarterValue, LoggDate, EditByUser, Type, Active, PlacingOrder")] DieselQuarterPriceModel dieselQuarterPriceModel)
         {
             var editBy = HttpContext.User.Identity.Name;
             if (editBy == null)

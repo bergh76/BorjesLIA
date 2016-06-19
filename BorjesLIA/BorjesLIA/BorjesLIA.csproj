@@ -372,7 +372,6 @@
     <Content Include="Content\production\js\maps\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Content\production\js\moment\moment.min.js" />
     <Content Include="Content\production\less\custom.css" />
-    <Content Include="Content\responsive.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -909,7 +908,6 @@
     <Content Include="Views\Imgs\Details.cshtml" />
     <Content Include="Views\Imgs\Edit.cshtml" />
     <Content Include="Views\Imgs\Index.cshtml" />
-    <Content Include="Views\EuroExchangeModels\Create.cshtml" />
     <Content Include="Views\EuroExchangeModels\Delete.cshtml" />
     <Content Include="Views\EuroExchangeModels\Details.cshtml" />
     <Content Include="Views\EuroExchangeModels\Edit.cshtml" />

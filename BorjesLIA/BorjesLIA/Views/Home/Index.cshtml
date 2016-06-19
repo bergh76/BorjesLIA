@@ -18,8 +18,6 @@
                 <a href="/">
                     <img src="~/Content/images/logo_blu.png" />
                 </a>
-                @*<img src="~/Content/images/borjes-logga-jpg.jpg" />*@
-                </a>
             </div>
         </div>
         <div class="navbar-collapse collapse">
@@ -28,28 +26,37 @@
         </div>
     </div>
 </nav>
-    <div>
-        <section id="main-slider">
-            <div class="owl-carousel">
-                @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
+    <section id="main-slider">
+    <div class="owl-carousel">
+        @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
             {
                 //för att lokal video inte går att styra från iframe.
                 if (element.type == 4.1m) //4.1 typ för mp4
                 {
+                <div class="owl-item">
+                    <video id="@element.url" class="center">
+                        <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
+                    </video>
+                </div>
+            }
 
-                        <div class="owl-item">
-                            <video id="@element.url" class="center">
-                                <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
-                            </video>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="owl-item">
-                            <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                        </div>
-                    }
+            else if(element.type == 4.2M)
+            {
+                <div class="owl-item">
+                    <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                </div>
+            }
+            else
+                {
+                    <div class="owl-item">
+                        <iframe id="@element.url"  src="@element.url" class="VideoClassTag" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                    </div>
                 }
-            </div>
-        </section>
+        }
     </div>
+</section>
+
+
+
+
+

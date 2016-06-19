@@ -12,48 +12,100 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <h2>Ta bort</h2>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Borttagning av data</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- fixa en holder för formen-->
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                        <div class="x_panel">
+                            <div class="x_title alert-danger">
+                                <h2>Du håller på att ta bort data. Vill du fortsätta?</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Tillagd av:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.User)
+                                    </dd>
 
-                <h3>Du är på väg att ta bort data? Borttagning av data är permanent.</h3>
-                <p>Vill du fortsätta?</p>
-                <div>
-                    <h4>Euroindex</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.euroValue)
-                        </dt>
+                                    <dt>
+                                        Tillagd den:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Date)
+                                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.euroValue)
-                        </dd>
+                                    <dt>
+                                        Editerad av:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EditByUser)
+                                    </dd>
+                                    <dt>
+                                        Editerad den:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.LoggDate)
+                                    </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Date)
-                        </dt>
+                                    <dt>
+                                        År:
+                                    </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Date)
-                        </dd>
-                        @*<dt>
-                            @Html.DisplayNameFor(model => model.EuroChartID)
-                        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Year)
+                                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.EuroChartID)
-                        </dd>*@
+                                    <dt>
+                                        Månad:
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Month)
+                                    </dd>
 
-                    </dl>
+                                    <dt>
+                                        Euroindex:
+                                    </dt>
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
+                                    <dd>
+                                        @Html.DisplayFor(model => model.euroValue)
+                                    </dd>
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
-                            @Html.ActionLink("Back to List", "Index")
+                                </dl>
+                            </div>
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Ta bort" class="btn btn-default" /> |
+                                    @Html.ActionLink("Tillbaka", "Index")
+                                </div>
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>

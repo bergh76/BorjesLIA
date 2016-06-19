@@ -55,7 +55,7 @@ Author URL:
 #main-slider {
   overflow: hidden;
 }
-.item{
+.item-responsive{
   /*background-image: url(/Images/UploadedImg/@Model.Url);*/
   position: absolute;
   top: 0;
@@ -68,7 +68,7 @@ Author URL:
   background-position: 50% 0;
   background-size: cover;
 }
-#main-slider {
+#main-slider .item {
   height: 558px;
   background-repeat: no-repeat;
   background-position: 50% 0;

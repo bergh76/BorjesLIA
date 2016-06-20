@@ -34,30 +34,30 @@
                 //}
 
                 var options = {
-                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear',},
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
+                    vAxis: { 
+                        title: "Pris",  fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 0.00, },
+                        gridlines: { count: 10, },                       
+                    },
 
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', },
-                        //viewWindow: { max: 11,  min: 0, },
-                        //gridlines: { count: 45,},
-                        //ticks: 
-                        //   [
-                        //       0.00, 
-                        //       10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
-                        //       15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
-                        //       20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
-                        //       25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
-                        //       30.0,
-                        //       //28.00, 28.50, 29.00, 29.50, 30.00
-                        //   ],
-
-                        hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
-                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                        pointSize: 7,
-                        dataOpacity: 0.9,
-                        lineWidth: 4,
-                    }
+                    hAxis:{ 
+                        title: "Vecka", 
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26  },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true  },
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    pointSize: 7,
+                    dataOpacity: 0.9,
+                    lineWidth: 4,
                 };
 
                     var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
@@ -81,17 +81,26 @@
 
                 function drawChart(elementId, title, dataTable) {
                     var options = {
-                        legend: { position: 'top', maxLines: 3},
                         title: title,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                        legend: { position: 'top', maxLines: 3,
+                            textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                            ,},
                         animation:{ "startup" : true, duration: 1000, easing: 'linear',
                         },
+                        vAxis: { 
+                            title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        },
 
-                        vAxis: {  title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },              
-                       
-                        hAxis:{ titleTextStyle: { fontName: 'Calibri', }, 
-                            viewWindowMode: 'explicit',  
-                            viewWindow: { min: 0, },
-                            gridlines: { count: 20, },
+                        hAxis:{ 
+                            title: "Pris",
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                            viewWindowMode: 'explicit',
+                            viewWindow: { min: 0.00, },
+                            gridlines: { count: 10, },
                         },
                         chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
                         pointSize: 7, dataOpacity: 0.8, lineWidth: 4,
@@ -116,18 +125,27 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: { position: 'top', maxLines: 3},
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
 
-                    vAxis: {  title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },  
+                    vAxis: { 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
+                    },
 
-                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
-                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                    pointSize: 7,
-                    dataOpacity: 0.9,
-                    lineWidth: 4,
-                };
+                    hAxis:{ 
+                        title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
                 var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
                 }
@@ -146,16 +164,30 @@
             });
             function drawChart(elementId, title, dataTable) {             
                 var options = {
-                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
 
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
+                    vAxis: { 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 0.00, },
+                        gridlines: { count: 10, },
+                    },
 
-                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
+                    hAxis:{ 
+                        title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,
-                    dataOpacity: 0.4,
+                    dataOpacity: 0.9,
                     lineWidth: 2,
                 };
                 var chart = new google.visualization.AreaChart(document.getElementById("DPWChartDiv"));

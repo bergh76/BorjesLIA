@@ -33,30 +33,30 @@
                 //}
 
                 var options = {
-                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear',},
-                    
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', },
-                        //viewWindow: { max: 11,  min: 0, },
-                        //gridlines: { count: 45,},
-                        ticks: 
-                            [
-                                0.00, 
-                                10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
-                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
-                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
-                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
-                                30.0,
-                                //28.00, 28.50, 29.00, 29.50, 30.00
-                            ]
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
+                    vAxis: { 
+                        title: "Pris",  fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },                        
                     },
 
-                    hAxis:{ title: "Månad", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
-                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
-                    pointSize: 4,
+                    hAxis:{ 
+                        title: "Månad", 
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26  },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true  },
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    pointSize: 7,
                     dataOpacity: 0.9,
-                    lineWidth: 2,
+                    lineWidth: 4,
                 };
                 var chart = new google.visualization.LineChart(document.getElementById("DMTGraphDiv"));
                     chart.draw(dataTable, options);
@@ -76,23 +76,31 @@
             });
 
             function drawChart(elementId, title, dataTable) {
-                var options = {
-                        legend: { position: 'top', maxLines: 3},
-                        title: title,
-                        animation:{ "startup" : true, duration: 1000, easing: 'linear',
-                        },
+                var options = { 
+                    title: title,
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
+                    vAxis: { 
+                        title: "Månad", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
 
-                        vAxis: {  title: "Månad", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },                       
-                       
-                        hAxis:{ titleTextStyle: { fontName: 'Calibri', }, 
-                            viewWindowMode: 'explicit',  
-                            viewWindow: { min: 0, },
-                            gridlines: { count: 20, },
-
-                        },
-                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
-                        pointSize: 7, dataOpacity: 0.8, lineWidth: 4,
-                    };
+                    hAxis:{ 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindowMode: 'explicit',
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    dataOpacity: 0.9,
+                };
                     var chart = new google.visualization.BarChart(document.getElementById("DMTGraphDiv"));
                     chart.draw(dataTable, options );
                 }
@@ -115,33 +123,29 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: { position: 'top', maxLines: 3},
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
-
-                    vAxis: {
-                        title: "Månad",
-                        titleTextStyle: { fontName: 'Calibri', },
-                        //minValue: 0,
-                        //gridlines: { count: 100,  },
-                        ticks:
-                            [
-                                10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
-                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
-                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
-                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
-                                30.0,
-                                //30.5, 31.0, 31.5, 32.0, 32.5, 33.0, 33.5, 34.0, 34.5,
-                            ],
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
                     },
-                    hAxis:{
+
+                    vAxis: { 
                         title: "Pris",
-                        titleTextStyle: { fontName: 'Calibri', }
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
+                    },
+
+                    hAxis:{ 
+                        title: "Månad", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                    pointSize: 7,
-                    dataOpacity: 0.8,
-                    lineWidth: 4,
+                    dataOpacity: 0.9,
                 };
                 var chart = new google.visualization.ColumnChart(document.getElementById("DMTGraphDiv"));
                 chart.draw(dataTable, options);
@@ -172,31 +176,33 @@
                 //                         role: "annotation" },
                 //                     ]);
                 //}
-                    var options = {
-                        legend: { position: 'top', maxLines: 3 },
-                        title: title,
-                        animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+                var options = { 
+                    title: title,
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
 
-                        vAxis: { title: "Pris",
-                            titleTextStyle: { fontName: 'Calibri', },
-                            minValue: 0,
-                            //gridlines: { count: 100, },
-                            ticks:
-                                [
-                                 0.00, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
-                                15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
-                                20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
-                                25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
-                                30.0,
-                                    //30.5, 31.0, 31.5, 32.0, 32.5, 33.0, 33.5, 34.0, 34.5,
-                                ],
-                        },
-                        hAxis:{ title: "Månad", titleTextStyle: { fontName: 'Calibri', },},
-                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                        pointSize: 4,
-                        dataOpacity: 0.4,
-                        lineWidth: 2,
-                    };
+                    vAxis: { 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
+                    },
+
+                    hAxis:{ 
+                        title: "Månad", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    pointSize: 4,
+                    dataOpacity: 0.9,
+                    lineWidth: 2,
+                };
                     var chart = new google.visualization.AreaChart(document.getElementById("DMTGraphDiv"));
                     chart.draw(dataTable, options);
             }

@@ -32,24 +32,30 @@
                 //}
 
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },                    
-
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri',  },
-                        //viewWindow: { max: 11,  min: 0, },
-                        //gridlines: { count: 100, },
-                        ticks: 
-                            [
-                                0.00, 5.0, 7.5, 7.75, 8.0, 8.25, 8.5, 8.75, 9.0, 9.25, 9.5, 9.75, 10.0,
-                            ]
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
+                    vAxis: { 
+                        title: "Pris",  fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },                        
                     },
 
-                    hAxis:{ title: "Månad", titleTextStyle: { fontName: 'Calibri', }, },
+                    hAxis:{ 
+                        title: "Månad", 
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26  },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true  },
+                    },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                    pointSize: 4,
+                    pointSize: 7,
                     dataOpacity: 0.9,
-                    lineWidth: 2,
+                    lineWidth: 4,
                 };
                     var chart = new google.visualization.LineChart(document.getElementById("EuroGraphDiv"));
                     chart.draw(dataTable, options);
@@ -72,42 +78,30 @@
             });
 
                 function drawChart(elementId, title, dataTable) {
-                    var options = {
-                        legend: {position: 'top', maxLines: 3},
+                    var options = { 
                         title: title,
-                        animation:{
-                            "startup" : true,
-                            duration: 1000,
-                            easing: 'linear',
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                        legend: { position: 'top', maxLines: 3,
+                            textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                            ,},
+                        animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                        },
+                        vAxis: { 
+                            title: "Månad", fontName: 'Calibri', fontSize: 34,
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                         },
 
-                        vAxis: {
-                            title: "Månad",
-                            titleTextStyle: {
-                                fontName: 'Calibri',
-                            },
-                        },
-
-                        hAxis:{
-                            titleTextStyle: {
-                                fontName: 'Calibri',
-                            },
+                        hAxis:{ 
+                            title: "Pris",
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                             viewWindowMode: 'explicit',
-                            viewWindow: {
-                                //max: 11,
-                                min: 0,
-                            },
-                            gridlines: {
-                                //count: 100, 
-                            },
-                            ticks: [
-                            5.0, 7.5, 7.75, 8.0, 8.25, 8.5, 8.75, 9.0, 9.25, 9.5, 9.75, 10.0,
-                            ]
+                            viewWindow: { min: 7.00, },
+                            gridlines: { count: 15, },
                         },
                         chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                        pointSize: 7,
                         dataOpacity: 0.9,
-                        lineWidth: 4,
                     };
                     var chart = new google.visualization.BarChart(document.getElementById("EuroGraphDiv"));
                     chart.draw(dataTable, options);
@@ -129,40 +123,30 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: {position: 'top', maxLines: 3},
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
                     },
 
-                    vAxis: {
+                    vAxis: { 
                         title: "Pris",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        viewWindow: {
-                            //max: 11,
-                            min: 0,
-                        },
-                        gridlines: {
-                            //count: 100,
-                        },
-                        ticks: [
-                            5.0, 7.5, 7.75, 8.0, 8.25, 8.5, 8.75, 9.0, 9.25, 9.5, 9.75, 10.0,
-                        ]
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
                     },
 
-                    hAxis:{
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        }
+                    hAxis:{ 
+                        title: "Månad", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                    pointSize: 7,
                     dataOpacity: 0.9,
-                    lineWidth: 4,
+
                 };
                 var chart = new google.visualization.ColumnChart(document.getElementById("EuroGraphDiv"));
                     chart.draw(dataTable, options);
@@ -180,37 +164,27 @@
                 drawChart('EuroGraphDiv', title, dataTable);
             });
             function drawChart(elementId, title, dataTable) {
-                var options = {
-                    legend: {position: 'top', maxLines: 3},
+                var options = { 
                     title: title,
-                    animation:{
-                        "startup" : true,
-                        duration: 1000,
-                        easing: 'linear',
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
                     },
 
-                    vAxis: {
+                    vAxis: { 
                         title: "Pris",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        },
-                        viewWindow: {
-                            //max: 11,
-                            min: 0,
-                        },
-                        gridlines: {
-                            //count: 100, 
-                        },
-                        ticks: [
-                            5.0, 7.5, 7.75, 8.0, 8.25, 8.5, 8.75, 9.0, 9.25, 9.5, 9.75, 10.0,
-                        ]
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
                     },
 
-                    hAxis:{
-                        title: "Vecka",
-                        titleTextStyle: {
-                            fontName: 'Calibri',
-                        }
+                    hAxis:{ 
+                        title: "Månad", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,

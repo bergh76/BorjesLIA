@@ -48,7 +48,7 @@ body {
  top: 0;
  left: 0;
  width: 100%;
- min-height: 1020px;
+ min-height: 1030px;
  }
 #main-slider .slider-inner {
   position: absolute;
@@ -123,12 +123,7 @@ body {
 }
 
 .sidenav {
-    border-bottom-left-radius: 5px;
-    height: 150px;
-    padding-top: 12px;
-    list-style: none;
-    float: left;
-    display: inline-block;
+    height: 100%;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -137,10 +132,15 @@ body {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    /*padding-top: 60px;*/
+    padding-top: 12px;
 }
 
+
 .sidenav a  {
+
+    list-style: none;
+
+    display: inline-block;
     /*padding:  20px;*/
     font-size: 18px;
     color: #fff;
@@ -152,13 +152,7 @@ body {
     color: rgba(221, 23, 38, 0.5);
 }
 
-.closebtn {
-    /*position: absolute;*/
-    top: 0;
-    /*left: 10px;*/
-    font-size: 18px !important;
-    /*margin-left: 50px;*/
-}
+
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}

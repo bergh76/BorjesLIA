@@ -9,7 +9,7 @@
             <ul>
                 @*<li><a javascript:void(0)" class="closebtn" onclick="closeNav()">×</a></li>*@
                 <li><a onclick="toggleFullScreen(), closeNav()"><i class="fa fa-television brn"></i> Helskärm</a></li>
-                <li><a><i class="fa fa-cog"></i> @Html.ActionLink("Inställningar", "Index", "Admin")</a></li>
+                <li><a><i class="fa fa-cog"> </i> @Html.ActionLink("Inställningar", "Index", "Admin")</a></li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-lock"></i> Log off</a></li>
                 <li><a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a></li>
             </ul>
@@ -19,8 +19,8 @@
     else
     {
         <ul>
-            <li><span><i class="fa fa-expeditedssl"></i> @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span></li>
-            <li><a javascript:void(0)" class="closebtn" onclick="closeNav()">Stäng</a></li>
+            <li><a><span class="fa fa-expeditedssl"> @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span></a></li>
+            <li><a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a></li>
         </ul>
 
     }

@@ -41,10 +41,10 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ID)
+                            @Html.DisplayFor(modelItem => item.urlString)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.urlString)
+                            @Html.DisplayFor(modelItem => item.dateUrl)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

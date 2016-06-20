@@ -304,30 +304,14 @@ function toggleFullScreen() {
 }
 
 
-//Hide mouse when inactive
-$(document).ready(function () {
+//Sidebar
+function openNav() {
+    document.getElementById("mySidenav").style.width = "180px";
+}
 
-    //var myVar;
-    //$(".navbar").hide();
-
-    //$("html").mousemove(function (event) {
-    //    $(".navbar").show();
-
-    //    myStopFunction();
-    //    myFunction();
-    //});
-
-    //function myFunction() {
-    //    myVar = setTimeout(function () {
-    //        $(".navbar").hide();
-    //    }, 1000);
-    //}
-    //function myStopFunction() {
-    //    if (typeof myVar != 'undefined') {
-    //        clearTimeout(myVar);
-    //    }
-    //}
-});
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
 
 //***** DATEPICKER FOR DATE *****//
 $(document).ready(function () {
@@ -356,46 +340,3 @@ $(document).ready(function () {
 //          * MAIN FUNCTIONS END *         //
 //*****************************************//
 
-
-
-//*****************************************//
-//              BX SLIDER                  //
-//*****************************************//
-//$(document).ready(function () {
-//    $(".bxslider").bxSlider({
-//        pager: false,
-//        mode: "fade",
-//        captions: false,
-//        auto: true,
-//        autoControls: false,
-//        responsive: true,
-//        minSlides: 1,
-//        slideMargin: 0,
-//        adaptiveHeight: true,
-//        loading: true,
-//        controls: false,
-//        pause: 5000, //15000,
-//        //video: true,
-//        autoControls: false,
-
-//    });
-//});
-
-//$(document).ready(function(){
-//    $('.bxslider').bxSlider({
-//        pager: false
-//    });
-//});
-
-////video test
-//$("#videoOne").on("pause", function (e) {
-//    slider.startShow();
-//});
-
-//$("#videoOne").on("play", function (e) {
-//    slider.stopShow();
-//});
-
-//*****************************************//
-//         * BX SLIDER END *               //
-//*****************************************//

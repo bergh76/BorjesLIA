@@ -122,4 +122,46 @@ body {
     margin-top: 0.3%;
 }
 
+.sidenav {
+    border-bottom-left-radius: 5px;
+    height: 150px;
+    padding-top: 12px;
+    list-style: none;
+    float: left;
+    display: inline-block;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    /*padding-top: 60px;*/
+}
+
+.sidenav a  {
+    /*padding:  20px;*/
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: rgba(221, 23, 38, 0.5);
+}
+
+.closebtn {
+    /*position: absolute;*/
+    top: 0;
+    /*left: 10px;*/
+    font-size: 18px !important;
+    /*margin-left: 50px;*/
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 

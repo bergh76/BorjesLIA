@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Skriv in dieselpris </p>
+                                <p>Skriv in värde </p>
                                 <div class="input-group">
                                     @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue,new { htmlAttributes = new { @class = "form-control checkWeek", placeholder = "" } })
                                     @Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
@@ -76,22 +76,15 @@
         }
         else
         {
-            <div class="x_panel">
-                <div class="x_title">
-                    <div class="clearfix"></div>
-                </div>
+            <div>
                 @Html.Partial("_DieselWeekGraph")
             </div>
         }
     }
 </div>
-
-
-
-        <!--script using ajax, relode page to show new graph-->
-            <script type="text/javascript">
-                function OnSuccess(response) {
-                    location.reload();
-                }
-
-            </script>
+<!--script using ajax, relode page to show new graph-->
+<script type="text/javascript">
+    function OnSuccess(response) {
+        location.reload();
+    }
+</script>

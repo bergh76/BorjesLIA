@@ -110,9 +110,10 @@
   padding: 4px;
 }
 .profile_info {
-  padding: 25px 10px 10px;
+  margin-left: 0;
+  margin-right:0;
   width: 65%;
-  float: left;
+  /*float: left;*/
 }
 .profile_info span {
   font-size: 13px;

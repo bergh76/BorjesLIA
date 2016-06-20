@@ -26,14 +26,15 @@
 
                 <div class="form-group">
                     <div class="dropdown">
-                        @Html.EnumDropDownListFor(model => model.ChartType, "Diagramtyp", new { @class = "btn btn-default dropdown-toggle " })
+                        <h4>Välj Diagramtyp</h4>
+                        @Html.EnumDropDownListFor(model => model.ChartType, new { @class = "btn btn-default dropdown-toggle " })
                         @Html.ValidationMessageFor(model => model.ChartType, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="dropdown">
-                        @*@Html.DropDownListFor(model => model.AddWeekDiesel.Year,new SelectList(Model.newWeekDieselList.Select(x => x.Year).Distinct()), "Alla", new { @class = "btn btn-default dropdown-toggle" })*@
+                        <h4>Välj År</h4><span><small>Håll inne shift för att välja fler än ett år</small></span>
                         @Html.ListBoxFor(model => model.newWeekDieselList, new MultiSelectList(Model.newWeekDieselList.OrderBy(x => x.Year).Select(x => x.Year).Distinct()), new { @class = "list-group-item" })
                          @Html.ValidationMessageFor(model => model.AddWeekDiesel.Year, "", new { @class = "text-danger" })
                     </div>

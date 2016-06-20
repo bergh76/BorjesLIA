@@ -137,7 +137,7 @@
                         title: "Pris",
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
-                        viewWindow: { min: 7.00, },
+                        viewWindow: { min: 0.00, },
                         gridlines: { count: 15, },
                     },
 
@@ -146,6 +146,8 @@
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                     },
+                }
+
                 var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
                 }

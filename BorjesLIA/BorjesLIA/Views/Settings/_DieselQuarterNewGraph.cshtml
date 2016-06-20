@@ -83,7 +83,7 @@
     {
 
         <script type="text/javascript">
-            google.charts.load('current', { 'packages': [['area']], });
+            google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(function () {
                 var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
@@ -91,16 +91,16 @@
                 drawChart('DPQChartDiv', title, dataTable);
             });
 
-                function drawChart(elementId, title, dataTable) {
-                    var options = {
-                        chart: {
-                            title: title,
-                        },
+            function drawChart(elementId, title, dataTable) {
+                var options = {
+                    chart: {
+                        title: title,
+                    },
 
-                    };
-                    var chart = new google.charts.Area(document.getElementById(elementId));
-                    chart.draw(dataTable, options);
-                }
+                };
+                var chart = new google.visualization.AreaChart(document.getElementById(elementId));
+                chart.draw(dataTable, options);
+            }
 
         </script>
     }

@@ -25,17 +25,18 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="dropdown">
+                        <h4>Välj Diagramtyp</h4>
                         @Html.EnumDropDownListFor(model => model.ChartType, new { @class = "btn btn-default dropdown-toggle " })
                         @Html.ValidationMessageFor(model => model.ChartType, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <div class="dropdown">
                         <h4>Välj Sorteringstyp</h4>
                         @Html.EnumDropDownListFor(model => model.SortType, new { @class = "btn btn-default dropdown-toggle " })
                         @Html.ValidationMessageFor(model => model.ChartType, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <div class="dropdown">

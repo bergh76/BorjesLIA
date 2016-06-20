@@ -65,16 +65,17 @@ namespace BorjesLIA.AdminControllers
         [ValidateAntiForgeryToken]
         public ActionResult _AddUrl(URLViewModel newUrl, FormCollection formCollection)
         {
-            var user = HttpContext.User.Identity.Name;
-            if(user == null)
-            {
-                user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            }
+           
             if (Request.IsAjaxRequest())
             {
+                var user = HttpContext.User.Identity.Name;
+                if (user == null)
+                {
+                    user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                }
                 using (var db = new ApplicationDbContext())
                 {
-                    newUrl.AddUrl.dateUrl = Convert.ToDateTime(formCollection[2]);
+                    newUrl.AddUrl.dateUrl = Convert.ToDateTime(formCollection[1]);
                     newUrl.AddUrl.User = user;
                     newUrl.AddUrl.LoggDate = DateTime.Now;
                     newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till

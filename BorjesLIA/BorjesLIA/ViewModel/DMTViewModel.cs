@@ -45,24 +45,23 @@ namespace BorjesLIA.ViewModel
                 if (Year != null)
                 {
                     string[] values = Year.Split(',').Select(sValue => sValue.Trim()).ToArray();
-                foreach (string yItem in values)
-                {
-                    dataTable.AddColumn(yItem.ToString(), "number");
-                }
-
-                foreach (var m in month)
-                {
-                    
-                    System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-                    var strMonthName = mfi.GetMonthName(m).ToString();
-                    var val = new List<object>(new[] { strMonthName });
-                    foreach (var year in values)
+                    foreach (string yItem in values)
                     {
-                        var result = data
-                            .Where(x => x.Date.Month == m && x.Year == year)
-                            .Select(x => x.DieselDTMValue)
-                            .SingleOrDefault();
-                        val.Add(result);
+                        dataTable.AddColumn(yItem.ToString(), "number");
+                    }
+
+                    foreach (var m in month)
+                    {
+                        System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
+                        var strMonthName = mfi.GetMonthName(m).ToString();
+                        var val = new List<object>(new[] { strMonthName });
+                        foreach (var year in values)
+                        {
+                            var result = data
+                                .Where(x => x.Date.Month == m && x.Year == year)
+                                .Select(x => x.DieselDTMValue)
+                                .SingleOrDefault();
+                            val.Add(result);
                         }
                         dataTable.AddRow(val);
                     }

@@ -21,26 +21,6 @@ namespace BorjesLIA.ViewModel
         public IEnumerable<DieselQuarterPriceModel> newQuarterDieselList { get; set; }
         public string Year { get; set; }
 
-        //public Task<List<DieselQuarterPriceModel>> GetQuarterData()
-        //{
-        //    ChartName = "Dieselpris Kvartal";
-        //    using (var db = new ApplicationDbContext())
-        //    {
-        //        if (db.DieselPriceQuarter == null)
-        //        {
-        //            return GetQuarterData();
-        //        }
-
-        //        else
-        //        {
-        //            Year = db.Settings.ToList().Where(x => x.Name == this.ChartName).Select(x => x.Year).FirstOrDefault();
-        //            var lqDiesel = db.DieselPriceQuarter.Where(x => x.Year == Year).OrderBy(x => x.Year).ToList();
-        //            return Task.Run(() => lqDiesel);
-        //        }
-        //    }
-
-        //}
-
         public string Title { get; set; }
         public DieselQuarterViewModel()
         {

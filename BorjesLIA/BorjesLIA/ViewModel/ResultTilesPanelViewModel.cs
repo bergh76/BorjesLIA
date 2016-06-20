@@ -26,9 +26,6 @@ namespace BorjesLIA.ViewModel
         public string actualEuro { get; set; }
         public string lastEuro { get; set; }
         public string diffEuro { get; set; }
-
-        //private ApplicationDbContext db = new ApplicationDbContext();
-
         public ResultTilesPanelViewModels()
         {
         }
@@ -162,6 +159,7 @@ namespace BorjesLIA.ViewModel
             }
         }
 
+        // Popoulates DMTstats to RestulTilesPanelViewModel
         private void GetDTM(string error)
         {
             using (var db = new ApplicationDbContext())

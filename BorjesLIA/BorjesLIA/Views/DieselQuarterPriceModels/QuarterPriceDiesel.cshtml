@@ -1,17 +1,5 @@
 ﻿@model BorjesLIA.ViewModel.DieselQuarterViewModel
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#myDQTable').DataTable({
-            "order": [
-                [
-                    0, "desc", //Column1
-                    //1, "asc" // Column2
-                ]
-            ],
-            "processing": true,
-        });
-    });
-</script>
+
 <div class="x_panel">
     <div class="x_title">
         <h2>Diesel <small>- priser per kvartal</small></h2>
@@ -96,3 +84,16 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myDQTable').DataTable({
+            "order": [
+                [
+                    0, "desc", //Column1
+                    //1, "asc" // Column2
+                ]
+            ],
+            "processing": true,
+        });
+    });
+</script>

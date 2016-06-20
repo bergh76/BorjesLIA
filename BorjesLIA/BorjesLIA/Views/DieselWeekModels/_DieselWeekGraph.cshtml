@@ -3,116 +3,11 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-@*<script src="~/Scripts/GraphHideNav.js"></script>*@
-
 @{ var dieselWeekChartList = Model.settings.Select(x => x.ChartType).Distinct().ToList();
     var chartID = dieselWeekChartList.FirstOrDefault();
 
     if (chartID == 1)
     {
-        <!-- 
-        @*<script type="text/javascript">
-            google.load("visualization", "1", { packages: ["corechart"] });
-            google.setOnLoadCallback(drawchart);
-            function drawchart() {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                    url: '@Url.Action("GetData")',
-                    data: "{ }",
-                    // If data connections is success
-                    success:
-                        function drawchart(dataValues) {
-                            // Adds data into columns to DataTable
-                            var data = new google.visualization.DataTable();
-                            data.addColumn('string', 'Datum');
-                            data.addColumn('number', 'Pris');
-                            if (window.JSON && !window.JSON.dateParser) {
-                                var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                JSON.dateParser = function (key, value) {
-                                    if (typeof value === 'string') {
-                                        var a = reISO.exec(value);
-                                        if (a)
-                                            return new Date(value);
-                                        a = reMsAjax.exec(value);
-                                        if (a) {
-                                            var b = a[1].split(/[-+,.]/);
-                                            return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                        }
-                                    }
-                                    return value;
-                                };
-
-                            }
-                            // Loops through the DataTable with data from database
-                            for (var i = 0; i < dataValues.length; i++) {
-                                var str = window.JSON.stringify(dataValues[i].Date);
-                                //console.log("Här var det strängat",str);
-                                var date = JSON.parse(str, JSON.dateParser);
-                                //console.log("Här ska det vara datum", date);
-                                data.addRow([
-                                    //(dataValues[i].Date), dataValues[i].euroValue])
-                                    (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                console.log(data);
-
-                            }
-                            var view = new google.visualization.DataView(data);
-                            view.setColumns([0, 1,
-                                             {
-                                                 calc: "stringify",
-                                                 sourceColumn: 1,
-                                                 type: "string",
-                                                 role: "annotation",
-                                             },
-                            ]);
-
-                            // Settings for visualization of the graph
-                            var options = {
-                                width: '100%',
-                                height: '100%',
-                                chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
-                            pointSize: 3,
-                            dataOpacity: 0.4,
-                            lineWidth: 2,
-                            vAxis: {
-                                viewWindow: {
-                                    min: 0,
-                                    max: 1.50
-                                },
-                                //ticks: [
-                                //      0, 0.05, 0.10, 0.15, 0.20,
-                                //      0.25, 0.30, 0.35, 0.40, 0.45,
-                                //      0.50, 0.55, 0.60, 0.65, 0.70,
-                                //      0.75, 0.80, 0.85, 0.90, 0.95,
-                                //      1.00, 1.10, 1.15, 1.20, 1.25,
-                                //      1.30, 1.35, 1.40, 1.45, 1.50,
-                                //      //1.55, 1.60, 1.65, 1.70, 1.75,
-                                //      //1.80, 1.85, 1.90, 1.95, 2.00
-                                //]
-                            },
-                            hAxis: {
-                                title: 'Datum',
-                                titleTextStyle:
-                                    {
-                                        color: '#333'
-                                    },
-                            }
-                        }
-                            // Draws the graph into a specified div
-                            var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
-                            chart.draw(view, options);
-            },
-            // If collectning data from database fails promp message here
-            error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-            });
-            }
-        </script>*@
-            -->
         <script type="text/javascript">
 
             google.charts.load('current', { 'packages': ['corechart'],});
@@ -139,30 +34,30 @@
                 //}
 
                 var options = {
-                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear',},
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
+                    vAxis: { 
+                        title: "Pris",  fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 0.00, },
+                        gridlines: { count: 10, },                       
+                    },
 
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', },
-                        //viewWindow: { max: 11,  min: 0, },
-                        //gridlines: { count: 45,},
-                        //ticks: 
-                        //   [
-                        //       0.00, 
-                        //       10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5,
-                        //       15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5,
-                        //       20.0, 20.5, 21.0, 21.5, 22.0, 22.5, 23.0, 23.5, 24.0, 24.5,
-                        //       25.0, 25.5, 26.0, 26.5, 27.0, 27.5, 28.0, 28.5, 29.0, 29.5,
-                        //       30.0,
-                        //       //28.00, 28.50, 29.00, 29.50, 30.00
-                        //   ],
-
-                        hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
-                        chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                        pointSize: 7,
-                        dataOpacity: 0.9,
-                        lineWidth: 4,
-                    }
+                    hAxis:{ 
+                        title: "Vecka", 
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26  },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true  },
+                    },
+                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
+                    pointSize: 7,
+                    dataOpacity: 0.9,
+                    lineWidth: 4,
                 };
 
                     var chart = new google.visualization.LineChart(document.getElementById("DPWChartDiv"));
@@ -173,109 +68,6 @@
 
     if (chartID == 2)
     {
-        <!-- 
-        @*<script type="text/javascript">
-            google.load("visualization", "1", { packages: ["corechart"] });
-            google.setOnLoadCallback(drawchart);
-            function drawchart() {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                    url: '@Url.Action("GetData")',
-                    data: "{ }",
-                    // If data connections is success
-                    success:
-                        function drawchart(dataValues) {
-                            // Adds data into columns to DataTable
-                            var data = new google.visualization.DataTable();
-                            data.addColumn('string', 'Datum');
-                            data.addColumn('number', 'Pris');
-                            if (window.JSON && !window.JSON.dateParser) {
-                                var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                JSON.dateParser = function (key, value) {
-                                    if (typeof value === 'string') {
-                                        var a = reISO.exec(value);
-                                        if (a)
-                                            return new Date(value);
-                                        a = reMsAjax.exec(value);
-                                        if (a) {
-                                            var b = a[1].split(/[-+,.]/);
-                                            return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                        }
-                                    }
-                                    return value;
-                                };
-
-                            }
-                            // Loops through the DataTable with data from database
-                            for (var i = 0; i < dataValues.length; i++) {
-                                var str = window.JSON.stringify(dataValues[i].Date);
-                                //console.log("Här var det strängat",str);
-                                var date = JSON.parse(str, JSON.dateParser);
-                                //console.log("Här ska det vara datum", date);
-                                data.addRow([
-                                    //(dataValues[i].Date), dataValues[i].euroValue])
-                                    (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                console.log(data);
-
-                            }
-                            var view = new google.visualization.DataView(data);
-                            view.setColumns([0, 1,
-                                             {
-                                                 calc: "stringify",
-                                                 sourceColumn: 1,
-                                                 type: "string",
-                                                 role: "annotation",
-                                             },
-                            ]);
-
-                            // Settings for visualization of the graph
-                            var options = {
-                                width: '100%',
-                                height: '100%',
-                                chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
-                                pointSize: 3,
-                                dataOpacity: 0.4,
-                                lineWidth: 2,
-                                vAxis: {
-                                    viewWindow: {
-                                        min: 0,
-                                        max: 1.50
-                                    },
-                                    ticks: [
-                                          0, 0.05, 0.10, 0.15, 0.20,
-                                          0.25, 0.30, 0.35, 0.40, 0.45,
-                                          0.50, 0.55, 0.60, 0.65, 0.70,
-                                          0.75, 0.80, 0.85, 0.90, 0.95,
-                                          1.00, 1.10, 1.15, 1.20, 1.25,
-                                          1.30, 1.35, 1.40, 1.45, 1.50,
-                                          //1.55, 1.60, 1.65, 1.70, 1.75,
-                                          //1.80, 1.85, 1.90, 1.95, 2.00
-                                    ]
-                                },
-                                hAxis: {
-                                    title: 'Datum',
-                                    titleTextStyle:
-                                        {
-                                            color: '#333'
-                                        },
-                                }
-                            }
-                            // Draws the graph into a specified div
-                            var chart = new google.visualization.BarChart(document.getElementById("DPWChartDiv"));
-                            chart.draw(view, options);
-                        },
-                    // If collectning data from database fails promp message here
-                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                });
-            }
-        </script>*@
-            -->
         <script type="text/javascript">
 
             google.charts.load('current', { 'packages': ['corechart'], });
@@ -289,17 +81,26 @@
 
                 function drawChart(elementId, title, dataTable) {
                     var options = {
-                        legend: { position: 'top', maxLines: 3},
                         title: title,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                        legend: { position: 'top', maxLines: 3,
+                            textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                            ,},
                         animation:{ "startup" : true, duration: 1000, easing: 'linear',
                         },
+                        vAxis: { 
+                            title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        },
 
-                        vAxis: {  title: "Vecka", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },              
-                       
-                        hAxis:{ titleTextStyle: { fontName: 'Calibri', }, 
-                            viewWindowMode: 'explicit',  
-                            viewWindow: { min: 0, },
-                            gridlines: { count: 20, },
+                        hAxis:{ 
+                            title: "Pris",
+                            titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                            textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                            viewWindowMode: 'explicit',
+                            viewWindow: { min: 0.00, },
+                            gridlines: { count: 10, },
                         },
                         chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" }, 
                         pointSize: 7, dataOpacity: 0.8, lineWidth: 4,
@@ -311,110 +112,6 @@
     }
     if (chartID == 3)
     {
-        <!-- 
-        @*<script type="text/javascript">
-            google.load("visualization", "1", { packages: ["corechart"] });
-            google.setOnLoadCallback(drawchart);
-            function drawchart() {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    // Calls an Action from Controller ie. EuroExhangeModelsController/GetData
-                    url: '@Url.Action("GetData")',
-                    data: "{ }",
-                    // If data connections is success
-                    success:
-                        function drawchart(dataValues) {
-                            
-                            // Adds data into columns to DataTable
-                            var data = new google.visualization.DataTable();
-                            data.addColumn('string', 'Datum');
-                            data.addColumn('number', 'Pris');
-                            if (window.JSON && !window.JSON.dateParser) {
-                                var reISO = /^(\y{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-                                var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-                                JSON.dateParser = function (key, value) {
-                                    if (typeof value === 'string') {
-                                        var a = reISO.exec(value);
-                                        if (a)
-                                            return new Date(value);
-                                        a = reMsAjax.exec(value);
-                                        if (a) {
-                                            var b = a[1].split(/[-+,.]/);
-                                            return new Date(b[0] ? +b[0] : 0 - +b[1]);
-                                        }
-                                    }
-                                    return value;
-                                };
-
-                            }
-                            // Loops through the DataTable with data from database
-                            for (var i = 0; i < dataValues.length; i++) {
-                                var str = window.JSON.stringify(dataValues[i].Date);
-                                //console.log("Här var det strängat",str);
-                                var date = JSON.parse(str, JSON.dateParser);
-                                //console.log("Här ska det vara datum", date);
-                                data.addRow([
-                                    //(dataValues[i].Date), dataValues[i].euroValue])
-                                    (new Date(date).toDateString()), dataValues[i].DieselWeekValue])
-                                console.log(data);
-
-                            }
-                            // Settings for visualization of the graph
-                            var view = new google.visualization.DataView(data);
-                            view.setColumns([0, 1,
-                                             {
-                                                 calc: "stringify",
-                                                 sourceColumn: 1,
-                                                 type: "string",
-                                                 role: "annotation",
-                                             },
-                            ]);
-
-                            var options = {
-                                width: '100%',
-                                height: '100%',
-                                chartArea: { left: 45, top: 20, width: "100%", height: "80%" },
-                                title: 'Dieselpris per vecka år', // (Model.Year.ToString())',
-                                pointSize: 3,
-                                dataOpacity: 0.4,
-                                lineWidth: 2,
-                                vAxis: {
-                                    viewWindow: {
-                                        min: 0,
-                                        max: 1.50
-                                    },
-                                    //ticks: [
-                                    //      0, 0.05, 0.10, 0.15, 0.20,
-                                    //      0.25, 0.30, 0.35, 0.40, 0.45,
-                                    //      0.50, 0.55, 0.60, 0.65, 0.70,
-                                    //      0.75, 0.80, 0.85, 0.90, 0.95,
-                                    //      1.00, 1.10, 1.15, 1.20, 1.25,
-                                    //      1.30, 1.35, 1.40, 1.45, 1.50,
-                                    //      //1.55, 1.60, 1.65, 1.70, 1.75,
-                                    //      //1.80, 1.85, 1.90, 1.95, 2.00
-                                    //]
-                                },
-                                hAxis: {
-                                    title: 'Datum',
-                                    titleTextStyle:
-                                        {
-                                            color: '#333'
-                                        },
-                                }
-                            }
-                            // Draws the graph into a specified div
-                            var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
-                            chart.draw(view, options);
-                        },
-                    // If collectning data from database fails promp message here
-                    error: function () { alert("Ett fel uppstod när datat försökte hämtas!"); }
-                });
-            }
-        </script>*@
-            -->
         <script type="text/javascript">
 
             google.charts.load('current', { 'packages': ['corechart'], });
@@ -428,18 +125,27 @@
 
             function drawChart(elementId, title, dataTable) {
                 var options = {
-                    legend: { position: 'top', maxLines: 3},
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
 
-                    vAxis: {  title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0,  },  
+                    vAxis: { 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 7.00, },
+                        gridlines: { count: 15, },
+                    },
 
-                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
-                    chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
-                    pointSize: 7,
-                    dataOpacity: 0.9,
-                    lineWidth: 4,
-                };
+                    hAxis:{ 
+                        title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
                 var chart = new google.visualization.ColumnChart(document.getElementById("DPWChartDiv"));
                     chart.draw(dataTable, options);
                 }
@@ -458,16 +164,30 @@
             });
             function drawChart(elementId, title, dataTable) {             
                 var options = {
-                    legend: { position: 'top', maxLines: 3 },
                     title: title,
-                    animation:{ "startup" : true, duration: 1000, easing: 'linear', },
+                    titleTextStyle: { fontName: 'Calibri', fontSize: 34},
+                    legend: { position: 'top', maxLines: 3,
+                        textStyle:{ fontName: 'Calibri', fontSize: 24 }                        
+                        ,},
+                    animation:{ "startup" : true, duration: 1000, easing: 'linear',
+                    },
 
-                    vAxis: { title: "Pris", titleTextStyle: { fontName: 'Calibri', }, minValue: 0, },
+                    vAxis: { 
+                        title: "Pris",
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        viewWindow: { min: 0.00, },
+                        gridlines: { count: 10, },
+                    },
 
-                    hAxis:{ title: "Vecka", titleTextStyle: { fontName: 'Calibri', } },
+                    hAxis:{ 
+                        title: "Vecka", fontName: 'Calibri', fontSize: 34,
+                        titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
+                        textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                    },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,
-                    dataOpacity: 0.4,
+                    dataOpacity: 0.9,
                     lineWidth: 2,
                 };
                 var chart = new google.visualization.AreaChart(document.getElementById("DPWChartDiv"));

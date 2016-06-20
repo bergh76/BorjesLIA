@@ -44,35 +44,6 @@ namespace BorjesLIA.AdminControllers
             return dieselW;
         }
 
-        /// <summary>
-        ///This ActionResult is not "in play" ie. no functionality connected to the View
-        /// </summary>
-        /// <param name="dieselWeekChart"></param>
-        /// <returns></returns>
-        //public ActionResult ShowView(DieselWeekViewModel dieselW)
-        //{
-        //    dieselW = new DieselWeekViewModel
-        //    {
-        //        AddWeekDiesel = new DieselWeekModel(),
-        //        newWeekDieselList = db.DieselPriceWeek.OrderByDescending(x => x.Week),
-        //        //populates list used for determain charttype from Entity Settings
-        //        settings = db.Settings.Where(x => x.Name == settingsName)
-        //    };
-        //    return View(dieselW);
-        //}
-
-
-        /// <summary>
-        /// Populates the chart with data
-        /// </summary>
-        /// <param name="dieselWeekChart"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        //public async Task<JsonResult> GetData(DieselWeekViewModel dieselWeekChart)
-        //{
-        //    var data = await dieselWeekChart.GetWeekData();
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
 
         /// <summary>
         /// Instansiates an object for startpage

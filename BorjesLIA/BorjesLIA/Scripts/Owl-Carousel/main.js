@@ -117,8 +117,9 @@ jQuery(function ($) {
 
             //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
+            console.log("getduration: " + getDuration);
             time = getDuration;
-
+            console.log("time duration vimeo: " + time);
             setTimeout(function () {
             var data = {
                 "event": "command",
@@ -133,8 +134,9 @@ jQuery(function ($) {
 
             //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
+            console.log("getduration: "+getDuration);
             time = getDuration;
-
+            console.log("time duration vimeo: " + time);
             setTimeout(function () {
                 var data = { method: "play" };
                 var player = document.getElementById(getSrc);

@@ -58,7 +58,7 @@
         <script type="text/javascript">
             google.charts.load('current', { 'packages': [['bar']], });
             google.charts.setOnLoadCallback(function () {
-                vvar title = @Html.Raw(Json.Encode(Model.Title));
+                var title = @Html.Raw(Json.Encode(Model.Title));
                 var tdata = @Html.Raw(Json.Encode(Model.DataTable));
                 var dataTable = new google.visualization.DataTable(tdata);
                 drawChart('DTMGraphDiv', title, dataTable);
@@ -105,7 +105,7 @@
 }
 <div class="x_panel">
     <div class="x_content">
-        <div id="DTMGraphDiv" style="width: 100%; height:450px""></div>
+        <div id="DTMGraphDiv" style="width: 100%; height:450px"></div>
     </div>
 </div>
 

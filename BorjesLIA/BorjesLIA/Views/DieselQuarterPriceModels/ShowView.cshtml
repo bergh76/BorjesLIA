@@ -27,7 +27,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Välj år </p>
+                                <span>Välj datum </span>
                                 <div class="input-group input-append date" id="dateRangePicker">
                                     <input class="form-control" name="date" readonly />
                                     <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
@@ -36,14 +36,14 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Välj kvartal </p>
+                                <span>Välj kvartal </span><p></p>
                                 @Html.EnumDropDownListFor(model => model.Quarters, new { @class = "btn btn-default dropdown-toggle " })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Skriv in värde </p>
-                                @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { htmlAttributes = new { @class = "form-control", placeholder = "Lägg till index" } })
+                                <span>Skriv in värde - <i><small>0,000</small></i></span>
+                                @Html.EditorFor(model => model.AddQuarterDiesel.DieselQuarterValue, new { htmlAttributes = new { @class = "form-control", placeholder = "0,000" } })
                                 @Html.ValidationMessageFor(model => model.AddQuarterDiesel.DieselQuarterValue, "", new { @class = "text-danger" })
 
                             </div>

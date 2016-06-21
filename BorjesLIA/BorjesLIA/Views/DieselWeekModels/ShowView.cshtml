@@ -27,7 +27,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Välj datum </p>
+                                <span>Välj datum </span>
                                 <div class="input-group input-append date" id="dateRangePicker">
                                     <input class="form-control" name="date" readonly />
                                     <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
@@ -37,9 +37,9 @@
 
                         <div class="form-group">
                             <div class="input-group date">
-                                <p>Skriv in värde </p>
+                             <span>Skriv in värde - <i><small>0,000</small></i></span>
                                 <div class="input-group">
-                                    @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue,new { htmlAttributes = new { @class = "form-control checkWeek", placeholder = "" } })
+                                    @Html.EditorFor(model => model.AddWeekDiesel.DieselWeekValue,new { htmlAttributes = new { @class = "form-control checkWeek", placeholder = "0,000" } })
                                     @Html.ValidationMessageFor(model => model.AddWeekDiesel.DieselWeekValue, "", new { @class = "text-danger" })
 
                                 </div>

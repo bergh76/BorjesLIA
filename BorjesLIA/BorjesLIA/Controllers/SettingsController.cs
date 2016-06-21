@@ -58,18 +58,18 @@ namespace BorjesLIA.Controllers
                 confEuro.ID = db.Settings.Where(x => x.Name == confEuroSettings).Select(x => x.ID).FirstOrDefault();
                 confEuro.Year = formEuroData[2];
                 confEuro.Name = this.confEuroSettings;
-                if (!string.IsNullOrEmpty(confEuro.Name) && string.IsNullOrEmpty(confEuro.Year))
-                {
-                    confEuro.Year = "Alla";
-                    // saves data to Settings db Entity
-                    db.Entry(confEuro).State = EntityState.Modified;
-                    db.SaveChanges();
+                //if (!string.IsNullOrEmpty(confEuro.Name) && string.IsNullOrEmpty(confEuro.Year))
+                //{
+                //    confEuro.Year = "Alla";
+                //    // saves data to Settings db Entity
+                //    db.Entry(confEuro).State = EntityState.Modified;
+                //    db.SaveChanges();
 
-                    return PartialView("Index_EuroSettings", confEuro);
-                }
+                //    return PartialView("Index_EuroSettings", confEuro);
+                //}
                 if (!string.IsNullOrEmpty(confEuro.Name) && !string.IsNullOrEmpty(confEuro.Year))
                 {
-                    confEuro.Year = formEuroData[2];
+                    //confEuro.Year = formEuroData[2];
                     // saves data to Settings db Entity
                     db.Entry(confEuro).State = EntityState.Modified;
                     db.SaveChanges();
@@ -116,23 +116,23 @@ namespace BorjesLIA.Controllers
                 // populate values from Html-form
                 string name = formDtmData[1].ToString();
                 confDtm.ID = db.Settings.Where(x => x.Name == confDtmSettings).Select(x => x.ID).FirstOrDefault();
-                confDtm.SortType = Convert.ToInt32(formDtmData[2]);
-                confDtm.Year = formDtmData[3].ToString();
+                //confDtm.SortType = Convert.ToInt32(formDtmData[2]);
+                confDtm.Year = formDtmData[2];
                 //confDtm.SortType = formDtmData
                 confDtm.Name = this.confDtmSettings;
 
-                if (!string.IsNullOrEmpty(confDtm.Name) && string.IsNullOrEmpty(confDtm.Year))
-                {
-                    confDtm.Year = "Alla";
-                    // saves data to Settings db Entity
-                    db.Entry(confDtm).State = EntityState.Modified;
-                    db.SaveChanges();
+                //if (!string.IsNullOrEmpty(confDtm.Name) && string.IsNullOrEmpty(confDtm.Year))
+                //{
+                //    confDtm.Year = "Alla";
+                //    // saves data to Settings db Entity
+                //    db.Entry(confDtm).State = EntityState.Modified;
+                //    db.SaveChanges();
 
-                    return PartialView("Index_DtmSettings", confDtm);
-                }
+                //    return PartialView("Index_DtmSettings", confDtm);
+                //}
                 if (!string.IsNullOrEmpty(confDtm.Name) && !string.IsNullOrEmpty(confDtm.Year))
                 {
-                    confDtm.Year = formDtmData[3].ToString();
+                    //confDtm.Year = formDtmData[3].ToString();
                     // saves data to Settings db Entity
                     db.Entry(confDtm).State = EntityState.Modified;
                     db.SaveChanges();
@@ -182,15 +182,15 @@ namespace BorjesLIA.Controllers
                 confDw.Year = formDWData[2];
                 confDw.Name = this.confDwSettings;
                 
-                if (!string.IsNullOrEmpty(confDw.Name) && string.IsNullOrEmpty(confDw.Year))
-                {
-                    confDw.Year = "Alla";
-                    // saves data to Settings db Entity
-                    db.Entry(confDw).State = EntityState.Modified;
-                    db.SaveChanges();
+                //if (!string.IsNullOrEmpty(confDw.Name) && string.IsNullOrEmpty(confDw.Year))
+                //{
+                //    confDw.Year = "Alla";
+                //    // saves data to Settings db Entity
+                //    db.Entry(confDw).State = EntityState.Modified;
+                //    db.SaveChanges();
 
-                    return PartialView("Index_DieselWeekSettings", confDw);
-                }
+                //    return PartialView("Index_DieselWeekSettings", confDw);
+                //}
                 if (!string.IsNullOrEmpty(confDw.Name) && !string.IsNullOrEmpty(confDw.Year))
                 {
                     confDw.Year = formDWData[2];
@@ -245,17 +245,17 @@ namespace BorjesLIA.Controllers
                 confDq.Year = formDQData[2];
                 confDq.Name = this.confDqSettings;
                 
-                if (!string.IsNullOrEmpty(confDq.Name) && string.IsNullOrEmpty(confDq.Year))
-                {
-                    confDq.Year = "Alla";
-                    // saves data to Settings db Entity
-                    db.Entry(confDq).State = EntityState.Modified;
-                    db.SaveChanges();
+                //if (!string.IsNullOrEmpty(confDq.Name) && string.IsNullOrEmpty(confDq.Year))
+                //{
+                //    confDq.Year = "Alla";
+                //    // saves data to Settings db Entity
+                //    db.Entry(confDq).State = EntityState.Modified;
+                //    db.SaveChanges();
 
-                    return PartialView("Index_DieselQuarterSettings", confDq);
-                }
+                //    return PartialView("Index_DieselQuarterSettings", confDq);
+                //}
 
-                else if (!string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
+                if (!string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
                 {
                     confDq.Year = formDQData[2];
                     // saves data to Settings db Entity

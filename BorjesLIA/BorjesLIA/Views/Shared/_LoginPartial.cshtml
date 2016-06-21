@@ -1,29 +1,26 @@
 ﻿@using Microsoft.AspNet.Identity
 <div id="mySidenav" class="sidenav">
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", }))
+        @if (Request.IsAuthenticated)
         {
-            @Html.AntiForgeryToken()
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", }))
+            {
+                @Html.AntiForgeryToken()
 
-            <ul>
-                @*<li><a javascript:void(0)" class="closebtn" onclick="closeNav()">×</a></li>*@
-                <li><a onclick="toggleFullScreen(), closeNav()"><i class="fa fa-television brn"></i> Helskärm</a></li>
-                <li><a><i class="fa fa-cog"> </i> @Html.ActionLink("Inställningar", "Index", "Admin")</a></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-lock"></i> Log off</a></li>
-                <li><a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a></li>
-            </ul>
+
+
+                <a onclick="toggleFullScreen(), closeNav()"><i class="fa fa-television brn"></i> Helskärm</a>
+                <a><i class="fa fa-cog"> </i> @Html.ActionLink("Inställningar", "Index", "Admin")</a>
+                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-lock"></i> Log off</a>
+                    <a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a>
+            }
+        }
+        else
+        {
+            <a><span class="fa fa-expeditedssl"> @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span></a>
+            <a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a>
 
         }
-    }
-    else
-    {
-        <ul>
-            <li><a><span class="fa fa-expeditedssl"> @Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span></a></li>
-            <li><a javascript:void(0)" onclick="closeNav()"><i class="fa fa-close"></i> Stäng</a></li>
-        </ul>
 
-    }
 </div>
 
 

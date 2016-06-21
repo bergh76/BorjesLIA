@@ -306,13 +306,17 @@ function toggleFullScreen() {
 
 //Sidebar
 function openNav() {
-    document.getElementById("mySidenav").style.width = "180px";
-
+    document.getElementById("mySidenav").style.width = "450px";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+//$(document).ready(function () {
+//    $("#flip").click(function () {
+//        $("#panel").slideToggle("slow");
+//    });
+//});
 
 //***** DATEPICKER FOR DATE *****//
 $(document).ready(function () {

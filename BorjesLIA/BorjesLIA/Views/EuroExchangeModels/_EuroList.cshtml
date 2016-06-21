@@ -12,13 +12,22 @@
             },
             "processing": true,
             "order": [[0, "desc", ]], //Column1  
-        })        
-       
+        })
+
         var table = $('#myTable').DataTable();
+        var expdata = table.buttons.exportData();
+        console.log("Tabelldata \n", expdata);
         new $.fn.dataTable.Buttons(table, {
             buttons: [
                 { extend: 'copy', text: 'Kopiera', },
-                { extend: 'excel', text: 'Excel', },
+                {
+                    extend: 'excel', text: 'Excel',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                },
                 'pdf'],
         });
         table.buttons().container()

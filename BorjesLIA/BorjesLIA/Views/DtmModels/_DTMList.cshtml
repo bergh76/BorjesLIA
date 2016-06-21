@@ -3,10 +3,27 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myDTMTable').DataTable({
-            "order": [[0, "desc"]],
+            //dom: 'B<"clear"><lf<t>ip>',
+            "language": {
+                "lengthMenu": "Visa _MENU_ rader per sida",
+                "zeroRecords": "Din sökning gav inget - försök med att annat sökord",
+                "info": "Visar nu _PAGE_ av _PAGES_",
+                "infoEmpty": "Datatabellen är tom",
+                "infoFiltered": "(filtrerdad på _MAX_ antal poster)"
+            },
             "processing": true,
-
+            "order": [[0, "desc", ]], //Column1  
+        })        
+       
+        var table = $('#myDTMTable').DataTable();
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                { extend: 'copy', text: 'Kopiera', },
+                { extend: 'excel', text: 'Excel', },
+                'pdf'],
         });
+        table.buttons().container()
+            .appendTo($('.col-sm-6:eq(0)', table.table().container()));      
     });
 </script>
 
@@ -23,33 +40,7 @@
         </ul>
         <div class="clearfix"></div>
     </div>
-    <ul class="nav navbar-left panel_toolbox">
-        <li>
-            <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Kopiera" tabindex="0" aria-controls="datatable-buttons">
-                <span>Copy</span>
-            </a>
-        </li>
-        <li>
-            <a class="btn btn-default buttons-csv buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till CSV-fil" tabindex="0" aria-controls="datatable-buttons">
-                <span>CSV</span>
-            </a>
-        </li>
-        <li>
-            <a class="btn btn-default buttons-excel buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till Excel" tabindex="0" aria-controls="datatable-buttons">
-                <span>Excel</span>
-            </a>
-        </li>
-        <li>
-            <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" data-toggle="tooltip" data-placement="top" title="Spara till PDF" tabindex="0" aria-controls="datatable-buttons">
-                <span>PDF</span>
-            </a>
-        </li>
-        <li>
-            <a class="btn btn-default buttons-print btn-sm" data-toggle="tooltip" data-placement="top" title="Skriv ut" tabindex="0" aria-controls="datatable-buttons">
-                <span>Print</span>
-            </a>
-        </li>
-    </ul>
+
     <div class="x_content">
         <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <table id="myDTMTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">

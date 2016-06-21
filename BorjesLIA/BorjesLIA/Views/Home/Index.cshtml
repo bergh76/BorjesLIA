@@ -1,11 +1,12 @@
 ﻿@model BorjesLIA.ViewModel.StartModelViewModel
-@{ 
+@{
     string stringPartOfIdIndex = "carouselElem";
     int IdIndex = 0;
-    string OwlItemIndexID = String.Format("{0},{1}", stringPartOfIdIndex, IdIndex); 
-    }
+    string OwlItemIndexID = String.Format("{0},{1}", stringPartOfIdIndex, IdIndex);
+}
 
-<nav class="navbar navbar-default navbar-collapse"><!-- testade att byta till div ist, för att ändra placeringen och få med naven/ -->
+<nav class="navbar navbar-default navbar-collapse">
+    <!-- testade att byta till div ist, för att ändra placeringen och få med naven/ -->
 
     <div class="container-dashboard">
         <div class="navbar-header">
@@ -28,33 +29,179 @@
         </div>
     </div>
 </nav>
-    <section id="main-slider">
-    <div class="owl-carousel">
-        @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
-            {
-                //för att lokal video inte går att styra från iframe.
-                if (element.type == 4.1m) //4.1 typ för mp4
+<section id="main-slider">
+        <div class="owl-carousel">
+            @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
                 {
-                <div class="owl-item">
-                    <video id="@element.url" class="center">
-                        <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
-                    </video>
-                </div>
+                    //för att lokal video inte går att styra från iframe.
+                    if (element.type == 4.1m) //4.1 typ för mp4
+                    {
+                    <div class="owl-item">
+                        <video id="@element.url" class="center">
+                            <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
+                        </video>
+                    </div>
+                }
+                else
+                {
+                    <div class="owl-item">
+                        <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                    </div>
+                }
             }
-            else 
+        </div>
+    </section>
+@*<section id="main-slider">
+    <div class="owl-carousel">
+        @{ var listObjects = Model.listVM.OrderBy(x => x.orderby).ToList();
+            var count = listObjects.Select(x => x.active).Count();
+            if (count > 1)
             {
-                <div class="owl-item">
-                    <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                </div>
+                foreach (var item in listObjects)
+                {
+                    if (item.type == 1.1m) //Eurochart typ för mp4
+                    {
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+                    }
+                    if (item.type == 1.2m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+
+                    }
+                    if (item.type == 1.3m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+
+                    }
+                    if (item.type == 1.4m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+
+                    }
+
+                    if (item.type == 2.1m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+
+                    }
+
+                    if (item.type == 3.1m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+
+                    }
+                    //för att lokal video inte går att styra från iframe.
+                    if (item.type == 4.1m) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <video id="@item.url" class="center">
+                                <source src="@item.url" type="video/mp4" class="VideoClassTag" name="@item.Duration" />
+                            </video>
+                        </div>
+
+                    }
+                    if (item.type == 4.2m || item.type == 4.5M) //4.1 typ för mp4
+                    {
+
+                        <div class="owl-item">
+                            <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in listObjects)
+                {
+                    <div class="owl-carousel">
+                        @if (item.type == 1.1m) //Eurochart typ för mp4
+                        {
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+                        @if (item.type == 1.2m) //4.1 typ för mp4
+                        {
+
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+                        @if (item.type == 1.3m) //4.1 typ för mp4
+                        {
+
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+                        @if (item.type == 1.4m) //4.1 typ för mp4
+                        {
+
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+
+                        @if (item.type == 2.1m) //4.1 typ för mp4
+                        {
+
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+
+                        @if (item.type == 3.1m) //4.1 typ för mp4
+                        {
+
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+
+                        }
+
+                        @if (item.type == 4.1m) //4.1 typ för mp4 för att lokal video inte går att styra från iframe.
+                        {
+
+                            <div class="owl-item">
+                                <video id="@item.url" class="center">
+                                    <source src="@item.url" type="video/mp4" class="VideoClassTag" name="@item.Duration" />
+                                </video>
+                            </div>
+
+                        }
+                        @if (item.type == 4.2m || item.type == 4.5M) //4.1 typ för mp4
+                        {
+                            <div class="owl-item">
+                                <iframe id="@item.url" class="VideoClassTag" src="@item.url" name="@item.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                            </div>
+                        }
+                        }
+                    </div>
+                }
             }
         }
     </div>
-</section>
-
-<!--leta efter en bättre lösning-->
-@*<script type="text/jscript">
-    setTimeout(function () {
-        console.log("reload page 1h");
-        window.location.reload();
-    }, 3600000);
-</script>*@
+</section>*@

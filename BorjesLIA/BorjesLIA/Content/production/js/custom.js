@@ -80,7 +80,7 @@ $(document).ready(function() {
     $SIDEBAR_MENU.find('a[href="' + URL + '"]').parent('li').addClass('current-page');
 
     $SIDEBAR_MENU.find('a').filter(function () {
-        return this.href == URL;
+        return this.href === URL;
     }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
         setContentHeight();
     }).parent().addClass('active');
@@ -217,7 +217,7 @@ $(document).ready(function() {
         $(this).next().slideToggle(200);
         $expand = $(this).find(">:first-child");
 
-        if ($expand.text() == "+") {
+        if ($expand.text() === "+") {
             $expand.text("-");
         } else {
             $expand.text("+");
@@ -226,7 +226,7 @@ $(document).ready(function() {
 });
 
 // NProgress
-if (typeof NProgress != 'undefined') {
+if (typeof NProgress !== 'undefined') {
     $(document).ready(function () {
         NProgress.start();
     });
@@ -304,7 +304,7 @@ function toggleFullScreen() {
 }
 
 
-//Sidebar
+//***** SIDENAV JQUERY *****//
 function openNav() {
     document.getElementById("mySidenav").style.width = "450px";
 }
@@ -312,11 +312,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
-//$(document).ready(function () {
-//    $("#flip").click(function () {
-//        $("#panel").slideToggle("slow");
-//    });
-//});
+
 
 //***** DATEPICKER FOR DATE *****//
 $(document).ready(function () {
@@ -327,9 +323,8 @@ $(document).ready(function () {
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true,
-            format: 'yyyy-mm-dd',
-
-        })
+            format: 'yyyy-mm-dd'
+        });
     $("#datepicker-year")
    .datepicker({
        autoclose: true,
@@ -337,7 +332,7 @@ $(document).ready(function () {
        format: " yyyy", // Notice the Extra space at the beginning
        viewMode: "years",
        minViewMode: "years"
-   })
+   });
 });
     
 

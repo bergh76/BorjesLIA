@@ -1,34 +1,60 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "processing": true,
+        });
+    });
+</script>
+<div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Inställningar för Placering</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+                <thead>
+                    <tr>
+                        <th>
+                            Namn
+                        </th>
+                        <th>
+                            Webbadress
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
 
-<table class="table">
-    <tr>
-        <th>
-           URL
-        </th>
-        <th>
-         Namn
-        </th>
-        <th>
-            Edit
-        </th>
-    </tr>
+                @foreach (var item in Model.ListOfVideoModels)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Url)
+                        </td>
 
-    @foreach (var item in Model.ListOfVideoModels)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Url)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-          
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+    </div>
+</div>

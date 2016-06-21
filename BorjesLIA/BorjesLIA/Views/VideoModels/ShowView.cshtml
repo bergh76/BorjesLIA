@@ -1,37 +1,50 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
-@ViewBag.Message
-<body>
-    <p>
-        <span class="field-validation-error" id="spanfile"></span>
-    </p>
-    @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
-    {
-        @Html.ValidationSummary();
-        <ul>
-            <li class="lifile">
-                <p>
-                    Välj en fil att ladda upp/ eller klistra in en länk
-                </p>
-                <div>
-                    <input type="file" id="fileToUpload" name="file" />
-                </div>
-                <div>
-                    <input type="text" id="exVideo" name="Url" value="Embedded video link" />
-                    <button type="button" class="" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
-                    <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
-                </div>
-                <div>
-                    <input type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
-                </div>
-                <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
-            </li>
-        </ul>
-        <div>
-            <button type="submit" class="btn btn-default" value="Upload">Lägg till video</button>
-            <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+
+<div class="col-md-12 col-sm-12 col-xs-12 pull-left">
+
+    <div class="x_panel">
+        <div class="x_title">
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
         </div>
-    }
-    
+        <div><span class="panel-success" id="spanfile"></span></div>
+        <div>@ViewBag.Message</div>
+        @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
+            {
+            @Html.ValidationSummary();
+            <ul>
+                <li class="lifile">
+                    <p>
+                        Välj en fil att ladda upp/ eller klistra in en länk
+                    </p>
+                </li>
+            </ul>
+            <div class="input-group">
+                <input type="file" id="fileToUpload" name="file" />
+            </div>
+            <div class="input-group">
+                <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
+                <button type="button" class="" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
+            </div>
+            <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
+            <div class="input-group">
+                <input class="form-control" type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+            </div>
+
+            <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
+            <div class="input-group">
+                <button type="submit" class="btn btn-default" value="Upload">Lägg till video</button>
+                <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+            </div>
+        }
+    </div>
     <section id="show-result-box" class="hidden">
         <iframe width="560"
                 height="315"
@@ -40,9 +53,11 @@
                 frameborder="0"
                 allowfullscreen></iframe>
     </section>
-    <p>
-        @Html.Partial("_VideoList", Model)
-    </p>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12" >
+     @Html.Partial("_VideoList", Model)
+</div>
 
     <script type="text/jscript">
         //--INIT YT PLAYER
@@ -71,11 +86,11 @@
                     return false;
                     //window.location.reload();
                 }
-                //fördröjning om det är så att spelaren inte laddat klippet, för att kunna ta ut klippets längd. 
+                //fördröjning om det är så att spelaren inte laddat klippet, för att kunna ta ut klippets längd.
                 if (!flag) {
                     var form = this;
                     setTimeout(function () {
-                        console.log("timeout: 3000ms"); 
+                        console.log("timeout: 3000ms");
                         form.submit();
                     }, 3000);
                     return false;
@@ -264,5 +279,5 @@
             }
         });
     </script>
-</body>
+
 

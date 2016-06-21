@@ -11,7 +11,7 @@
         });
     });
 </script>
-<div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+<div class="col-md-12 col-sm-12 col-xs-12 pull-left">
     <div class="x_panel">
         <div class="x_title">
             <h2>Inställningar för Placering</h2>
@@ -25,74 +25,70 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-        <div class="x_content">
-            @using (Html.BeginForm("SetOrderPlacing", "Settings", FormMethod.Post))
-            {
-                <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
-                    <thead>
-                        <tr>
-                            <th>
-                                ID
-                            </th>
-                            <th>
-                                Sortering
-                            </th>
-                            <th>
-                                Ny Sortering
-                            </th>
-                            <th>
-                                Namn
-                            </th>
-                            <th>
-                                Typ
-                            </th>
-                            <th>
-                                Aktiv (Ja/Nej)
-                            </th>
-                            <th>
-                                Spara
-                            </th>
-                        </tr>
-                    </thead>
-                    @{ int counter = 1; }
-                    @for (int i = 0; i < Model.listVM.Count(); i++)
-                {
-                    var temp = i;
-                    var rId = counter + temp;
-                        @Html.HiddenFor(model => Model.listVM[i].type)
+       <div class="x_content">
+                           @using (Html.BeginForm("SetOrderPlacing", "Settings", FormMethod.Post))
+                    {
+                        <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Sortering
+                                    </th>
+                                    <th>
+                                        Ny Sortering
+                                    </th>
+                                    <th>
+                                        Namn
+                                    </th>
+                                    <th>
+                                        Typ
+                                    </th>
+                                    <th>
+                                        Aktiv (Ja/Nej)
+                                    </th>
+                                    <th>
+                                        Spara
+                                    </th>
+                                </tr>
+                            </thead>
+                            @{ int counter = 1; }
+                            @for (int i = 0; i < Model.listVM.Count(); i++)
+                        {
+                            var temp = i;
+                            var rId = counter + temp;
+                                <tr>
+                                    <td>
+                                        @rId @Html.HiddenFor(model => Model.listVM[i].ID)
+                                    </td>
+                                    <td>
+                                        @Model.listVM[i].orderby
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => Model.listVM[i].orderby,new { type="file", @class="input-file" })
+                                    </td>
+                                    <td>
+                                        @Model.listVM[i].name
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => Model.listVM[i].type) @Html.HiddenFor(model => Model.listVM[i].type)
+                                    </td>
+                                    <td style="text-align: center">
+                                        @Html.CheckBoxFor(model => Model.listVM[i].active) @Html.HiddenFor(model => Model.listVM[i].active)
+                                    </td>
+                                    <td><button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
+                                </tr>
+                            }
 
-                        @Html.HiddenFor(model => Model.listVM[i].active)
-                        @Html.HiddenFor(model => Model.listVM[i].ID)
-                        <tr>
-                            <td>
-                                @rId  @Html.HiddenFor(model => Model.listVM[i].ID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => Model.listVM[i].orderby)
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => Model.listVM[i].orderby, new { @class = "form-control", style = "width: 10px" })
-                            </td>
-                            <td>
-                                @Model.listVM[i].name
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => Model.listVM[i].type)
-                            </td>
-                            <td style="text-align: center">
-                                @Html.CheckBoxFor(model => Model.listVM[i].active) @Html.HiddenFor(model => Model.listVM[i].active)
-                            </td>
-                            <td><button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
-                        </tr>
-                    }
-
-                </table>
-                        }
+                        </table>
+                                }
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-
+                       
 
             @*@using (Html.BeginForm("SetOrderPlacing", "Settings", FormMethod.Post))
             {

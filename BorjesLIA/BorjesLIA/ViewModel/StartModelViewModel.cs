@@ -12,19 +12,19 @@ using BorjesLIA.Models;
 
 namespace BorjesLIA.ViewModel
 {
-    public enum SortSettings
-    {   
-       Eurochart = 1,
-       DieselQChart,
-       DieselWChart,
-       DMTChart,
-       Webadress,
-       Image,
-       VideoMp4,
-       VideoYoutube,
-       VideVimeo,
-       NotFound
-    }
+    //public enum SortSettings
+    //{   
+    //   Eurochart = 1,
+    //   DieselQChart,
+    //   DieselWChart,
+    //   DMTChart,
+    //   Webadress,
+    //   Image,
+    //   VideoMp4,
+    //   VideoYoutube,
+    //   VideVimeo,
+    //   NotFound
+    //}
 
     public class StartModelViewModel
     {
@@ -36,7 +36,7 @@ namespace BorjesLIA.ViewModel
             public int ID { get; set; }
             public string Url { get; set; }
             public string ObjectName { get; set; }
-            public int SortIndex { get; set; }
+            public int PlacingOrder { get; set; }
             public bool Active { get; set; }
             public DateTime Date { get; set; }
             public int Duration { get; set; }

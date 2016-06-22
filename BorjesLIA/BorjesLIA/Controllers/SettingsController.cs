@@ -304,7 +304,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = String.Format("{0}",item.Name);
-                listvm.SortIndex = item.PlacingOrder;
+                listvm.PlacingOrder = item.PlacingOrder;
                 listvm.Type = item.Type;
                 listvm.TypeName = String.Format("{0}", dictionary[item.Type]);
                 listvm.Active = item.Active;
@@ -316,7 +316,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = String.Format("{0}", item.urlString);
-                listvm.SortIndex = item.PlacingOrder;
+                listvm.PlacingOrder = item.PlacingOrder;
                 listvm.Type = item.Type;
                 listvm.TypeName = String.Format("{0}", dictionary[item.Type]);
                 listvm.Active = item.Active;
@@ -328,7 +328,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = String.Format("{0}", item.Name);
-                listvm.SortIndex = item.PlacingOrder;
+                listvm.PlacingOrder = item.PlacingOrder;
                 listvm.Duration = item.Duration;
                 listvm.Type = item.Type;
                 listvm.TypeName = String.Format("{0}", dictionary[item.Type]);
@@ -342,7 +342,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
-                listvm.SortIndex = euros.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.PlacingOrder = euros.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = euros.Select(x => x.Type).FirstOrDefault();
                 listvm.TypeName = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
                 listvm.Active = euros.Select(x => x.Active).FirstOrDefault();
@@ -354,7 +354,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
-                listvm.SortIndex = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.PlacingOrder = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dtm.Select(x => x.Type).FirstOrDefault();
                 listvm.TypeName = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
                 listvm.Active = dtm.Select(x => x.Active).FirstOrDefault();
@@ -366,7 +366,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
-                listvm.SortIndex = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.PlacingOrder = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dieselPriceQuarter.Select(x => x.Type).FirstOrDefault();
                 listvm.TypeName = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
                 listvm.Active = dieselPriceQuarter.Select(x => x.Active).FirstOrDefault();
@@ -378,7 +378,7 @@ namespace BorjesLIA.Controllers
             {
                 var listvm = new listViewModel();
                 listvm.ObjectName = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];
-                listvm.SortIndex = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
+                listvm.PlacingOrder = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dieselPriceWeek.Select(x => x.Type).FirstOrDefault();
                 listvm.TypeName = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];
                 listvm.Active = dieselPriceWeek.Select(x => x.Active).FirstOrDefault();
@@ -401,7 +401,7 @@ namespace BorjesLIA.Controllers
             {
                 foreach (var item in listaMVM.listVM)
                 {
-                    var formOrderBy = item.SortIndex;
+                    var formOrderBy = item.PlacingOrder;
                     var formType = item.Type;
                     var formId = item.ID;
                     var formActive = item.Active;
@@ -415,9 +415,9 @@ namespace BorjesLIA.Controllers
                 if (item.Type == 1) //eurochart
                 {
                     var changeOrderPlacing = db.EuroExchangeModels.FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -429,9 +429,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 2) //dtm
                 {
                     var changeOrderPlacing = db.DtmModels.FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -443,9 +443,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 3) //quarter
                 {
                     var changeOrderPlacing = db.DieselPriceQuarter.FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -457,9 +457,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 4) //week
                 {
                     var changeOrderPlacing = db.DieselPriceWeek.FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -471,9 +471,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 5) //url
                 {
                     var changeOrderPlacing = db.UrlModels.Where(x => x.ID == item.ID).FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -485,11 +485,11 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 6) //img 
                 {
                     var changeOrderPlacing = db.Imgs.Where(x => x.ID == item.ID).First();
-                    var asdf = item.SortIndex;
+                    var asdf = item.PlacingOrder;
                     var asdfasdf = item.Active;
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -501,9 +501,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 7) //mp4
                 {
                     var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -515,9 +515,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 8) //youtube
                 {
                     var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).FirstOrDefault();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)
@@ -529,9 +529,9 @@ namespace BorjesLIA.Controllers
                 else if (item.Type == 9) //vimeo
                 {
                     var changeOrderPlacing = db.VideoModels.Where(x => x.ID == item.ID).First();
-                    if (changeOrderPlacing.PlacingOrder != item.SortIndex)
+                    if (changeOrderPlacing.PlacingOrder != item.PlacingOrder)
                     {
-                        changeOrderPlacing.PlacingOrder = item.SortIndex;
+                        changeOrderPlacing.PlacingOrder = item.PlacingOrder;
                         db.SaveChanges();
                     }
                     if (changeOrderPlacing.Active != item.Active)

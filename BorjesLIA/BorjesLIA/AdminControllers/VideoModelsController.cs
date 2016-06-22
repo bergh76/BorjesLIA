@@ -202,7 +202,7 @@ namespace BorjesLIA.AdminControllers
                     return HttpNotFound();
                 }
                 //om internlänk
-                if (videoModel.Type == 4.1m)
+                if (videoModel.Type == 7) // mp4-file
                 {
                     string fileName = videoModel.Url;
                     string myPath = @"/Content/videos/";
@@ -210,7 +210,7 @@ namespace BorjesLIA.AdminControllers
                     return Json(new { success = true, returnData = myFilePath });
                 }
                 //om externlänk
-                else if (videoModel.Type == 4.2m || videoModel.Type == 4.5m)
+                else if (videoModel.Type == 8 || videoModel.Type == 9) //val 8=YouTube, 9=Vimeo
                 {
                     string fileName = videoModel.Url;
                     return Json(new { success = true, returnData = fileName });

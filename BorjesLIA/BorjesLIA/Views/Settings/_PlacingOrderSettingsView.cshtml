@@ -32,72 +32,76 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-       <div class="x_content">
-                           @using (Html.BeginForm("SetOrderPlacing", "Settings", FormMethod.Post))
+        <div class="x_content">
+            @using (Html.BeginForm("SetOrderPlacing", "Settings", FormMethod.Post))
+            {
+                <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Typ
+                            </th>
+                            <th>
+                                Namn
+                            </th>
+                            <th>
+                                Sortering
+                            </th>
+                            <th>
+                                Ny Sortering
+                            </th>
+
+
+                            <th>
+                                Aktiv (Ja/Nej)
+                            </th>
+                            <th>
+                                Spara
+                            </th>
+                        </tr>
+                    </thead>
+                    @{ int counter = 1; }
+                    @for (int i = 0; i < Model.listVM.Count(); i++)
                     {
-                        <table id="myTable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable-buttons_info">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Typ
-                                    </th>
-                                    <th>
-                                        Namn
-                                    </th>
-                                    <th>
-                                        Sortering
-                                    </th>
-                                    <th>
-                                        Ny Sortering
-                                    </th>
-                                   
-                                    
-                                    <th>
-                                        Aktiv (Ja/Nej)
-                                    </th>
-                                    <th>
-                                        Spara
-                                    </th>
-                                </tr>
-                            </thead>
-                            @{ int counter = 1; }
-                            @for (int i = 0; i < Model.listVM.Count(); i++)
-                        {
-                            var temp = i;
-                            var rId = counter + temp;
-                                <tr>
-                                    <td>
-                                        @rId @Html.HiddenFor(model => Model.listVM[i].ID)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => Model.listVM[i].TypeName) @Html.HiddenFor(model => Model.listVM[i].Type)
-                                    </td>
-                                    <td>
-                                        @Model.listVM[i].ObjectName
-                                    </td>
-                                    <td>
-                                        @Model.listVM[i].SortIndex
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => Model.listVM[i].SortIndex,new { type="file", @class="input-file" })
-                                    </td>
-                                   
+                        var temp = i;
+                        var rId = counter + temp;
+                        <tr>
+                            <td>
+                                @rId @Html.HiddenFor(model => Model.listVM[i].ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => Model.listVM[i].TypeName) @Html.HiddenFor(model => Model.listVM[i].Type)
+                            </td>
+                            <td>
+                                @Model.listVM[i].ObjectName
+                            </td>
+                            <td>
+                                @Model.listVM[i].PlacingOrder
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => Model.listVM[i].PlacingOrder, new { type = "file", @class = "input-file" })
+                            </td>
 
-                                    <td style="text-align: center">
-                                        @Html.CheckBoxFor(model => Model.listVM[i].Active) @Html.HiddenFor(model => Model.listVM[i].Active)
-                                    </td>
-                                    <td><button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
-                                </tr>
-                            }
 
-                        </table>
-                                }
-                </div>
-            </div>
+                            <td style="text-align: center">
+                                @Html.CheckBoxFor(model => Model.listVM[i].Active) @Html.HiddenFor(model => Model.listVM[i].Active)
+                            </td>
+                            <td><button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
+                        </tr>
+                    }
+
+                </table>
+                        }
         </div>
+    </div>
+</div>
+
+
+
+
 
                        
 

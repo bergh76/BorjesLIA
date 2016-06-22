@@ -31,26 +31,27 @@
 </nav>
 <section id="main-slider">
         <div class="owl-carousel">
-            @foreach (var element in Model.listVM.OrderBy(x => x.orderby))
+            @foreach (var element in Model.listVM.OrderBy(x => x.PlacingOrder))
+            {
+                //för att lokal video inte går att styra från iframe.
+                if (element.Type == 7) //7 typ för mp4
                 {
-                    //för att lokal video inte går att styra från iframe.
-                    if (element.type == 4.1m) //4.1 typ för mp4
-                    {
                     <div class="owl-item">
-                        <video id="@element.url" class="center">
-                            <source src="@element.url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
+                        <video id="@element.Url" class="center">
+                            <source src="@element.Url" type="video/mp4" class="VideoClassTag" name="@element.Duration" />
                         </video>
                     </div>
                 }
                 else
                 {
                     <div class="owl-item">
-                        <iframe id="@element.url" class="VideoClassTag" src="@element.url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        <iframe id="@element.Url" class="VideoClassTag" src="@element.Url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                     </div>
                 }
             }
         </div>
     </section>
+
 @*<section id="main-slider">
     <div class="owl-carousel">
         @{ var listObjects = Model.listVM.OrderBy(x => x.orderby).ToList();

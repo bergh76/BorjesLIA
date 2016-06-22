@@ -2,7 +2,31 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myTable').DataTable({
-            //dom: 'B<"clear"><lf<t>ip>',
+            dom: 'B<"clear"><lf<t>ip>',
+            buttons: [
+            {
+                extend: 'copy',
+                text: 'Kopiera',
+            },
+            {
+                extend: 'excel',
+                text: 'Excel',
+                exportOptions: {
+                    modifier: { page: 'current' }
+                },
+            },
+            {
+                extend: 'csv',
+                text: 'Csv',
+                exportOptions: {
+                    modifier: { page: 'current' }
+                },
+            },
+            {
+                extend: 'pdf',
+                text: 'Pdf'
+            },
+            ],
             "language": {
                 "lengthMenu": "Visa _MENU_ rader per sida",
                 "zeroRecords": "Din sökning gav inget - försök med att annat sökord",
@@ -17,21 +41,6 @@
         var table = $('#myTable').DataTable();
         var expdata = table.buttons.exportData();
         console.log("Tabelldata \n", expdata);
-        new $.fn.dataTable.Buttons(table, {
-            buttons: [
-                { extend: 'copy', text: 'Kopiera', },
-                {
-                    extend: 'excel', text: 'Excel',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                },
-                'pdf'],
-        });
-        table.buttons().container()
-            .appendTo($('.col-sm-6:eq(0)', table.table().container()));
     });
 
 </script>

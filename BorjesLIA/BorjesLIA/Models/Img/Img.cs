@@ -40,8 +40,8 @@ namespace BorjesLIA.Models.Img
         public bool Active { get; set; }
 
         [Display(Name = "Typ")]
-        public decimal Type { get; set; }
+        public int Type { get; set; }
 
-    
+
     }
 }

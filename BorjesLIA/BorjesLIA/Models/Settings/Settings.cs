@@ -8,6 +8,7 @@ using System.Web;
 
 namespace BorjesLIA.Models.Settings
 {
+   
     public class Settings
     {
         public int ID { get; set; }

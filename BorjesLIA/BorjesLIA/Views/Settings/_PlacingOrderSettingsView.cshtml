@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#myTable').DataTable({
-            "order": [[2, "asc"]],
+            "order": [[3, "asc"]],
             "language": {
                 "lengthMenu": "Visa _MENU_ rader per sida",
                 "zeroRecords": "Din sökning gav inget - försök med att annat sökord",
@@ -42,17 +42,19 @@
                                         ID
                                     </th>
                                     <th>
-                                        Sortering
-                                    </th>
-                                    <th>
-                                        Ny Sortering
+                                        Typ
                                     </th>
                                     <th>
                                         Namn
                                     </th>
                                     <th>
-                                        Typ
+                                        Sortering
                                     </th>
+                                    <th>
+                                        Ny Sortering
+                                    </th>
+                                   
+                                    
                                     <th>
                                         Aktiv (Ja/Nej)
                                     </th>
@@ -71,19 +73,21 @@
                                         @rId @Html.HiddenFor(model => Model.listVM[i].ID)
                                     </td>
                                     <td>
-                                        @Model.listVM[i].orderby
+                                        @Html.DisplayFor(model => Model.listVM[i].TypeName) @Html.HiddenFor(model => Model.listVM[i].Type)
                                     </td>
                                     <td>
-                                        @Html.EditorFor(model => Model.listVM[i].orderby,new { type="file", @class="input-file" })
+                                        @Model.listVM[i].ObjectName
                                     </td>
                                     <td>
-                                        @Model.listVM[i].name
+                                        @Model.listVM[i].SortIndex
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => Model.listVM[i].type) @Html.HiddenFor(model => Model.listVM[i].type)
+                                        @Html.EditorFor(model => Model.listVM[i].SortIndex,new { type="file", @class="input-file" })
                                     </td>
+                                   
+
                                     <td style="text-align: center">
-                                        @Html.CheckBoxFor(model => Model.listVM[i].active) @Html.HiddenFor(model => Model.listVM[i].active)
+                                        @Html.CheckBoxFor(model => Model.listVM[i].Active) @Html.HiddenFor(model => Model.listVM[i].Active)
                                     </td>
                                     <td><button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
                                 </tr>

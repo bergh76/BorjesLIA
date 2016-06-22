@@ -113,7 +113,7 @@ namespace BorjesLIA.AdminControllers
                         newDiesel.AddWeekDiesel.Active = true;
                     }
 
-                    newDiesel.AddWeekDiesel.Type = 1.4M;
+                    newDiesel.AddWeekDiesel.Type = 4;
                     db.DieselPriceWeek.Add(newDiesel.AddWeekDiesel);
                     db.SaveChanges();
                     newDiesel.newWeekDieselList = db.DieselPriceWeek.ToList().OrderByDescending(x => x.Week);

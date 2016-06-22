@@ -127,7 +127,7 @@ namespace BorjesLIA.AdminControllers
                         newQDiesel.AddQuarterDiesel.Active = true;
                     }
 
-                    newQDiesel.AddQuarterDiesel.Type = 1.3M;
+                    newQDiesel.AddQuarterDiesel.Type = 3;
 
                     db.DieselPriceQuarter.Add(newQDiesel.AddQuarterDiesel);
                     db.SaveChanges();

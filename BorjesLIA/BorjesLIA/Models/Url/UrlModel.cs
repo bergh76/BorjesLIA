@@ -35,7 +35,7 @@ namespace BorjesLIA.Models.URL
         public int PlacingOrder { get; set; }
 
         [Display(Name = "Typ")]
-        public decimal Type { get; set; }
+        public int Type { get; set; }
 
         [Display(Name = "Aktiv")]
         public bool Active { get; set; }

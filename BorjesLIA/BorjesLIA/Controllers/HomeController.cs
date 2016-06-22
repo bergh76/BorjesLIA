@@ -33,10 +33,10 @@ namespace BorjesLIA.Controllers
                 if (item.Active == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.name = item.Name;
-                    listvm.url = "/Images/UploadedImg/" + item.Url;
-                    listvm.orderby = item.PlacingOrder;
-                    listvm.type = item.Type;
+                    listvm.ObjectName = item.Name;
+                    listvm.Url = "/Images/UploadedImg/" + item.Url;
+                    listvm.SortIndex = item.PlacingOrder;
+                    listvm.Type = item.Type;
                     model.listVM.Add(listvm);
                 }
             }
@@ -45,9 +45,9 @@ namespace BorjesLIA.Controllers
                 if (item.Active == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.url = item.urlString;
-                    listvm.orderby = item.PlacingOrder;
-                    listvm.type = item.Type;
+                    listvm.Url = item.urlString;
+                    listvm.SortIndex = item.PlacingOrder;
+                    listvm.Type = item.Type;
                     model.listVM.Add(listvm);
                 }
             }
@@ -58,26 +58,26 @@ namespace BorjesLIA.Controllers
                     var listvm = new listViewModel();
                     if (item.Type == 4.1m) //mp4
                     {
-                        listvm.url = "/Content/videos/" + item.Url;
+                        listvm.Url = "/Content/videos/" + item.Url;
                         listvm.Duration = item.Duration;
-                        listvm.orderby = item.PlacingOrder;
-                        listvm.type = item.Type;
+                        listvm.SortIndex = item.PlacingOrder;
+                        listvm.Type = item.Type;
                         model.listVM.Add(listvm);
                     }
                     else if (item.Type == 4.2m) //youtube
                     {
-                        listvm.url = item.Url;
+                        listvm.Url = item.Url;
                         listvm.Duration = item.Duration;
-                        listvm.orderby = item.PlacingOrder;
-                        listvm.type = item.Type;
+                        listvm.SortIndex = item.PlacingOrder;
+                        listvm.Type = item.Type;
                         model.listVM.Add(listvm);
                     }
                     else if (item.Type == 4.5m) //vimeo
                     {
-                        listvm.url = item.Url;
+                        listvm.Url = item.Url;
                         listvm.Duration = item.Duration;
-                        listvm.orderby = item.PlacingOrder;
-                        listvm.type = item.Type;
+                        listvm.SortIndex = item.PlacingOrder;
+                        listvm.Type = item.Type;
                         model.listVM.Add(listvm);
                     }
                 }
@@ -89,9 +89,9 @@ namespace BorjesLIA.Controllers
                 if (checkActive == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.url = "/EuroExchangeModels/_EuroLineGraph/";
-                    listvm.orderby = euros.Select(x => x.PlacingOrder).FirstOrDefault();
-                    listvm.type = euros.Select(x => x.Type).FirstOrDefault();
+                    listvm.Url = "/EuroExchangeModels/_EuroLineGraph/";
+                    listvm.SortIndex = euros.Select(x => x.PlacingOrder).FirstOrDefault();
+                    listvm.Type = euros.Select(x => x.Type).FirstOrDefault();
                     model.listVM.Add(listvm);
                 }
             }
@@ -101,9 +101,9 @@ namespace BorjesLIA.Controllers
                 if (checkActive == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.url = "/DtmModels/DtmLineGraph/";
-                    listvm.orderby = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
-                    listvm.type = dtm.Select(x => x.Type).FirstOrDefault();
+                    listvm.Url = "/DtmModels/DtmLineGraph/";
+                    listvm.SortIndex = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
+                    listvm.Type = dtm.Select(x => x.Type).FirstOrDefault();
                     model.listVM.Add(listvm);
                 }
             }
@@ -113,9 +113,9 @@ namespace BorjesLIA.Controllers
                 if (checkActive == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
-                    listvm.orderby = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
-                    listvm.type = dieselPriceQuarter.Select(x => x.Type).FirstOrDefault();
+                    listvm.Url = "/DieselQuarterPriceModels/_DieselQuarterGraph/";
+                    listvm.SortIndex = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
+                    listvm.Type = dieselPriceQuarter.Select(x => x.Type).FirstOrDefault();
                     model.listVM.Add(listvm);
                 }
             }
@@ -125,9 +125,9 @@ namespace BorjesLIA.Controllers
                 if (checkActive == true)
                 {
                     var listvm = new listViewModel();
-                    listvm.url = "/DieselWeekModels/_DieselWeekGraph/";
-                    listvm.orderby = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
-                    listvm.type = dieselPriceWeek.Select(x => x.Type).FirstOrDefault();
+                    listvm.Url = "/DieselWeekModels/_DieselWeekGraph/";
+                    listvm.SortIndex = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
+                    listvm.Type = dieselPriceWeek.Select(x => x.Type).FirstOrDefault();
                     model.listVM.Add(listvm);
                 }
             }

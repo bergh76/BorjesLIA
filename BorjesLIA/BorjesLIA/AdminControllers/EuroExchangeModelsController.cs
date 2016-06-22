@@ -96,7 +96,7 @@ namespace BorjesLIA.AdminControllers
                         newEuro.AddEuro.Active = true;
                     }
                     
-                    newEuro.AddEuro.Type = 1.1M;
+                    newEuro.AddEuro.Type = 1;
                     db.EuroExchangeModels.Add(newEuro.AddEuro);
                     db.SaveChanges();
                     newEuro = NewEuroObject();

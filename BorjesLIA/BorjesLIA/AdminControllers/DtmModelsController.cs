@@ -116,7 +116,7 @@ namespace BorjesLIA.AdminControllers
                         newDTM.AddDtm.Active = true;
                     }
                     
-                    newDTM.AddDtm.Type = 1.2M;
+                    newDTM.AddDtm.Type = 2;
                     db.DtmModels.Add(newDTM.AddDtm);
                     db.SaveChanges(); 
                     newDTM.newDTMList = db.DtmModels.ToList().OrderByDescending(x => x.Date);

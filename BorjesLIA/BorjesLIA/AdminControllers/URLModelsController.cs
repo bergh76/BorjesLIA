@@ -80,7 +80,7 @@ namespace BorjesLIA.AdminControllers
                     newUrl.AddUrl.LoggDate = DateTime.Now;
                     newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till
                     newUrl.AddUrl.Active = true;
-                    newUrl.AddUrl.Type = 2.1M;
+                    newUrl.AddUrl.Type = 5;
                     db.UrlModels.Add(newUrl.AddUrl);
                     db.SaveChanges();
                     newUrl.newUrlList = db.UrlModels.ToList()

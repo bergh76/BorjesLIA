@@ -40,7 +40,7 @@ namespace BorjesLIA.Models.Video
         public bool Active { get; set; }
 
         [Display(Name = "Typ")]
-        public decimal Type { get; set; }
+        public int Type { get; set; }
 
         [Display(Name = "varaktighet")]
         public int Duration { get; set; }

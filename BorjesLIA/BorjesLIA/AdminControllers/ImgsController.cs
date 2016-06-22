@@ -119,7 +119,7 @@ namespace BorjesLIA.AdminControllers
                 image.Url = filename2;
                 image.Date = DateTime.Now;
                 image.Active = true;
-                image.Type = 3.1M; // 3.1 för image
+                image.Type = 6; // 3.1 för image
                 image.PlacingOrder = placingOrder; 
 
                

@@ -81,13 +81,13 @@ namespace BorjesLIA.AdminControllers
                         if (VM.Url.Contains("youtube"))
                         {
                             video.Url = VM.Url += "?enablejsapi=1"; //för att kunna använda YT api
-                            video.Type = 4.2M; // 4.2 för youtube
+                            video.Type = 8; // 4.2 för youtube
 
                         }
                         else if (VM.Url.Contains("vimeo"))
                         {
                             video.Url = VM.Url += "?api=1"; //för att kunna använda YT api
-                            video.Type = 4.5M; // 4.5 för vimeo
+                            video.Type = 9; // 4.5 för vimeo
 
                         }
 
@@ -148,7 +148,7 @@ namespace BorjesLIA.AdminControllers
                         video.Active = true;
                         video.Date = DateTime.Now;
                         video.Duration = VideoSeconds += 6;
-                        video.Type = 4.1M; // 4.1 för mp4
+                        video.Type = 7; // 4.1 för mp4
                         db.VideoModels.Add(video);
                         db.SaveChanges();
 

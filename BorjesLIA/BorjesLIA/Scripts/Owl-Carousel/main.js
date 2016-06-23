@@ -162,7 +162,7 @@ jQuery(function ($) {
             //set up YT-player api
             player = new YT.Player(stringUrl, {
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady()
                 }
             });
         };

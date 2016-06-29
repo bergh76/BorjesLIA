@@ -65,7 +65,7 @@ namespace BorjesLIA.AdminControllers
         [ValidateAntiForgeryToken]
         public ActionResult _AddUrl(URLViewModel newUrl, FormCollection formCollection)
         {
-           
+
             if (Request.IsAjaxRequest())
             {
                 var user = HttpContext.User.Identity.Name;
@@ -73,19 +73,29 @@ namespace BorjesLIA.AdminControllers
                 {
                     user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
                 }
+
                 using (var db = new ApplicationDbContext())
                 {
-                    newUrl.AddUrl.dateUrl = Convert.ToDateTime(formCollection[1]);
-                    newUrl.AddUrl.User = user;
-                    newUrl.AddUrl.LoggDate = DateTime.Now;
-                    newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till
-                    newUrl.AddUrl.Active = true;
-                    newUrl.AddUrl.Type = 5;
-                    db.UrlModels.Add(newUrl.AddUrl);
-                    db.SaveChanges();
-                    newUrl.newUrlList = db.UrlModels.ToList()
-                        .OrderByDescending(x => x.ID);
-                    return PartialView("_UrlList", newUrl);
+
+                    if (!String.IsNullOrEmpty(formCollection[1]))
+                    {
+                        newUrl.AddUrl.dateUrl = Convert.ToDateTime(formCollection[1]);
+                        newUrl.AddUrl.User = user;
+                        newUrl.AddUrl.LoggDate = DateTime.Now;
+                        newUrl.AddUrl.PlacingOrder = 0; //TODO: sätta deafult eller inmatning när man lägger till
+                        newUrl.AddUrl.Active = true;
+                        newUrl.AddUrl.Type = 5;
+                        db.UrlModels.Add(newUrl.AddUrl);
+                        db.SaveChanges();
+                        newUrl.newUrlList = db.UrlModels.ToList()
+                            .OrderByDescending(x => x.ID);
+                        return PartialView("_UrlList", newUrl);
+                    }
+                    else
+                    {
+                        // ToDo: Fix a errorpromt to View
+                        return View(newUrl);
+                    }
                 }
             }
             else

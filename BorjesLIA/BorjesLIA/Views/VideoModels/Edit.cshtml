@@ -5,159 +5,160 @@
 }
 
     <div class="container-dashboard body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    @Html.Partial("_AdminPanel")
-                </div>
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @Html.Partial("_AdminPanel")
             </div>
-            <div class="right_col" role="main">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Editering av data</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
+        </div>
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Editering av data</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
 
-                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Ändra data</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div class="col-md-9">
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.ID)
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Namn</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Filnamn</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Längt</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Typ</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Sorteringsindex</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.PlacingOrder, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <div class="input-group">
-                                                    Aktiv @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <p>Datum</p>
-                                                <div class="input-group">
-                                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <input type="submit" value="Spara" class="btn btn-default pull-right" />
+                <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Ändra data</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-md-9">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.ID)
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Namn:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
-                                }
 
-                                <div>
-                                    @Html.ActionLink("Tillbaka", "Index")
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Filmlänk:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Längd:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Typ:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Sorteringsindex:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PlacingOrder, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                Aktiv: @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Datum:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <button type="submit" class="btn btn-primary" value="Upload">Spara</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                @*</section>*@
+                            }
 
+                            <div>
+                                @Html.ActionLink("Tillbaka", "Index")
                             </div>
+                            @*</section>*@
+
                         </div>
                     </div>
-                    <!-- Fixa en form för bilden -->
-                    <div class="col-md-8 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Video @Model.Name</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <div id="getProp" data-prop="@Html.DisplayFor(model => model.ID)"></div>
+                </div>
+                <!-- Fixa en form för bilden -->
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Video @Model.Name</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <div id="getProp" data-prop="@Html.DisplayFor(model => model.ID)"></div>
 
-                                <section id="show-result-box" class="hidden">
-                                    <iframe width="560"  height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
-                                </section>
-                                <section id="show-video-result-box" class="hidden">
-                                    <video controls width="560" height="315" id="videoID">
-                                        <source src="" type="video/mp4">
-                                    </video>
-                                </section>
-                            </div>                            
+                            <section id="show-result-box" class="hidden">
+                                <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
+                            </section>
+                            <section id="show-video-result-box" class="hidden">
+                                <video controls width="560" height="315" id="videoID">
+                                    <source src="" type="video/mp4">
+                                </video>
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <script>
         $(document).ready(function () {
             //ger yt vad den behöver

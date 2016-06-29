@@ -32,7 +32,7 @@
                             @using (Ajax.BeginForm("_AddUrl", new AjaxOptions { UpdateTargetId = "urlList" }))
                             {
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                
+
                                 <div class="x_content">
                                     @Html.AntiForgeryToken()
                                     <div class="x_panel">
@@ -52,18 +52,19 @@
                                             <div class="form-horizontal">
 
                                                 <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <p>Välj datum </p>
+                                                    <div class="input-group">
+                                                        <span>Välj datum </span>
                                                         <div class="input-group input-append date" id="dateRangePicker">
-                                                            <input class="form-control" name="date" readonly />
                                                             <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                                                            <input class="form-control" name="date" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <p>Lägg till webbadress</p>
+                                                    <div class="input-group">
+                                                        <span>Lägg till webbadress</span>
                                                         <div class="input-group">
+                                                            <span class="input-group-addon" id="basic-addon3">http://www.xampl.com</span>
                                                             @Html.EditorFor(model => model.AddUrl.urlString, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.AddUrl.urlString, "", new { @class = "text-danger" })
                                                         </div>
@@ -71,8 +72,8 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="input-group date">
-                                                        <input type="submit" value="Lägg till" class="btn btn-default pull-right" />
+                                                    <div class="input-group">
+                                                        <button type="submit" class="btn info-button" value="Upload">Lägg till</button>
                                                     </div>
                                                 </div>
                                             </div>

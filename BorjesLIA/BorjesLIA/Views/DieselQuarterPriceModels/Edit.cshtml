@@ -25,7 +25,7 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
-                <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Ändra data @Model.Year - @Model.Month - @Model.Quarter</h2>
@@ -42,63 +42,73 @@
                         <div class="x_content">
                             @using (Ajax.BeginForm("Edit", new AjaxOptions { UpdateTargetId = "ajaxReplace" })) //använder onSuccess ist UpdateTargetId = "update", ger betydligt mer laddtid.
                             {
-                                @*@using (Html.BeginForm())*@
-                                //{
                                 @Html.AntiForgeryToken()
 
-                                <div class="form-horizontal">
+                                <div class="col-md-9">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     @Html.HiddenFor(model => model.ID)
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.User, new { @class = "form-control", @readonly = "readonly" })
-                                            @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            <span>Skapad av:</span>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(model => model.User, new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @readonly = "readonly" })
-                                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            <span>Datum:</span>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.Year, new { @class = "form-control", @readonly = "readonly" })
-                                            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.Month, new { @class = "form-control", @readonly = "readonly" })
-                                            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            <span>År:</span>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(model => model.Year, new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Quarter, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Quarter, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Quarter, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            <span>Månad:</span>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(model => model.Month, new { @class = "form-control", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.DieselQuarterValue, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.DieselQuarterValue, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.DieselQuarterValue, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            <span>Kvartal:</span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.Quarter, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Quarter, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @*@Html.LabelFor(model => model.LoggDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="input-group">
+                                            <span>Nytt värde: <i><small>0,000</small></i></span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.DieselQuarterValue, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DieselQuarterValue, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <div class="col-md-10">
                                             @Html.HiddenFor(model => model.LoggDate, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.LoggDate, "", new { @class = "text-danger" })
@@ -106,8 +116,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" value="Spara" class="btn btn-default" />
+                                        <div class="input-group">
+                                            <button type="submit" class="btn submit-button" value="Upload">Spara</button>
                                         </div>
                                     </div>
                                 </div>
@@ -123,4 +133,10 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
 

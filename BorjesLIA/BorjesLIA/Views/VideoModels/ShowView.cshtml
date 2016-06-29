@@ -15,11 +15,50 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            <section class="form-group">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
+                    {
+                        @Html.ValidationSummary()
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="t-box-padding-right"><input type="file" class="form-control" id="fileToUpload" name="file" /> </li>
+                                <li class="t-box-padding-right"><input class="form-control" type="text" id="exVideo" name="Url" placeholder="Klistra in din länk här" /></li>
+                                <li class="t-box-padding-right"><input type="text" class="form-control" id="VideoNameInput" name="Name" placeholder="Namn på videoklippet" /> </li>
+                            </ul>
+                            <div class="form-inline">
+                                <button type="submit" class="btn submit-button">Spara</button>
+                                @*<button type="button" class="btn btn-primary pull-right" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>*@
+                                <button class="btn info-sm-button pull-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-info"></i>
+                                </button>
+                            </div>
+                        </div><!-- /.navbar-collapse -->
+                    }
+                </div><!-- /.container-fluid -->
+            </nav>           
+            <div class="collapse" id="collapseExample">
+                <div class="well-lg">
+                    <div class="x_panel"><img src="~/Images/iframeEmbedInfo.png" id="infoIframe" /></div>
+                </div>
+            </div>               
+
+            <!-- 
+            @*<section class="nav-justified">
                 @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
             {
-                    @Html.ValidationSummary();
-                    <div class="form-inline">
+                    @Html.ValidationSummary()
+                    <div class="form-group">
                         <div><span class="panel-success" id="spanfile"></span></div>
                         <div class="form-group">
                             <div class="input-group">
@@ -27,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-inline">
+                    <div class="form-group">
                         <div class="input-group">
                             <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
                             <span class="input-group-btn">
@@ -35,18 +74,20 @@
                             </span>
                         </div><!-- /input-group -->
                         @*<div class="form-inline">
-                        <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
-                        <button type="button" class="btn btn-sm btn-primary " id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
-                    </div>*@
+                            <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
+                            <button type="button" class="btn btn-sm btn-primary " id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
+                        </div>
                     </div>
                     <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
-                    <div class="form-inline">
+                    <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
-                    <div class="form-inline">
+                    <div class="form-group">
                         <div class="input-group">
                             <button type="submit" class="btn btn-primary" value="Upload">Lägg till video</button>
                             <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
@@ -55,11 +96,13 @@
 
                 }
                 @*<section id="show-result-box" class="hidden">
-            <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
-            <p>asdfasdfasdf</p> *@
-            </section>
+                <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
+                <p>asdfasdfasdf</p>
+            </section>*@
+                -->
+            </div>
         </div>
-    </div>
+
 </div>
 <div class="col-md-12 col-sm-12 col-xs-12" >
      @Html.Partial("_VideoList", Model)

@@ -96,9 +96,9 @@
 .nav-sm .profile {
   display: none;
 }
-.menu_section {
-  /*margin-bottom: 35px;*/
-}
+ /*.menu_section {
+ margin-bottom: 35px;
+}*/
 .menu_section h3 {
   padding-left: 23px;
   color: #fff;
@@ -1987,7 +1987,7 @@ a.star {
   border: 1px solid #EFEFEF;
 }
 .input-group {
-  margin-bottom: 10px;
+      margin-bottom: 10px;
 }
 .ln_solid {
   border-top: 1px solid #e5e5e5;
@@ -2008,16 +2008,35 @@ span.section {
   border-bottom: 1px solid #e5e5e5;
 }
 .form-control {
-  border-radius: 0;
+ border-top-right-radius: 3px !important;
+ border-bottom-right-radius: 3px !important;
   width: 100%;
 }
 .form-horizontal .control-label {
   /*padding-top: 8px*/
 }
 .form-control:focus {
-  border-color: #CCD0D7;
-  box-shadow: none !important;
+background:#FFFFFF;
+color:#999999;
+border:1px solid #7E9EBF;
+border-radius:4px ;
+box-shadow: 0px 2px 8px #929EAB; 
+-webkit-box-shadow: 0px 2px 8px #929EAB; 
+-moz-box-shadow: 0px 2px 8px #929EAB; 
 }
+.form-control:hover {
+   border-top-left-radius: 3px !important;
+ border-bottom-left-radius: 3px !important;
+background:#FFFFFF;
+color:#999999;
+border:1px solid #7E9EBF;
+border-radius:4px ;
+box-shadow: 0px 2px 8px #929EAB; 
+-webkit-box-shadow: 0px 2px 8px #929EAB; 
+-moz-box-shadow: 0px 2px 8px #929EAB; 
+transition: 0.5s !important;
+}
+
 legend {
   font-size: 18px;
   color: inherit;
@@ -2049,6 +2068,7 @@ legend {
   padding-right: 45px;
 }
 .form-group {
+    
   margin-bottom: 10px;
 }
 .validate {

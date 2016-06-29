@@ -922,7 +922,6 @@
     <Content Include="Scripts\Owl-Carousel\main.js" />
     <Content Include="Scripts\Owl-Carousel\owl.carousel.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\DieselQuarterPriceModels\Create.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Delete.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Details.cshtml" />
     <Content Include="Views\DieselQuarterPriceModels\Edit.cshtml" />
@@ -969,13 +968,11 @@
     <Content Include="Views\EuroExchangeModels\Details.cshtml" />
     <Content Include="Views\EuroExchangeModels\Edit.cshtml" />
     <Content Include="Views\EuroExchangeModels\Index.cshtml" />
-    <Content Include="Views\URLModels\Create.cshtml" />
     <Content Include="Views\URLModels\Delete.cshtml" />
     <Content Include="Views\URLModels\Details.cshtml" />
     <Content Include="Views\URLModels\Edit.cshtml" />
     <Content Include="Views\URLModels\Index.cshtml" />
     <Content Include="Views\DtmModels\Index.cshtml" />
-    <Content Include="Views\DtmModels\Create.cshtml" />
     <Content Include="Views\DtmModels\Delete.cshtml" />
     <Content Include="Views\DtmModels\Details.cshtml" />
     <Content Include="Views\DtmModels\Edit.cshtml" />
@@ -991,7 +988,6 @@
     <Content Include="Views\StartModels\Edit.cshtml" />
     <Content Include="Views\StartModels\Index.cshtml" />
     <Content Include="Views\DtmModels\DtmLineGraph.cshtml" />
-    <Content Include="Views\DieselWeekModels\Create.cshtml" />
     <Content Include="Views\DieselWeekModels\Delete.cshtml" />
     <Content Include="Views\DieselWeekModels\Details.cshtml" />
     <Content Include="Views\DieselWeekModels\Edit.cshtml" />

@@ -82,14 +82,15 @@
                                 @Model.listVM[i].PlacingOrder
                             </td>
                             <td>
-                                @Html.EditorFor(model => Model.listVM[i].PlacingOrder, new { type = "file", @class = "input-file" })
+                                @Html.EditorFor(model => Model.listVM[i].PlacingOrder, new { htmlAttributes = new { @class = "form-control"} })
+                                @*@Html.EditorFor(model => Model.listVM[i].PlacingOrder, new { type = "file", @class = "form-control input-group" })*@
                             </td>
 
 
                             <td style="text-align: center">
                                 @Html.CheckBoxFor(model => Model.listVM[i].Active) @Html.HiddenFor(model => Model.listVM[i].Active)
                             </td>
-                            <td><button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
+                            <td><button type="submit" class="btn submit-sm-button"><i class="glyphicon glyphicon-floppy-save"></i> Spara</button></td>
                         </tr>
                     }
 

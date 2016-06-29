@@ -5,131 +5,131 @@
 }
 
     <div class="container-dashboard body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    @Html.Partial("_AdminPanel")
-                </div>
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @Html.Partial("_AdminPanel")
             </div>
-            <div class="right_col" role="main">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Detaljer</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- fixa en holder för formen-->
-                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Detaljer för bilder</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div class="col-md-9">
-                                        @Html.HiddenFor(model => model.ID)
+        </div>
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Detaljer</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- fixa en holder för formen-->
+                <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Detaljer för bilder</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-md-9">
+                                    @Html.HiddenFor(model => model.ID)
 
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <h3>Webbsida</h3>
-                                                <div class="input-group">
-                                                    @Html.DisplayFor(model => model.urlString, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3>Webbsida</h3>
+                                            <div class="input-group">
+                                                @Html.DisplayFor(model => model.urlString, new { htmlAttributes = new { @class = "form-control" } })
                                             </div>
                                         </div>
-
-
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <h3>Typ</h3>
-                                                <div class="input-group">
-                                                    @Html.DisplayFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <h3>Sorteringsindex</h3>
-                                                <div class="input-group">
-                                                    @Html.DisplayFor(model => model.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <div class="input-group">
-                                                    Aktiv @Html.DisplayFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <h3>Tillagd av</h3>
-                                                <div class="input-group">
-                                                    @Html.DisplayFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group date">
-                                                <h3>Datum</h3>
-                                                <div class="input-group">
-                                                    @Html.DisplayFor(model => model.LoggDate, new { htmlAttributes = new { @class = "form-control" } })
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                }
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
 
-                                    <div class="form-actions no-color">
-                                        <input type="submit" value="Delete" class="btn btn-default" /> |
-                                        @Html.ActionLink("Tillbaka", "Index")
+
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3>Typ</h3>
+                                            <div class="input-group">
+                                                @Html.DisplayFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
                                     </div>
-                                }
-                                
-                            </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3>Sorteringsindex</h3>
+                                            <div class="input-group">
+                                                @Html.DisplayFor(model => model.PlacingOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                Aktiv @Html.DisplayFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3>Tillagd av</h3>
+                                            <div class="input-group">
+                                                @Html.DisplayFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <h3>Datum</h3>
+                                            <div class="input-group">
+                                                @Html.DisplayFor(model => model.LoggDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Delete" class="btn delete-button" /> |
+                                    @Html.ActionLink("Tillbaka", "Index")
+                                </div>
+                            }
+
                         </div>
                     </div>
-                    <!-- Fixa en form för bilden -->
-                    <div class="col-md-8 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Bild @Model.urlString</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe id="@Model.urlString" src="@Model.urlString" class="VideoClassTag" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
-                            </div>
+                </div>
+                <!-- Fixa en form för bilden -->
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Bild @Model.urlString</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe id="@Model.urlString" src="@Model.urlString" class="VideoClassTag" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 

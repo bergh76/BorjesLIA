@@ -5,103 +5,109 @@
 }
 
     <div class="container-dashboard body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    @Html.Partial("_AdminPanel")
-                </div>
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @Html.Partial("_AdminPanel")
             </div>
-            <div class="right_col" role="main">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Editering av data </h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Ändra data </h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
+        </div>
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Editering av data </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Ändra data </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
 
-                                    <div class="form-horizontal">
-                                        <h4>Drivmedelstillägg</h4>
-                                        <hr />
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.ID)
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.ID)
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Skapad av:</span>
+                                            <div class="input-group">
                                                 @Html.TextBoxFor(model => model.User, new { @class = "form-control", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Datum:</span>
+                                            <div class="input-group">
                                                 @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>År:</span>
+                                            <div class="input-group">
                                                 @Html.TextBoxFor(model => model.Year, new { @class = "form-control", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Månad:</span>
+                                            <div class="input-group">
                                                 @Html.TextBoxFor(model => model.Month, new { @class = "form-control", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            @*@Html.LabelFor(model => model.DieselDTMValue, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                            <div class="col-md-10">
-                                                @Html.HiddenFor(model => model.DieselDTMValue, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span>Nytt värde: <i><small>0,000</small></i></span>
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.DieselDTMValue, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => model.DieselDTMValue, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                    </div>
 
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Spara" class="btn btn-default" />
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <button type="submit" class="btn submit-button" value="Upload">Spara</button>
                                         </div>
                                     </div>
-                                }
-
-                                <div>
-                                    @Html.ActionLink("Tillbaka", "Index")
                                 </div>
+                            }
+
+                            <div>
+                                @Html.ActionLink("Tillbaka", "Index")
                             </div>
                         </div>
                     </div>
@@ -109,3 +115,5 @@
             </div>
         </div>
     </div>
+</div>
+

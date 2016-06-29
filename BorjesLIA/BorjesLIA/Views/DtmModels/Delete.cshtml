@@ -5,108 +5,109 @@
 }
 
     <div class="container-dashboard body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    @Html.Partial("_AdminPanel")
-                </div>
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @Html.Partial("_AdminPanel")
             </div>
-            <div class="right_col" role="main">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Borttagning av data</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- fixa en holder för formen-->
-                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
-                        <div class="x_panel">
-                            <div class="x_title alert-danger">
-                                <h2>Du håller på att ta bort data. Vill du fortsätta?</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li>
-                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <dl class="dl-horizontal">
-                                    <dt>
-                                        Tillagd av:
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.User)
-                                    </dd>
-
-                                    <dt>
-                                        Tillagd den:
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Date)
-                                    </dd>
-
-                                    <dt>
-                                        Editerad av:
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.EditByUser)
-                                    </dd>
-                                    <dt>
-                                        Editerad den:
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.LoggDate)
-                                    </dd>
-
-                                    <dt>
-                                        År:
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Year)
-                                    </dd>
-
-                                    <dt>
-                                        Månad:
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Month)
-                                    </dd>
-                                    
-                                    <dt>
-                                        Dieselpris:
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.DieselDTMValue)
-                                    </dd>
-
-                                </dl>
-                            </div>
-
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-actions no-color">
-                                    <input type="submit" value="Ta bort" class="btn btn-default" /> |
-                                    @Html.ActionLink("Tillbaka", "Index")
-                                </div>
-                            }
+        </div>
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Borttagning av data</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- fixa en holder för formen-->
+                <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
+                    <div class="x_panel">
+                        <div class="x_title alert-danger">
+                            <h2>Du håller på att ta bort data. Vill du fortsätta?</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
                         </div>
+                        <div class="x_content">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Skapad av:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.User)
+                                </dd>
+
+                                <dt>
+                                    Skapad den:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Date)
+                                </dd>
+
+                                <dt>
+                                    Editerad av:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.EditByUser)
+                                </dd>
+                                <dt>
+                                    Editerad den:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.LoggDate)
+                                </dd>
+
+                                <dt>
+                                    År:
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Year)
+                                </dd>
+
+                                <dt>
+                                    Månad:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Month)
+                                </dd>
+
+                                <dt>
+                                    Dieselpris:
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.DieselDTMValue)
+                                </dd>
+
+                            </dl>
+                        </div>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Ta bort" class="btn delete-button" /> |
+                                @Html.ActionLink("Tillbaka", "Index")
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+

@@ -317,9 +317,9 @@ function fileupload() {
     document.getElementById("uploadBtn").onchange = function () {
         document.getElementById("uploadFile").value = this.value;
     };
-
-    //***** DATEPICKER FOR DATE *****//
-    $(document).ready(function () {
+}
+//***** DATEPICKER FOR DATE *****//
+$(document).ready(function () {
         $('#dateRangePicker')
             .datepicker({
                 clearBtn: true,
@@ -329,14 +329,14 @@ function fileupload() {
                 todayHighlight: true,
                 format: 'yyyy-mm-dd'
             });
-        $("#datepicker-year")
-       .datepicker({
-           autoclose: true,
-           todayHighlight: true,
-           format: " yyyy", // Notice the Extra space at the beginning
-           viewMode: "years",
-           minViewMode: "years"
-       });
+       // $("#datepicker-year")
+       //.datepicker({
+       //    autoclose: true,
+       //    todayHighlight: true,
+       //    format: " yyyy", // Notice the Extra space at the beginning
+       //    viewMode: "years",
+       //    minViewMode: "years"
+       //});
     });
 
 
@@ -344,4 +344,3 @@ function fileupload() {
     //          * MAIN FUNCTIONS END *         //
     //*****************************************//
 
-}

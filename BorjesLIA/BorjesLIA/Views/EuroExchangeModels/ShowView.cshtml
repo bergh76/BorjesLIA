@@ -1,7 +1,6 @@
 ﻿@model BorjesLIA.ViewModel.EuroViewModel
 <!--ajax script-->
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
 <!--ajax script end-->
     <!-- FORMFIELDS START -->
     <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
@@ -32,26 +31,32 @@
                                     <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
                                     <input class="form-control" name="date" readonly />
                                 </div>
+
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="input-group">
-                                <span>Skriv in värde - <i><small>0,00</small></i></span>
+                                <span>Skriv in värde - <i><small>0,000</small></i></span>
                                 <div class="input-group">
                                     <span class="input-group-addon add-on">
                                         <i class="fa fa-calculator"></i>
-                                    </span>  @Html.EditorFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control", placeholder = "0,00" } })
-                                    @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
+                                    </span>
+                                    @Html.EditorFor(model => model.AddEuro.euroValue, new { htmlAttributes = new { @class = "form-control", placeholder = "0,000" } })
                                 </div>
+                                @Html.ValidationMessageFor(model => model.AddEuro.euroValue, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <button type="submit" class="btn submit-button" value="Upload">Lägg till</button>
+                                <button type="submit" class="btn submit-button">Lägg till</button>
                             </div>
                         </div>
                     </div>
                 }
+
+                @*<span class="text-danger">@ViewBag.EmptyForm</span>*@
+
                 <!-- Create ENDS -->
             </section>
         </div>

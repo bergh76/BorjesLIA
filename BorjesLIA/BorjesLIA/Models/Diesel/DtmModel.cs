@@ -24,8 +24,7 @@ namespace BorjesLIA.Models.Diesel
         [Display(Name = "Månad")]
         public string Month { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Display(Name = "Pris")]
+        [Display(Name = "Procent")]
         public decimal DieselDTMValue { get; set; }
 
         [DataType(DataType.DateTime)]

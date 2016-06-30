@@ -29,6 +29,7 @@ namespace BorjesLIA.Models.Diesel
 
         //[DataType(DataType.Currency)]
         [Display(Name = "Pris")]
+        [Required(ErrorMessage = "Kontrollera din inmatning!")]
         public decimal DieselWeekValue { get; set; }
 
         [DataType(DataType.DateTime)]

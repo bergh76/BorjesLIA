@@ -46,7 +46,8 @@ namespace BorjesLIA.AdminControllers
 
 
         /// <summary>
-        /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        /// </summary>
+        /// Creats a new EuroViewModel object, populates needed lists with data and return a view with data        
+        /// </summary>
         /// <param name="newEuro"></param>
         /// <returns></returns>
 
@@ -56,7 +57,6 @@ namespace BorjesLIA.AdminControllers
             // Adds a new post to Entity EuroExchangeModel
             if (Request.IsAjaxRequest())
             {
-
                 using (var db = new ApplicationDbContext())
                 {
                     if (!string.IsNullOrEmpty(formCollection[1]))
@@ -74,33 +74,37 @@ namespace BorjesLIA.AdminControllers
                         newEuro.AddEuro.Month = month;
                         if (db.EuroExchangeModels.Any(x => x.Year == year && x.Month == month) || db.EuroExchangeModels.ToList().Select(x => x.Date) == null)
                         {
-                            // ToDo: return a errormessage to the view //
+                            // ToDo: return a errormessage to the view 
+                            ModelState.AddModelError("Date", "Datumvärde är tomt");
                             return View(newEuro);
-                        }                        
+                        }
+                        else
+                        {
+                            var previousValue = db.EuroExchangeModels.FirstOrDefault();
+                            if (previousValue != null)
+                            {
+                                newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
+                                newEuro.AddEuro.Active = previousValue.Active;
+                            }
+                            else
+                            {
+                                newEuro.AddEuro.PlacingOrder = 0;
+                                newEuro.AddEuro.Active = true;
+                            }
+
+                            newEuro.AddEuro.Type = 1;
+                            db.EuroExchangeModels.Add(newEuro.AddEuro);
+                            db.SaveChanges();
+                            newEuro = NewEuroObject();
+                            return PartialView("ShowView", newEuro);
+                        }
                     }
                     else
                     {
                         // ToDo: return a errormessage to the view //
+                        //ViewBag.EmptyForm = "Formuläret är tomt!";
                         return View(newEuro);
-                    }
-                    var previousValue = db.EuroExchangeModels.FirstOrDefault();
-                        if (previousValue != null)
-                        {
-                            newEuro.AddEuro.PlacingOrder = previousValue.PlacingOrder;
-                            newEuro.AddEuro.Active = previousValue.Active;
-                        }
-                    
-                    else
-                    {
-                        newEuro.AddEuro.PlacingOrder = 0;
-                        newEuro.AddEuro.Active = true;
-                    }
-                    
-                    newEuro.AddEuro.Type = 1;
-                    db.EuroExchangeModels.Add(newEuro.AddEuro);
-                    db.SaveChanges();
-                    newEuro = NewEuroObject();
-                    return PartialView("ShowView", newEuro);
+                    }                   
                 }
             }
             return View(newEuro);

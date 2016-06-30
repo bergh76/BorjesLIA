@@ -320,24 +320,18 @@ function fileupload() {
 }
 //***** DATEPICKER FOR DATE *****//
 $(document).ready(function () {
-        $('#dateRangePicker')
-            .datepicker({
-                clearBtn: true,
-                language: "sv",
-                calendarWeeks: true,
-                autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
-       // $("#datepicker-year")
-       //.datepicker({
-       //    autoclose: true,
-       //    todayHighlight: true,
-       //    format: " yyyy", // Notice the Extra space at the beginning
-       //    viewMode: "years",
-       //    minViewMode: "years"
-       //});
-    });
+    $('#dateRangePicker')
+        .datepicker({
+            clearBtn: true,
+            language: "sv",
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true,
+            format: 'yyyy-mm-dd'
+        })
+});
+
+
 
 
     //*****************************************//

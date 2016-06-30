@@ -1,5 +1,5 @@
 ﻿@model BorjesLIA.ViewModel.VideoViewModel
-@ViewBag.Message
+
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -34,11 +34,12 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="t-box-padding-right"><input type="file" class="form-control" id="fileToUpload" name="file" /> </li>
-                                <li class="t-box-padding-right"><input class="form-control" type="text" id="exVideo" name="Url" placeholder="Klistra in din länk här" /></li>
+                                <li class="t-box-padding-right"><input type="text" class="form-control" id="exVideo" name="Url" placeholder="Klistra in din länk här" /></li>
                                 <li class="t-box-padding-right"><input type="text" class="form-control" id="VideoNameInput" name="Name" placeholder="Namn på videoklippet" /> </li>
                             </ul>
                             <div class="form-inline">
                                 <button type="submit" class="btn submit-button">Spara</button>
+                                <span class="text-success">@ViewBag.Message</span>
                                 @*<button type="button" class="btn btn-primary pull-right" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>*@
                                 <button class="btn info-sm-button pull-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-info"></i>
                                 </button>
@@ -68,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
+                            <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" /> //OK
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-primary" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
                             </span>

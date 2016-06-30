@@ -44,6 +44,7 @@ namespace BorjesLIA.AdminControllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file, VideoModel VM, VideoViewModel modelObj)
         {
+
             var user = HttpContext.User.Identity.Name;
             if (user == null)
             {

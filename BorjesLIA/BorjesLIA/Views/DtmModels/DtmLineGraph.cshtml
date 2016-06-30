@@ -19,17 +19,14 @@
 
             function drawChart(elementId, title, dataTable) {
                 //var view = new google.visualization.DataView(dataTable);
-                //console.log("View 1 \n",view);
-                //for (var i = 0; i < dataTable.length; i++) {
-                //    view.setColumns([0,[i],
-                //        {
-                //            calc: "stringify",
-                //            sourceColumn: [i],
-                //            type: "string",
-                //            role: "annotation" },
-                //            console.log("Calc \n", calc),
+                //for(var i = 0; i < dataTable.length; i++){
+
+                //    view.setColumns([0, i,
+                //                       { calc: "stringify",
+                //                           sourceColumn: dataTable[i].cols,
+                //                           type: "string",
+                //                           role: "annotation" },
                 //    ]);
-                //    console.log("view.setColumns \n",view.setColumns);
                 //}
 
                 var options = {
@@ -41,17 +38,19 @@
                     animation:{ "startup" : true, duration: 1000, easing: 'linear',
                     },
                     vAxis: { 
-                        title: "Pris",  fontName: 'Calibri', fontSize: 34,
+                        title: "Procent %",  fontName: 'Calibri', fontSize: 34,
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                         viewWindow: { min: 7.00, },
-                        gridlines: { count: 15, },                        
+                        gridlines: { count: 15, }, 
+                        format:'##,##%',
                     },
 
                     hAxis:{ 
                         title: "Månad", 
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26  },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true  },
+
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 7,
@@ -59,7 +58,8 @@
                     lineWidth: 4,
                 };
                 var chart = new google.visualization.LineChart(document.getElementById("DMTGraphDiv"));
-                    chart.draw(dataTable, options);
+                chart.draw(dataTable, options);
+                //chart.draw(view, options);
                 }
         </script>
     }
@@ -76,6 +76,16 @@
             });
 
             function drawChart(elementId, title, dataTable) {
+                //var view = new google.visualization.DataView(dataTable);
+                //for(var i = 0; i < dataTable.length; i++){
+
+                //    view.setColumns([0, i,
+                //                        { calc: "stringify",
+                //                            sourceColumn: dataTable[i].cols,
+                //                            type: "string",
+                //                            role: "annotation" },
+                //    ]);
+                //}
                 var options = { 
                     title: title,
                     titleTextStyle: { fontName: 'Calibri', fontSize: 34},
@@ -88,21 +98,25 @@
                         title: "Månad", fontName: 'Calibri', fontSize: 34,
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+                        
                     },
 
                     hAxis:{ 
-                        title: "Pris",
+                        title: "Procent %",
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                         viewWindowMode: 'explicit',
                         viewWindow: { min: 7.00, },
                         gridlines: { count: 15, },
+                        format:'##,##%',
+
                     },
                     chartArea: { left: 170, right:100, top: 200, width: "100%", height: "50%" },
                     dataOpacity: 0.9,
                 };
                     var chart = new google.visualization.BarChart(document.getElementById("DMTGraphDiv"));
-                    chart.draw(dataTable, options );
+                chart.draw(dataTable, options);
+                    //chart.draw(view, options);
                 }
         </script>
     }
@@ -122,6 +136,16 @@
             });
 
             function drawChart(elementId, title, dataTable) {
+                //var view = new google.visualization.DataView(dataTable);
+                //for(var i = 0; i < dataTable.length; i++){
+
+                //    view.setColumns([0, i,
+                //                        { calc: "stringify",
+                //                            sourceColumn: dataTable[i].cols,
+                //                            type: "string",
+                //                            role: "annotation" },
+                //    ]);
+                //}
                 var options = {
                     title: title,
                     titleTextStyle: { fontName: 'Calibri', fontSize: 34},
@@ -132,23 +156,26 @@
                     },
 
                     vAxis: { 
-                        title: "Pris",
+                        title: "Procent %",
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                         viewWindow: { min: 7.00, },
                         gridlines: { count: 15, },
+                        format:'##,##%',
                     },
 
                     hAxis:{ 
                         title: "Månad", fontName: 'Calibri', fontSize: 34,
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     dataOpacity: 0.9,
                 };
                 var chart = new google.visualization.ColumnChart(document.getElementById("DMTGraphDiv"));
                 chart.draw(dataTable, options);
+                //chart.draw(view, options);
                 }
         </script>
     }
@@ -166,15 +193,15 @@
                 drawChart('DMTGraphDiv', title, dataTable);
             });
             function drawChart(elementId, title, dataTable) {
-                //var view = new google.visualization.DataView(data);
-                //for(var i = 0; i < dataTabel.lenth; i++){
+                //var view = new google.visualization.DataView(dataTable);
+                //for(var i = 0; i < dataTable.length; i++){
 
-                //    view.setColumns([i,
-                //                     { calc: "stringify",
-                //                         sourceColumn: i,
-                //                         type: "string",
-                //                         role: "annotation" },
-                //                     ]);
+                //    view.setColumns([0, 
+                //                       { calc: "stringify",
+                //                           sourceColumn: i.,
+                //                           type: "string",
+                //                           role: "annotation" },
+                //    ]);
                 //}
                 var options = { 
                     title: title,
@@ -186,17 +213,19 @@
                     },
 
                     vAxis: { 
-                        title: "Pris",
+                        title: "Procent %",
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26 },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
                         viewWindow: { min: 7.00, },
                         gridlines: { count: 15, },
+                        format:'##,##%',
                     },
 
                     hAxis:{ 
                         title: "Månad", fontName: 'Calibri', fontSize: 34,
                         titleTextStyle: { fontName: 'Calibri', fontSize: 26   },
                         textStyle: { fontName: 'Calibri', fontSize: 26, bold: true },
+
                     },
                     chartArea: { left: 120, right:100, top: 200, width: "100%", height: "50%" },
                     pointSize: 4,
@@ -204,7 +233,8 @@
                     lineWidth: 2,
                 };
                     var chart = new google.visualization.AreaChart(document.getElementById("DMTGraphDiv"));
-                    chart.draw(dataTable, options);
+                chart.draw(dataTable, options);
+                    //chart.draw(view, options);
             }
 
         </script>

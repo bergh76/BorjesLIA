@@ -116,20 +116,10 @@ namespace BorjesLIA.Controllers
                 // populate values from Html-form
                 string name = formDtmData[1].ToString();
                 confDtm.ID = db.Settings.Where(x => x.Name == confDtmSettings).Select(x => x.ID).FirstOrDefault();
-                //confDtm.SortType = Convert.ToInt32(formDtmData[2]);
-                confDtm.Year = formDtmData[2];
+                //confDtm.SortType = Convert.ToInt32(formDtmData[2]); 
                 //confDtm.SortType = formDtmData
+                confDtm.Year = formDtmData[2];
                 confDtm.Name = this.confDtmSettings;
-
-                //if (!string.IsNullOrEmpty(confDtm.Name) && string.IsNullOrEmpty(confDtm.Year))
-                //{
-                //    confDtm.Year = "Alla";
-                //    // saves data to Settings db Entity
-                //    db.Entry(confDtm).State = EntityState.Modified;
-                //    db.SaveChanges();
-
-                //    return PartialView("Index_DtmSettings", confDtm);
-                //}
                 if (!string.IsNullOrEmpty(confDtm.Name) && !string.IsNullOrEmpty(confDtm.Year))
                 {
                     //confDtm.Year = formDtmData[3].ToString();
@@ -181,16 +171,7 @@ namespace BorjesLIA.Controllers
                 confDw.ID = db.Settings.Where(x => x.Name == confDwSettings).Select(x => x.ID).FirstOrDefault();
                 confDw.Year = formDWData[2];
                 confDw.Name = this.confDwSettings;
-                
-                //if (!string.IsNullOrEmpty(confDw.Name) && string.IsNullOrEmpty(confDw.Year))
-                //{
-                //    confDw.Year = "Alla";
-                //    // saves data to Settings db Entity
-                //    db.Entry(confDw).State = EntityState.Modified;
-                //    db.SaveChanges();
 
-                //    return PartialView("Index_DieselWeekSettings", confDw);
-                //}
                 if (!string.IsNullOrEmpty(confDw.Name) && !string.IsNullOrEmpty(confDw.Year))
                 {
                     confDw.Year = formDWData[2];
@@ -244,16 +225,6 @@ namespace BorjesLIA.Controllers
                 confDq.ID = db.Settings.Where(x => x.Name == confDqSettings).Select(x => x.ID).FirstOrDefault();
                 confDq.Year = formDQData[2];
                 confDq.Name = this.confDqSettings;
-                
-                //if (!string.IsNullOrEmpty(confDq.Name) && string.IsNullOrEmpty(confDq.Year))
-                //{
-                //    confDq.Year = "Alla";
-                //    // saves data to Settings db Entity
-                //    db.Entry(confDq).State = EntityState.Modified;
-                //    db.SaveChanges();
-
-                //    return PartialView("Index_DieselQuarterSettings", confDq);
-                //}
 
                 if (!string.IsNullOrEmpty(confDq.Year) && !string.IsNullOrEmpty(confDq.Year))
                 {
@@ -334,7 +305,7 @@ namespace BorjesLIA.Controllers
                 listvm.TypeName = String.Format("{0}", dictionary[item.Type]);
                 listvm.Active = item.Active;
                 listvm.ID = item.ID;
-               
+                               
                 model.listVM.Add(listvm);
             }
            

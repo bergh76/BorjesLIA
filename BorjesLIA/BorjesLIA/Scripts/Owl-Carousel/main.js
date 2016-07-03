@@ -93,7 +93,6 @@ jQuery(function ($) {
 
 
     function thisSlide(current) {
-
         thisSlideIndex = this.currentItem;
         //var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
         var getSrc = current.find(".VideoClassTag").eq(thisSlideIndex).attr('src');
@@ -170,22 +169,22 @@ jQuery(function ($) {
 });
 
 //adjustIframes
-//function adjustIframes() {
-//    $('iframe').each(function () {
-//        var
-//        $this = $(this),
-//        proportion = $this.data('proportion'),
-//        w = $this.attr('width'),
-//        actual_w = $this.width();
+function adjustIframes() {
+    $('iframe').each(function () {
+        var
+        $this = $(this),
+        proportion = $this.data('proportion'),
+        w = $this.attr('width'),
+        actual_w = $this.width();
 
-//        if (!proportion) {
-//            proportion = $this.attr('height') / w;
-//            $this.data('proportion', proportion);
-//        }
+        if (!proportion) {
+            proportion = $this.attr('height') / w;
+            $this.data('proportion', proportion);
+        }
 
-//        if (actual_w != w) {
-//            $this.css('height', Math.round(actual_w * proportion) + 'px');
-//        }
-//    });
-//}
-//$(window).on('resize load', adjustIframes);
+        if (actual_w != w) {
+            $this.css('height', Math.round(actual_w * proportion) + 'px');
+        }
+    });
+}
+$(window).on('resize load', adjustIframes);

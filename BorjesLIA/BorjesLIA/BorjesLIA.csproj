@@ -1027,6 +1027,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\extensions\css\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
+    <Folder Include="Content\SiteMainUi\js\" />
     <Folder Include="Content\videos\" />
     <Folder Include="Images\UploadedImg\" />
     <Folder Include="Models\DBContext\" />

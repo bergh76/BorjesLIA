@@ -40,74 +40,300 @@
                             <div class="form-inline">
                                 <button type="submit" class="btn submit-button">Spara</button>
                                 <span class="text-success">@ViewBag.Message</span>
-                                @*<button type="button" class="btn btn-primary pull-right" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>*@
-                                <button class="btn info-sm-button pull-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-info"></i>
+                                <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
+                                <button class="btn info-sm-button pull-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa fa-info"></i>
                                 </button>
                             </div>
                         </div><!-- /.navbar-collapse -->
+
                     }
+                <section id="show-result-box" class="hidden">
+                        <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
+                        <p>asdfasdfasdf</p>
+                    </section>
                 </div><!-- /.container-fluid -->
-            </nav>           
+            </nav>
             <div class="collapse" id="collapseExample">
                 <div class="well-lg">
                     <div class="x_panel"><img src="~/Images/iframeEmbedInfo.png" id="infoIframe" /></div>
                 </div>
-            </div>               
-
-            <!-- 
-            @*<section class="nav-justified">
-                @using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
-            {
-                    @Html.ValidationSummary()
-                    <div class="form-group">
-                        <div><span class="panel-success" id="spanfile"></span></div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="file" class="fileUpload" id="fileToUpload" name="file" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" /> //OK
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
-                            </span>
-                        </div><!-- /input-group -->
-                        @*<div class="form-inline">
-                            <input class="form-control" type="text" id="exVideo" name="Url" value="Embedded video link" />
-                            <button type="button" class="btn btn-sm btn-primary " id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
-                        </div>
-                    </div>
-                    <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
-                    <div class="form-group">
-                        <div class="input-group">
-                            <button type="submit" class="btn btn-primary" value="Upload">Lägg till video</button>
-                            <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
-                        </div>
-                    </div>
-
-                }
-                @*<section id="show-result-box" class="hidden">
-                <iframe width="560" height="315" id="myVideoID" src="" frameborder="0" allowfullscreen></iframe>
-                <p>asdfasdfasdf</p>
-            </section>*@
-                -->
             </div>
         </div>
+    </div>
 
 </div>
-<div class="col-md-12 col-sm-12 col-xs-12" >
-     @Html.Partial("_VideoList", Model)
+<div class="col-md-12 col-sm-12 col-xs-12">
+    @Html.Partial("_VideoList", Model)
 </div>
+<script type="text/jscript">
+        //--INIT YT PLAYER
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var flag = false;
+        var noGo = false;
+        var player;
+        //-- END INIT YT PLAYER
+
+        //-- ON SUBMIT
+        $(function () {
+            $("#SubmitTarget").on('submit', function (event) {
+                if ($('#fileToUpload').val() == "") {
+                    validateYouTubeUrl();
+                }
+                else if ($('#fileToUpload').val() !== "") {
+                        validateFileFunction();
+                }
+                //om ingen fil valts och länken som ska skrivas in för yt eller vimeo inte är ok i regex
+                if(noGo) {
+                    $("#spanfile").html("Ingenting hände. Handlingen som begärdes kändes inte igen.");
+                    event.preventDefault();
+                    return false;
+                    //window.location.reload();
+                }
+                //fördröjning om det är så att spelaren inte laddat klippet, för att kunna ta ut klippets längd.
+                if (!flag) {
+                    var form = this;
+                    setTimeout(function () {
+                        console.log("timeout: 3000ms");
+                        form.submit();
+                    }, 3000);
+                    return false;
+
+                }
+                else {
+                    var form = this;
+                    form.submit();
+                    return false;
+                }
+            });
+        });
+        //--END ON SUBMIT
+
+        //--YT PLAYER
+        function validateYouTubeUrl() {
+            var url = $('#exVideo').val();
+            if (url != undefined || url != '') {
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                if (match && match[2].length == 11) {
+                    getVideoDuration()
+                } else {
+                    validateVimeoUrl();
+                }
+            }
+        }
+        function getVideoDuration() {
+            console.log("getVideoDuration");
+            var div = document.getElementById("exVideo").value;
+            div += "?enablejsapi=1";
+            $('#myVideoID').attr("src", div);
+            player = new YT.Player('myVideoID', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        //spelaren behöver vara laddad för att kunna ta ut längden på klippet.
+        function onPlayerReady() {
+            var vd = player.getDuration();
+            document.getElementById("lengthOfVideo").value = vd;
+            flag = true;
+            $("#spanfile").text("");
+        }
+        //-- END YT PLAYER
+
+        //-- Vimeo Player
+        function validateVimeoUrl(event) {
+            var url = $('#exVideo').val();
+            //TODO: kolla att regEpen bara tar embedded vimeo..
+            var regExp = /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/;
+            var match = url.match(regExp);
+            if (match) {
+                initVimeo();
+            } else {
+                noGo = true;
+                flag = false;
+            }
+        }
+        function initVimeo() {
+            var url = $('#exVideo').val();
+            var apiUrl = url + "?api=1";
+
+            $('#myVideoID').attr("src", apiUrl);
+
+            // http://jsfiddle.net/bdougherty/UTt2K/
+
+            var f = $('iframe'),
+            url = f.attr('src').split('?')[0],
+            status = $('.status');
+
+            // Listen for messages from the player
+            if (window.addEventListener) {
+                window.addEventListener('message', onMessageReceived, false);
+            }
+            else {
+                window.attachEvent('onmessage', onMessageReceived, false);
+            }
+
+            // Handle messages received from the player
+            function onMessageReceived(e) {
+                var data = JSON.parse(e.data);
+                //{"method":"getDuration","value":597,"player_id":"myVideoID"}
+                //{"event":"ready","player_id":"myVideoID"}
+                console.log("e.data: " + e.data);
+                if (typeof data.value != 'undefined') {
+                    console.log("data method: " + data.method);
+                    console.log("data value: " + data.value);
+
+                    var vd = data.value;
+                    document.getElementById("lengthOfVideo").value = vd;
+
+                    flag = true;
+                    $("#spanfile").text("");
+                }
+                else if (typeof data.event != 'undefined') {
+                    console.log("data event: " + data.event);
+
+                    if (data.event == 'ready') {
+                        onReady();
+                    }
+
+                }
+            }
+            function onReady() {
+                post("getDuration");
+                //post("play");
+            }
+            // Helper function for sending a message to the player
+            function post(action, value) {
+
+                var data = { method: action };
+
+                if (value) {
+                    data.value = value;
+                }
+
+                f[0].contentWindow.postMessage(JSON.stringify(data), url);
+            }
+        }
+        //-- End Vimeo Player
+
+        //-- myFileFunction
+        function validateFileFunction(event) {
+
+            var file = getNameFromPath($("#fileToUpload").val());
+
+            if (file != null) {
+                var extension = file.substr((file.lastIndexOf('.') + 1));
+                // alert(extension);
+                switch (extension) {
+                    case 'mp4':
+                        //case 'ogg':  //fler tänkbara filer tex AVI , MPG
+                        flag = true;
+                        break;
+                    default:
+                        noGo = true;
+                        flag = false;
+                }
+            }
+            if (flag == false) {
+                $("#spanfile").text("Det går endast att ladda upp .mp4-filer");
+            }
+            else {
+                var fileSize = document.getElementById('fileToUpload').files[0].size; //size in kb
+                fileSize = fileSize / 1048576; //size in mb
+                if (fileSize > 100) {
+                    console.log(" > 100mb");
+                    $("#spanfile").text("Det går endast att ladda upp till och med 100mb");
+                    noGo = true;
+                    flag = false;
+                }
+                else {
+                    flag = true;
+                    $("#spanfile").text("");
+                }
+            }
+        }
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+
+            if (strName == null) {
+                alert("!");
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+        //-- END myFileFunction
+
+        //-- VAlidateName
+        function validateName() {
+        }
+        //-- END ValidateName
+        //-- info
+        //$('#infoBTN').click(function () {
+        //    var hasHidden = $("#infoIframe").hasClass("hidden");
+        //    if (hasHidden) {
+        //        $('#infoIframe').removeClass('hidden');
+        //    }
+        //    else {
+        //        $('#infoIframe').addClass('hidden');
+        //    }
+        //});
+</script>
+
+
+
+<!--OLD CODE -->
+<!-- 
+<body>
+    <p>
+        <span class="field-validation-error" id="spanfile"></span>
+    </p>
+    using (Html.BeginForm("FileUpload", "VideoModels", FormMethod.Post, new { enctype = "multipart/form-data", id = "SubmitTarget" }))
+    {
+        Html.ValidationSummary();
+        <ul>
+            <li class="lifile">
+                <p>
+                    Välj en fil att ladda upp/ eller klistra in en länk
+                </p>
+                <div>
+                    <input type="file" id="fileToUpload" name="file" />
+                </div>
+                <div>
+                    <input type="text" id="exVideo" name="Url" value="Embedded video link" />
+                    <button type="button" class="" id="infoBTN"><i class="glyphicon glyphicon-info-sign"></i></button>
+                    <img src="~/Images/iframeEmbedInfo.png" id="infoIframe" class="hidden" />
+                </div>
+                <div>
+                    <input type="text" id="VideoNameInput" name="Name" value="Namn på videoklippet" />
+                </div>
+                <input type="hidden" id="lengthOfVideo" name="Duration" value="" />
+            </li>
+        </ul>
+        <div>
+            <button type="submit" class="btn btn-default" value="Upload">Lägg till video</button>
+            <button type="button" class="btn btn-default" value="Refresh Page" onClick="window.location.reload()">Avbryt</button>
+        </div>
+    }
+
+    <section id="show-result-box" class="hidden">
+        <iframe width="560"
+                height="315"
+                id="myVideoID"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+    </section>
+    <p>
+        Html.Partial("_VideoList", Model)
+    </p>
 
     <script type="text/jscript">
         //--INIT YT PLAYER
@@ -175,7 +401,7 @@
             $('#myVideoID').attr("src", div);
             player = new YT.Player('myVideoID', {
                 events: {
-                    'onReady': onPlayerReady()
+                    'onReady': onPlayerReady
                 }
             });
         }
@@ -329,5 +555,6 @@
             }
         });
     </script>
-
+</body>
+    -->
 

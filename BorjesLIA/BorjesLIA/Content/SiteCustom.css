@@ -9,7 +9,6 @@ body {
 .body-content {
     padding-left: 0px;
     padding-right: 0px;
-
 }
 
  @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
@@ -35,6 +34,7 @@ body {
   background-position: 50% 0;
   background-size: cover;
 }
+
 #main-slider .item {
   height: 558px;
   background-repeat: no-repeat;
@@ -48,7 +48,7 @@ body {
  top: 0;
  left: 0;
  width: 100%;
- min-height: 1030px;
+ min-height: 1025px;
  }
 #main-slider .slider-inner {
   position: absolute;

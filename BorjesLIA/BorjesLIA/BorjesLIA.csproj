@@ -375,10 +375,6 @@
     <Content Include="Images\bx_loader.gif" />
     <Content Include="Images\controls.png" />
     <Content Include="Images\iframeEmbedInfo.png" />
-    <Content Include="Images\Infobox_info_icon.svg.png" />
-    <Content Include="Images\UploadedImg\home-1353389_960_720.jpg" />
-    <Content Include="Images\UploadedImg\landscape-615429_960_720.jpg" />
-    <Content Include="Images\UploadedImg\sunset-1331088_960_720.jpg" />
     <Content Include="Content\animate.min.css" />
     <Content Include="Readme\Readme.txt" />
     <Content Include="Scripts\SiteCustom.js" />
@@ -1032,6 +1028,7 @@
     <Folder Include="Content\DataTables-1.10.11\extensions\css\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
     <Folder Include="Content\videos\" />
+    <Folder Include="Images\UploadedImg\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>

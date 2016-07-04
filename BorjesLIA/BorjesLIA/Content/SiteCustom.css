@@ -257,7 +257,8 @@ body {
  	-moz-box-shadow:inset 1px 1px 0px 0px #ffffff;
  	box-shadow:inset 1px 1px 0px 0px #ffffff;
 }
-    .info-sm-button:hover {
+
+.info-sm-button:hover {
         background: -moz-linear-gradient( center top, #ffffff 5%, #ededed 100% );
         background: -ms-linear-gradient( top, #ffffff 5%, #ededed 100% );
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
@@ -265,8 +266,9 @@ body {
         background-color: #ffffff;
         color: #007acc;
         transition: 0.5s !important;
-    }
-}.info-sm-button:active {
+}
+
+.info-sm-button:active {
 	position:relative;
 	top:1px;
 }
@@ -291,6 +293,7 @@ body {
     float: left;
     display: inline-block
 }
+
 .sidenav a  {
     list-style: none;
     display: inline-block;

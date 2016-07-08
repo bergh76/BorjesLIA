@@ -328,10 +328,10 @@ $(document).ready(function () {
             autoclose: true,
             todayHighlight: true,
             format: 'yyyy-mm-dd'
-        })
+        });
 });
 
-
+//$(".chosen-select").chosen({ width: "50%" });
 
 
     //*****************************************//

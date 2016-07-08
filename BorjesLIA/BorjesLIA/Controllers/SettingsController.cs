@@ -58,15 +58,7 @@ namespace BorjesLIA.Controllers
                 confEuro.ID = db.Settings.Where(x => x.Name == confEuroSettings).Select(x => x.ID).FirstOrDefault();
                 confEuro.Year = formEuroData[2];
                 confEuro.Name = this.confEuroSettings;
-                //if (!string.IsNullOrEmpty(confEuro.Name) && string.IsNullOrEmpty(confEuro.Year))
-                //{
-                //    confEuro.Year = "Alla";
-                //    // saves data to Settings db Entity
-                //    db.Entry(confEuro).State = EntityState.Modified;
-                //    db.SaveChanges();
 
-                //    return PartialView("Index_EuroSettings", confEuro);
-                //}
                 if (!string.IsNullOrEmpty(confEuro.Name) && !string.IsNullOrEmpty(confEuro.Year))
                 {
                     //confEuro.Year = formEuroData[2];
@@ -207,7 +199,6 @@ namespace BorjesLIA.Controllers
             return View(dqSettings);
         }
 
-
         /// <summary>
         /// Creats a Settings object and collects data from inputform via FormCollection and saves new values to Settings Entity
         /// </summary>
@@ -244,7 +235,7 @@ namespace BorjesLIA.Controllers
         //******************************************************************************************//
         public ActionResult Index_PlacingOrder()
         {
-
+            var type = "Graf";
             var images = db.Imgs.ToList();
             var exPageUrl = db.UrlModels.ToList();
             var videos = db.VideoModels.ToList();
@@ -256,13 +247,12 @@ namespace BorjesLIA.Controllers
             model.listVM = new List<listViewModel>();
 
 
-            Dictionary<int, string> dictionary =
-        new Dictionary<int, string>();
+            Dictionary<int, string> dictionary = new Dictionary<int, string>();
 
-            dictionary.Add(1, "Graf Euroindex");
-            dictionary.Add(2, "Graf Drivmedelstillägg");
-            dictionary.Add(3, "Graf Dieselpris kvartal");
-            dictionary.Add(4, "Graf Dieselpris vecka");
+            dictionary.Add(1, "Euroindex");
+            dictionary.Add(2, "Drivmedelstillägg");
+            dictionary.Add(3, "Dieselpris kvartal");
+            dictionary.Add(4, "Dieselpris vecka");
             dictionary.Add(5, "Webbadress");
             dictionary.Add(6, "Bild");
             dictionary.Add(7, "Video mp4");
@@ -315,7 +305,7 @@ namespace BorjesLIA.Controllers
                 listvm.ObjectName = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
                 listvm.PlacingOrder = euros.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = euros.Select(x => x.Type).FirstOrDefault();
-                listvm.TypeName = dictionary[euros.Select(x => x.Type).FirstOrDefault()];
+                listvm.TypeName = type;
                 listvm.Active = euros.Select(x => x.Active).FirstOrDefault();
                 listvm.ID = euros.Select(x => x.ID).FirstOrDefault();
               
@@ -327,7 +317,7 @@ namespace BorjesLIA.Controllers
                 listvm.ObjectName = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
                 listvm.PlacingOrder = dtm.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dtm.Select(x => x.Type).FirstOrDefault();
-                listvm.TypeName = dictionary[dtm.Select(x => x.Type).FirstOrDefault()];
+                listvm.TypeName = type;
                 listvm.Active = dtm.Select(x => x.Active).FirstOrDefault();
                 listvm.ID = dtm.Select(x => x.ID).FirstOrDefault();
               
@@ -339,7 +329,7 @@ namespace BorjesLIA.Controllers
                 listvm.ObjectName = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
                 listvm.PlacingOrder = dieselPriceQuarter.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dieselPriceQuarter.Select(x => x.Type).FirstOrDefault();
-                listvm.TypeName = dictionary[dieselPriceQuarter.Select(x => x.Type).FirstOrDefault()];
+                listvm.TypeName = type;
                 listvm.Active = dieselPriceQuarter.Select(x => x.Active).FirstOrDefault();
                 listvm.ID = dieselPriceQuarter.Select(x => x.ID).FirstOrDefault();
           
@@ -351,7 +341,7 @@ namespace BorjesLIA.Controllers
                 listvm.ObjectName = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];
                 listvm.PlacingOrder = dieselPriceWeek.Select(x => x.PlacingOrder).FirstOrDefault();
                 listvm.Type = dieselPriceWeek.Select(x => x.Type).FirstOrDefault();
-                listvm.TypeName = dictionary[dieselPriceWeek.Select(x => x.Type).FirstOrDefault()];
+                listvm.TypeName = type;
                 listvm.Active = dieselPriceWeek.Select(x => x.Active).FirstOrDefault();
                 listvm.ID = dieselPriceWeek.Select(x => x.ID).FirstOrDefault();
 

@@ -71,13 +71,14 @@ body {
 #main-slider .slider-inner .btn {
   margin-top: 10px;
 }
-#main-slider .owl-prev,
-#main-slider .owl-next {
+
+#main-slider .owl-prev, #main-slider .owl-next {
+  border-radius: 5px;
   position: absolute;
   top: 50%;
   background-color: rgba(0, 0, 0, 0.0);
   background-color: transparent;
-  color: #fff;
+  color: transparent;
   font-size: 30px;
   display: inline-block;
   margin-top: -35px;
@@ -89,15 +90,20 @@ body {
   -webkit-transition: background-color 400ms;
   transition: background-color 400ms;
 }
+
 #main-slider .owl-prev:hover,
 #main-slider .owl-next:hover {
+    color: #fff;
+  transition:  color 400ms;
   background-color: rgba(221, 23, 38, 0.5);
 }
 #main-slider .owl-prev {
+
   left: -35px;
   text-indent: 14px;
 }
 #main-slider .owl-next {
+
   right: -35px;
   text-indent: -14px;
 }
@@ -108,7 +114,7 @@ body {
   background: rgba(221, 23, 38, 0.5);
 }
 #progressBar {
-  margin-top: -10px;
+  margin-top: -12px;
   position: relative;
   top: 0;
   flex-grow: 1;

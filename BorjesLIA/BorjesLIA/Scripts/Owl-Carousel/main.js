@@ -96,7 +96,7 @@ jQuery(function ($) {
         thisSlideIndex = this.currentItem;
         //var getSrc = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('src');
         var getSrc = current.find(".VideoClassTag").eq(thisSlideIndex).attr('src');
-        console.log("getSrc: " + getSrc);
+        //console.log("getSrc: " + getSrc);
         var checkOne = getSrc.includes("/Content/videos/");
         var checkTwo = getSrc.includes("youtube");
         var checkThree = getSrc.includes("vimeo");
@@ -116,7 +116,7 @@ jQuery(function ($) {
 
             //var getDuration = current.find(".owl-item").eq(thisSlideIndex).find(".VideoClassTag").attr('name');
             var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
-            console.log("getduration: " + getDuration);
+            //console.log("getduration: " + getDuration);
             time = getDuration;
             console.log("time duration vimeo: " + time);
             setTimeout(function () {
@@ -135,7 +135,7 @@ jQuery(function ($) {
             var getDuration = current.find(".VideoClassTag").eq(thisSlideIndex).attr('name');
             console.log("getduration: "+getDuration);
             time = getDuration;
-            console.log("time duration vimeo: " + time);
+            //console.log("time duration vimeo: " + time);
             setTimeout(function () {
                 var data = { method: "play" };
                 var player = document.getElementById(getSrc);

@@ -24,7 +24,7 @@
         </div>
         <div class="navbar-collapse collapse">
             @Html.Partial("_LoginPartial")
-            <span  onmouseover="openNav()"><i class="glyphicon glyphicon-list fa-2x pull-right" style="padding-top:10px; cursor: pointer"></i></span>
+            <span onmouseover="openNav()"><i class="glyphicon glyphicon-list fa-2x pull-right" style="padding-top:10px; cursor: pointer"></i></span>
             @*<span class="navbar-right navbar-form btn fa fa-television fa-2x" onclick="toggleFullScreen()" data-toggle="tooltip" data-placement="left" title="Helskärm"></span>*@
         </div>
     </div>
@@ -45,7 +45,7 @@
                 else
                 {
                     <div class="owl-item">
-                        <iframe id="@element.Url" class="VideoClassTag" src="@element.Url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
+                        <iframe id="@element.Url" class="VideoClassTag " src="@element.Url" name="@element.Duration" webkitAllowFullScreen mozallowfullscreen allowFullScreen allowfullscreen frameborder="0"></iframe>
                     </div>
                 }
             }

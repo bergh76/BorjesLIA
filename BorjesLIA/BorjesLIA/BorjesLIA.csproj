@@ -259,8 +259,8 @@
     <Content Include="Content\DataTables-1.10.11\media\css\jquery.dataTables.css" />
     <Content Include="Content\DataTables-1.10.11\media\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables-1.10.11\media\css\jquery.dataTables_themeroller.css" />
-    <Content Include="Content\images\logo_blu.png" />
     <Content Include="Images\contentslider\picture2.jpg" />
+    <Content Include="Images\UploadedImg\Borjes_Moose.png" />
     <Content Include="Scripts\bootstrap-datepicker.sv.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -348,8 +348,6 @@
     <Content Include="Content\DataTables-1.10.11\extensions\Select\css\select.jqueryui.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\images\borjes-logga-jpg.jpg" />
-    <Content Include="Content\images\test_user.jpg" />
     <Content Include="Content\SiteCustom.css" />
     <Content Include="Content\SiteMainUi\css\custom.css" />
     <Content Include="Content\SiteMainUi\css\maps\jquery-jvectormap-2.0.3.css" />
@@ -819,7 +817,6 @@
     <Content Include="Content\DataTables-1.10.11\extensions\Buttons\css\common.scss" />
     <Content Include="Content\DataTables-1.10.11\extensions\Buttons\css\mixins.scss" />
     <Content Include="Scripts\DataTables-1.10.11\PdfMaker\pdfmake.min.js.map" />
-    <None Include="Properties\PublishProfiles\BörjesLIA.pubxml" />
     <Content Include="Scripts\DataTables-1.10.11\jszip\.bower.json" />
     <Content Include="Scripts\DataTables-1.10.11\jszip\bower.json" />
     <Content Include="Scripts\DataTables-1.10.11\jszip\CHANGES.md" />
@@ -1023,9 +1020,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\DataTables-1.10.11\extensions\css\" />
     <Folder Include="Content\DataTables-1.10.11\media\images\" />
+    <Folder Include="Content\images\" />
     <Folder Include="Content\SiteMainUi\js\" />
     <Folder Include="Content\videos\" />
-    <Folder Include="Images\UploadedImg\" />
     <Folder Include="Models\DBContext\" />
   </ItemGroup>
   <ItemGroup>

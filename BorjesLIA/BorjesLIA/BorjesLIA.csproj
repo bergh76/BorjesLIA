@@ -210,13 +210,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606170857515_BorjesLIA.cs" />
-    <Compile Include="Migrations\201606170857515_BorjesLIA.Designer.cs">
-      <DependentUpon>201606170857515_BorjesLIA.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606182216253_BorjesLIA1.cs" />
-    <Compile Include="Migrations\201606182216253_BorjesLIA1.Designer.cs">
-      <DependentUpon>201606182216253_BorjesLIA1.cs</DependentUpon>
+    <Compile Include="Migrations\201709141417234_DBInit.cs" />
+    <Compile Include="Migrations\201709141417234_DBInit.Designer.cs">
+      <DependentUpon>201709141417234_DBInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Charts\ChartModel.cs" />
@@ -1037,11 +1033,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606170857515_BorjesLIA.resx">
-      <DependentUpon>201606170857515_BorjesLIA.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606182216253_BorjesLIA1.resx">
-      <DependentUpon>201606182216253_BorjesLIA1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709141417234_DBInit.resx">
+      <DependentUpon>201709141417234_DBInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

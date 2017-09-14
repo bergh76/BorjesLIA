@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -19,21 +20,21 @@ namespace BorjesLIA.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<URL.URLModel> UrlModels { get; set; }
+        public DbSet<URL.URLModel> UrlModels { get; set; }
 
-        public System.Data.Entity.DbSet<Img.Img> Imgs { get; set; }
+        public DbSet<Img.Img> Imgs { get; set; }
 
-        public System.Data.Entity.DbSet<Diesel.DieselWeekModel> DieselPriceWeek { get; set; }
+        public DbSet<Diesel.DieselWeekModel> DieselPriceWeek { get; set; }
 
-        public System.Data.Entity.DbSet<Diesel.DieselQuarterPriceModel> DieselPriceQuarter{ get; set; }
+        public DbSet<Diesel.DieselQuarterPriceModel> DieselPriceQuarter{ get; set; }
 
-        public System.Data.Entity.DbSet<Diesel.DtmModel> DtmModels { get; set; }
+        public DbSet<Diesel.DtmModel> DtmModels { get; set; }
 
-        public System.Data.Entity.DbSet<Euro.EuroExchangeModel> EuroExchangeModels { get; set; }
+        public DbSet<Euro.EuroExchangeModel> EuroExchangeModels { get; set; }
 
-        public System.Data.Entity.DbSet<Video.VideoModel> VideoModels { get; set; }
+        public DbSet<Video.VideoModel> VideoModels { get; set; }
 
-        public System.Data.Entity.DbSet<Settings.Settings> Settings { get; set; }
+        public DbSet<Settings.Settings> Settings { get; set; }
 
 
     }
